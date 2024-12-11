@@ -3,7 +3,7 @@ import React from 'react';
 const FilterSection = () => {
   return (
     <div className="absolute text-[.6rem] left-1/2 transform -translate-x-1/2
-    top-[82%] md:top-[122%] translate-y-5 w-[80%] h-auto md:w-auto md:h-[10vh] bg-black
+     top-[50%] sm:top-[82%] md:top-[122%] translate-y-5 w-[80%] h-auto md:w-auto md:h-[10vh] bg-black
      text-white grid grid-cols-1 md:flex  items-center justify-between px-2 py-4 md:py-2 md:px-4 rounded-lg shadow-lg z-40">
       {/* Input Field */}
       

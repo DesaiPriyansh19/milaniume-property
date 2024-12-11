@@ -4,9 +4,11 @@ import './App.css'
 import Carousel from './components/Carousel'
 import FilterSection from './components/FilterSection';
 import Navbar from './components/Navbar';
+import Img1 from '../src/assets/office.jpeg'
+import room from '../src/assets/Room3.jpg'
 const images = [
-  'src/assets/office.jpeg',
-  'src/assets/Room3.jpg',
+  {Img1},
+  {room},
 
 ];
 const dynamicContent = [

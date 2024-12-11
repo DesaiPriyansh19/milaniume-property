@@ -7,8 +7,8 @@ import Navbar from './components/Navbar';
 import Img1 from '../src/assets/office.jpeg'
 import room from '../src/assets/Room3.jpg'
 const images = [
-  {Img1},
-  {room},
+  Img1,
+  room,
 
 ];
 const dynamicContent = [

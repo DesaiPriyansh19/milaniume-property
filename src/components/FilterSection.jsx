@@ -1,0 +1,44 @@
+import React from 'react';
+
+const FilterSection = () => {
+  return (
+    <div className="absolute text-[.6rem] left-1/2 transform -translate-x-1/2
+    top-[82%] md:top-[122%] translate-y-5 w-[80%] h-auto md:w-auto md:h-[10vh] bg-black
+     text-white grid grid-cols-1 md:flex  items-center justify-between px-2 py-4 md:py-2 md:px-4 rounded-lg shadow-lg z-40">
+      {/* Input Field */}
+      
+      <input
+        type="text"
+        placeholder="Search "
+        className="flex-grow bg-transparent  text-white placeholder-gray-400 px-3 py-2 w-[90%] md:w-auto rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+      />
+
+      {/* Dropdowns */}
+      <select className="bg-transparent  text-white px-3 py-2 rounded-lg mx-2 focus:outline-none focus:ring-2 focus:ring-black">
+        <option>All Status</option>
+        <option>For Sale</option>
+        <option>For Rent</option>
+      </select>
+
+      <select className="bg-transparent  text-white px-3 py-2 rounded-lg mx-2 focus:outline-none focus:ring-2 focus:ring-black">
+        <option>All Type</option>
+        <option>Apartment</option>
+        <option>House</option>
+        <option>Office</option>
+      </select>
+
+      {/* Filter Button */}
+      <button className="flex items-center border  border-gray-700 text-white px-6 py-2 rounded-lg mx-2">
+        <img src="/path/to/filter-icon.svg" alt="Filter" className="w-4 h-4 mr-2" />
+        Filter
+      </button>
+
+      {/* Search Button */}
+      <button className="bg-[#E7C873]  text-black px-6 py-2 rounded-lg hover:text-[#E7C873] hover:border hover:border-[#E7C873] hover:bg-black">
+        Search
+      </button>
+    </div>
+  );
+};
+
+export default FilterSection;

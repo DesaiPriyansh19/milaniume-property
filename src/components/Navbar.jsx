@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Call from '../../svg/Icon/Call/Index';
+import logo from '../../src/assets/logothree.jpeg'
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -9,7 +9,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4 flex items-center justify-between h-16">
         {/* Left: Logo */}
         <div className="flex items-center">
-          <img src="/path/to/logo1.png" alt="Logo 1" className="w-10 h-10" />
+          <img src={logo} alt="Logo 1" className="w-10 h-10 rounded-full" />
           {/* Nav links for large devices */}
           <div className="hidden lg:flex text-sm space-x-6 ml-[50%]">
             <a href="#" className="text-white hover:text-[#E7C873]">Home</a>
@@ -51,7 +51,10 @@ const Navbar = () => {
       {isMenuOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-80 z-50 flex flex-col">
           <div className="flex justify-between items-center p-4">
-            <img src="/path/to/logo1.png" alt="Logo 1" className="w-10 h-10" />
+          <span className='flex gap-5'>
+          <img src={logo} alt="Logo 1" className="w-10 h-10 rounded-full" />
+             <img src="src/assets/Contact.png" alt="Logo 3" className="w-8 h-8" />
+             </span>
             <button className="text-white" onClick={() => setIsMenuOpen(false)}>
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -63,6 +66,11 @@ const Navbar = () => {
             <a href="#" className="text-white text-lg">AboutUs</a>
             <a href="#" className="text-white text-lg">Property</a>
             <a href="#" className="text-white text-lg">Service</a>
+       
+         
+              <button className="bg-transparent text-sm text-white px-4 py-1 rounded-full border-2 border-[#E7C873]">
+              Add Property
+            </button>
           </div>
         </div>
       )}

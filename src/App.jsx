@@ -23,7 +23,7 @@ function App() {
     <div className="font-roboto h-full p-0 m-0 w-full">
     <Navbar/>
     <Carousel images={images} dynamicContent={dynamicContent} />
-    <FilterSection/>
+    {/* <FilterSection/> */}
     </div>
   </>)
 }

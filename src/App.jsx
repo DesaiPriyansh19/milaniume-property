@@ -24,28 +24,28 @@ import HomePage from "./components/HomePage";
 // ];
 
 function App() {
-  // const [isVisible, setIsVisible] = useState(true);
-  // const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  // const handlePopupOpen = () => setIsPopupOpen(true);
-  // const handlePopupClose = () => setIsPopupOpen(false);
+  const handlePopupOpen = () => setIsPopupOpen(true);
+  const handlePopupClose = () => setIsPopupOpen(false);
 
-  // useEffect(() => {
-  //   // Hide the animation after 3 seconds with smooth fade out
-  //   const timer = setTimeout(() => {
-  //     setIsVisible(false);
-  //   }, 2000); // Adjust time as needed
+  useEffect(() => {
+    // Hide the animation after 3 seconds with smooth fade out
+    const timer = setTimeout(() => {
+      setIsVisible(false);
+    }, 2000); // Adjust time as needed
 
-  //   return () => clearTimeout(timer); // Cleanup the timer
-  // }, []);
+    return () => clearTimeout(timer); // Cleanup the timer
+  }, []);
 
-  // useEffect(() => {
-  //   if (isVisible) {
-  //     document.body.style.overflow = "hidden";
-  //   } else {
-  //     document.body.style.overflow = "auto";
-  //   }
-  // }, [isVisible]);
+  useEffect(() => {
+    if (isVisible) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [isVisible]);
 
   return (
     <Router>

@@ -1,12 +1,12 @@
 import React from 'react'
-
+import Room from '../assets/Room.jpeg'
 function Cards() {
     const data = [
-        { imgSrc: 'src/assets/Room.jpeg', text1: 'Thaltej', text2: '8 properies' },
-        { imgSrc: 'src/assets/Room.jpeg', text1: 'Gota', text2: '9 properties' },
-        { imgSrc: 'src/assets/Room.jpeg', text1: 'Bopal', text2: '15 properties' },
-        { imgSrc: 'src/assets/Room.jpeg', text1: 'Stalite', text2: '18 properties' },
-        { imgSrc: 'src/assets/Room.jpeg', text1: 'SciCity', text2: '11 properties'},
+        { imgSrc: Room, text1: 'Thaltej', text2: '8 properies' },
+        { imgSrc: Room, text1: 'Gota', text2: '9 properties' },
+        { imgSrc: Room, text1: 'Bopal', text2: '15 properties' },
+        { imgSrc: Room, text1: 'Stalite', text2: '18 properties' },
+        { imgSrc: Room, text1: 'SciCity', text2: '11 properties'},
       ];
   return (
     

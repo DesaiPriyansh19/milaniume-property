@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import logo from "../../src/assets/logothree.jpeg";
+import Call from "../../svg/Icon/Call/Index";
+import MyProfileLogo from "../../svg/Icon/MyProfileLogo";
 
 const Navbar = ({handlePopupOpen}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -31,11 +33,10 @@ const Navbar = ({handlePopupOpen}) => {
         <div className="flex items-center space-x-4">
           {/* Mobile view: Call icon and number */}
           <div className="lg:hidden flex items-center">
-            <img
-              src="src/assets/CallLogo.png"
-              alt="Call Icon"
+            <span
+             
               className="w-6 h-6"
-            />
+            ><Call/></span>
             <p className="text-white ml-2">+918521221224</p>
           </div>
           {/* Hamburger menu for small devices */}
@@ -60,18 +61,18 @@ const Navbar = ({handlePopupOpen}) => {
           </button>
           {/* Button and Contact for large devices */}
           <div className="hidden lg:flex items-center space-x-4">
-            <img
-              src="src/assets/CallLogo.png"
-              alt="Call Icon"
+            <span
+             
+             
               className="w-6 h-6"
-            />
+            >  <Call/></span>
             <p className="text-white">+918521221224</p>
-            <img
-              src="src/assets/Contact.png"
+            <span
+             
               onClick={handlePopupOpen}
-              alt="Logo 3"
-              className="w-8 h-8"
-            />
+              
+              className="w-8 h-8 "
+            ><MyProfileLogo/></span>
             <button className="bg-transparent text-sm text-white px-4 py-1 rounded-full border-2 border-white hover:border-[#E7C873]">
               Add Property
             </button>
@@ -85,11 +86,10 @@ const Navbar = ({handlePopupOpen}) => {
           <div className="flex justify-between items-center p-4">
             <span className="flex gap-5">
               <img src={logo} alt="Logo 1" className="w-10 h-10 rounded-full" />
-              <img
-                src="src/assets/Contact.png"
-                alt="Logo 3"
-                className="w-8 h-8"
-              />
+              <span
+             
+              className="w-6 h-6"
+            ><MyProfileLogo/></span>
             </span>
             <button className="text-white" onClick={() => setIsMenuOpen(false)}>
               <svg

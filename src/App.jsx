@@ -1,27 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoaderAnimation from "./components/LoaderAnimation";
 import "./App.css";
-import Carousel from "./components/Carousel";
-import FilterSection from "./components/FilterSection";
+
 import Navbar from "./components/Navbar";
-import Img1 from "../src/assets/office.jpeg";
-import room from "../src/assets/Room3.jpg";
-import Cards from "./components/Cards";
-import WhyShould from "./components/WhyShould";
+
 import { AnimatePresence } from "framer-motion";
 
-const images = [Img1, room];
-
-const dynamicContent = [
-  {
-    title: "Welcome to Millennium Properties",
-    description: "We Build Your Dreams",
-  },
-  {
-    title: "Luxury Apartment",
-    description: "Your Dreams, Our Vision; A Sustainable Future",
-  },
-];
+import Login from "./components/Login";
+import HomePage from "./components/HomePage";
 
 function App() {
   const [isVisible, setIsVisible] = useState(true);
@@ -35,18 +22,28 @@ function App() {
     return () => clearTimeout(timer); // Cleanup the timer
   }, []);
 
+  useEffect(() => {
+    if (isVisible) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [isVisible]);
+
   return (
-    <>
-       <AnimatePresence>
+    <Router>
+      <AnimatePresence>
         {isVisible && <LoaderAnimation key="loader" />}
       </AnimatePresence>
       <div className="font-roboto h-full p-0 m-0 w-full">
         <Navbar />
-        <Carousel images={images} dynamicContent={dynamicContent} />
-        <Cards />
-        <WhyShould />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          {/* Add other routes for different pages */}
+          <Route path="/login" element={<Login />} />
+        </Routes>
       </div>
-    </>
+    </Router>
   );
 }
 

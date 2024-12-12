@@ -2,7 +2,7 @@ import React from 'react';
 
 const FilterSection = () => {
   return (
-    <div className="relative w-full flex justify-center mt-0">
+    <div className="relative w-full flex justify-center mt-0 ">
       <div className="absolute text-[.6rem] left-1/2 transform -translate-x-1/2 
         top-full w-[95%] h-auto md:w-auto md:h-[10vh] bg-black text-white grid grid-cols-1 md:flex 
         items-center justify-between px-2 py-4 md:py-2 md:px-4 rounded-lg shadow-lg z-40">
@@ -11,8 +11,8 @@ const FilterSection = () => {
         <input
           type="text"
           placeholder="Search"
-          className="flex-grow bg-transparent text-white placeholder-gray-400 
-            px-3 py-2 w-[90%] md:w-auto rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+          className="flex-grow bg-transparent text-white placeholder-white text-[.7rem]
+            px-3 py-2 h-[90%] w-[90%] md:w-auto rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
         />
 
         {/* Dropdowns */}

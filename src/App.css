@@ -1,0 +1,24 @@
+/* App.css */
+html {
+    scroll-behavior: smooth;
+  }
+  span svg {
+    max-width: 9vh;
+    max-height: 9vw;
+    height: auto;
+    width: auto;
+}
+
+  /* App.css */
+.fade-out {
+  animation: fadeOut 4s ease-out;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity:1;
+  }
+  to {
+    opacity: 0;
+  }
+}

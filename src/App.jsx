@@ -10,19 +10,7 @@ import { AnimatePresence } from "framer-motion";
 
 import HomePage from "./components/HomePage";
 import LoginPopup from "./components/LoginPopup";
-// import LoginPopup from "./components/LoginPopup";
-// const images = [room, Img1];
 
-// const dynamicContent = [
-//   {
-//     title: "Luxury Apartment",
-//     description: "Your Dreams, Our Vision; A Sustainable Future",
-//   },
-//   {
-//     title: "Welcome to Millennium Properties",
-//     description: "We Build Your Dreams",
-//   },
-// ];
 
 function App() {
   const [isVisible, setIsVisible] = useState(true);
@@ -53,7 +41,7 @@ function App() {
       <AnimatePresence>
         {isVisible && <LoaderAnimation key="loader" />}
       </AnimatePresence>
-      <div className="font-roboto h-full p-0 m-0 w-full">
+      <div className="font-roboto  p-0 m-0 ">
         <Navbar handlePopupOpen={handlePopupOpen} />
         {isPopupOpen && <LoginPopup handlePopupClose={handlePopupClose} />}
         <Routes>

@@ -17,7 +17,7 @@ const Carousel = ({ images, dynamicContent }) => {
   };
 
   return (<>
-    <div className=" text-center relative h-[500px] sm:h-[500px] md:h-[600px] w-full">
+    <div className=" text-center relative h-[500px] sm:h-[500px] md:h-[600px] w-full overflow-hidden">
       <Slider {...settings}>
         {images.map((img, index) => (
           <div key={index} className="relative w-full h-[570px] sm:h-[500px] md:h-[600px]">

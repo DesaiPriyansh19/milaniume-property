@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import logo from '../../src/assets/logothree.jpeg'
+import React, { useState } from "react";
+import logo from "../../src/assets/logothree.jpeg";
 
-const Navbar = () => {
+const Navbar = ({handlePopupOpen}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -12,10 +12,18 @@ const Navbar = () => {
           <img src={logo} alt="Logo 1" className="w-10 h-10 rounded-full" />
           {/* Nav links for large devices */}
           <div className="hidden lg:flex text-sm space-x-6 ml-[50%]">
-            <a href="#" className="text-white hover:text-[#E7C873]">Home</a>
-            <a href="#" className="text-white hover:text-[#E7C873]">AboutUs</a>
-            <a href="#" className="text-white hover:text-[#E7C873]">Property</a>
-            <a href="#" className="text-white hover:text-[#E7C873]">Service</a>
+            <a href="#" className="text-white hover:text-[#E7C873]">
+              Home
+            </a>
+            <a href="#" className="text-white hover:text-[#E7C873]">
+              AboutUs
+            </a>
+            <a href="#" className="text-white hover:text-[#E7C873]">
+              Property
+            </a>
+            <a href="#" className="text-white hover:text-[#E7C873]">
+              Service
+            </a>
           </div>
         </div>
 
@@ -23,7 +31,11 @@ const Navbar = () => {
         <div className="flex items-center space-x-4">
           {/* Mobile view: Call icon and number */}
           <div className="lg:hidden flex items-center">
-            <img src="src/assets/CallLogo.png" alt="Call Icon" className="w-6 h-6" />
+            <img
+              src="src/assets/CallLogo.png"
+              alt="Call Icon"
+              className="w-6 h-6"
+            />
             <p className="text-white ml-2">+918521221224</p>
           </div>
           {/* Hamburger menu for small devices */}
@@ -31,15 +43,35 @@ const Navbar = () => {
             className="lg:hidden text-white"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16m-7 6h7"
+              />
             </svg>
           </button>
           {/* Button and Contact for large devices */}
           <div className="hidden lg:flex items-center space-x-4">
-            <img src="src/assets/CallLogo.png" alt="Call Icon" className="w-6 h-6" />
+            <img
+              src="src/assets/CallLogo.png"
+              alt="Call Icon"
+              className="w-6 h-6"
+            />
             <p className="text-white">+918521221224</p>
-            <img src="src/assets/Contact.png" alt="Logo 3" className="w-8 h-8" />
+            <img
+              src="src/assets/Contact.png"
+              onClick={handlePopupOpen}
+              alt="Logo 3"
+              className="w-8 h-8"
+            />
             <button className="bg-transparent text-sm text-white px-4 py-1 rounded-full border-2 border-white hover:border-[#E7C873]">
               Add Property
             </button>
@@ -51,24 +83,46 @@ const Navbar = () => {
       {isMenuOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-80 z-50 flex flex-col">
           <div className="flex justify-between items-center p-4">
-          <span className='flex gap-5'>
-          <img src={logo} alt="Logo 1" className="w-10 h-10 rounded-full" />
-             <img src="src/assets/Contact.png" alt="Logo 3" className="w-8 h-8" />
-             </span>
+            <span className="flex gap-5">
+              <img src={logo} alt="Logo 1" className="w-10 h-10 rounded-full" />
+              <img
+                src="src/assets/Contact.png"
+                alt="Logo 3"
+                className="w-8 h-8"
+              />
+            </span>
             <button className="text-white" onClick={() => setIsMenuOpen(false)}>
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </button>
           </div>
           <div className="flex flex-col items-center space-y-4 mt-10">
-            <a href="#" className="text-white text-lg">Home</a>
-            <a href="#" className="text-white text-lg">AboutUs</a>
-            <a href="#" className="text-white text-lg">Property</a>
-            <a href="#" className="text-white text-lg">Service</a>
-       
-         
-              <button className="bg-transparent text-sm text-white px-4 py-1 rounded-full border-2 border-[#E7C873]">
+            <a href="#" className="text-white text-lg">
+              Home
+            </a>
+            <a href="#" className="text-white text-lg">
+              AboutUs
+            </a>
+            <a href="#" className="text-white text-lg">
+              Property
+            </a>
+            <a href="#" className="text-white text-lg">
+              Service
+            </a>
+
+            <button className="bg-transparent text-sm text-white px-4 py-1 rounded-full border-2 border-[#E7C873]">
               Add Property
             </button>
           </div>

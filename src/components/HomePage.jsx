@@ -19,6 +19,7 @@ const dynamicContent = [
   },
 ];
 
+
   return (
     <div>
       <Carousel images={images} dynamicContent={dynamicContent} />

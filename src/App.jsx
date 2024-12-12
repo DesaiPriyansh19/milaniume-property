@@ -9,6 +9,7 @@ import { AnimatePresence } from "framer-motion";
 
 import Login from "./components/Login";
 import HomePage from "./components/HomePage";
+import LoginPopup from "./components/LoginPopup";
 // import LoginPopup from "./components/LoginPopup";
 // const images = [room, Img1];
 
@@ -53,12 +54,10 @@ function App() {
         {isVisible && <LoaderAnimation key="loader" />}
       </AnimatePresence>
       <div className="font-roboto h-full p-0 m-0 w-full">
-        <Navbar />
-
+        <Navbar handlePopupOpen={handlePopupOpen} />
+        {isPopupOpen && <LoginPopup handlePopupClose={handlePopupClose} />}
         <Routes>
           <Route path="/" element={<HomePage />} />
-          {/* Add other routes for different pages */}
-          <Route path="/login" element={<Login />} />
         </Routes>
       </div>
     </Router>

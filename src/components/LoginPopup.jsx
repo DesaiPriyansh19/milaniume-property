@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Popup.css"; // Import Tailwind and custom styles
+
 import GoogleWrapper from "../../utils/GoogleWrapper";
 import axios from "axios";
 import InputField from "../../utils/InputFields";

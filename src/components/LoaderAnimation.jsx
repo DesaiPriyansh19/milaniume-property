@@ -7,7 +7,7 @@ const LoaderAnimation = () => {
       initial={{ opacity: 1, visibility: "visible" }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 2 }} // Smooth fade-in and fade-out
+      transition={{ duration:1}} // Smooth fade-in and fade-out
       className="min-h-screen w-full fixed top-0 left-0 flex items-center justify-center
          bg-transparent backdrop-blur-sm z-10"
     >
@@ -23,15 +23,15 @@ const LoaderAnimation = () => {
         <motion.div
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1, delay: 0.2 }}
+          transition={{ duration: 1, delay: 0 }}
           className="w-10 h-32 bg-[#1F4B43] mx-2 rounded"
         ></motion.div>
 
         <motion.div
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.75, delay: 0.3 }}
-          className="w-10 h-28 bg-yellow-500 mx-2 rounded"
+          transition={{ duration: 0.75, delay: 0.2}}
+          className="w-10 h-28 bg-[#E7C873] mx-2 rounded"
         ></motion.div>
       </div>
 

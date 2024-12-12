@@ -7,7 +7,7 @@ import Navbar from "./components/Navbar";
 
 import { AnimatePresence } from "framer-motion";
 
-import Login from "./components/Login";
+
 import HomePage from "./components/HomePage";
 import LoginPopup from "./components/LoginPopup";
 // import LoginPopup from "./components/LoginPopup";

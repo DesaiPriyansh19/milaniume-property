@@ -24,9 +24,7 @@ function Cards() {
               filter: 'brightness(85%)',
             }}
           >
-            <div  className="p-4" style={{
-    textShadow: "4px 4px 8px rgba(0.1, 0.5, 0.9, 0.8)", // Apply text shadow to all children
-  }}>
+            <div  className="p-4"
               <p className="text-white font-normal  text-[1.2rem]">{item.text1}</p>
               <p className="text-white font-light text-[.8rem]">{item.text2}</p>
             </div>

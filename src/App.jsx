@@ -7,10 +7,10 @@ import Navbar from "./components/Navbar";
 
 import { AnimatePresence } from "framer-motion";
 
-
 import HomePage from "./components/HomePage";
 import LoginPopup from "./components/LoginPopup";
-
+import ViewProperty from "./components/AdminPanel/AdminProperty/ViewProperty";
+import AddProperty from "./components/AdminPanel/AdminProperty/EditProperty";
 
 function App() {
   const [isVisible, setIsVisible] = useState(true);
@@ -46,6 +46,7 @@ function App() {
         {isPopupOpen && <LoginPopup handlePopupClose={handlePopupClose} />}
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/admin" element={<ViewProperty />} />
         </Routes>
       </div>
     </Router>

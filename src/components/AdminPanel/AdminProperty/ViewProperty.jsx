@@ -4,7 +4,7 @@ import EditProperty from "./EditProperty";
 import AddProperty from "./AddProperty";
 
 export default function ViewProperty() {
-  const baseUrl = "http://localhost:4000/api/property";
+  const baseUrl = "https://milaniumepropertybackend.vercel.app/api/property";
   const { data, fetchById, updateById, addNew } = useApiData(baseUrl);
   const [editData, setEditData] = useState("View");
   const [formData, setFormData] = useState({

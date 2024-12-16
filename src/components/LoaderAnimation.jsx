@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 
 const LoaderAnimation = () => {
-  return (
+  return (<>
     <motion.div
       initial={{ opacity: 1, visibility: "visible" }}
       animate={{ opacity: 1 }}
@@ -10,7 +10,8 @@ const LoaderAnimation = () => {
       transition={{ duration:1}} // Smooth fade-in and fade-out
       className="min-h-screen w-full fixed top-0 left-0 flex items-center justify-center
          bg-transparent backdrop-blur-sm z-10"
-    >
+    >     {/* Black overlay */}
+        <div className="absolute inset-0 bg-black opacity-50"></div>
       {/* Animated Buildings */}
       <div className="absolute z-20 flex items-center justify-center w-full h-full">
         <motion.div
@@ -47,7 +48,7 @@ const LoaderAnimation = () => {
       >
         We Build Your Dreams
       </motion.h1>
-    </motion.div>
+    </motion.div></>
   );
 };
 

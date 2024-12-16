@@ -49,6 +49,7 @@ function App() {
           <Route path="/admin" element={<ViewProperty />} />
         </Routes>
       </div>
+     
     </Router>
   );
 }

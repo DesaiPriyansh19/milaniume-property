@@ -1,7 +1,9 @@
 import React from 'react';
+import FilterLogo from '../../svg/Icon/FilterLogo/Index';
+import Cards from './Cards';
 
 const FilterSection = () => {
-  return (
+  return (<>
     <div className="relative w-full flex justify-center mt-0 ">
       <div className="absolute text-[.6rem] left-1/2 transform -translate-x-1/2 
         top-full w-[95%] h-auto md:w-auto md:h-[10vh] bg-black text-white grid grid-cols-1 md:flex 
@@ -10,7 +12,7 @@ const FilterSection = () => {
         {/* Input Field */}
         <input
           type="text"
-          placeholder="Search"
+          placeholder="Search Area"
           className="flex-grow bg-transparent text-white placeholder-white text-[.7rem]
             px-3 py-2 h-[90%] w-[90%] md:w-auto rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
         />
@@ -34,17 +36,19 @@ const FilterSection = () => {
         {/* Filter Button */}
         <button className="flex items-center border border-gray-700 text-white 
           px-6 py-2 rounded-lg mx-2">
-          <img src="/path/to/filter-icon.svg" alt="Filter" className="w-4 h-4 mr-2" />
+          <span className="w-4 h-4 mr-2"><FilterLogo/></span>
           Filter
         </button>
 
         {/* Search Button */}
         <button className="bg-[#E7C873] text-black px-6 py-2 rounded-lg 
-          hover:text-[#E7C873] hover:border hover:border-[#E7C873] hover:bg-black">
+          hover:text-[#E7C873] font-medium hover:border hover:border-[#E7C873] hover:bg-black">
           Search
         </button>
       </div>
     </div>
+    <Cards/>
+    </>
   );
 };
 

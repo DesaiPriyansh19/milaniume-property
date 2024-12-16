@@ -5,6 +5,8 @@ import WhyShould from "./WhyShould";
 import Img1 from "../assets/office.jpeg";
 import room from "../assets/Room3.jpg";
 import UploadWidget from "./UploadWidget/UploadWidget";
+import SignInDiv from "./SignInDiv";
+import FeaturedProperty from "./FeaturedProperty";
 
 export default function HomePage() {
   const images = [Img1, room];
@@ -16,16 +18,17 @@ export default function HomePage() {
     },
     {
       title: "Luxury Apartment",
-      description: "Your Dreams, Our Vision; A Sustainable Future",
+      description: "Your Dreams, Our Vision, A Sustainable Future",
     },
   ];
 
   return (
     <div>
       <Carousel images={images} dynamicContent={dynamicContent} />
-      <Cards />
+   
       <WhyShould />
-      
+      <SignInDiv/>
+      <FeaturedProperty/>
     </div>
   );
 }

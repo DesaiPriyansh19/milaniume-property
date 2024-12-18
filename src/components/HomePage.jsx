@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // Import AOS styles
 import Carousel from "./Carousel";
 import Cards from "./Cards";
 import WhyShould from "./WhyShould";
@@ -9,6 +11,10 @@ import SignInDiv from "./SignInDiv";
 import FeaturedProperty from "./FeaturedProperty";
 
 export default function HomePage() {
+  useEffect(() => {
+    AOS.init({ once: true }); // Initialize AOS
+  }, []);
+  
   const images = [Img1, room];
 
   const dynamicContent = [
@@ -26,9 +32,13 @@ export default function HomePage() {
     <div>
       <Carousel images={images} dynamicContent={dynamicContent} />
    
-      <WhyShould />
-      <SignInDiv/>
-      <FeaturedProperty/>
+      <div data-aos="fade-out">
+         <WhyShould/>
+         </div>
+         <div data-aos="fade-out">
+      <SignInDiv/> </div>
+      <div data-aos="fade-out">
+      <FeaturedProperty/></div>
     </div>
   );
 }

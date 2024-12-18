@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import logo from "../../src/assets/logothree.jpeg";
 import Call from "../../svg/Icon/Call/Index";
 import MyProfileLogo from "../../svg/Icon/MyProfileLogo";
+import { Link } from "react-router-dom";
 
 const Navbar = ({ handlePopupOpen }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,19 +14,19 @@ const Navbar = ({ handlePopupOpen }) => {
         <div className="flex items-center">
           <img src={logo} alt="Logo 1" className="w-10 h-10 rounded-full" />
           {/* Nav links for large devices */}
-          <div className="hidden lg:flex text-sm space-x-6 ml-[50%]">
-            <a href="#" className="text-white hover:text-[#E7C873]">
+          <div className="hidden lg:flex text-[.8rem] space-x-6 ml-[70%]">
+            <Link to='/' className="text-white px-2 hover:text-[#E7C873] hover:border-b-[1.5px]">
               Home
-            </a>
-            <a href="#" className="text-white hover:text-[#E7C873]">
+            </Link>
+            <Link to='/' className="text-white hover:text-[#E7C873]">
               AboutUs
-            </a>
-            <a href="#" className="text-white hover:text-[#E7C873]">
+            </Link>
+            <Link to='/properties' className="text-white hover:text-[#E7C873]">
               Property
-            </a>
-            <a href="#" className="text-white hover:text-[#E7C873]">
+            </Link>
+            <Link to='/' className="text-white hover:text-[#E7C873]">
               Service
-            </a>
+            </Link>
           </div>
         </div>
 

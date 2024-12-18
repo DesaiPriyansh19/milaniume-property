@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Room from "../assets/Room.jpeg";
-import LocationLogo from "../../svg/Icon/Locationlogo/Index";
-function FeaturedProperty() {
+import Room from "../../assets/Room.jpeg";
+import LocationLogo from "../../../svg/Icon/Locationlogo/Index";
+function PropertyCards() {
     const [activeTab, setActiveTab] = useState("All Properties");
 
     // Sample data
@@ -88,4 +88,4 @@ function FeaturedProperty() {
     );
 }
 
-export default FeaturedProperty
+export default PropertyCards

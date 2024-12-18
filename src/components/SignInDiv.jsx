@@ -11,10 +11,10 @@ function SignInDiv() {
       Save properties, create alerts and keep track of the enquiries you send to agents.
     </p>
   </div>
-  <div className='w-full sm:w-[40%] mt-0 sm:mt-0 flex justify-center sm:justify-end'>
+  <div className='w-full sm:w-[40%] mt-0 sm:mt-0 flex items-center justify-center sm:justify-end'>
     <button className='bg-[#E7C873] hover:border-2 hover:bg-transparent hover:border-[#E7C873] hover:text-[#E7C873] flex items-center justify-center gap-1
       rounded-lg px-4 py-1 md:py-2 text-[#1F4B43] text-[.7rem] sm:text-[.8rem] mr-4 font-medium'>
-      Sign in or create an account <span className='text-[1.2rem] sm:text-[1.5rem]'>
+      Sign in or create an account <span className='text-[1rem] sm:text-[1.2rem]'>
         &#8594;
       </span>
     </button>

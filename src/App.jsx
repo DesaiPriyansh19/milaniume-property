@@ -1,57 +1,53 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import LoaderAnimation from "./components/LoaderAnimation";
-import "./App.css";
-
-import Navbar from "./components/Navbar";
-
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-
+import LoaderAnimation from "./components/LoaderAnimation";
+import Navbar from "./components/Navbar";
 import HomePage from "./components/HomePage";
 import LoginPopup from "./components/LoginPopup";
-import ViewProperty from "./components/AdminPanel/AdminProperty/ViewProperty";
-import AddProperty from "./components/AdminPanel/AdminProperty/EditProperty";
+import Properties from "./components/Properties/Properties";
+import "./App.css";
 
 function App() {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(true); // Loader visible on initial load
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const location = useLocation();
 
   const handlePopupOpen = () => setIsPopupOpen(true);
   const handlePopupClose = () => setIsPopupOpen(false);
 
   useEffect(() => {
-    // Hide the animation after 3 seconds with smooth fade out
+    // Show the loader only on the first load of the website
     const timer = setTimeout(() => {
       setIsVisible(false);
-    }, 2000); // Adjust time as needed
-
-    return () => clearTimeout(timer); // Cleanup the timer
-  }, []);
+    }, 2000); // Adjust time for animation
+    return () => clearTimeout(timer); // Cleanup timer
+  }, []); // Empty dependency array ensures it runs only once
 
   useEffect(() => {
-    if (isVisible) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
+    // Prevent scrolling when the loader is visible
+    document.body.style.overflow = isVisible ? "hidden" : "auto";
   }, [isVisible]);
 
   return (
-    <Router>
+    <div className="font-roboto p-0 m-0">
       <AnimatePresence>
         {isVisible && <LoaderAnimation key="loader" />}
       </AnimatePresence>
-      <div className="font-roboto  p-0 m-0 ">
-        <Navbar handlePopupOpen={handlePopupOpen} />
-        {isPopupOpen && <LoginPopup handlePopupClose={handlePopupClose} />}
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/admin" element={<ViewProperty />} />
-        </Routes>
-      </div>
-     
-    </Router>
+      <Navbar handlePopupOpen={handlePopupOpen} />
+      {isPopupOpen && <LoginPopup handlePopupClose={handlePopupClose} />}
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/properties" element={<Properties />} />
+      </Routes>
+    </div>
   );
 }
 
-export default App;
+export default function RootApp() {
+  return (
+    <Router>
+      <App />
+    </Router>
+  );
+}

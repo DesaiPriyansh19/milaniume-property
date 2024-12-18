@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // Import AOS styles
 import Room from "../assets/Room.jpeg";
 function Cards() {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, // Animation duration (in ms)
+      once: true, // Whether animation should happen only once
+    });
+  }, []);
   const data = [
     { imgSrc: Room, text1: "Thaltej", text2: "8 properies" },
     { imgSrc: Room, text1: "Gota", text2: "9 properties" },
@@ -10,7 +18,8 @@ function Cards() {
   ];
   return (
     <>
-      <section className=" p-6 mt-[56%] md:mt-[20%] lg:mt-16"> 
+      <section className=" p-6 mt-[56%] md:mt-[20%] lg:mt-16 "
+       > 
         <h3 className="text-center text-2xl font-medium">
           Find Properties in These Area
         </h3>
@@ -18,7 +27,7 @@ function Cards() {
           Your Dreams, Our Vision; A Sustainable Future
         </p>
         <button className=" hidden sm:flex text-black text-[.9rem] m-3 mb-5 font-extralight border-[.1px] px-3 py-1 rounded-lg border-[#E7C873] ">View all →</button>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" >
   <div className="flex lg:flex-wrap space-x-4 w-full mx-auto items-center justify-start">
     {data.map((item, index) => (
       <div
@@ -27,6 +36,9 @@ function Cards() {
         style={{
           backgroundImage: `url(${item.imgSrc})`,
         }}
+        data-aos="fade-out"
+        data-aos-delay="0"
+        data-aos-duration="800"
       >
         {/* Black overlay */}
         <div className="absolute inset-0 bg-black opacity-15"></div>

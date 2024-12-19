@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logo from "../../src/assets/logothree.jpeg";
+import logo from "../../src/assets/LogoThree.png";
 import Call from "../../svg/Icon/Call/Index";
 import MyProfileLogo from "../../svg/Icon/MyProfileLogo";
 import { Link } from "react-router-dom";
@@ -9,22 +9,22 @@ const Navbar = ({ handlePopupOpen }) => {
 
   return (
     <nav className="bg-gradient-to-b pt-5 text-sm from-black w-full to-transparent bg-opacity-10 absolute inset-x-0 top-0 z-40">
-      <div className="container mx-auto px-4 flex items-center justify-between h-16">
+      <div className="container mx-auto px-1 flex items-center justify-between h-16">
         {/* Left: Logo */}
         <div className="flex items-center">
-          <img src={logo} alt="Logo 1" className="w-10 h-10 rounded-full" />
+          <img src={logo} alt="Logo 1" className="w-[20vw] md:w-[15vw]  rounded-full" />
           {/* Nav links for large devices */}
-          <div className="hidden lg:flex text-[.8rem] space-x-6 ml-[70%]">
-            <Link to='/' className="text-white px-2 hover:text-[#E7C873] hover:border-b-[1.5px]">
+          <div className="hidden lg:flex text-[.8rem] w-[100%] space-x-6 mx-auto">
+            <Link to='/' className="text-white px-2 hover:text-[#E7C873] hover:border-b-[1px]">
               Home
             </Link>
-            <Link to='/' className="text-white hover:text-[#E7C873]">
+            <Link to='/' className="text-white hover:text-[#E7C873] hover:border-b-[1px]">
               AboutUs
             </Link>
-            <Link to='/properties' className="text-white hover:text-[#E7C873]">
+            <Link to='/properties' className="text-white hover:text-[#E7C873] hover:border-b-[1px]">
               Property
             </Link>
-            <Link to='/' className="text-white hover:text-[#E7C873]">
+            <Link to='/' className="text-white hover:text-[#E7C873] hover:border-b-[1px]">
               Service
             </Link>
           </div>

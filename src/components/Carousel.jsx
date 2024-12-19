@@ -23,7 +23,7 @@ const Carousel = ({ images, dynamicContent }) => {
           <div key={index} className="relative w-full h-[570px] sm:h-[500px] md:h-[600px]">
             <img src={img} alt={`Slide ${index}`} className="w-full h-full object-cover" />
             <div  style={{
-    textShadow: "4px 4px 8px rgba(0.1, 0.2, 0.5, 0.7)", // Apply text shadow to all children
+    textShadow: "4px 4px 8px rgba(0.9, 0.9, 0.0, 0.0)", // Apply text shadow to all children
   }} className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black flex flex-col justify-center items-center">
               <h1 className="text-white text-3xl sm:text-3xl md:text-5xl px-2 md:px-0 font-normal ">{dynamicContent[index].title}</h1>
               <p className="text-white text-lg font-thin md:font-normal">{dynamicContent[index].description}</p>

@@ -5,7 +5,7 @@ function PropertyCards() {
     
   
   return (
-    <div className="px-5 md:px-4 rounded-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+    <div className=" w-[90%] px-5 md:px-4 rounded-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
       <div
         className="relative bg-cover bg-center h-[300px] sm:h-[300px] md:h-[300px] lg:h-[300px] p-4 rounded-xl shadow-lg"
         style={{ backgroundImage: `url(${Room})` }} 

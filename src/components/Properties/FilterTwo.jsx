@@ -6,8 +6,8 @@ const FilterTwo = () => {
   return (<>
     <div className="relative w-full mb-[200px] sm:mb-[150px] md:mb-[150px] lg:mb-[100px] flex justify-center mt-0 ">
       <div className="absolute text-[.7rem] md:text-[.6rem] left-1/2 transform -translate-x-1/2 
-        top-full w-[95%] h-auto md:w-auto md:h-[10vh] bg-black text-white grid grid-cols-1 md:flex 
-        items-center justify-between px-2 py-4 md:py-2 md:px-4 rounded-lg shadow-lg z-[9]">
+        top-full w-full md:w-[95%] h-auto  md:h-[10vh] bg-black text-white grid grid-cols-1 md:flex 
+        items-center justify-between px-2 py-4 md:py-2 md:px-4 rounded-none md:rounded-lg shadow-lg z-[9]">
         
         {/* Input Field */}
         <input
@@ -20,17 +20,18 @@ const FilterTwo = () => {
         {/* Dropdowns */}
         <select className="bg-transparent text-white px-3 py-2 rounded-lg mx-2 
           focus:outline-none focus:ring-2 focus:ring-black">
-          <option>All Status</option>
-          <option>For Sale</option>
-          <option>For Rent</option>
+          <option className='text-black'>SALE & RENT</option>
+          <option className='text-black'>For Sale</option>
+          <option  className='text-black'>For Rent</option>
         </select>
 
         <select className="bg-transparent text-white px-3 py-2 rounded-lg mx-2 
           focus:outline-none focus:ring-2 focus:ring-black">
-          <option>All Type</option>
-          <option>Apartment</option>
-          <option>House</option>
-          <option>Office</option>
+          <option className='text-black'>All Type</option>
+          <option className='text-black'>RECIDENCIAL</option>
+          <option className='text-black'>COMMERCIAL</option>
+          <option className='text-black'>INDUSTRAIL</option>
+          <option className='text-black'>PLOT & LAND </option>
         </select>
 
         {/* Filter Button */}

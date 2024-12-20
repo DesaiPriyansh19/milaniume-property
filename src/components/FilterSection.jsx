@@ -6,8 +6,8 @@ const FilterSection = () => {
   return (<>
     <div className="relative w-full flex justify-center mt-0 ">
       <div className="absolute text-[.6rem] left-1/2 transform -translate-x-1/2 
-        top-full w-[95%] h-auto md:w-auto md:h-[10vh] bg-black text-white grid grid-cols-1 md:flex 
-        items-center justify-between px-2 py-4 md:py-2 md:px-4 rounded-lg shadow-lg z-[9]">
+        top-full w-[100%] text-center md:text-start h-auto md:w-[80%] md:h-[10vh] bg-black text-white grid grid-cols-1 md:flex 
+        items-center justify-between px-2 py-4 md:py-2 md:px-4 rounded-none md:rounded-lg shadow-lg z-[9]">
         
         {/* Input Field */}
         <input

@@ -12,7 +12,7 @@ const Navbar = ({ handlePopupOpen }) => {
       <div className="container mx-auto px-1 flex items-center justify-between h-16">
         {/* Left: Logo */}
         <div className="flex items-center">
-          <img src={logo} alt="Logo 1" className="w-[20vw] md:w-[15vw]  rounded-full" />
+          <img src={logo} alt="Logo 1" className="w-[145px] sm:w-[200px] md:w-[15vw]  rounded-full" />
           {/* Nav links for large devices */}
           <div className="hidden lg:flex text-[.8rem] w-[100%] space-x-6 mx-auto">
             <Link to='/' className="text-white px-2 hover:text-[#E7C873] hover:border-b-[1px]">
@@ -31,7 +31,7 @@ const Navbar = ({ handlePopupOpen }) => {
         </div>
 
         {/* Right: Contact and Menu */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-3 pr-4 lg:pr-1">
           {/* Mobile view: Call icon and number */}
           <div className="lg:hidden flex items-center">
             <span className="w-6 h-6">
@@ -78,17 +78,17 @@ const Navbar = ({ handlePopupOpen }) => {
 
       {/* Side Navigation */}
       {isMenuOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-80 z-50 flex flex-col">
-          <div className="flex justify-between items-center p-4">
-            <span className="flex gap-5">
-              <img src={logo} alt="Logo 1" className="w-10 h-10 rounded-full" />
-              <span className="w-6 h-6">
+        <div className="fixed inset-0 bg-black backdrop-blur-sm bg-opacity-80 z-50 flex flex-col">
+          <div className=" flex justify-start items-center p-0">
+            <span className="absolute top-0 left-0 flex items-center justify-start gap-5">
+              <img src={logo} alt="Logo 1" className="w-[200px]  rounded-full" />
+              <span className="w-11 h-11 flex items-center justify-start">
                 <MyProfileLogo />
               </span>
             </span>
-            <button className="text-white" onClick={() => setIsMenuOpen(false)}>
+            <button className="text-white absolute top-5 right-5" onClick={() => setIsMenuOpen(false)}>
               <svg
-                className="w-6 h-6"
+                className="w-6 h-6 sm:h-9 sm:w-10"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -103,21 +103,23 @@ const Navbar = ({ handlePopupOpen }) => {
               </svg>
             </button>
           </div>
-          <div className="flex flex-col items-center space-y-4 mt-10">
-            <a href="#" className="text-white text-lg">
+          <div className="absolute top-[20%] right-[10%] left-[10%] flex flex-col items-center space-y-4 mt-10">
+        
+          <Link to='/' className="text-white text-lg sm:text-xl" onClick={() => setIsMenuOpen(false)}>
               Home
-            </a>
-            <a href="#" className="text-white text-lg">
+              </Link>
+            <a href="#" className="text-white text-lg sm:text-xl" onClick={() => setIsMenuOpen(false)}>
               AboutUs
             </a>
-            <a href="#" className="text-white text-lg">
+           
+            <Link to='/properties'className="text-white text-lg sm:text-xl"onClick={() => setIsMenuOpen(false)}>
               Property
-            </a>
-            <a href="#" className="text-white text-lg">
+              </Link>
+            <a href="#" className="text-white text-lg sm:text-xl"onClick={() => setIsMenuOpen(false)}>
               Service
             </a>
 
-            <button className="bg-transparent text-sm text-white px-4 py-1 rounded-full border-2 border-[#E7C873]">
+            <button className="bg-transparent text-sm text-white px-6 py-2 rounded-full border-2 border-[#E7C873]">
               Add Property
             </button>
           </div>

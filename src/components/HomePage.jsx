@@ -36,9 +36,11 @@ export default function HomePage() {
          <WhyShould/>
          </div>
          <div data-aos="fade-out">
-      <SignInDiv/> </div>
+      <SignInDiv/> 
+      </div>
       <div data-aos="fade-out">
-      <FeaturedProperty/></div>
+      <FeaturedProperty/>
+      </div>
     </div>
   );
 }

@@ -12,7 +12,7 @@ function Properties() {
   <img
     src={bgImg}
     alt="Background"
-    className="w-full h-[40vh] md:h-[40vh] lg:h-full object-cover object-top "
+    className="w-full h-[450px]  md:h-[40vh] lg:h-full object-cover object-top "
   />
   <div className="absolute inset-0 flex flex-col justify-center items-center text-white 
   "
@@ -22,7 +22,7 @@ function Properties() {
     <h1 className="text-white text-2xl md:text-4xl lg:text-5xl font-medium">
       Your <span className="text-[#E7C873]">Property</span>, Our Priority.
     </h1>
-    <p className="text-white mt-2 md:mt-4 px-20 sm:px-0 text-center text-sm md:text-base lg:text-lg font-normal">
+    <p className="text-white mt-2 md:mt-4 px-2 sm:px-0 text-center text-sm md:text-base lg:text-lg font-normal">
     Find Your Perfect Property – Where Your Search Ends.
     </p>
   </div>

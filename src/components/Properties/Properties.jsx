@@ -12,9 +12,9 @@ function Properties() {
   <img
     src={bgImg}
     alt="Background"
-    className="w-full h-[450px]  md:h-[40vh] lg:h-full object-cover object-top "
+    className="w-full h-[350px]  md:h-[40vh] lg:h-full object-cover object-top "
   />
-  <div className="absolute inset-0 flex flex-col justify-center items-center text-white 
+  <div className="absolute mt-[100px] sm:mt-[50px] text-center inset-0 flex flex-col justify-center items-center text-white 
   "
   style={{
     textShadow: "4px 4px 8px rgba(0.9, 0.9, 0.9, 0.1)", // Apply text shadow to all children

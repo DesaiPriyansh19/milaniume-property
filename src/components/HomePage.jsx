@@ -13,6 +13,7 @@ import FilterTwo from './Properties/FilterTwo';
 import WeUseRealestate from './WeUseRealestate';
 import Properties from './Properties/Properties';
 import FeaturedCatagory from './FeaturedCatagory';
+import LokingForNewHome from './LokingForNewHome';
 
 export default function HomePage() {
   useEffect(() => {
@@ -37,19 +38,24 @@ export default function HomePage() {
       <Carousel images={images} dynamicContent={dynamicContent} />
       
    <FilterTwo/>
+
    <div data-aos="fade-out">
-        
          <FeaturedCatagory/>
          </div>
+
+            <div data-aos="fade-in" data-aos-duration="1000" data-aos-delay="500"> <LokingForNewHome/></div>
+         
+         <div data-aos="fade-out"><WeUseRealestate/>
+         </div>
+      
       <div data-aos="fade-out">
          <WhyShould/>
       
          </div>
            
    
-      <div data-aos="fade-out"><WeUseRealestate/>
-         </div>
-      <div data-aos="fade-out">
+    
+      <div data-aos-duration="2000" data-aos-delay="300" data-aos="fade-out">
       <FeaturedProperty/>
       </div>
       <div data-aos="fade-out">

@@ -37,7 +37,7 @@ const Navbar = ({ handlePopupOpen }) => {
           <a href="tel:+1234567890" className="w-6 h-6">
   <Call />
 </a>
-            <p className="text-white ml-2"></p>
+           
           </div>
           {/* Hamburger menu for small devices */}
           <button

@@ -46,7 +46,7 @@ function WeUseRealestate() {
     </div>
 
     {/* Learn More Button */}
-    <button className="bg-[#E7C873] text-black text-sm px-6 py-2 rounded-lg hover:bg-teal-600">
+    <button className="bg-[#E7C873] text-black text-sm px-6 py-2 rounded-lg ">
       Learn More &#8594;
     </button>
   </div>
@@ -57,7 +57,7 @@ function WeUseRealestate() {
       <img
         src={image}
         alt="Real Estate"
-        className="w-full h-full py-8 rounded-2xl object-cover"
+        className="w-full h-full md:py-16 lg:py-8 mx-auto rounded-2xl object-cover"
       />
     </div>
   </div>

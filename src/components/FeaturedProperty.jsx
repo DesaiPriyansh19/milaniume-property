@@ -31,7 +31,8 @@ function FeaturedProperty() {
       setActiveTab(tab);
     };
   
-    return (
+    return (<>
+    <h3 className="text-2xl text-center mt-11 font-medium ">Featured Properties</h3>
       <div className="w-full px-11 py-8">
         {/* Tabs */}
         <ul className="flex justify-center mb-6">
@@ -85,6 +86,7 @@ function FeaturedProperty() {
           hover:border-white rounded-3xl">See All Listing  &#8594;
    </button></div> 
       </div>
+      </>
     );
 }
 

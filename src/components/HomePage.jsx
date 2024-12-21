@@ -9,6 +9,10 @@ import room from "../assets/Room3.jpg";
 import UploadWidget from "./UploadWidget/UploadWidget";
 import SignInDiv from "./SignInDiv";
 import FeaturedProperty from "./FeaturedProperty";
+import FilterTwo from './Properties/FilterTwo';
+import WeUseRealestate from './WeUseRealestate';
+import Properties from './Properties/Properties';
+import FeaturedCatagory from './FeaturedCatagory';
 
 export default function HomePage() {
   useEffect(() => {
@@ -31,15 +35,25 @@ export default function HomePage() {
   return (
     <div>
       <Carousel images={images} dynamicContent={dynamicContent} />
-   
+      
+   <FilterTwo/>
+   <div data-aos="fade-out">
+        
+         <FeaturedCatagory/>
+         </div>
       <div data-aos="fade-out">
          <WhyShould/>
+      
          </div>
-         <div data-aos="fade-out">
-      <SignInDiv/> 
-      </div>
+           
+   
+      <div data-aos="fade-out"><WeUseRealestate/>
+         </div>
       <div data-aos="fade-out">
       <FeaturedProperty/>
+      </div>
+      <div data-aos="fade-out">
+      <SignInDiv/> 
       </div>
     </div>
   );

@@ -6,8 +6,8 @@ import WhyThree from '../../svg/Icon/WhyThree'
 function WhyShould() {
   return (
     <>
-    <section>
-    <h3 className='text-center text-2xl font-medium mb-1'>Why You Should Work With Us</h3>
+    <section className='mt-10'>
+    <h3 className=' text-center text-2xl font-medium mb-1'>Why You Should Work With Us</h3>
     <p className='text-center text-[.8rem] mb-6'>Experience Trust, Excellence, and Expertise</p>
     <div className='flex items-center justify-center w-[80%] mx-auto mb-2'>
         <div className='flex flex-col gap-1 justify-center items-center mb-3 sm:mb-0'>

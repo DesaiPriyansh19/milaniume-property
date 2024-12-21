@@ -8,7 +8,7 @@ function Properties() {
   return (
     <>
  <div className="relative w-full mb-0 ">
- <div className="absolute inset-0 bg-black opacity-40"></div>
+ <div className="absolute inset-0 bg-black opacity-40 backdrop-blur-2xl"></div>
   <img
     src={bgImg}
     alt="Background"

@@ -14,7 +14,7 @@ const Navbar = ({ handlePopupOpen }) => {
         <div className="flex items-center">
           <img src={logo} alt="Logo 1" className="w-[145px] sm:w-[200px] md:w-[15vw]  rounded-full" />
           {/* Nav links for large devices */}
-          <div className="hidden lg:flex text-[.8rem] w-[100%] space-x-6 mx-auto">
+          <div className="hidden lg:flex text-[.8rem] w-[10%] space-x-6 mx-auto">
             <Link to='/' className="text-white px-2 hover:text-[#E7C873] hover:border-b-[1px]">
               Home
             </Link>
@@ -34,10 +34,10 @@ const Navbar = ({ handlePopupOpen }) => {
         <div className="flex items-center space-x-3 pr-4 lg:pr-1">
           {/* Mobile view: Call icon and number */}
           <div className="lg:hidden flex items-center">
-            <span className="w-6 h-6">
-              <Call />
-            </span>
-            <p className="text-white ml-2">+918521221224</p>
+          <a href="tel:+1234567890" className="w-6 h-6">
+  <Call />
+</a>
+            <p className="text-white ml-2"></p>
           </div>
           {/* Hamburger menu for small devices */}
           <button
@@ -60,12 +60,11 @@ const Navbar = ({ handlePopupOpen }) => {
             </svg>
           </button>
           {/* Button and Contact for large devices */}
-          <div className="hidden lg:flex items-center space-x-4">
-            <span className="w-6 h-6">
-              {" "}
-              <Call />
-            </span>
-            <p className="text-white">+918521221224</p>
+          <div className="hidden lg:flex items-center justify-center space-x-4">
+          <a href="tel:+1234567890" className="w-6 h-6">
+  <Call />
+</a>
+            
             <span onClick={handlePopupOpen}>
               <MyProfileLogo />
             </span>

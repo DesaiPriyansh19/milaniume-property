@@ -37,7 +37,7 @@ const Carousel = ({ images, dynamicContent }) => {
         ))}
       </Slider>
     </div>
-    <FilterSection/>
+
     </>
   );
 };

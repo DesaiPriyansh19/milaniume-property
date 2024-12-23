@@ -65,11 +65,11 @@ export default function SidebarAdmin() {
                     {category.icon}
 
                     <div
-                      className={`absolute top-[-1px] ${
+                      className={`absolute  top-[-1px] ${
                         conMaxWidth === 72
-                          ? "left-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                          ? "left-10 opacity-0 z-10 bg-black group-hover:opacity-100 transition-opacity duration-300"
                           : "left-4 mb-1"
-                      } text-white ml-2 text-sm whitespace-nowrap rounded-md`}
+                      } text-white  bg-opacity-60 px-2 ml-2 text-sm whitespace-nowrap rounded-md`}
                     >
                       {category.name}
                     </div>
@@ -95,8 +95,8 @@ export default function SidebarAdmin() {
               conMaxWidth === 72 ? "left-full hidden" : "left-14 top-0"
             } ml-6  text-sm whitespace-nowrap  rounded-md `}
           >
-            <p className="mb-1 font-medium">Karan Jangde</p>
-            <p className="text-xs">jangdekaran4@gmail.com</p>
+            <p className="mb-1 font-medium">Testing</p>
+            <p className="text-xs">test@gmail.com</p>
           </div>
         </div>
       </div>

@@ -15,7 +15,7 @@ export default function ManagePeoples() {
     }
   };
 
-  if (loading) {
+  if (loading && !data) {
     return <p className="text-white mx-auto p-4">Loading....</p>;
   }
 
@@ -32,19 +32,19 @@ export default function ManagePeoples() {
               <th className="px-4 py-2 ">
                 <div
                   className={`w-5 h-5 rounded-md flex justify-center items-center cursor-pointer border-2 border-gray-300 ${
-                    selectedPeople.length === data.length
+                    selectedPeople.length === data?.length
                       ? "bg-[#41a494]"
                       : "bg-transparent"
                   }`}
                   onClick={() => {
-                    if (selectedPeople.length === data.length) {
+                    if (selectedPeople.length === data?.length) {
                       setSelectedPeople([]);
                     } else {
                       setSelectedPeople(data.map((person) => person._id));
                     }
                   }}
                 >
-                  {selectedPeople.length === data.length ? "-" : "+"}
+                  {selectedPeople.length === data?.length ? "-" : "+"}
                 </div>
               </th>
               <th className="px-4 py-2">No</th>
@@ -54,7 +54,7 @@ export default function ManagePeoples() {
             </tr>
           </thead>
           <tbody>
-            {data.map((person, idx) => (
+            {data?.map((person, idx) => (
               <tr
                 key={person._id}
                 onClick={() => handleCheckboxChange(person._id)}

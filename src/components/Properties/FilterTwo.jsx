@@ -93,9 +93,9 @@ const FilterTwo = () => {
 
       return (
       <>
-        <div className="relative w-full mb-[290px] sm:mb-[190px] md:mb-[195px] lg:mb-[90px] flex justify-center mt-0">
+        <div className="relative w-full   mb-[290px] sm:mb-[190px] md:mb-[195px] lg:mb-[90px] flex justify-center mt-0">
           <div
-            className="absolute text-[.7rem] md:text-[.6rem] left-1/2 transform -translate-x-1/2 
+            className="absolute text-[.7rem]  md:text-[.6rem] left-1/2 transform -translate-x-1/2 
             top-full w-full md:w-[95%] h-auto md:h-[10vh] bg-black text-white grid grid-cols-1 md:flex 
             items-center justify-between px-2 py-4 md:py-2 md:px-4 rounded-none md:rounded-lg shadow-lg z-[9]"
           >

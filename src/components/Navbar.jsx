@@ -3,7 +3,7 @@ import logo from "../../src/assets/LogoThree.png";
 import Call from "../../svg/Icon/Call/Index";
 import MyProfileLogo from "../../svg/Icon/MyProfileLogo";
 import { Link } from "react-router-dom";
-
+import pdf from '/public/Brochure-MillennumProperties.pdf'
 const Navbar = ({ handlePopupOpen }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -11,10 +11,10 @@ const Navbar = ({ handlePopupOpen }) => {
     <nav className="bg-gradient-to-b pt-5 text-sm from-black w-full to-transparent bg-opacity-10 absolute inset-x-0 top-0 z-40">
       <div className="container mx-auto px-1 flex items-center justify-between h-16">
         {/* Left: Logo */}
-        <div className="flex items-center">
+        <div className="flex items-center text-center justify-center">
           <img src={logo} alt="Logo 1" className="w-[145px] sm:w-[200px] md:w-[15vw]  rounded-full" />
           {/* Nav links for large devices */}
-          <div className="hidden lg:flex text-[.8rem] w-[10%] space-x-6 mx-auto">
+          <div className="hidden lg:flex text-[.8rem] px-28    space-x-6 mx-auto">
             <Link to='/' className="text-white px-2 hover:text-[#E7C873] hover:border-b-[1px]">
               Home
             </Link>
@@ -26,6 +26,9 @@ const Navbar = ({ handlePopupOpen }) => {
             </Link>
             <Link to='/' className="text-white hover:text-[#E7C873] hover:border-b-[1px]">
               Service
+            </Link>
+            <Link to='/' className="text-white hover:text-[#E7C873] hover:border-b-[1px]">
+             Quick Contact
             </Link>
           </div>
         </div>
@@ -68,9 +71,18 @@ const Navbar = ({ handlePopupOpen }) => {
             <span onClick={handlePopupOpen}>
               <MyProfileLogo />
             </span>
-            <button className="bg-transparent text-sm text-white px-4 py-1 rounded-full border-2 border-white hover:border-[#E7C873]">
-              Add Property
-            </button>
+            {/* <button className="bg-transparent text-sm text-white px-4 py-1 rounded-full border-2 border-white hover:border-[#E7C873]">
+            Brochure
+            </button> */}
+            <a
+  href={pdf}
+  target="_blank"
+  rel="noopener noreferrer"
+ 
+   className="bg-transparent text-sm text-white px-4 py-1 rounded-full border-2 border-white hover:border-[#E7C873]"
+>
+  Brochure
+</a>
           </div>
         </div>
       </div>
@@ -118,9 +130,16 @@ const Navbar = ({ handlePopupOpen }) => {
               Service
             </a>
 
-            <button className="bg-transparent text-sm text-white px-6 py-2 rounded-full border-2 border-[#E7C873]">
-              Add Property
-            </button>
+            <a
+  href={pdf}
+  target="_blank"
+  rel="noopener noreferrer"
+  download="Brochure.pdf"
+  className="bg-transparent text-sm text-white px-6 py-2 rounded-full border-2 border-[#E7C873]"
+>
+  Brochure
+</a>
+
           </div>
         </div>
       )}

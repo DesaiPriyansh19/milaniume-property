@@ -39,8 +39,8 @@ function FeaturedProperty() {
           {Object.keys(data).map((tab) => (
             <li
               key={tab}
-              className={`cursor-pointer text-[.6rem] px-4 py-1 ${
-                activeTab === tab ? "border-2 rounded-3xl bg-[#f3fdfb] border-black" : ""
+              className={`cursor-pointer text-[.6rem] lg:text-[.7rem] px-4 py-1 ${
+                activeTab === tab ? "border-[1px] rounded-3xl bg-[#f3fdfb] border-black" : ""
               }`}
               onClick={() => handleTabClick(tab)}
             >

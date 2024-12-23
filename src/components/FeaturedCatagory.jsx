@@ -21,34 +21,40 @@ function FeaturedCatagory() {
 <p className='text-sm text-center md:text-start px-20 text-gray-500 '> wide range of properties</p>
     <div className='grid grid-cols-3 mt-5 px-1 md:px-0 md:flex gap-3 items-center  justify-center py-3'>
 
-    <div data-aos-duration="1400" data-aos-delay="100" data-aos="flip-up"><div className='bg-gray-100 rounded-2xl p-6 flex  flex-col justify-center items-center'> 
+    <div data-aos-duration="1400" data-aos-delay="100" data-aos="flip-up">
+        <div className='bg-gray-100 rounded-2xl py-3 text-center flex h-[130px] md:w-[120px] lg:[w-170px] flex-col justify-center items-center'> 
     <span className=''><HomeLogo/></span>
 <p className='text-[.8rem] font-semibold'>Residantial</p>
 <p className='text-[.7rem]'>2 properties</p>
 </div></div>
-<div data-aos-duration="1400" data-aos-delay="250" data-aos="flip-up" className='bg-gray-100 rounded-2xl p-6 flex flex-col justify-center items-center'> 
+<div data-aos-duration="1400" data-aos-delay="250" data-aos="flip-up" 
+className='bg-gray-100 rounded-2xl py-3 text-center flex h-[130px] md:w-[120px] lg:[w-170px] flex-col justify-center items-center'> 
     <span className=''><HomeLogo2/></span>
-<p className='text-[.8rem] font-semibold'>Residantial</p>
+<p className='text-[.8rem] font-semibold'>Commercial Property</p>
 <p className='text-[.7rem]'>2 properties</p>
 </div>
-<div data-aos-duration="1400" data-aos-delay="350" data-aos="flip-up" className='bg-gray-100 rounded-2xl p-6 flex flex-col justify-center items-center'> 
+<div data-aos-duration="1400" data-aos-delay="350" data-aos="flip-up"
+ className='bg-gray-100 rounded-2xl py-3 text-center flex h-[130px] md:w-[120px] lg:[w-170px] flex-col justify-center items-center'> 
     <span className=''><HomeLogo3/></span>
-<p className='text-[.8rem] font-semibold'>Residantial</p>
+<p className='text-[.8rem] font-semibold'>Industrial Property</p>
 <p className='text-[.7rem]'>2 properties</p>
 </div>
-<div data-aos-duration="1400" data-aos-delay="450" data-aos="flip-up" className='bg-gray-100 rounded-2xl p-6 flex flex-col justify-center items-center'> 
+<div data-aos-duration="1400" data-aos-delay="650" data-aos="flip-up"
+ className='bg-gray-100 rounded-2xl py-3 text-center flex h-[130px] md:w-[120px] lg:[w-170px] flex-col justify-center items-center'> 
     <span className=''><HomeLogo4/></span>
 <p className='text-[.8rem] font-semibold'>Residantial</p>
 <p className='text-[.7rem]'>2 properties</p>
 </div>
-<div data-aos-duration="1400" data-aos-delay="550" data-aos="flip-up" className='bg-gray-100 rounded-2xl p-6 flex flex-col justify-center items-center'> 
+<div data-aos-duration="1400" data-aos-delay="750" data-aos="flip-up"
+ className='bg-gray-100 rounded-2xl py-3 text-center flex h-[130px] md:w-[120px] lg:[w-170px] flex-col justify-center items-center'> 
     <span className=''><HomeLogo5/></span>
 <p className='text-[.8rem] font-semibold'>Residantial</p>
 <p className='text-[.7rem]'>2 properties</p>
 </div>
-<div data-aos-duration="1400" data-aos-delay="650" data-aos="flip-up" className='bg-gray-100 rounded-2xl p-6 flex flex-col justify-center items-center'> 
+<div data-aos-duration="1400" data-aos-delay="950" data-aos="flip-up"
+ className='bg-gray-100 rounded-2xl py-3 text-center flex h-[130px] md:w-[120px] lg:[w-170px] flex-col justify-center items-center'> 
     <span className=''><HomeLogo6/></span>
-<p className='text-[.8rem] font-semibold'>Residantial</p>
+<p className='text-[.8rem] font-semibold px-0 '>Agriculture & Project Land</p>
 <p className='text-[.7rem]'>2 properties</p>
 </div>
 

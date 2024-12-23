@@ -40,7 +40,9 @@ function App() {
   return (
     <div className="font-roboto p-0 m-0">
       <AnimatePresence>
-        {isVisible && <LoaderAnimation key="loader" />}
+        {isVisible && location.pathname === "/" && (
+          <LoaderAnimation key="loader" />
+        )}
       </AnimatePresence>
       {/* <Navbar handlePopupOpen={handlePopupOpen} /> */}
       <AppLayout handlePopupOpen={handlePopupOpen}>

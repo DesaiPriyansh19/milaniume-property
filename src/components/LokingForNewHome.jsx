@@ -5,6 +5,7 @@ import homimg from '../assets/LookingForNewHome.png'
 import homimg2 from '../assets/LookingforHome2.png'
 import AOS from 'aos';
 import 'aos/dist/aos.css'; // Import AOS styles
+import { Link } from 'react-router-dom';
 function LokingForNewHome() {
      useEffect(() => {
         AOS.init({ once: true }); // Initialize AOS
@@ -53,10 +54,10 @@ function LokingForNewHome() {
      text-[#1F4B43] text-sm flex justify-center items-center gap-2
       font-semibold border-[1.2px] border-[#1F4B43] rounded-xl py-2'>   
       <FaHome  />Post Property</button>
-    <button data-aos-duration="500" data-aos-delay="350" data-aos="fade-in" className='px-5 hover:bg-[#e8f4f4]
+  <Link to={'/quickenquiry'}> <button data-aos-duration="500" data-aos-delay="350" data-aos="fade-in" className='px-5 hover:bg-[#e8f4f4]
      text-[#1F4B43] text-sm flex justify-center items-center gap-2 
      font-semibold border-[1.2px] border-[#1F4B43] rounded-xl py-2'>
-        <FaCommentDots  />Quick Enquiry</button>
+        <FaCommentDots  />Quick Enquiry</button></Link> 
 </div>
     </>
   )

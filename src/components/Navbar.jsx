@@ -27,7 +27,7 @@ const Navbar = ({ handlePopupOpen }) => {
             <Link to='/' className="text-white hover:text-[#E7C873] hover:border-b-[1px]">
               Service
             </Link>
-            <Link to='/' className="text-white hover:text-[#E7C873] hover:border-b-[1px]">
+           <Link to={'/quickenquiry'} className="text-white hover:text-[#E7C873] hover:border-b-[1px]">
              Quick Contact
             </Link>
           </div>

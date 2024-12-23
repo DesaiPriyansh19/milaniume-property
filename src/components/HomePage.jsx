@@ -14,6 +14,7 @@ import WeUseRealestate from './WeUseRealestate';
 import Properties from './Properties/Properties';
 import FeaturedCatagory from './FeaturedCatagory';
 import LokingForNewHome from './LokingForNewHome';
+import Discover from './Discover';
 
 export default function HomePage() {
   useEffect(() => {
@@ -55,9 +56,11 @@ export default function HomePage() {
            
    
     
-      <div data-aos-duration="2000" data-aos-delay="300" data-aos="fade-out">
+      <div data-aos-duration="2000" data-aos-delay="300" data-aos="fade-in">
       <FeaturedProperty/>
       </div>
+      <div data-aos="fade-in" data-aos-duration="300" data-aos-delay="500">
+      <Discover/></div>
       <div data-aos="fade-out">
       <SignInDiv/> 
       </div>

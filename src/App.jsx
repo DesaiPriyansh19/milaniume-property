@@ -15,6 +15,7 @@ import Properties from "./components/Properties/Properties";
 import AdminPanelDashBoard from "../src/components/AdminPanel/AdminProperty/AdminPanelDashBoard";
 import "./App.css";
 import AppLayout from "./components/AppLayout";
+import QuickEnquiry from "./components/QuickEnquiry";
 
 function App() {
   const [isVisible, setIsVisible] = useState(true); // Loader visible on initial load
@@ -51,7 +52,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/properties" element={<Properties />} />
         <Route path="/admin" element={<Navigate to="/admin/dashboard" />} />
-
+            <Route path="/quickenquiry" element={<QuickEnquiry/>} />
         {/* Dynamic slug route */}
         <Route path="/admin/:slug" element={<AdminPanelDashBoard />} />
       </Routes>

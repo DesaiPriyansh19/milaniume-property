@@ -6,147 +6,156 @@ import AddProperty from "./AddProperty";
 export default function ViewProperty() {
   const baseUrl = "https://milaniumepropertybackend.vercel.app/api/property";
   const { data, fetchById, updateById, addNew } = useApiData(baseUrl);
-  const [editData, setEditData] = useState("View");
+  const [editData, setEditData] = useState({ type: "View", id: null });
   const [formData, setFormData] = useState({
     PropertyName: "",
     PropertyType: [],
     ForSale: true,
     ForRent: false,
+    Featured: false,
     Prices: {},
-    Bedrooms: "",
-    Bathrooms: "",
-    Sqft: "",
+    PropertyDetails: {
+      Bedrooms: "",
+      Bathrooms: "",
+      Sqft: "",
+    },
     Area: "",
     Location: "",
     City: "",
-    ContactDetails:{},
+    ContactDetails: {},
     PropertyPhotos: [],
   });
 
   useEffect(() => {
-    if (data && data[0]) {
+    if (data) {
       setFormData({
-        PropertyName: data[0]?.PropertyName,
-        PropertyType: data[0]?.PropertyType,
-        ForSale: data[0]?.ForSale,
-        ForRent: data[0]?.ForRent,
-        Prices: data[0]?.Prices || "",
-        Bedrooms: data[0]?.PropertyDetails?.Bedrooms || "",
-        Bathrooms: data[0]?.PropertyDetails?.Bathrooms || "",
-        Sqft: data[0]?.PropertyDetails?.Sqft || "",
-        Area: data[0]?.Area,
-        Location: data[0]?.Location,
-        City: data[0]?.City,
-        ContactDetails: data[0]?.ContactDetails || "",
-        PropertyPhotos: data[0]?.PropertyPhotos || [],
+        PropertyName: data?.PropertyName,
+        PropertyType: data?.PropertyType,
+        ForSale: data?.ForSale,
+        ForRent: data?.ForRent,
+        Featured: data?.Featured,
+        Prices: data?.Prices || "",
+        PropertyDetails: {
+          Bedrooms: data?.PropertyDetails?.Bedrooms || "",
+          Bathrooms: data?.PropertyDetails?.Bathrooms || "",
+          Sqft: data?.PropertyDetails?.Sqft || "",
+        },
+        Area: data?.Area,
+        Location: data?.Location,
+        City: data?.City,
+        ContactDetails: data?.ContactDetails || "",
+        PropertyPhotos: data?.PropertyPhotos || [],
       });
     }
   }, [data]);
 
-  const handleEdit = (type) => {
-    setEditData(type);
+  const handleEdit = (type, id) => {
+    const selectedProperty = data.find((property) => property._id === id); // Filter data by ID
+    if (selectedProperty) {
+      setFormData({
+        PropertyName: selectedProperty?.PropertyName,
+        PropertyType: selectedProperty?.PropertyType,
+        ForSale: selectedProperty?.ForSale,
+        ForRent: selectedProperty?.ForRent,
+        Featured: selectedProperty?.Featured,
+        Prices: selectedProperty?.Prices || "",
+        PropertyDetails: {
+          Bedrooms: selectedProperty?.PropertyDetails?.Bedrooms || "",
+          Bathrooms: selectedProperty?.PropertyDetails?.Bathrooms || "",
+          Sqft: selectedProperty?.PropertyDetails?.Sqft || "",
+        },
+        Area: selectedProperty?.Area,
+        Location: selectedProperty?.Location,
+        City: selectedProperty?.City,
+        ContactDetails: selectedProperty?.ContactDetails || "",
+        PropertyPhotos: selectedProperty?.PropertyPhotos || [],
+      });
+    }
+    setEditData({ type, id });
   };
-
-  useEffect(() => {
-    fetchById("675bf85922b89f22fc8c3ce6");
-  }, []); // Empty dependency array to run only once
-
-  console.log(data);
 
   return (
     <>
-      {editData === "View" && (
-        <div className="text-black w-full min-h-screen flex flex-col items-center justify-center">
-          <p>
-            <strong>Property Name:</strong> {data[0]?.PropertyName}
-          </p>
-          <p>
-            <strong>Property Type:</strong> {data[0]?.PropertyType.join(", ")}
-          </p>
-          <p>
-            <strong>For Sale:</strong> {data[0]?.ForSale ? "Yes" : "No"}
-          </p>
-          <p>
-            <strong>For Rent:</strong> {data[0]?.ForRent ? "Yes" : "No"}
-          </p>
-          <p>
-            <strong>Sales Price:</strong> {data[0]?.Prices?.SalesPrice}
-          </p>
-          <p>
-            <strong>Rent Price:</strong> {data[0]?.Prices?.RentPrice || "N/A"}
-          </p>
-          <div>
-            <strong>Property Details:</strong>
-            <ul>
-              <li>
-                <strong>Bedrooms:</strong> {data[0]?.PropertyDetails?.Bedrooms}
-              </li>
-              <li>
-                <strong>Bathrooms:</strong>{" "}
-                {data[0]?.PropertyDetails?.Bathrooms}
-              </li>
-              <li>
-                <strong>Square Footage:</strong>{" "}
-                {data[0]?.PropertyDetails?.Sqft}
-              </li>
-            </ul>
-          </div>
-          <p>
-            <strong>Area:</strong> {data[0]?.Area}
-          </p>
-          <p>
-            <strong>Location:</strong> {data[0]?.Location}
-          </p>
-          <p>
-            <strong>City:</strong> {data[0]?.City}
-          </p>
-          <p>
-            <strong>Email:</strong> {data[0]?.ContactDetails?.ContactEmail}
-          </p>
-          <p>
-            <strong>Phone:</strong> {data[0]?.ContactDetails?.ContactPhone}
-          </p>
-          <div>
-            <strong>Property Photos:</strong>
-            <ul>
-              {data[0]?.PropertyPhotos?.map((photo, index) => (
-                <li key={index}>
-                  <a href={photo} target="_blank" rel="noopener noreferrer">
-                    {photo}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="flex items-center gap-4">
+      {editData.type === "View" && (
+        <div className="text-white  mx-auto p-4">
+          <div className="flex items-center mb-6 justify-between">
+            <div>
+              {" "}
+              <p className="text-xl font-semibold uppercase ">View Property</p>
+              <p className=" text-sm text-gray-200">
+                Welcome to your Real Estate Portfolio
+              </p>
+            </div>
             <button
-              onClick={() => {
-                handleEdit("Edit");
-              }}
-              className="bg-blue-500 text-white p-2 rounded"
+              onClick={() => handleEdit("Add")}
+              className=" bg-red-500 text-white h-8 px-5  rounded "
             >
-              Edit
+              Add New Estate
             </button>
-            <button
-              onClick={() => {
-                handleEdit("Add");
-              }}
-              className="bg-red-500 text-white p-2 rounded"
-            >
-              Add
-            </button>
+          </div>
+          <div className="text-white w-full flex flex-wrap gap-6 items-center  ">
+            {data.map((property, index) => (
+              <div
+                key={index}
+                onClick={() => handleEdit("Edit", property._id)}
+                className="bg-gray-800 w-full sm:w-1/3 lg:w-1/4 p-4 cursor-pointer rounded-lg shadow-lg hover:shadow-xl transform hover:scale-[0.98] transition duration-300"
+              >
+                {/* Property Image */}
+                <div className="h-48 w-full relative group bg-gray-700 rounded-lg overflow-hidden">
+                  <img
+                    src={
+                      property.PropertyPhotos?.[0] ||
+                      "https://i.pinimg.com/736x/ba/78/d2/ba78d2b517f4783313180e89a1780808.jpg"
+                    }
+                    alt={property.PropertyName}
+                    className="w-full h-full object-cover"
+                  />
+
+                  <p className="absolute inset-0 text-xl font-mono  backdrop-blur-sm w-full h-full ease-in-out duration-300 transition-opacity group-hover:opacity-100 flex opacity-0 justify-center items-center ">
+                    <span>View Prop</span>{" "}
+                    <span className="ml-2 mt-2 transition-transfrom ease-in-out duration-200 group-active:translate-x-2 group-active:-translate-y-2">
+                      &#8599;
+                    </span>
+                  </p>
+                  <p
+                    className={`text-sm group-hover:opacity-0 ease-in-out duration-300 transition-opacity  absolute top-0 right-1 ${
+                      property.Featured
+                        ? "bg-yellow-500 text-black"
+                        : "bg-zinc-900 text-gray-200 opacity-75"
+                    } inline-block p-2 my-2 rounded-md`}
+                  >
+                    {property.Featured ? "Featured" : "Not Featured"}
+                  </p>
+                </div>
+
+                {/* Property Details */}
+                <div className="py-2">
+                  <h2 className="text-lg font-semibold text-white truncate">
+                    {property.PropertyName || "Property Name"}
+                  </h2>
+                  <p className="text-sm text-gray-400">
+                    {property.Location || "Location not available"}
+                  </p>
+
+                  <p className="text-xl font-bold text-white mt-2">
+                    ₹ {property.Prices?.SalesPrice || "Price not available"} /-
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       )}
-      {editData === "Edit" && (
+      {editData.type === "Edit" && (
         <EditProperty
           updateById={updateById}
           handleEdit={handleEdit}
           setFormData={setFormData}
           formData={formData}
+          editData={editData}
         />
       )}
-      {editData === "Add" && (
+      {editData.type === "Add" && (
         <AddProperty addNew={addNew} handleEdit={handleEdit} />
       )}
     </>

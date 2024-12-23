@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import AOS from 'aos';
 import 'aos/dist/aos.css'; // Import AOS styles
 import Room from "../assets/Room.jpeg";
+import Aos from 'aos';
 function Cards() {
   useEffect(() => {
-    AOS.init({
+    Aos.init({
       duration: 1000, // Animation duration (in ms)
       once: true, // Whether animation should happen only once
     });

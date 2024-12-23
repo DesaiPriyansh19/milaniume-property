@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+  Navigate,
+} from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import LoaderAnimation from "./components/LoaderAnimation";
 import Navbar from "./components/Navbar";
 import HomePage from "./components/HomePage";
 import LoginPopup from "./components/LoginPopup";
 import Properties from "./components/Properties/Properties";
+import AdminPanelDashBoard from "../src/components/AdminPanel/AdminProperty/AdminPanelDashBoard";
 import "./App.css";
+import AppLayout from "./components/AppLayout";
 
 function App() {
   const [isVisible, setIsVisible] = useState(true); // Loader visible on initial load
@@ -34,12 +42,18 @@ function App() {
       <AnimatePresence>
         {isVisible && <LoaderAnimation key="loader" />}
       </AnimatePresence>
-      <Navbar handlePopupOpen={handlePopupOpen} />
+      {/* <Navbar handlePopupOpen={handlePopupOpen} /> */}
+      <AppLayout handlePopupOpen={handlePopupOpen}>
       {isPopupOpen && <LoginPopup handlePopupClose={handlePopupClose} />}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/properties" element={<Properties />} />
+        <Route path="/admin" element={<Navigate to="/admin/dashboard" />} />
+
+        {/* Dynamic slug route */}
+        <Route path="/admin/:slug" element={<AdminPanelDashBoard />} />
       </Routes>
+      </AppLayout>
     </div>
   );
 }

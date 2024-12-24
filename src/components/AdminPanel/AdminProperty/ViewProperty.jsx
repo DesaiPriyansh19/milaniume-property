@@ -93,21 +93,21 @@ export default function ViewProperty() {
               Add New Estate
             </button>
           </div>
-          <div className="text-white w-full flex flex-wrap gap-6 items-center  ">
+          <div className="text-white w-full grid grid-cols-4 gap-4">
             {data.map((property, index) => (
               <div
                 key={index}
                 onClick={() => handleEdit("Edit", property._id)}
-                className="bg-gray-800 w-full sm:w-1/3 lg:w-1/4 p-4 cursor-pointer rounded-lg shadow-lg hover:shadow-xl transform hover:scale-[0.98] transition duration-300"
+                className="bg-gray-800  p-4 cursor-pointer rounded-lg shadow-lg hover:shadow-xl transform hover:scale-[0.98] transition duration-300"
               >
                 {/* Property Image */}
                 <div className="h-48 w-full relative group bg-gray-700 rounded-lg overflow-hidden">
                   <img
                     src={
-                      property.PropertyPhotos?.[0] ||
+                      property?.PropertyPhotos?.[0] ||
                       "https://i.pinimg.com/736x/ba/78/d2/ba78d2b517f4783313180e89a1780808.jpg"
                     }
-                    alt={property.PropertyName}
+                    alt={property?.PropertyName}
                     className="w-full h-full object-cover"
                   />
 
@@ -119,26 +119,30 @@ export default function ViewProperty() {
                   </p>
                   <p
                     className={`text-sm group-hover:opacity-0 ease-in-out duration-300 transition-opacity  absolute top-0 right-1 ${
-                      property.Featured
+                      property?.Featured
                         ? "bg-yellow-500 text-black"
                         : "bg-zinc-900 text-gray-200 opacity-75"
                     } inline-block p-2 my-2 rounded-md`}
                   >
-                    {property.Featured ? "Featured" : "Not Featured"}
+                    {property?.Featured ? "Featured" : "Not Featured"}
                   </p>
                 </div>
 
                 {/* Property Details */}
                 <div className="py-2">
                   <h2 className="text-lg font-semibold text-white truncate">
-                    {property.PropertyName || "Property Name"}
+                    {property?.PropertyName || "Property Name"}
                   </h2>
                   <p className="text-sm text-gray-400">
-                    {property.Location || "Location not available"}
+                    {property?.Area || "Location not available"}
                   </p>
 
-                  <p className="text-xl font-bold text-white mt-2">
-                    ₹ {property.Prices?.SalesPrice || "Price not available"} /-
+                  <p className="text-base font-bold text-white mt-2">
+                    ₹{" "}
+                    {Intl.NumberFormat().format(property?.Prices?.SalesPrice) ||
+                      Intl.NumberFormat().format(property?.Prices?.RentPrice) ||
+                      "Price Not Available"}{" "}
+                    /-
                   </p>
                 </div>
               </div>

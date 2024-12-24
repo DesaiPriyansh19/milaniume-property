@@ -33,9 +33,10 @@ const InputField = ({
         </label>
         <select
           name={name}
+          style={{ height: `${multiple ? "135px" : "0px"}` }}
           value={value}
           onChange={onChange}
-          className={inputClassName}
+          className={`${inputClassName} `}
           required={required}
           multiple={multiple}
         >

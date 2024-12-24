@@ -8,7 +8,7 @@ export default function AddProperty({ addNew, handleEdit }) {
     PropertyType: [],
     ForSale: true,
     ForRent: false,
-    Featured:false,
+    Featured: false,
     Prices: {},
     PropertyDetails: {
       Bedrooms: "",
@@ -82,6 +82,7 @@ export default function AddProperty({ addNew, handleEdit }) {
     e.preventDefault();
     console.log("submited data", formData);
     await addNew(formData);
+    handleEdit("View");
   };
 
   console.log(formData);
@@ -92,7 +93,9 @@ export default function AddProperty({ addNew, handleEdit }) {
         <div>
           {" "}
           <p className="text-xl font-semibold uppercase ">Add Property</p>
-          <p className=" text-sm text-gray-200">Add New Real Estate To Your Portfolio</p>
+          <p className=" text-sm text-gray-200">
+            Add New Real Estate To Your Portfolio
+          </p>
         </div>
         <div className="flex gap-4">
           <button
@@ -116,7 +119,7 @@ export default function AddProperty({ addNew, handleEdit }) {
           <div className="grid grid-cols-2 w-full gap-4 justify-between">
             <div className="col-span-1 row-span-2">
               {" "}
-              <div className="mb-4 w-full">
+              <div className="mb-6 w-full">
                 <InputField
                   label="Property Name"
                   type="text"

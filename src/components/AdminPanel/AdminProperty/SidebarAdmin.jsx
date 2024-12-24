@@ -36,9 +36,9 @@ export default function SidebarAdmin() {
           } pt-4 mb-10 px-4`}
         >
           {conMaxWidth === 288 && (
-            <p className="text-2xl font-bold cursor-pointer text-white">
+            <Link to="/" className="text-2xl font-bold cursor-pointer text-white">
               MILLINUM
-            </p>
+            </Link>
           )}
           <div
             onClick={handleMinimise}

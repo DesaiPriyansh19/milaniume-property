@@ -49,7 +49,9 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/properties" element={<Properties />} />
           <Route path="/admin" element={<Navigate to="/admin/dashboard" />} />
+
           <Route path="/quickenquiry" element={<QuickEnquiry />} />
+
           {/* Dynamic slug route */}
           <Route path="/admin/:slug" element={<AdminPanelDashBoard />} />
         </Routes>

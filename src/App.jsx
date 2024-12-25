@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import LoaderAnimation from "./components/LoaderAnimation";
+import Navbar from "./components/Navbar";
 import HomePage from "./components/HomePage";
 import LoginPopup from "./components/LoginPopup";
 import Properties from "./components/Properties/Properties";
@@ -52,9 +53,9 @@ function App() {
 
           <Route path="/quickenquiry" element={<QuickEnquiry />} />
 
-          {/* Dynamic slug route */}
-          <Route path="/admin/:slug" element={<AdminPanelDashBoard />} />
-        </Routes>
+        {/* Dynamic slug route */}
+        <Route path="/admin/:slug" element={<AdminPanelDashBoard />} />
+      </Routes>
       </AppLayout>
     </div>
   );
@@ -62,8 +63,11 @@ function App() {
 
 export default function RootApp() {
   return (
-    <Router>
-      <App />
-    </Router>
+
+      <Router>
+        <App />
+      </Router>
+
+
   );
 }

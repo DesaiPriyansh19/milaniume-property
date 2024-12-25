@@ -4,6 +4,7 @@ import Call from "../../svg/Icon/Call/Index";
 import MyProfileLogo from "../../svg/Icon/MyProfileLogo";
 import { Link } from "react-router-dom";
 import pdf from "/Brochure-MillennumProperties.pdf?url";
+import pdf from "/Brochure-MillennumProperties.pdf?url";
 const Navbar = ({ handlePopupOpen }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -83,10 +84,10 @@ const Navbar = ({ handlePopupOpen }) => {
           </button>
           {/* Button and Contact for large devices */}
           <div className="hidden lg:flex items-center justify-center space-x-4">
-            <a href="tel:+1234567890" className="w-6 h-6">
-              <Call />
-            </a>
-
+          <a href="tel:+1234567890" className="w-6 h-6">
+  <Call />
+</a>
+            
             <span onClick={handlePopupOpen}>
               <MyProfileLogo />
             </span>

@@ -38,7 +38,7 @@ export default function HomePage() {
     <div>
       <Carousel images={images} dynamicContent={dynamicContent} />
       
-   <FilterTwo/>
+
 
    <div data-aos="fade-out">
          <FeaturedCatagory/>

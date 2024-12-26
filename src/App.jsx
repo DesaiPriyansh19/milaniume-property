@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { FaReact, FaGit, FaTwitter, FaGithub } from 'react-icons/fa';
 import {
   BrowserRouter as Router,
   Routes,
@@ -11,10 +12,11 @@ import Navbar from "./components/Navbar";
 import HomePage from "./components/HomePage";
 import LoginPopup from "./components/LoginPopup";
 import Properties from "./components/Properties/Properties";
-import AdminPanelDashBoard from "../src/components/AdminPanel/AdminProperty/AdminPanelDashBoard";
+import AdminPanelDashBoard from "./components/AdminPanel/AdminProperty/AdminPanelDashBoard";
 import "./App.css";
 import AppLayout from "./components/AppLayout";
 import QuickEnquiry from "./components/QuickEnquiry";
+import RightSideLogos from './components/RightSideLogos'; // Import RightSideLogos component
 
 function App() {
   const [isVisible, setIsVisible] = useState(true); // Loader visible on initial load
@@ -37,37 +39,31 @@ function App() {
   }, [isVisible]);
 
   return (
-    <div className="font-roboto p-0 m-0">
+    <div className="font-roboto p-0 m-0 min-h-screen flex flex-col">
       <AnimatePresence>
         {isVisible && location.pathname === "/" && (
           <LoaderAnimation key="loader" />
         )}
       </AnimatePresence>
-      {/* <Navbar handlePopupOpen={handlePopupOpen} /> */}
       <AppLayout handlePopupOpen={handlePopupOpen}>
         {isPopupOpen && <LoginPopup handlePopupClose={handlePopupClose} />}
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/properties" element={<Properties />} />
           <Route path="/admin" element={<Navigate to="/admin/dashboard" />} />
-
           <Route path="/quickenquiry" element={<QuickEnquiry />} />
-
-        {/* Dynamic slug route */}
-        <Route path="/admin/:slug" element={<AdminPanelDashBoard />} />
-      </Routes>
+          <Route path="/admin/:slug" element={<AdminPanelDashBoard />} />
+        </Routes>
       </AppLayout>
+      <RightSideLogos /> {/* Right-side logos component */}
     </div>
   );
 }
 
 export default function RootApp() {
   return (
-
-      <Router>
-        <App />
-      </Router>
-
-
+    <Router>
+      <App />
+    </Router>
   );
 }

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import logo from "../../src/assets/LogoThree.png";
+import logo from "../../src/assets/logo final PNG.png";
 import Call from "../../svg/Icon/Call/Index";
 import MyProfileLogo from "../../svg/Icon/MyProfileLogo";
 import { Link } from "react-router-dom";
 import pdf from "/Brochure-MillennumProperties.pdf?url";
-import pdf from "/Brochure-MillennumProperties.pdf?url";
+
 const Navbar = ({ handlePopupOpen }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -13,11 +13,7 @@ const Navbar = ({ handlePopupOpen }) => {
       <div className="container mx-auto px-1 flex items-center justify-between h-16">
         {/* Left: Logo */}
         <div className="flex items-center text-center justify-center">
-          <img
-            src={logo}
-            alt="Logo 1"
-            className="w-[145px] sm:w-[200px] md:w-[15vw]  rounded-full"
-          />
+          <img src={logo} alt="Logo 1" className="w-[145px] sm:w-[200px] md:w-[80px]  " />
           {/* Nav links for large devices */}
           <div className="hidden lg:flex text-[.8rem] px-28    space-x-6 mx-auto">
             <Link

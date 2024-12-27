@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css'; // Import AOS styles
 import bgimg from '../assets/slider1.jpg.png'
+import { Link } from 'react-router-dom';
 function Discover() {
      useEffect(() => {
             AOS.init({ once: true }); // Initialize AOS
@@ -23,9 +24,9 @@ function Discover() {
             <p className="mt-4 text-lg md:text-xl lg:text-xl">
               Find your dream home in the perfect location.
             </p>
-            <button className="mt-6 px-4 py-2 bg-[#E7C873] text-sm text-black rounded-lg font-normal">
+            <Link to={'/properties'}> <button className="mt-6 px-4 py-2 bg-[#E7C873] text-sm text-black rounded-lg font-normal">
               View Properties &#8594;
-            </button>
+            </button></Link> 
           </div>
         </div>
       );

@@ -17,6 +17,16 @@ import "./App.css";
 import AppLayout from "./components/AppLayout";
 import QuickEnquiry from "./components/QuickEnquiry";
 import RightSideLogos from './components/RightSideLogos'; // Import RightSideLogos component
+import YourRequirements from "./components/YourRequirements";
+import PostProperty from "./components/PostProperty";
+import OurServices from "./components/Ourservices/OurServices";
+import PropertyServices from "./components/Ourservices/PropertyServices";
+import LoanFinance from "./components/Ourservices/LoanFinance";
+import InteriorDesign from "./components/Ourservices/InteriorDesign";
+import AboutUs from "./components/AboutUs";
+import ViewProperty from "./components/AdminPanel/AdminProperty/ViewProperty";
+import PropertyDetailPage from "./components/Properties/PropertyDetails";
+
 
 function App() {
   const [isVisible, setIsVisible] = useState(true); // Loader visible on initial load
@@ -50,9 +60,17 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/properties" element={<Properties />} />
+          <Route path="/properties/viewdetails" element={<PropertyDetailPage/>} />
+          <Route path="/aboutus" element={<AboutUs/>} />
           <Route path="/admin" element={<Navigate to="/admin/dashboard" />} />
           <Route path="/quickenquiry" element={<QuickEnquiry />} />
           <Route path="/admin/:slug" element={<AdminPanelDashBoard />} />
+          <Route path="/yourrequirments" element={<YourRequirements/>} />
+          <Route path="/postproperty" element={<PostProperty/>} />
+          <Route path="/ourservices" element={<OurServices/>} />
+          <Route path="/ourservices/property" element={<PropertyServices/>} />
+        <Route path="/ourservices/loan" element={<LoanFinance/>} />
+        <Route path="/ourservices/interior" element={<InteriorDesign/>} />
         </Routes>
       </AppLayout>
       <RightSideLogos /> {/* Right-side logos component */}

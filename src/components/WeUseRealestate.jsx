@@ -1,5 +1,6 @@
 import React from 'react'
 import image from '../assets/BgImage.png'
+import { Link } from 'react-router-dom'
 function WeUseRealestate() {
   return (
     <>
@@ -46,9 +47,9 @@ function WeUseRealestate() {
     </div>
 
     {/* Learn More Button */}
-    <button className="bg-[#E7C873] text-black text-sm px-6 py-2 rounded-lg ">
+    <Link to={'/ourservices/property'}><button className="bg-[#E7C873] text-black text-sm px-6 py-2 rounded-lg ">
       Learn More &#8594;
-    </button>
+    </button></Link>
   </div>
 
   {/* Right Side */}

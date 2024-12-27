@@ -13,7 +13,7 @@ const Navbar = ({ handlePopupOpen }) => {
       <div className="container mx-auto px-1 flex items-center justify-between h-16">
         {/* Left: Logo */}
         <div className="flex items-center text-center justify-center">
-          <img src={logo} alt="Logo 1" className="w-[145px] sm:w-[200px] md:w-[80px]  " />
+          <img src={logo} alt="Logo 1" className="mx-2 w-[70px] sm:mx-0 sm:w-[90px] md:w-[80px]  " />
           {/* Nav links for large devices */}
           <div className="hidden lg:flex text-[.8rem] px-28    space-x-6 mx-auto">
             <Link
@@ -23,7 +23,7 @@ const Navbar = ({ handlePopupOpen }) => {
               Home
             </Link>
             <Link
-              to="/"
+              to="/aboutus"
               className="text-white hover:text-[#E7C873] hover:border-b-[1px]"
             >
               AboutUs
@@ -35,7 +35,7 @@ const Navbar = ({ handlePopupOpen }) => {
               Property
             </Link>
             <Link
-              to="/"
+              to="/ourservices"
               className="text-white hover:text-[#E7C873] hover:border-b-[1px]"
             >
               Service

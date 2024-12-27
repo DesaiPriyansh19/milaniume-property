@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Room from "../assets/Room.jpeg";
 import LocationLogo from "../../svg/Icon/Locationlogo/Index";
 import useFetch from "../../hooks/useFetch";
+import { Link } from "react-router-dom";
 function FeaturedProperty() {
   const [activeTab, setActiveTab] = useState("All Properties");
   const [filteredData, setFilteredData] = useState([]);
@@ -57,7 +58,7 @@ function FeaturedProperty() {
           {filteredData.map((card) => (
             <div
               key={card.id}
-              className="relative bg-cover bg-center h-[300px] sm:h-[300px] md:h-[300px] lg:h-[300px] p-4 rounded-xl shadow-lg"
+              className="relative bg-cover bg-center h-[300px] sm:h-[300px] md:h-[300px] lg:h-[300px] p-4 rounded-xl shadow-lg overflow-hidden transition-transform duration-300 transform hover:scale-105"
               style={{
                 backgroundImage: `url(${card.PropertyPhotos[0] || Room})`,
               }}
@@ -106,13 +107,12 @@ function FeaturedProperty() {
         </div>
         <div className="flex items-center justify-center">
           {" "}
-          <button
+    <Link to={'/properties'} >    <button
             className="mt-3 md:mt-5 px-4 py-2 text-[.7rem] font-extralight  bg-[#E7C873]
-         text-black hover:bg-transparent hover:text-white hover:border-[1px]
-          hover:border-white rounded-3xl"
+         text-black  rounded-3xl"
           >
             See All Listing &#8594;
-          </button>
+          </button></Link> 
         </div>
       </div>
     </>

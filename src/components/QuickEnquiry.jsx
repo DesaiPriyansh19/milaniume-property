@@ -35,13 +35,16 @@ const QuickEnquiry = () => {
         <div className="map-container w-full h-64">
           {/* Replace the coordinates with your office's latitude and longitude */}
           <iframe 
-            src="https://maps.app.goo.gl/qVzyNCnEpvbDT5JC9" 
+    src="https://www.google.com/maps/embed?pb=!1m13!1m8!1m3!1d7339.078095836263!2d72.538186!3d23.113964!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjPCsDA2JzUwLjMiTiA3MsKwMzInMjYuNyJF!5e0!3m2!1sen!2sin!4v1735298228605!5m2!1sen!2sin" 
             width="100%" 
             height="100%" 
             style={{border:0}} 
             allowFullScreen="" 
             loading="lazy" 
-          ></iframe>
+          >
+
+          </iframe>
+
         </div>
       </div>
       {/* Right Section - Office Location with Map */}
@@ -50,47 +53,52 @@ const QuickEnquiry = () => {
         
         <form className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700" htmlFor="fullName">Full Name</label>
+            <label className="block text-sm 
+            font-medium text-gray-500" htmlFor="fullName">Full Name</label>
             <input 
               type="text" 
               id="fullName" 
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md" 
+              placeholder='enter your name'
+              className="w-full p-2 text-sm border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]" 
               required 
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700" htmlFor="email">Email (Required)</label>
+            <label className="block text-sm font-medium text-gray-500" htmlFor="email">Email (Required)</label>
             <input 
               type="email" 
               id="email" 
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md" 
+              placeholder='enter your email id'
+              className="w-full p-2 text-sm border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]" 
               required 
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700" htmlFor="phone">Phone (Required)</label>
+            <label className="block text-sm font-medium text-gray-500" htmlFor="phone">Phone (Required)</label>
             <input 
               type="tel" 
               id="phone" 
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md" 
+                  placeholder='enter your contact number'
+              className="w-full p-2 text-sm border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]" 
               required 
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700" htmlFor="message">Message</label>
+            <label className="block text-sm font-medium text-gray-500" htmlFor="message">Message</label>
             <textarea 
               id="message" 
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md" 
+                  placeholder='enter details of enquiry'
+              className="w-full p-2 text-sm border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]" 
               rows="4" 
             ></textarea>
           </div>
 
           <button 
             type="submit" 
-            className="mt-4 w-full bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700"
+            className="mt-4 w-full bg-[#1F4B43] text-sm  text-white p-2 rounded-md "
           >
             Submit
           </button>

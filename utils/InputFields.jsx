@@ -11,6 +11,7 @@ const InputField = ({
   required = false,
   variant = 0, // Default input style
   options = [],
+  checked,
   multiple = false,
 }) => {
   const variants = [
@@ -22,20 +23,33 @@ const InputField = ({
       labelClassName: "block text-sm mb-2 font-semibold",
       inputClassName: "w-full p-4 border-b text-base bg-gray-800",
     },
+    {
+      labelClassName: "block text-sm ",
+      inputClassName: "accent-zinc-900 border border-white",
+    },
   ];
   const { labelClassName, inputClassName } = variants[variant];
 
   if (type === "select") {
     return (
-      <div className="h-full">
+      <div className="h-full relative">
         <label htmlFor={name} className={labelClassName}>
           {label}
         </label>
         <select
           name={name}
-          style={{ height: `${multiple ? "135px" : "0px"}` }}
           value={value}
           onChange={onChange}
+          style={{
+            backgroundColor: "#1f2937", // Tailwind bg-gray-800
+            borderBottom: "1px solid white", // Tailwind border-white
+            borderRadius: "0px", // Tailwind border-radius
+            color: "white", // Tailwind text-white
+            appearance: "none", // Tailwind appearance-none
+            padding: "1rem", // Tailwind padding
+            width: "100%", // Tailwind width
+            paddingRight: "2rem", // Adding extra padding for arrow icon
+          }}
           className={`${inputClassName} `}
           required={required}
           multiple={multiple}
@@ -46,6 +60,62 @@ const InputField = ({
             </option>
           ))}
         </select>
+
+        {/* Arrow Icon */}
+        <span
+          style={{
+            transform: "rotate(180deg) translateY(50%)",
+            position: "absolute",
+            top: "60%",
+            right: "10px", // or whatever position you need
+          }}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5 text-white"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M5.293 8.707a1 1 0 010-1.414L10 3.586l4.707 4.707a1 1 0 01-1.414 1.414L10 6.414 6.707 9.707a1 1 0 01-1.414 0z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </span>
+      </div>
+    );
+  }
+  if (type === "checkbox") {
+    return (
+      <div className="flex gap-2 justify-between items-center mb-2">
+        <label htmlFor={name} className="max-w-44 text-sm">
+          {label}
+        </label>
+        <div className="relative z-[2] w-4 h-4 mb-[2px]">
+          <input
+            type={type}
+            name={name}
+            className="appearance-none border-2 cursor-pointer  border-gray-300 bg-transparent w-full h-full rounded"
+            checked={checked}
+            onChange={onChange}
+          />
+          {checked && (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width=""
+              height=""
+              viewBox="0 0 24 24"
+              fill="white"
+              className="absolute top-[40%] -z-[1] left-[75%] -translate-x-1/2 -translate-y-1/2 "
+            >
+              <path
+                fillRule="evenodd"
+                d="M 22.59375 3.5 L 8.0625 18.1875 L 1.40625 11.5625 L 0 13 L 8.0625 21 L 24 4.9375 Z"
+              ></path>
+            </svg>
+          )}
+        </div>
       </div>
     );
   }

@@ -80,7 +80,7 @@ function FeaturedProperty() {
                 <p className="text-[.9rem] font-normal">{card.PropertyName}</p>
                 <p className="text-[.7rem] gap-1 flex items-center">
                   <LocationLogo className="" />
-                  {card.Area}
+                  {card.Landmark}
                 </p>
                 <div className="flex justify-between items-center mt-2">
                   <div className="flex items-center gap-3">
@@ -96,8 +96,15 @@ function FeaturedProperty() {
                   </div>
                   <p className="text-white text-[.9rem] px-3 font-medium">
                     ₹
-                    {Intl.NumberFormat().format(card.Prices.SalesPrice) ||
-                      "Not available"}
+                    {card?.Prices?.SalesPrice
+                      ? `${Intl.NumberFormat().format(
+                          card.Prices.SalesPrice
+                        )}/-`
+                      : card?.Prices?.RentPrice
+                      ? `${Intl.NumberFormat().format(
+                          card.Prices.RentPrice
+                        )}/month`
+                      : "Price Not Available"}
                   </p>
                 </div>
               </div>

@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import bgImg from "../../assets/property_2_-853gCunl--transformed.webp";
 import PropertyCards from "./PropertyCards";
-import FilterTwo from "./FilterTwo";
+
 import AOS from "aos";
 import "aos/dist/aos.css"; // Import AOS styles
+import useFetch from "../../../hooks/useFetch";
 function Properties() {
   const [activeTab, setActiveTab] = useState("Residential");
+  const { data, loading } = useFetch(
+    "https://milaniumepropertybackend.vercel.app/api/property"
+  );
 
   const renderAdditionalInputs = () => {
     useEffect(() => {
@@ -612,15 +616,15 @@ border-[1.5px] border-[#1F4B43]"
         </form>
       </div>
 
-      <div className=" w-[150px] mx-5 text-center font-extralight ">
+      <div className=" w-[90%] mx-auto text-start px-4 mb-2 font-extralight ">
         <p
           className="text-[.7rem] w-auto rounded-lg text-gray-500 
        border-gray-400"
         >
-          Results-8 Properties
+          Results {data.length} Properties
         </p>
       </div>
-      <PropertyCards />
+      <PropertyCards data={data} />
     </>
   );
 }

@@ -1,12 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import Room from "../../assets/Room.jpeg";
-import LocationLogo from "../../../svg/Icon/Locationlogo/Index";
-import useFetch from "../../../hooks/useFetch";
-function PropertyCards() {
-  const { data, loading } = useFetch(
-    "https://milaniumepropertybackend.vercel.app/api/property"
-  );
-  console.log(data);
+
+function PropertyCards({ data }) {
   return (
     <div className=" w-[90%] px-5 md:px-4 rounded-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
       {data?.map((card) => {
@@ -40,7 +35,7 @@ function PropertyCards() {
               </p>
               <div className="flex justify-between items-center mt-2">
                 <div className="flex items-center gap-[2px]">
-                <p className="text-[.6rem] text-gray-70  pr-2">
+                  <p className="text-[.6rem] text-gray-70  pr-2">
                     {card.PropertyDetails.Sqft} Sqft
                   </p>
                   <p className="text-[.6rem] text-gray-70 border-l-[1px] pl-2">

@@ -1,25 +1,43 @@
 import React from "react";
-
+import img from '../assets/about2.jpg'
+import { Link } from "react-router-dom";
+import WhyShould from "./WhyShould";
+import WeUseRealestate from "./WeUseRealestate";
+import img2 from '../assets/nice-suit.jpg'
 const AboutUs = () => {
-  return (
-    <section className="bg-gray-100 py-16 px-8 sm:px-16 lg:px-32">
-      <div className="max-w-screen-xl mx-auto">
-        {/* Title Section */}
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-extrabold tracking-tight text-gray-800 mb-4">
+  return (<>
+   <div style={{ backgroundImage: `url(${img})` }}
+     className="w-full h-[500px] sm:h-[500px] md:h-[600px] bg-cover bg-center bg-no-repeat relative 
+     before:absolute before:inset-0 before:bg-black/10 before:backdrop-blur-[0px]">
+               <div className="absolute inset-0 bg-black/35 md:bg-black/35"></div>
+               <div className="  relative z-10 flex flex-col items-center justify-center 
+               text-center text-white h-full px-4" style={{
+                textShadow: "4px 4px 8px rgba(2, 2, 0.5, 0.5)", // Apply text shadow to all children
+              }} >
+            <h2 className=" mt-0 text-2xl md:text-2xl lg:text-5xl font-normal">
             About Us
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            We are a dynamic real estate agency committed to making your property journey seamless, enjoyable, and profitable.
-          </p>
-        </div>
+            </h2>
+            <p className="hidden md:flex mt-4 font-thin text-sm px-40">
+            We are a dynamic real estate agency committed to <br></br>making your property journey seamless, enjoyable, and profitable.
+
+
+            </p>
+        <Link to={'/'}  >  <button className="mt-6 px-4 py-2 bg-[#E7C873] text-sm text-black rounded-lg font-normal">
+             Back to Home &#8594;
+            </button></Link>
+          </div>
+     </div>
+    <section className=" py-16 px-8 sm:px-16 lg:px-32">
+
+      <div className="max-w-screen-xl mx-auto">
+    
 
         {/* Company Info Section */}
         <div className="lg:flex items-center justify-between space-x-12">
           <div className="lg:w-1/2 space-y-6">
-            <h3 className="text-3xl font-semibold text-gray-800 mb-4">Your Trusted Real Estate Partner</h3>
+            <h3 className="text-3xl font-medium text-gray-800 mb-4">Your Trusted Real Estate Partner</h3>
             <p className="text-lg text-gray-700">
-              At [Company Name], we specialize in delivering high-quality real estate services tailored to your unique needs. Our experience and commitment to excellence ensures that every property transaction is handled with care and professionalism.
+              At Millenuime, we specialize in delivering high-quality real estate services tailored to your unique needs. Our experience and commitment to excellence ensures that every property transaction is handled with care and professionalism.
             </p>
             <p className="text-lg text-gray-700">
               Whether you're looking to buy, sell, or invest in real estate, we are here to offer guidance, advice, and a seamless experience.
@@ -29,7 +47,7 @@ const AboutUs = () => {
           <div className="lg:w-1/2 mt-8 lg:mt-0">
             <div className="relative rounded-lg overflow-hidden">
               <img
-                src="https://via.placeholder.com/500x400"
+                src={img2}
                 alt="Real Estate Team"
                 className="w-full h-full object-cover transition-transform duration-500 transform hover:scale-105"
               />
@@ -38,7 +56,7 @@ const AboutUs = () => {
         </div>
 
         {/* Core Values Section */}
-        <div className="mt-24">
+        <div className="mt-24 mb-11">
           <h3 className="text-3xl font-semibold text-center text-gray-800 mb-12">Our Core Values</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
             <div className="bg-white shadow-xl hover:shadow-2xl transition-transform duration-300 transform hover:scale-105 rounded-lg p-8 text-center">
@@ -72,6 +90,7 @@ const AboutUs = () => {
             </div>
           </div>
         </div>
+<WhyShould/>
 
         {/* Meet the Team Section */}
         <div className="mt-24">
@@ -116,6 +135,7 @@ const AboutUs = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 

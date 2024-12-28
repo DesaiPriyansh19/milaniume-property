@@ -13,7 +13,7 @@ function LokingForNewHome() {
       
   return (
     <>
-    <div className="w-[97%] md:w-[90%] lg:w-[80%] mx-auto flex flex-col md:flex-row gap-6 p-6 md:p-12">
+    <div className="w-[97%] md:w-[90%] lg:w-[80%] mx-auto max-w-4xl flex flex-col md:flex-row gap-6 p-6 md:p-12">
   {/* First Div */}
   <div className="flex-1 bg-[#F9F9F9] max-w-sm p-6 rounded-lg relative">
     <h4 className="text-xl md:text-lg font-medium mb-2">

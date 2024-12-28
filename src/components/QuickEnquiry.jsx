@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 const QuickEnquiry = () => {
   return (<>
   <div style={{ backgroundImage: `url(${img})` }}
-     className="w-full h-[400px] sm:h-[300px] md:h-[350px] lg:h-[400px] bg-cover bg-center bg-no-repeat relative 
-     before:absolute before:inset-0 before:bg-black/10 before:backdrop-blur-[1px]">
+     className="w-full h-[400px] sm:h-[300px] md:h-[350px] lg:h-[300px] bg-cover bg-center bg-no-repeat relative 
+     before:absolute before:inset-0 before:bg-black/10 before:backdrop-blur-[0px]">
                <div className="absolute inset-0 bg-black/35 md:bg-black/45"></div>
                <div className="  relative z-10 flex flex-col items-center justify-center 
                text-center text-white h-full px-4" style={{
@@ -15,7 +15,7 @@ const QuickEnquiry = () => {
             <h2 className=" mt-10 text-2xl md:text-2xl lg:text-5xl font-normal">
             Quick Enquiry
             </h2>
-            <p className="hidden md:flex mt-4 font-medium text-sm px-40">
+            <p className="hidden md:flex mt-4 font-thin text-sm px-40">
             Whether you’re looking to buy, sell, or rent, our experienced team is here to guide you through <br></br> every step of the process. Fill out the form below,and we’ll get <br></br> back to you promptly with personalized assistance.
 
 

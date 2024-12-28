@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import img from '../../assets/AboutUS.webp'
 const OurServices = () => {
   // State to control the current slide
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -37,13 +37,28 @@ const OurServices = () => {
     );
   };
 
-  return (
+  return (<>
+   <div style={{ backgroundImage: `url(${img})` }}
+       className="w-full h-[500px] sm:h-[500px] md:h-[600px] bg-cover bg-center bg-no-repeat relative 
+       before:absolute before:inset-0 before:bg-black/10 before:backdrop-blur-[0px]">
+                 <div className="absolute inset-0 bg-black/35 md:bg-black/35"></div>
+                 <div className="  relative z-10 flex flex-col items-center justify-center 
+                 text-center text-white h-full px-4" style={{
+                  textShadow: "4px 4px 8px rgba(2, 2, 0.5, 0.5)", // Apply text shadow to all children
+                }} >
+              <h2 className=" mt-0 text-2xl md:text-2xl lg:text-5xl font-normal">
+              Our Services
+              </h2>
+              <p className="hidden md:flex mt-4 font-thin text-sm px-40">
+              Explore the services we offer to meet your real estate needs.
+              </p>
+          <Link to={'/'}  >  <button className="mt-6 px-4 py-2 bg-[#E7C873] text-sm text-black rounded-lg font-normal">
+               Back to Home &#8594;
+              </button></Link>
+            </div>
+       </div>
     <div className="bg-gray-50 text-gray-800">
-      {/* Hero Section */}
-      <div className="text-center py-16 bg-[#1F4B43]">
-        <h1 className="text-4xl mt-6 font-bold text-white">Our Services</h1>
-        <p className="mt-4 text-lg text-white">Explore the services we offer to meet your real estate needs.</p>
-      </div>
+    
 
       {/* Carousel Section */}
       <section className="py-16 bg-[#f4fffd]">
@@ -89,6 +104,7 @@ const OurServices = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };
 

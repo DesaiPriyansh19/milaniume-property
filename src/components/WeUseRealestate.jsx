@@ -1,10 +1,10 @@
 import React from 'react'
-import image from '../assets/BgImage.png'
+import image from '../assets/Real-Estate-Broker.jpg'
 import { Link } from 'react-router-dom'
 function WeUseRealestate() {
   return (
     <>
-    <div className="px-4 sm:px-20 py-10 w-full flex flex-col md:flex-row">
+    <div className="px-4 sm:px-20 py-10 w-full max-w-5xl mx-auto flex flex-col md:flex-row">
          {/* Right Side for sm screen*/}
   <div className="flex-1 sm:hidden flex justify-center items-center ">
     <div className="w-full h-full  max-w-md max-h-md  overflow-hidden">
@@ -54,11 +54,11 @@ function WeUseRealestate() {
 
   {/* Right Side */}
   <div className="hidden flex-1 sm:flex h-full w-full p-0 m-0 justify-center items-center ">
-    <div className="w-full h-full  max-w-md max-h-md  overflow-hidden">
+    <div className="w-full h-[80%] mx-auto pt-16 max-w-md max-h-md  overflow-hidden">
       <img
         src={image}
         alt="Real Estate"
-        className="w-full h-full md:py-16 lg:py-8 mx-auto rounded-2xl object-cover"
+        className="w-full h-full  mx-auto rounded-2xl object-cover"
       />
     </div>
   </div>

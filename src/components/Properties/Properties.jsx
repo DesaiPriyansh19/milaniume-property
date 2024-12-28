@@ -477,7 +477,7 @@ function Properties() {
           className="text-[.7rem] w-auto rounded-lg text-gray-500 
        border-gray-400"
         >
-          Results {data.length} Properties
+          Results {data?.length} Properties
         </p>
       </div>
       <PropertyCards data={data} />

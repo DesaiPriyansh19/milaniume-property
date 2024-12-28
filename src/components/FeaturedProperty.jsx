@@ -22,9 +22,7 @@ function FeaturedProperty() {
         setFilteredData(PropertyData);
       } else {
         setFilteredData(
-          PropertyData.filter((item) =>
-            item.PropertyType.find((items) => items === activeTab)
-          )
+          PropertyData.filter((item) => item.PropertyType === activeTab)
         );
       }
     }
@@ -57,8 +55,8 @@ function FeaturedProperty() {
         <div className="lg:w-[90%] rounded-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {filteredData.map((card) => (
             <div
-              key={card.id}
-              className="relative bg-cover bg-center h-[300px] sm:h-[300px] md:h-[300px] lg:h-[300px] p-4 rounded-xl shadow-lg overflow-hidden transition-transform duration-300 transform hover:scale-105"
+              key={card._id}
+              className="relative bg-cover bg-center h-[300px] sm:h-[300px] md:h-[300px] lg:h-[300px] p-4 rounded-xl shadow-lg"
               style={{
                 backgroundImage: `url(${card.PropertyPhotos[0] || Room})`,
               }}
@@ -79,10 +77,10 @@ function FeaturedProperty() {
               </div>
               <div className="absolute bottom-4 left-4 text-white pl-2 rounded-md">
                 <p className="text-[.9rem] font-normal">{card.PropertyName}</p>
-                <p className="text-[.7rem] gap-1 flex items-center">
+                <div className="text-[.7rem] gap-1 flex items-center">
                   <LocationLogo className="" />
-                  {card.Area}
-                </p>
+                  <p>{card.Landmark}</p>
+                </div>
                 <div className="flex justify-between items-center mt-2">
                   <div className="flex items-center gap-3">
                     <p className="text-[.6rem] text-gray-70">
@@ -97,8 +95,15 @@ function FeaturedProperty() {
                   </div>
                   <p className="text-white text-[.9rem] px-3 font-medium">
                     ₹
-                    {Intl.NumberFormat().format(card.Prices.SalesPrice) ||
-                      "Not available"}
+                    {card?.Prices?.SalesPrice
+                      ? `${Intl.NumberFormat().format(
+                          card.Prices.SalesPrice
+                        )}/-`
+                      : card?.Prices?.RentPrice
+                      ? `${Intl.NumberFormat().format(
+                          card.Prices.RentPrice
+                        )}/month`
+                      : "Price Not Available"}
                   </p>
                 </div>
               </div>

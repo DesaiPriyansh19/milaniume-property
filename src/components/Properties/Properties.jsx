@@ -1,16 +1,20 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import bgImg from "../../assets/property_2_-853gCunl--transformed.webp";
 import PropertyCards from "./PropertyCards";
-import FilterTwo from "./FilterTwo";
-import AOS from 'aos';
-import 'aos/dist/aos.css'; // Import AOS styles
+
+import AOS from "aos";
+import "aos/dist/aos.css"; // Import AOS styles
+import useFetch from "../../../hooks/useFetch";
 function Properties() {
   const [activeTab, setActiveTab] = useState("Residential");
+  const { data, loading } = useFetch(
+    "https://milaniumepropertybackend.vercel.app/api/property"
+  );
 
   const renderAdditionalInputs = () => {
-      useEffect(() => {
-            AOS.init({ once: true }); // Initialize AOS
-          }, []);
+    useEffect(() => {
+      AOS.init({ once: true }); // Initialize AOS
+    }, []);
 
     switch (activeTab) {
       case "Residential":
@@ -427,59 +431,56 @@ function Properties() {
       {/* Property Filter Section */}
       <div className="p-6 ">
         {/* Tabs */}
-       
-  {/* Tabs */}
-  <ul
-    className="flex w-full justify-center mb-6 sticky top-0 bg-white z-10 "
-  >
-    {[
-      "Residential",
-      "Commercial",
-      "Industrial",
-      "Plot&Land",
-    ].map((tab) => (
-      <li
-        key={tab}
-        className={`cursor-pointer font-medium text-[.6rem] sm:text-[.8rem]
+
+        {/* Tabs */}
+        <ul className="flex w-full justify-center mb-6 sticky top-0 bg-white z-10 ">
+          {["Residential", "Commercial", "Industrial", "Plot&Land"].map(
+            (tab) => (
+              <li
+                key={tab}
+                className={`cursor-pointer font-medium text-[.6rem] sm:text-[.8rem]
            md:text-[.9rem] lg:text-[1rem] px-4 py-1${
-          activeTab === tab
-            ? " text-gray-600 border-[2px] border-[#1F4B43] rounded-3xl"
-            : ""
-        }`}
-        onClick={() => setActiveTab(tab)}
-      >
-        {tab}
-      </li>
-    ))}
-  </ul>
-
-
+             activeTab === tab
+               ? " text-gray-600 border-[2px] border-[#1F4B43] rounded-3xl"
+               : ""
+           }`}
+                onClick={() => setActiveTab(tab)}
+              >
+                {tab}
+              </li>
+            )
+          )}
+        </ul>
 
         {/* Filter Form */}
         <form className="space-y-4 bg-white p-6 rounded ">
           {/* Common Inputs */}
-       <div className="flex text-sm w-full justify-start items-center gap-1 "> 
-       
-          
-         
-         
-          </div> 
+          <div className="flex text-sm w-full justify-start items-center gap-1 "></div>
 
           {/* Dynamic Inputs */}
           {renderAdditionalInputs()}
 
-       {/* Submit Button */}
-       <div className="w-[100%] flex justify-center items-center">
-              <button className="w-[100%] px-1 py-1  md:w-[20%] text-sm border-[1.2px] text-white
-               bg-[#1F4B43] border-[#1F4B43] rounded-lg">
-            Search
-          </button></div>  
+          {/* Submit Button */}
+          <div className="w-[100%] flex justify-center items-center">
+            <button
+              className="w-[100%] px-1 py-1  md:w-[20%] text-sm border-[1.2px] text-white
+               bg-[#1F4B43] border-[#1F4B43] rounded-lg"
+            >
+              Search
+            </button>
+          </div>
         </form>
       </div>
 
-      <div className=" w-[150px] mx-5 text-center font-extralight "><p className="text-[.7rem] w-auto rounded-lg text-gray-500 
-       border-gray-400">Results-8 Properties</p></div>
-      <PropertyCards/>
+      <div className=" w-[90%] mx-auto text-start px-4 mb-2 font-extralight ">
+        <p
+          className="text-[.7rem] w-auto rounded-lg text-gray-500 
+       border-gray-400"
+        >
+          Results {data.length} Properties
+        </p>
+      </div>
+      <PropertyCards data={data} />
     </>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from "react";
- import bgImg from "../assets/propertiesBgFInal.jpg";
+ import bgImg from "../assets/Property2.jpg";
  
  
  import AOS from 'aos';
@@ -14,7 +14,7 @@ import React, { useState,useEffect } from "react";
      switch (activeTab) {
        case "Residential":
          return (
-            <div className="max-w-3xl mx-auto p-6 bg-[#eff9f7] rounded-md shadow-md">
+            <div className="">
             <h2 className="text-2xl font-light mb-4">Upload Residential Property Data</h2>
           
             {/* Personal Details */}
@@ -223,8 +223,8 @@ import React, { useState,useEffect } from "react";
          
        case "Commercial":
          return (
-            <div className="max-w-3xl mx-auto p-6 bg-[#eff9f7] rounded-md shadow-md">
-            <h2 className="text-2xl font-light mb-4">Upload Residential Property Data</h2>
+            <div className="">
+            <h2 className="text-2xl font-light mb-4">Upload Commercial Property Data</h2>
           
             {/* Personal Details */}
             <div className="mb-6 ">
@@ -430,8 +430,8 @@ import React, { useState,useEffect } from "react";
          case "Industrial":
            return (
              <>
-             <div className="max-w-3xl mx-auto p-6 bg-[#eff9f7] rounded-md shadow-md">
-            <h2 className="text-2xl font-light mb-4">Upload Residential Property Data</h2>
+             <div className="">
+            <h2 className="text-2xl font-light mb-4">Upload Industrial Property Data</h2>
           
             {/* Personal Details */}
             <div className="mb-6 ">
@@ -640,8 +640,8 @@ import React, { useState,useEffect } from "react";
              return (
                  <>
                   
-                  <div className="max-w-3xl mx-auto p-6 bg-[#eff9f7] rounded-md shadow-md">
-            <h2 className="text-2xl font-light mb-4">Upload Residential Property Data</h2>
+                  <div className="">
+            <h2 className="text-2xl font-light mb-4">Upload  Plot&Land Data</h2>
           
             {/* Personal Details */}
             <div className="mb-6 ">
@@ -864,7 +864,7 @@ import React, { useState,useEffect } from "react";
          />
  
          {/* Dark Overlay */}
-         <div className="absolute inset-0 bg-black opacity-[0.1] z-10"></div>
+         <div className="absolute inset-0 bg-black opacity-[0.3] z-10"></div>
  
          {/* Text Content */}
          <div
@@ -912,12 +912,14 @@ import React, { useState,useEffect } from "react";
  
  
          {/* Filter Form */}
-         <form data-aos="fade-in" data-aos-duration="1000" data-aos-delay="500" className=" bg-white  rounded ">
+         <form data-aos="fade-in" data-aos-duration="1000" data-aos-delay="500"
+         >
+            <div  className="max-w-5xl mx-auto p-6 bg-[#eff9f7] rounded-md shadow-md">
       
  
            {/* Dynamic Inputs */}
            {renderAdditionalInputs()}
- 
+           </div>
     
          </form>
        </div>

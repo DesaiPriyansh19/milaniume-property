@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from "react";
-import bgImg from "../assets/propertiesBgFInal.jpg";
+import bgImg from "../assets/Propery3.jpg";
 
 
 import AOS from 'aos';
@@ -14,87 +14,9 @@ function YourRequirements() {
     switch (activeTab) {
       case "Residential":
         return (
-            <div data-aos="fade-in" data-aos-duration="1000" data-aos-delay="500"  className="max-w-3xl mx-auto p-6 bg-[#eff9f7] rounded-md shadow-md">
+            <div data-aos="fade-in" data-aos-duration="1000" data-aos-delay="500"  className="">
      
 
-      {/* Personal Details */}
-      <div data-aos="fade-in" data-aos-duration="1000" data-aos-delay="500" className="mb-6">
-        <h3 className="text-lg font-light mb-2">Personal Details</h3>
-        <label className="block mb-2 text-sm">
-          Role:
-          <select
-            className="block w-full mt-1 p-2 border rounded-md"
-          >
-            <option value="buyer">Buyer</option>
-            <option value="tenant">Tenant</option>
-            <option value="agent">Agent</option>
-            <option value="builder">Builder</option>
-          </select>
-        </label>
-
-        <label className="block mb-2 text-sm">
-          Name:
-          <input
-            type="text"
-            placeholder="Enter your name"
-            className="block w-full mt-1 p-2 border rounded-md"
-          />
-        </label>
-
-        <label className="block mb-2 text-sm">
-          Mobile Number:
-          <input
-            type="tel"
-            placeholder="Enter your mobile number"
-            className="block w-full mt-1 p-2 border rounded-md"
-          />
-        </label>
-
-        <label className="block mb-2 text-sm">
-          Email:
-          <input
-            type="email"
-            placeholder="Enter your email"
-            className="block w-full mt-1 p-2 border rounded-md"
-          />
-        </label>
-      </div>
-
-      {/* Requirements Property Details */}
-      <div data-aos="fade-in" data-aos-duration="1000" data-aos-delay="500" className="mb-6">
-        <h3 className="text-lg font-light mb-2">Requirements Property Details</h3>
-        <label className="block mb-2 text-sm">
-          Area (sqft):
-          <input
-            type="number"
-            placeholder="Enter area in sqft"
-            className="block w-full mt-1 p-2 border rounded-md"
-          />
-        </label>
-
-        <label className="block mb-2 text-sm">
-          Rent or Buy:
-          <select
-            className="block w-full mt-1 p-2 border rounded-md"
-          >
-            <option value="rent">Rent</option>
-            <option value="buy">Buy</option>
-          </select>
-        </label>
-      </div>
-
-      {/* Construction Status */}
-      <div data-aos="fade-in" data-aos-duration="1000" data-aos-delay="500" className="mb-6">
-        <h3 className="text-lg font-light mb-2">Construction Status</h3>
-        <label className="block mb-2 text-sm">
-          <select className="block w-full mt-1 p-2 border rounded-md">
-            <option value="new-launch">New Launch</option>
-            <option value="under-construction">Under Construction</option>
-            <option value="ready-to-move">Ready to Move</option>
-            <option value="old-construction">Old Construction</option>
-          </select>
-        </label>
-      </div>
 
       {/* All Residential */}
       <div data-aos="fade-in" data-aos-duration="1000" data-aos-delay="500" className="mb-6">
@@ -147,6 +69,23 @@ function YourRequirements() {
           ))}
         </div>
       </div>
+      {/* Facing */}
+      <div data-aos="fade-in" data-aos-duration="1000" data-aos-delay="500" data-aos="fade-in" data-aos-duration="1000" data-aos-delay="500" className="mb-6">
+        <h3 className="text-lg font-light mb-2">Available For</h3>
+        <div className="flex flex-wrap">
+          {[
+            "FOR FAMILY",
+            "FOR EXICUTIVE",
+            "FOR BECHLORE",
+           
+          ].map((direction) => (
+            <label key={direction} className="w-1/2 p-2">
+              <input type="checkbox" className="mr-2" /> {direction}
+            </label>
+          ))}
+        </div>
+      </div>
+
 
       {/* Facing */}
       <div data-aos="fade-in" data-aos-duration="1000" data-aos-delay="500" data-aos="fade-in" data-aos-duration="1000" data-aos-delay="500" className="mb-6">
@@ -223,87 +162,10 @@ function YourRequirements() {
         
       case "Commercial":
         return (
-            <div className="max-w-3xl mx-auto p-6 bg-[#eff9f7] rounded-md shadow-md">
+            <div className="">
           
       
-            {/* Personal Details */}
-            <div className="mb-6">
-              <h3 className="text-lg font-light mb-2">Personal Details</h3>
-              <label className="block mb-2 text-sm">
-                Role:
-                <select
-                  className="block w-full mt-1 p-2 border rounded-md"
-                >
-                  <option value="buyer">Buyer</option>
-                  <option value="tenant">Tenant</option>
-                  <option value="agent">Agent</option>
-                  <option value="builder">Builder</option>
-                </select>
-              </label>
-      
-              <label className="block mb-2 text-sm">
-                Name:
-                <input
-                  type="text"
-                  placeholder="Enter your name"
-                  className="block w-full mt-1 p-2 border rounded-md"
-                />
-              </label>
-      
-              <label className="block mb-2 text-sm">
-                Mobile Number:
-                <input
-                  type="tel"
-                  placeholder="Enter your mobile number"
-                  className="block w-full mt-1 p-2 border rounded-md"
-                />
-              </label>
-      
-              <label className="block mb-2 text-sm">
-                Email:
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="block w-full mt-1 p-2 border rounded-md"
-                />
-              </label>
-            </div>
-      
-            {/* Requirements Property Details */}
-            <div className="mb-6">
-              <h3 className="text-xl font-light mb-2">Requirements Property Details</h3>
-              <label className="block mb-2 text-sm">
-                Area (sqft):
-                <input
-                  type="number"
-                  placeholder="Enter area in sqft"
-                  className="block w-full mt-1 p-2 border rounded-md"
-                />
-              </label>
-      
-              <label className="block mb-2 text-sm">
-                Rent or Buy:
-                <select
-                  className="block w-full mt-1 p-2 border rounded-md"
-                >
-                  <option value="rent">Rent</option>
-                  <option value="buy">Buy</option>
-                </select>
-              </label>
-            </div>
-      
-            {/* Construction Status */}
-            <div className="mb-6">
-              <h3 className="text-xl font-light mb-2">Construction Status</h3>
-              <label className="block mb-2 text-sm">
-                <select className="block w-full mt-1 p-2 border rounded-md">
-                  <option value="new-launch">New Launch</option>
-                  <option value="under-construction">Under Construction</option>
-                  <option value="ready-to-move">Ready to Move</option>
-                  <option value="old-construction">Old Construction</option>
-                </select>
-              </label>
-            </div>
+           
       
             {/* All Residential */}
             <div className="mb-6">
@@ -432,87 +294,12 @@ function YourRequirements() {
           return (
             <>
              
-             <div className="max-w-3xl mx-auto p-6 bg-[#eff9f7] rounded-md shadow-md">
+             <div className="">
           
       
-            {/* Personal Details */}
-            <div className="mb-6">
-              <h3 className="text-lg font-light mb-2">Personal Details</h3>
-              <label className="block mb-2 text-sm">
-                Role:
-                <select
-                  className="block w-full mt-1 p-2 border rounded-md"
-                >
-                  <option value="buyer">Buyer</option>
-                  <option value="tenant">Tenant</option>
-                  <option value="agent">Agent</option>
-                  <option value="builder">Builder</option>
-                </select>
-              </label>
+          
       
-              <label className="block mb-2 text-sm">
-                Name:
-                <input
-                  type="text"
-                  placeholder="Enter your name"
-                  className="block w-full mt-1 p-2 border rounded-md"
-                />
-              </label>
-      
-              <label className="block mb-2 text-sm">
-                Mobile Number:
-                <input
-                  type="tel"
-                  placeholder="Enter your mobile number"
-                  className="block w-full mt-1 p-2 border rounded-md"
-                />
-              </label>
-      
-              <label className="block mb-2 text-sm">
-                Email:
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="block w-full mt-1 p-2 border rounded-md"
-                />
-              </label>
-            </div>
-      
-            {/* Requirements Property Details */}
-            <div className="mb-6">
-              <h3 className="text-xl font-light mb-2">Requirements Property Details</h3>
-              <label className="block mb-2 text-sm">
-                Area (sqft):
-                <input
-                  type="number"
-                  placeholder="Enter area in sqft"
-                  className="block w-full mt-1 p-2 border rounded-md"
-                />
-              </label>
-      
-              <label className="block mb-2 text-sm">
-                Rent or Buy:
-                <select
-                  className="block w-full mt-1 p-2 border rounded-md"
-                >
-                  <option value="rent">Rent</option>
-                  <option value="buy">Buy</option>
-                </select>
-              </label>
-            </div>
-      
-            {/* Construction Status */}
-            <div className="mb-6">
-              <h3 className="text-xl font-light mb-2">Construction Status</h3>
-              <label className="block mb-2 text-sm">
-                <select className="block w-full mt-1 p-2 border rounded-md">
-                  <option value="new-launch">New Launch</option>
-                  <option value="under-construction">Under Construction</option>
-                  <option value="ready-to-move">Ready to Move</option>
-                  <option value="old-construction">Old Construction</option>
-                </select>
-              </label>
-            </div>
+       
       
             {/* All Industrial*/}
             <div className="mb-6">
@@ -650,88 +437,10 @@ function YourRequirements() {
             return (
                 <>
                  
-                 <div className="w-full  md:max-w-3xl mx-auto p-6 bg-[#eff9f7] rounded-md shadow-md">
+                 <div className="">
             
           
-                {/* Personal Details */}
-                <div className="mb-6">
-                  <h3 className="text-lg font-light mb-2">Personal Details</h3>
-                  <label className="block mb-2 text-sm">
-                    Role:
-                    <select
-                      className="block w-full mt-1 p-2 border rounded-md"
-                    >
-                      <option value="buyer">Buyer</option>
-                      <option value="tenant">Tenant</option>
-                      <option value="agent">Agent</option>
-                      <option value="builder">Builder</option>
-                    </select>
-                  </label>
-          
-                  <label className="block mb-2 text-sm">
-                    Name:
-                    <input
-                      type="text"
-                      placeholder="Enter your name"
-                      className="block w-full mt-1 p-2 border rounded-md"
-                    />
-                  </label>
-          
-                  <label className="block mb-2 text-sm">
-                    Mobile Number:
-                    <input
-                      type="tel"
-                      placeholder="Enter your mobile number"
-                      className="block w-full mt-1 p-2 border rounded-md"
-                    />
-                  </label>
-          
-                  <label className="block mb-2 text-sm">
-                    Email:
-                    <input
-                      type="email"
-                      placeholder="Enter your email"
-                      className="block w-full mt-1 p-2 border rounded-md"
-                    />
-                  </label>
-                </div>
-          
-                {/* Requirements Property Details */}
-                <div className="mb-6">
-                  <h3 className="text-xl font-light mb-2">Requirements Property Details</h3>
-                  <label className="block mb-2 text-sm">
-                    Area (sqft):
-                    <input
-                      type="number"
-                      placeholder="Enter area in sqft"
-                      className="block w-full mt-1 p-2 border rounded-md"
-                    />
-                  </label>
-          
-                  <label className="block mb-2 text-sm">
-                    Rent or Buy:
-                    <select
-                      className="block w-full mt-1 p-2 border rounded-md"
-                    >
-                      <option value="rent">Rent</option>
-                      <option value="buy">Buy</option>
-                    </select>
-                  </label>
-                </div>
-          
-                {/* Construction Status */}
-                <div className="mb-6">
-                  <h3 className="text-xl font-light mb-2">Construction Status</h3>
-                  <label className="block mb-2 text-sm">
-                    <select className="block w-full mt-1 p-2 border rounded-md">
-                      <option value="new-launch">New Launch</option>
-                      <option value="under-construction">Under Construction</option>
-                      <option value="ready-to-move">Ready to Move</option>
-                      <option value="old-construction">Old Construction</option>
-                    </select>
-                  </label>
-                </div>
-          
+            
                 {/* All Industrial*/}
                 <div className="mb-6">
                   <h3 className="text-xl font-light mb-2">Plot & Land</h3>
@@ -844,7 +553,7 @@ function YourRequirements() {
         />
 
         {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-black opacity-[0.1] z-10"></div>
+        <div className="absolute inset-0 bg-black opacity-[0.3] z-10"></div>
 
         {/* Text Content */}
         <div
@@ -892,8 +601,91 @@ function YourRequirements() {
 
 
         {/* Filter Form */}
-        <form data-aos="fade-in" data-aos-duration="1000" data-aos-delay="500" className=" bg-white  rounded ">
+        <form data-aos="fade-in" data-aos-duration="1000" data-aos-delay="500" 
+        className=" max-w-5xl mx-auto p-6 bg-[#eff9f7] rounded-md shadow-xl ">
      
+      {/* Personal Details */}
+      <div data-aos="fade-in" data-aos-duration="1000" data-aos-delay="500" className="mb-6">
+        <h3 className="text-lg font-light mb-2">Personal Details</h3>
+    <div className="grid grid-cols-2 gap-2">   
+      <label className="block mb-2 text-sm">
+          Role:
+          <select
+            className="block w-full mt-1 p-2 border rounded-md"
+          >
+            <option value="buyer">Buyer</option>
+            <option value="tenant">Tenant</option>
+            <option value="agent">Agent</option>
+            <option value="builder">Builder</option>
+          </select>
+        </label>
+
+        <label className="block mb-2 text-sm">
+          Name:
+          <input
+            type="text"
+            placeholder="Enter your name"
+            className="block w-full mt-1 p-2 border rounded-md"
+          />
+        </label>
+
+        <label className="block mb-2 text-sm">
+          Mobile Number:
+          <input
+            type="tel"
+            placeholder="Enter your mobile number"
+            className="block w-full mt-1 p-2 border rounded-md"
+          />
+        </label>
+
+        <label className="block mb-2 text-sm">
+          Email:
+          <input
+            type="email"
+            placeholder="Enter your email"
+            className="block w-full mt-1 p-2 border rounded-md"
+          />
+        </label>
+      </div>
+      </div> 
+      {/* Requirements Property Details */}
+      <div data-aos="fade-in" data-aos-duration="1000" data-aos-delay="500" className="mb-6 ">
+        <h3 className="text-lg font-light mb-2">Requirements Property Details</h3>
+        <div className="grid grid-cols-2 gap-2">
+        <label className="block mb-2 text-sm">
+          Area (sqft):
+          <input
+            type="number"
+            placeholder="Enter area in sqft"
+            className="block w-full mt-1 p-2 border rounded-md"
+          />
+        </label>
+
+        <label className="block mb-2 text-sm">
+          Rent or Buy:
+          <select
+            className="block w-full mt-1 p-2 border rounded-md"
+          >
+            <option value="rent">Rent</option>
+            <option value="buy">Buy</option>
+          </select>
+        </label>
+        </div>
+      </div>
+
+      {/* Construction Status */}
+      <div data-aos="fade-in" data-aos-duration="1000" data-aos-delay="500" className="mb-6 w-[50%]">
+        <h3 className="text-lg font-light mb-2">Construction Status</h3>
+        
+        <label className="block mb-2 text-sm">
+          <select className="block w-full mt-1 p-2 rounded-md">
+            <option value="new-launch">New Launch</option>
+            <option value="under-construction">Under Construction</option>
+            <option value="ready-to-move">Ready to Move</option>
+            <option value="old-construction">Old Construction</option>
+          </select>
+        </label>
+      </div>
 
           {/* Dynamic Inputs */}
           {renderAdditionalInputs()}

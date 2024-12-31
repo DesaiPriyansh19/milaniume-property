@@ -13,6 +13,7 @@ const InputField = ({
   options = [],
   checked,
   multiple = false,
+  rows = 4, // Default rows for textarea
 }) => {
   const variants = [
     {
@@ -26,6 +27,11 @@ const InputField = ({
     {
       labelClassName: "block text-sm ",
       inputClassName: "accent-zinc-900 border border-white",
+    },
+    {
+      labelClassName: "block text-sm font-medium text-gray-500",
+      inputClassName:
+        "w-full p-2 text-sm border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]",
     },
   ];
   const { labelClassName, inputClassName } = variants[variant];
@@ -116,6 +122,24 @@ const InputField = ({
             </svg>
           )}
         </div>
+      </div>
+    );
+  }
+  if (type === "textarea") {
+    return (
+      <div>
+        <label htmlFor={name} className={labelClassName}>
+          {label}
+        </label>
+        <textarea
+          name={name}
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+          rows={rows}
+          className={`${inputClassName} resize-none`} // Prevent resize for consistent UI
+          required={required}
+        ></textarea>
       </div>
     );
   }

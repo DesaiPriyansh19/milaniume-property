@@ -10,7 +10,7 @@ export default function SidebarAdmin() {
     { name: "Dashboard", icon: <HomeSvg />, path: "/dashboard" },
     { name: "Manage Peoples", icon: <HomeSvg />, path: "/manage-peoples" },
     { name: "Contact Information", icon: <HomeSvg />, path: "/contact-info" },
-    { name: "Profile Form", icon: <HomeSvg />, path: "/profile-form" },
+    { name: "Enquiries", icon: <HomeSvg />, path: "/enquiries" },
     { name: "Add Property", icon: <HomeSvg />, path: "/add-property" },
     { name: "Bar Chart", icon: <HomeSvg />, path: "/bar-chart" },
     { name: "Pie Chart", icon: <HomeSvg />, path: "/pie-chart" },

@@ -3,12 +3,13 @@ import Room from "../assets/Room.jpeg";
 import LocationLogo from "../../svg/Icon/Locationlogo/Index";
 import useFetch from "../../hooks/useFetch";
 import { Link } from "react-router-dom";
+import SkeletonLoader from "./SkeletonLoader";
 function FeaturedProperty() {
   const [activeTab, setActiveTab] = useState("All Properties");
   const [filteredData, setFilteredData] = useState([]);
   const data = ["All Properties", "Commercial", "Residential", "Industrial"];
 
-  const { data: PropertyData } = useFetch(
+  const { data: PropertyData , loading } = useFetch(
     "https://milaniumepropertybackend.vercel.app/api/property"
   );
 
@@ -33,6 +34,8 @@ function FeaturedProperty() {
       <h3 className="text-2xl text-center mt-11 font-medium ">
         Featured Properties
       </h3>
+      
+     
       <div className="w-full px-11 py-8">
         {/* Tabs */}
         <ul className="flex justify-center mb-6">
@@ -51,7 +54,14 @@ function FeaturedProperty() {
           ))}
         </ul>
 
-        {/* Cards */}
+
+
+       {/* Show skeleton loader when loading */}
+       {loading ? (
+       
+       <SkeletonLoader/>
+    
+   ) : ( 
         <div className="lg:w-[90%] rounded-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {filteredData.map((card) => (
             <div
@@ -109,7 +119,9 @@ function FeaturedProperty() {
               </div>
             </div>
           ))}
-        </div>
+        </div>)}
+
+
         <div className="flex items-center justify-center">
           {" "}
     <Link to={'/properties'} >    <button

@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from "react";
-import bgImg from "../../assets/property_2_-853gCunl--transformed.webp";
+import bgImg from "../../assets/pexels-jonathanborba-5563473.jpg";
 import PropertyCards from "./PropertyCards";
 
 import AOS from "aos";
 import "aos/dist/aos.css"; // Import AOS styles
 import useFetch from "../../../hooks/useFetch";
+import SkeletonLoader from "../SkeletonLoader";
 function Properties() {
   const [activeTab, setActiveTab] = useState("Residential");
   const { data, loading } = useFetch(
     "https://milaniumepropertybackend.vercel.app/api/property"
   );
-
+  useEffect(() => {
+    AOS.init({ once: true }); // Initialize AOS
+  }, []);
   const renderAdditionalInputs = () => {
-    useEffect(() => {
-      AOS.init({ once: true }); // Initialize AOS
-    }, []);
+  
 
     switch (activeTab) {
       case "Residential":
@@ -401,16 +402,17 @@ function Properties() {
 
   return (
     <>
+   
       <div className="relative w-full mb-0 pb-0">
         {/* Background Image with Blur */}
         <img
           src={bgImg}
           alt="Background"
-          className="w-full h-[350px] md:h-[40vh] lg:h-[450px] object-cover object-top filter blur-[0px]"
+          className="w-full h-[350px] md:h-[40vh] lg:h-[100%] object-cover object-top filter blur-[0px]"
         />
 
         {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-black opacity-[0.1] z-10"></div>
+        <div className="absolute inset-0 bg-black opacity-[0.3] z-10"></div>
 
         {/* Text Content */}
         <div
@@ -480,7 +482,15 @@ function Properties() {
           Results {data?.length} Properties
         </p>
       </div>
-      <PropertyCards data={data} />
+    
+       {/* Show skeleton loader when loading */}
+    {loading ? (
+       
+          <SkeletonLoader/>
+       
+      ) : (
+        
+      <PropertyCards data={data} />)}
     </>
   );
 }

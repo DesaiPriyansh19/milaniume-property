@@ -6,20 +6,28 @@ export default {
     "./utils/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: { fontFamily: {
+    extend: {
+       fontFamily: {
       roboto: ['Roboto', 'sans-serif'],
     },
     boxShadow: {
-      uniqshadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
+
+      
+      
+    },
+   
+    animation: {
+      blink: "blink 1s linear infinite", // Set the animation duration to 1 second
+    },
+    keyframes: {
+      blink: {
+        "0%, 100%": { opacity: 0.5 },
+        "50%": { opacity: 1 },
+      },
     },
   
   },
-    
-    extend: {
-      fontFamily: {
-        roboto: ["Roboto", "sans-serif"],
-      },
-    },
-  },
+ 
+
   plugins: [],
-};
+}};

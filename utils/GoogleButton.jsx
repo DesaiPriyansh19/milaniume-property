@@ -44,7 +44,7 @@ export default function GoogleButton({ handlePopupClose, text }) {
   return (
     <div>
       <button
-        className="w-full mb-8 text-base font-medium bg-inherit flex items-center justify-center gap-3  p-3 rounded-xl"
+        className="w-full text-base font-medium bg-inherit flex items-center justify-center gap-3  rounded-xl"
         onClick={googleLogin}
       >
         <span>

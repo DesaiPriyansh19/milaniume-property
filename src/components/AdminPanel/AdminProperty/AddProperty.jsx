@@ -168,9 +168,9 @@ export default function AddProperty({ addNew, handleEdit }) {
   };
   const handleMainPhotoChange = (index, value) => {
     setFormData((prevData) => {
-      const updatedPhotos = [...prevData.Photos];
+      const updatedPhotos = [...prevData.PropertyPhotos];
       updatedPhotos[index] = value;
-      return { ...prevData, Photos: updatedPhotos };
+      return { ...prevData, PropertyPhotos: updatedPhotos };
     });
   };
 
@@ -582,7 +582,7 @@ export default function AddProperty({ addNew, handleEdit }) {
 
           <section className="mb-4">
             <h2 className="text-2xl font-bold mb-4">Property Photos (URLs)</h2>
-            {formData?.PropertyPhotos.map((photo, index) => (
+            {formData?.PropertyPhotos?.map((photo, index) => (
               <div key={index} className="flex items-center">
                 <div className="mb-4 w-full">
                   <InputField

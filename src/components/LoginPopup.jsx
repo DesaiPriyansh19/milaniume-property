@@ -39,7 +39,7 @@ const LoginPopup = ({ handlePopupClose }) => {
 
       try {
         const response = await axios.post(
-          "https://milaniumepropertybackend.vercel.app/api/users",
+          "https://milaniumepropertybackend.vercel.app/api/users/login",
           userData
         );
         console.log("Login successful:", response.data);
@@ -136,15 +136,15 @@ const LoginPopup = ({ handlePopupClose }) => {
               >
                 Login
               </button>
-              <button
-                type="button"
-                className="w-full h-11  justify-center flex font-extralight  hover:bg-[#E7C873] border-[2px]  border-[#E7C873] text-black py-2   px-4 rounded-lg "
+              <div
+                
+                className="w-full justify-center flex font-extralight  hover:bg-[#E7C873] border-[2px]  border-[#E7C873] text-black py-2   px-4 rounded-lg "
               >
                 <GoogleWrapper
                   text="Google"
                   handlePopupClose={handlePopupClose}
                 />
-              </button>
+              </div>
             </>
           )}
 

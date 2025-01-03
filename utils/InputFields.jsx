@@ -33,6 +33,10 @@ const InputField = ({
       inputClassName:
         "w-full p-2 text-sm border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]",
     },
+    {
+      labelClassName: "block text-sm",
+      inputClassName: "block w-full mt-1 p-2 text-sm border rounded-md",
+    },
   ];
   const { labelClassName, inputClassName } = variants[variant];
 
@@ -46,17 +50,21 @@ const InputField = ({
           name={name}
           value={value}
           onChange={onChange}
-          style={{
-            backgroundColor: "#1f2937", // Tailwind bg-gray-800
-            borderBottom: "1px solid white", // Tailwind border-white
-            borderRadius: "0px", // Tailwind border-radius
-            color: "white", // Tailwind text-white
-            appearance: "none", // Tailwind appearance-none
-            padding: "1rem", // Tailwind padding
-            width: "100%", // Tailwind width
-            paddingRight: "2rem", // Adding extra padding for arrow icon
-          }}
-          className={`${inputClassName} `}
+          style={
+            variant !== 4
+              ? {
+                  backgroundColor: "#1f2937", // Tailwind bg-gray-800
+                  borderBottom: "1px solid white", // Tailwind border-white
+                  borderRadius: "0px", // Tailwind border-radius
+                  color: "white", // Tailwind text-white
+                  appearance: "none", // Tailwind appearance-none
+                  padding: "1rem", // Tailwind padding
+                  width: "100%", // Tailwind width
+                  paddingRight: "2rem", // Adding extra padding for arrow icon
+                }
+              : {}
+          }
+          className={`${inputClassName} appearance-none`}
           required={required}
           multiple={multiple}
         >
@@ -78,7 +86,7 @@ const InputField = ({
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 text-white"
+            className={`h-5 w-5 text-white`}
             viewBox="0 0 20 20"
             fill="currentColor"
           >

@@ -1,19 +1,68 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../src/assets/logo final PNG.png";
 import Call from "../../svg/Icon/Call/Index";
 import MyProfileLogo from "../../svg/Icon/MyProfileLogo";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import pdf from "/Brochure-MillennumProperties.pdf?url";
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 const Navbar = ({ handlePopupOpen }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
+  useEffect(() => {
+    const verifyToken = () => {
+      const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  
+      if (userInfo) {
+        try {
+          const decodedToken = jwtDecode(userInfo.token);
+          setIsLoggedIn(true);
+          if (decodedToken?.isAdmin) {
+            setIsAdmin(true);
+          } else {
+            setIsAdmin(false);
+          }
+        } catch (error) {
+          console.error("Invalid token:", error);
+          setIsLoggedIn(false);
+          setIsAdmin(false);
+        }
+      } else {
+        setIsLoggedIn(false);
+        setIsAdmin(false);
+      }
+    };
+  
+    verifyToken();
+  }, []);
+  
+  const handleOnClick = () => {
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    if (!isLoggedIn && !userInfo) {
+      // User not logged in
+      handlePopupOpen();
+    } else if (isAdmin) {
+      // User is admin
+      navigate("/admin");
+    } else {
+      // User is logged in but not admin
+      alert("Logged in successfully!");
+    }
+  };
+  
   return (
     <nav className="bg-gradient-to-b pt-5 text-sm from-black w-full to-transparent bg-opacity-10 absolute inset-x-0 top-0 z-40">
       <div className="container mx-auto px-1 flex items-center justify-between h-16">
         {/* Left: Logo */}
         <div className="flex items-center text-center justify-center">
-          <img src={logo} alt="Logo 1" className="mx-2 w-[70px] sm:mx-0 sm:w-[90px] md:w-[80px]  " />
+          <img
+            src={logo}
+            alt="Logo 1"
+            className="mx-2 w-[70px] sm:mx-0 sm:w-[90px] md:w-[80px]  "
+          />
           {/* Nav links for large devices */}
           <div className="hidden lg:flex text-[.8rem] px-28    space-x-6 mx-auto">
             <Link
@@ -41,11 +90,11 @@ const Navbar = ({ handlePopupOpen }) => {
               Service
             </Link>
 
-
-           <Link to={'/quickenquiry'} className="text-white hover:text-[#E7C873] hover:border-b-[1px]">
-             Quick Contact
-
-
+            <Link
+              to={"/quickenquiry"}
+              className="text-white hover:text-[#E7C873] hover:border-b-[1px]"
+            >
+              Quick Contact
             </Link>
           </div>
         </div>
@@ -80,11 +129,11 @@ const Navbar = ({ handlePopupOpen }) => {
           </button>
           {/* Button and Contact for large devices */}
           <div className="hidden lg:flex items-center justify-center space-x-4">
-          <a href="tel:+1234567890" className="w-6 h-6">
-  <Call />
-</a>
-            
-            <span onClick={handlePopupOpen}>
+            <a href="tel:+1234567890" className="w-6 h-6">
+              <Call />
+            </a>
+
+            <span onClick={handleOnClick}>
               <MyProfileLogo />
             </span>
             {/* <button className="bg-transparent text-sm text-white px-4 py-1 rounded-full border-2 border-white hover:border-[#E7C873]">

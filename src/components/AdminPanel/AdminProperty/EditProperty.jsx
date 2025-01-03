@@ -103,7 +103,6 @@ export default function EditProperty({
 
     handleEdit("View");
   };
-  console.log(formData);
 
   return (
     <>

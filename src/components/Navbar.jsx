@@ -61,10 +61,10 @@ const Navbar = ({ handlePopupOpen }) => {
           <img
             src={logo}
             alt="Logo 1"
-            className="mx-2 w-[70px] sm:mx-0 sm:w-[90px] md:w-[80px]  "
+            className="mx-2 w-[70px] sm:mx-0 sm:w-[90px] md:w-[80px] xl:w-[90px]  "
           />
           {/* Nav links for large devices */}
-          <div className="hidden lg:flex text-[.8rem] px-28    space-x-6 mx-auto">
+          <div className="hidden lg:flex text-[.8rem] xl:text-[1rem] px-28 xl:px-80   space-x-6 xl:space-x-8 mx-auto">
             <Link
               to="/"
               className="text-white px-2 hover:text-[#E7C873] hover:border-b-[1px]"
@@ -103,7 +103,7 @@ const Navbar = ({ handlePopupOpen }) => {
         <div className="flex items-center space-x-3 pr-4 lg:pr-1">
           {/* Mobile view: Call icon and number */}
           <div className="lg:hidden flex items-center">
-            <a href="tel:+1234567890" className="w-6 h-6">
+            <a href="tel:+1234567890" className="w-6 h-6 ">
               <Call />
             </a>
           </div>
@@ -129,7 +129,7 @@ const Navbar = ({ handlePopupOpen }) => {
           </button>
           {/* Button and Contact for large devices */}
           <div className="hidden lg:flex items-center justify-center space-x-4">
-            <a href="tel:+1234567890" className="w-6 h-6">
+            <a href="tel:+1234567890" className="w-6 h-6  ">
               <Call />
             </a>
 

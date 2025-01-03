@@ -48,7 +48,7 @@ const QuickEnquiry = () => {
     <>
       <div
         style={{ backgroundImage: `url(${img})` }}
-        className="w-full h-[400px] sm:h-[300px] md:h-[350px] lg:h-[300px] bg-cover bg-center bg-no-repeat relative 
+        className="w-full h-[500px] sm:h-[500px] md:h-[600px] bg-cover bg-center bg-no-repeat relative 
      before:absolute before:inset-0 before:bg-black/10 before:backdrop-blur-[0px]"
       >
         <div className="absolute inset-0 bg-black/35 md:bg-black/45"></div>

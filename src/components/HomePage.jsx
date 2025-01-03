@@ -62,7 +62,7 @@ export default function HomePage() {
       <div data-aos="fade-in" data-aos-duration="300" data-aos-delay="500">
       <Discover/></div>
       <div data-aos="fade-out">
-      <SignInDiv/> 
+      {/* <SignInDiv/>  */}
       </div>
     </div>
   );

@@ -26,6 +26,7 @@ import InteriorDesign from "./components/Ourservices/InteriorDesign";
 import AboutUs from "./components/AboutUs";
 import ViewProperty from "./components/AdminPanel/AdminProperty/ViewProperty";
 import PropertyDetailPage from "./components/Properties/PropertyDetails";
+import Footer from "./components/Footer";
 
 
 function App() {
@@ -74,6 +75,7 @@ function App() {
         </Routes>
       </AppLayout>
       <RightSideLogos /> {/* Right-side logos component */}
+      <Footer/>
     </div>
   );
 }

@@ -6,127 +6,115 @@ import AOS from "aos";
 import "aos/dist/aos.css"; // Import AOS styles
 import useFetch from "../../../hooks/useFetch";
 import SkeletonLoader from "../SkeletonLoader";
+
 function Properties() {
   const [activeTab, setActiveTab] = useState("Residential");
+  const [isModalOpen, setIsModalOpen] = useState(false); // Moved here
   const { data, loading } = useFetch(
     "https://milaniumepropertybackend.vercel.app/api/property"
   );
+
   useEffect(() => {
     AOS.init({ once: true }); // Initialize AOS
   }, []);
-  const renderAdditionalInputs = () => {
+
+  const openModal = () => {
+    console.log("Modal Open Triggered");
+    setIsModalOpen(true);
+  };
+  
+  const closeModal = () => {
+    console.log("Modal Close Triggered");
+    setIsModalOpen(false);
+  };
   
 
+  const renderAdditionalInputs = () => {
     switch (activeTab) {
       case "Residential":
         return (
-          <>
-            <div className="mb-4 mt-4 text-sm grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 items-center justify-start max-w-screen-lg">
-              {/* no1 */}
-              <div className="mb-4 w-full">
-                <label className="block mb-2 text-sm text-gray-500">Search</label>
-                <input
-                  type="text"
-                  placeholder="ENTER PROPERTY AREA"
-                  className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]"
-                />
+          <div >
+            {/* Filter Button */}
+            <button
+              onClick={openModal}
+              className="px-4 py-2 bg-[#1F4B43] text-white rounded-lg"
+            >
+              Filter
+            </button>
+
+            {/* Filter Modal */}
+            {isModalOpen && (
+              
+              <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50" onClick={closeModal}>
+     
+
+                <div className="bg-white rounded-lg p-6 w-11/12 md:w-3/4 lg:w-1/2 overflow-y-auto max-h-[90vh]"  onClick={(e) => e.stopPropagation()}>
+                  {/* Close Button */}
+                  <button
+                    onClick={closeModal}
+                    className="text-gray-500 hover:text-gray-800 float-right text-xl font-bold"
+                  >
+                    &times;
+                  </button>
+
+                  <h2 className="text-lg font-semibold mb-4 text-gray-700">
+                    Filters
+                  </h2>
+
+                  {/* Filters Content */}
+                  <div className="text-sm grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 items-center justify-start">
+                    {/* Search Input */}
+                    <div className="mb-4 w-full">
+                      <label className="block mb-2 text-sm text-gray-500">
+                        Search
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="ENTER PROPERTY AREA"
+                        className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]"
+                      />
+                    </div>
+
+                    {/* Residential Type */}
+                    <div className="mb-4 text-sm w-full">
+                      <label className="block mb-2 text-sm text-gray-500">
+                        Residential Type
+                      </label>
+                      <select className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg text-sm placeholder:text-[#1F4B43] border-[#1F4B43]">
+                        <option>LOW RISE APARTMENT</option>
+                        <option>HIGH RISE APARTMENT</option>
+                        <option>BUNGALOW</option>
+                        <option>VILLAS</option>
+                        <option>TENEMENT</option>
+                        <option>ROWHOUSE</option>
+                        <option>FARM HOUSE</option>
+                      </select>
+                    </div>
+
+                    {/* Sale/Rent */}
+                    <div className="w-full mb-4">
+                      <label className="block mb-2 text-sm text-gray-500">
+                        Sale/Rent
+                      </label>
+                      <select className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]">
+                        <option>Buy</option>
+                        <option>Rent</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Apply Filters Button */}
+                  <button
+                    onClick={closeModal}
+                    className="mt-4 px-4 py-2 bg-[#1F4B43] text-white rounded-lg"
+                  >
+                    Apply Filters
+                  </button>
+                </div>
               </div>
-              {/* no2 */}
-              <div className="mb-4 text-sm w-full">
-                <label className="block mb-2 text-sm text-gray-500">Residential Type</label>
-                <select className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg text-sm placeholder:text-[#1F4B43] border-[#1F4B43]">
-                  <option>LOW RISE APARTMENT</option>
-                  <option>HIGH RISE APARTMENT</option>
-                  <option>BUNGALOW</option>
-                  <option>VILLAS</option>
-                  <option>TENEMENT</option>
-                  <option>ROWHOUSE</option>
-                  <option>FARM HOUSE</option>
-                </select>
-              </div>
-              {/* no3 */}
-              <div className="w-full mb-4">
-                <label className="block mb-2 text-sm text-gray-500">Sale/Rent</label>
-                <select className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]">
-                  <option>Buy</option>
-                  <option>Rent</option>
-                </select>
-              </div>
-              {/* no4 */}
-              <div className="mb-4 text-sm w-full">
-                <label className="block mb-2 text-sm text-gray-500">Residential Availability</label>
-                <select className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg text-sm placeholder:text-[#1F4B43] border-[#1F4B43]">
-                  <option>1 BHK</option>
-                  <option>2 BHK</option>
-                  <option>3 BHK</option>
-                  <option>4 BHK</option>
-                  <option>5 BHK</option>
-                  <option>6 BHK</option>
-                  <option>Above 6 BHK</option>
-                  <option>Duplex</option>
-                  <option>PG</option>
-                  <option>Residential Plot</option>
-                </select>
-              </div>
-              {/* no5 */}
-              <div className="mb-4 text-sm w-full">
-                <label className="block mb-2 text-sm text-gray-500">Residential Condition</label>
-                <select className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg text-sm placeholder:text-[#1F4B43] border-[#1F4B43]">
-                  <option>FULLY FURNISHED</option>
-                  <option>FURNISHED</option>
-                  <option>SEMI FURNISHED</option>
-                  <option>FIX-FURNISHED</option>
-                  <option>KITCHEN FIX</option>
-                  <option>UNFURNISHED</option>
-                </select>
-              </div>
-              {/* no6 */}
-              <div className="mb-4 text-sm w-full">
-                <label className="block mb-2 text-sm text-gray-500">Available For</label>
-                <select className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg text-sm placeholder:text-[#1F4B43] border-[#1F4B43]">
-                  <option>FOR FAMILY</option>
-                  <option>FOR EXECUTIVE</option>
-                  <option>FOR BACHELOR</option>
-                </select>
-              </div>
-              {/* no8 */}
-              <div className="mb-4 text-sm w-full sm:max-w-52">
-                <label className="block mb-2 text-sm text-gray-500">Sqft/Sqyd</label>
-                <span className="p-[2px] sm:p-0 flex flex-row justify-center items-center rounded-lg border-[1.5px] border-[#1F4B43]">
-                  <input
-                    type="number"
-                    placeholder="min"
-                    className="w-full sm:w-[40%] py-2 text-sm placeholder:text-[#1F4B43] text-center"
-                  />
-                  <label className="block w-[10%] mx-1 text-sm text-[#1F4B43]">To</label>
-                  <input
-                    type="number"
-                    placeholder="max"
-                    className="w-full sm:w-[40%] py-2 text-sm placeholder:text-[#1F4B43] text-center"
-                  />
-                </span>
-              </div>
-              {/* no7 */}
-              <div className="mb-4 text-sm w-full sm:max-w-52">
-                <label className="block mb-2 text-sm text-gray-500">Budget</label>
-                <span className=" p-[2px] sm:p-0 flex flex-row justify-center items-center rounded-lg border-[1.5px] border-[#1F4B43]">
-                  <input
-                    type="number"
-                    placeholder="min"
-                    className="w-full sm:w-[40%]  p-2 text-sm placeholder:text-[#1F4B43] text-center"
-                  />
-                  <label className="block w-[10%] mx-1 text-sm text-[#1F4B43]">To</label>
-                  <input
-                    type="number"
-                    placeholder="max"
-                    className="w-full sm:w-[40%] p-2 text-sm placeholder:text-[#1F4B43] text-center"
-                  />
-                </span>
-              </div>
-            </div>
-          </>
-        );
-        
+            )}
+          </div>
+        ); 
       case "Commercial":
         return (
           <>
@@ -408,7 +396,7 @@ function Properties() {
         <img
           src={bgImg}
           alt="Background"
-          className="w-full h-[350px] md:h-[40vh] lg:h-[100%] object-cover object-top filter blur-[0px]"
+          className="w-full h-[500px] sm:h-[500px] md:h-[600px] object-cover object-top filter blur-[0px]"
         />
 
         {/* Dark Overlay */}

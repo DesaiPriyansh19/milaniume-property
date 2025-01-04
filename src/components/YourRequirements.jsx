@@ -882,10 +882,10 @@ function YourRequirements() {
             </h3>
             <div className="grid grid-cols-2 gap-2">
               <label className="block mb-2 text-sm">
-                Area (sqft):
+                Area:
                 <input
-                  type="number"
-                  placeholder="Enter area in sqft"
+                  type="text"
+                  placeholder="Enter area/location"
                   className="block w-full mt-1 p-2 border rounded-md"
                 />
               </label>

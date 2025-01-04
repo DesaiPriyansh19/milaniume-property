@@ -1,7 +1,5 @@
 import React, { useState,useEffect } from "react";
  import bgImg from "../assets/Property2.jpg";
- 
- 
  import AOS from 'aos';
  import 'aos/dist/aos.css'; // Import AOS styles
  function  PostProperty() {

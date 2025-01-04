@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import bgImg from "../../assets/pexels-jonathanborba-5563473.jpg";
+import bgImg from "../../assets/pexels-clubhouseconvos-13620073.jpg";
 import PropertyCards from "./PropertyCards";
 
 import AOS from "aos";
@@ -30,363 +30,175 @@ function Properties() {
   
 
   const renderAdditionalInputs = () => {
+     // Function to render dynamic filters
+  const renderFilters = () => {
     switch (activeTab) {
       case "Residential":
         return (
-          <div >
-            {/* Filter Button */}
-            <button
-              onClick={openModal}
-              className="px-4 py-2 bg-[#1F4B43] text-white rounded-lg"
-            >
-              Filter
-            </button>
+          <>
+            {/* Search */}
+            <div className="mb-4 w-full">
+              <label className="block mb-2 text-sm text-gray-500">Search</label>
+              <input
+                type="text"
+                placeholder="ENTER PROPERTY AREA"
+                className="w-full p-2 border rounded-lg border-[#1F4B43] placeholder:text-[#1F4B43]"
+              />
+            </div>
 
-            {/* Filter Modal */}
-            {isModalOpen && (
-              
-              <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50" onClick={closeModal}>
-     
+            {/* Residential Type */}
+            <div className="mb-4 text-sm w-full">
+              <label className="block mb-2 text-sm text-gray-500">Residential Type</label>
+              <select className="w-full p-2 border rounded-lg border-[#1F4B43] text-sm">
+                <option>LOW RISE APARTMENT</option>
+                <option>HIGH RISE APARTMENT</option>
+                <option>BUNGALOW</option>
+                <option>VILLAS</option>
+                <option>TENEMENT</option>
+                <option>ROWHOUSE</option>
+                <option>FARM HOUSE</option>
+              </select>
+            </div>
 
-                <div className="bg-white rounded-lg p-6 w-11/12 md:w-3/4 lg:w-1/2 overflow-y-auto max-h-[90vh]"  onClick={(e) => e.stopPropagation()}>
-                  {/* Close Button */}
-                  <button
-                    onClick={closeModal}
-                    className="text-gray-500 hover:text-gray-800 float-right text-xl font-bold"
-                  >
-                    &times;
-                  </button>
+            {/* Sale/Rent */}
+            <div className="w-full mb-4">
+              <label className="block mb-2 text-sm text-gray-500">Sale/Rent</label>
+              <select className="w-full p-2 border rounded-lg border-[#1F4B43]">
+                <option>Buy</option>
+                <option>Rent</option>
+              </select>
+            </div>
+          </>
+        );
 
-                  <h2 className="text-lg font-semibold mb-4 text-gray-700">
-                    Filters
-                  </h2>
-
-                  {/* Filters Content */}
-                  <div className="text-sm grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 items-center justify-start">
-                    {/* Search Input */}
-                    <div className="mb-4 w-full">
-                      <label className="block mb-2 text-sm text-gray-500">
-                        Search
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="ENTER PROPERTY AREA"
-                        className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]"
-                      />
-                    </div>
-
-                    {/* Residential Type */}
-                    <div className="mb-4 text-sm w-full">
-                      <label className="block mb-2 text-sm text-gray-500">
-                        Residential Type
-                      </label>
-                      <select className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg text-sm placeholder:text-[#1F4B43] border-[#1F4B43]">
-                        <option>LOW RISE APARTMENT</option>
-                        <option>HIGH RISE APARTMENT</option>
-                        <option>BUNGALOW</option>
-                        <option>VILLAS</option>
-                        <option>TENEMENT</option>
-                        <option>ROWHOUSE</option>
-                        <option>FARM HOUSE</option>
-                      </select>
-                    </div>
-
-                    {/* Sale/Rent */}
-                    <div className="w-full mb-4">
-                      <label className="block mb-2 text-sm text-gray-500">
-                        Sale/Rent
-                      </label>
-                      <select className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]">
-                        <option>Buy</option>
-                        <option>Rent</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  {/* Apply Filters Button */}
-                  <button
-                    onClick={closeModal}
-                    className="mt-4 px-4 py-2 bg-[#1F4B43] text-white rounded-lg"
-                  >
-                    Apply Filters
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
-        ); 
       case "Commercial":
         return (
           <>
-         <div className="mb-4 mx-4 sm:mx-6 lg:mx-28 mt-4 text-sm grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 items-start justify-start max-w-screen-lg">
-  {/* Search */}
-  <div className="mb-4 w-full">
-    <label className="block mb-2 text-sm text-gray-500">Search</label>
-    <input
-      type="text"
-      placeholder="ENTER PROPERTY AREA"
-      className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]"
-    />
-  </div>
+            {/* Search */}
+            <div className="mb-4 w-full">
+              <label className="block mb-2 text-sm text-gray-500">Search</label>
+              <input
+                type="text"
+                placeholder="ENTER PROPERTY AREA"
+                className="w-full p-2 border rounded-lg border-[#1F4B43] placeholder:text-[#1F4B43]"
+              />
+            </div>
 
-  {/* Commercial Availability */}
-  <div className="mb-4 text-sm">
-    <label className="block mb-2 text-sm text-gray-400">Commercial Availability</label>
-    <select className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg tex-sm placeholder:text-[#1F4B43] border-[#1F4B43]">
-      <option>OFFICE</option>
-      <option>SHOP</option>
-      <option>CO WORKING SPACE</option>
-      <option>READY TO MOVE OFFICE</option>
-      <option>WAREHOUSE</option>
-      <option>COLD STORAGE</option>
-      <option>OTHER</option>
-    </select>
-  </div>
-
-  {/* Sale/Rent */}
-  <div className="mb-4 w-full">
-    <label className="block mb-2 text-sm text-gray-500">Sale/Rent</label>
-    <select className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]">
-      <option>Buy</option>
-      <option>Rent</option>
-    </select>
-  </div>
-
-  {/* Commercial Condition */}
-  <div className="mb-4 text-sm">
-    <label className="block mb-2 text-sm text-gray-400">Commercial Condition</label>
-    <select className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg tex-sm placeholder:text-[#1F4B43] border-[#1F4B43]">
-      <option>FULLY FURNISHED</option>
-      <option>FURNISHED</option>
-      <option>SEMI FURNISHED</option>
-      <option>FIX-FURNISHED</option>
-      <option>UNFURNISHED</option>
-    </select>
-  </div>
-
-  {/* Sqft/Sqyd */}
-  <div className="mb-4 text-sm w-full sm:max-w-52">
-    <label className="block mb-2 text-sm text-gray-500">Sqft/Sqyd</label>
-    <span className="p-[2px] sm:p-0 flex flex-row justify-center items-center  rounded-lg border-[1.5px] border-[#1F4B43]">
-      <input
-        type="number"
-        placeholder="min"
-        className="w-full sm:w-[40%]  p-2 placeholder:text-[#1F4B43] text-center"
-      />
-      <label className="w-[10%]  text-sm text-[#1F4B43]">To</label>
-      <input
-        type="number"
-        placeholder="max"
-        className="w-full sm:w-[40%]  p-2 flex flex-row justify-center items-center placeholder:text-[#1F4B43] text-center"
-      />
-    </span>
-  </div>
-
-  {/* Budget */}
-  <div className="mb-4 text-sm w-full sm:max-w-52">
-    <label className="block mb-2 text-sm text-gray-500">Budget</label>
-    <span className="p-[2px] sm:p-0 flex flex-row justify-center items-center  rounded-lg border-[1.5px] border-[#1F4B43]">
-      <input
-        type="number"
-        placeholder="min"
-        className="w-full sm:w-[40%]  p-2 tex-sm placeholder:text-[#1F4B43] text-center"
-      />
-      <label className="w-[10%]   text-sm text-[#1F4B43]">To</label>
-      <input
-        type="number"
-        placeholder="max"
-        className="w-full sm:w-[40%]  p-2 tex-sm placeholder:text-[#1F4B43] text-center"
-      />
-    </span>
-  </div>
-
-
-</div>
-  {/* Commercial Availability Type */}
-  <div className="mb-4 text-sm w-ful sm:w-[90%] md:w-[75%] mx-auto max-w-screen-lg">
-    <label className="block mb-2 text-sm text-gray-400">Commercial Availability Type</label>
-    <div className="w-full flex flex-wrap gap-4 p-2 rounded-lg text-sm">
-      {[
-        "BOSS CABIN",
-        "MANAGER CABIN",
-        "WORK STATION",
-        "CONFERENCE ROOM",
-        "PANTRY",
-        "RECEPTION",
-        "WAITING AREA",
-      ].map((item) => (
-        <label key={item} className="flex items-center space-x-2">
-          <input type="checkbox" className="form-checkbox text-[#1F4B43]" value={item} />
-          <span>{item}</span>
-        </label>
-      ))}
-    </div>
-  </div>
+            {/* Commercial Type */}
+            <div className="mb-4 text-sm">
+              <label className="block mb-2 text-sm text-gray-500">Commercial Availability</label>
+              <select className="w-full p-2 border rounded-lg border-[#1F4B43] text-sm">
+                <option>OFFICE</option>
+                <option>SHOP</option>
+                <option>CO WORKING SPACE</option>
+                <option>READY TO MOVE OFFICE</option>
+                <option>WAREHOUSE</option>
+                <option>COLD STORAGE</option>
+                <option>OTHER</option>
+              </select>
+            </div>
           </>
         );
-        case "Industrial":
-          return (
-            <>
-             
-             <div className="mb-4 mx-4 mt-4 text-sm grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 items-center justify-start">
-  {/* Search */}
-  <div className="mb-4 w-full">
-    <label className="block mb-2 text-sm text-gray-500">Search</label>
-    <input
-      type="text"
-      placeholder="Search Area"
-      className="w-full p-2 border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]"
-    />
-  </div>
 
-  {/* Industrial Type */}
-  <div className="mb-4 text-sm">
-    <label className="block mb-2 text-sm text-gray-500">Industrial Type</label>
-    <select className="w-full p-2 border-[1.5px] rounded-lg text-sm placeholder:text-[#1F4B43] border-[#1F4B43]">
-      <option>Ware House</option>
-      <option>Heavy Manufacturing</option>
-      <option>Light Manufacturing</option>
-      <option>Distribution Warehouse</option>
-      <option>General Warehouse</option>
-      <option>Flex Space</option>
-      <option>Showroom Buildings</option>
-      <option>Research and Development</option>
-      <option>Data Center</option>
-    </select>
-  </div>
+      case "Industrial":
+        return (
+          <>
+            {/* Industrial Type */}
+            <div className="mb-4 text-sm">
+              <label className="block mb-2 text-sm text-gray-500">Industrial Type</label>
+              <select className="w-full p-2 border rounded-lg border-[#1F4B43] text-sm">
+                <option>Warehouse</option>
+                <option>Heavy Manufacturing</option>
+                <option>Light Manufacturing</option>
+                <option>Data Center</option>
+                <option>Research and Development</option>
+              </select>
+            </div>
+          </>
+        );
 
-  {/* Rent/Buy */}
-  <div className="mb-4 w-full">
-    <label className="block mb-2 text-sm text-gray-500">Rent/Buy</label>
-    <select className="w-full p-2 border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]">
-      <option>Buy</option>
-      <option>Rent</option>
-    </select>
-  </div>
+      case "Plot&Land":
+        return (
+          <>
+            {/* Land Type */}
+            <div className="mb-4 text-sm">
+              <label className="block mb-2 text-sm text-gray-500">Land Type</label>
+              <select className="w-full p-2 border rounded-lg border-[#1F4B43] text-sm">
+                <option>Residential Land</option>
+                <option>Agricultural Land</option>
+                <option>Commercial Land</option>
+                <option>Industrial Land</option>
+              </select>
+            </div>
+          </>
+        );
 
-  {/* Sqft/Sqyd */}
-  <div className="mb-4 text-sm w-full sm:max-w-52">
-    <label className="block mb-2 text-sm text-gray-500">Sqft/Sqyd</label>
-    <span className="p-[2px] sm:p-0 flex flex-row justify-center items-center rounded-lg border-[1.5px] border-[#1F4B43]">
-      <input
-        type="number"
-        placeholder="min"
-        className="w-full sm:w-[40%]  p-2  text-sm placeholder:text-[#1F4B43] text-center"
-      />
-      <label className="w-[10%] mx-1 text-sm text-[#1F4B43]">To</label>
-      <input
-        type="number"
-        placeholder="max"
-        className="w-full sm:w-[40%]  p-2  text-sm placeholder:text-[#1F4B43] text-center"
-      />
-    </span>
-  </div>
-
-  {/* Budget */}
-  <div className="mb-4 text-sm w-full sm:max-w-52">
-    <label className="block mb-2 text-sm text-gray-500">Budget</label>
-    <span className="p-[2px] sm:p-0 flex flex-row justify-center items-center rounded-lg border-[1.5px] border-[#1F4B43]">
-      <input
-        type="number"
-        placeholder="min"
-        className="w-full sm:w-[40%]  p-2  text-sm placeholder:text-[#1F4B43] text-center"
-      />
-      <label className="w-[10%] mx-1 text-sm text-[#1F4B43]">To</label>
-      <input
-        type="number"
-        placeholder="max"
-        className="w-full sm:w-[40%]  p-2  text-sm placeholder:text-[#1F4B43] text-center"
-      />
-    </span>
-  </div>
-</div>
-
-            </>
-          );
-        case "Plot&Land":
-          return (
-            <>
-             <div className="mb-4 mx-4 mt-4 text-sm grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 items-center justify-start">
-  {/* Search */}
-  <div className="mb-4 w-full">
-    <label className="block mb-2 text-sm text-gray-500">Search</label>
-    <input
-      type="text"
-      placeholder="Search Area"
-      className="w-full p-2 border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]"
-    />
-  </div>
-
-  {/* Industrial Type */}
-  <div className="mb-4 text-sm">
-    <label className="block mb-2 text-sm text-gray-500">Industrial Type</label>
-    <select className="w-full p-2 border-[1.5px] rounded-lg text-sm placeholder:text-[#1F4B43] border-[#1F4B43]">
-      <option>Ware House</option>
-      <option>Heavy Manufacturing</option>
-      <option>Light Manufacturing</option>
-      <option>Distribution Warehouse</option>
-      <option>General Warehouse</option>
-      <option>Flex Space</option>
-      <option>Showroom Buildings</option>
-      <option>Research and Development</option>
-      <option>Data Center</option>
-    </select>
-  </div>
-
-  {/* Rent/Buy */}
-  <div className="mb-4 w-full">
-    <label className="block mb-2 text-sm text-gray-500">Rent/Buy</label>
-    <select className="w-full p-2 border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]">
-      <option>Buy</option>
-      <option>Rent</option>
-    </select>
-  </div>
-
-  {/* Sqft/Sqyd */}
-  <div className="mb-4 text-sm w-full sm:max-w-52">
-    <label className="block mb-2 text-sm text-gray-500">Sqft/Sqyd</label>
-    <span className="p-[2px] sm:p-0 flex flex-row justify-center items-center rounded-lg border-[1.5px] border-[#1F4B43]">
-      <input
-        type="number"
-        placeholder="min"
-        className="w-full sm:w-[40%]  p-2  text-sm placeholder:text-[#1F4B43] text-center"
-      />
-      <label className="w-[10%] mx-1 text-sm text-[#1F4B43]">To</label>
-      <input
-        type="number"
-        placeholder="max"
-        className="w-full sm:w-[40%]  p-2  text-sm placeholder:text-[#1F4B43] text-center"
-      />
-    </span>
-  </div>
-
-  {/* Budget */}
-  <div className="mb-4 text-sm w-full sm:max-w-52">
-    <label className="block mb-2 text-sm text-gray-500">Budget</label>
-    <span className="p-[2px] sm:p-0 flex flex-row justify-center items-center rounded-lg border-[1.5px] border-[#1F4B43]">
-      <input
-        type="number"
-        placeholder="min"
-        className="w-full sm:w-[40%]  p-2  placeholder:text-[#1F4B43] text-center"
-      />
-      <label className="w-[10%] mx-1 text-sm text-[#1F4B43]">To</label>
-      <input
-        type="number"
-        placeholder="max"
-        className="w-full sm:w-[40%]  p-2  placeholder:text-[#1F4B43] text-center"
-      />
-    </span>
-  </div>
-</div>
-
-            </>
-          );
-          
-        
       default:
         return null;
     }
   };
+
+  return (
+    <div>
+      {/* Tabs */}
+      <div className="flex gap-4 mb-4 mx-auto">
+        {["Residential", "Commercial", "Industrial", "Plot&Land"].map((tab) => (
+          <button
+            key={tab}
+            onClick={() => setActiveTab(tab)}
+            className={`px-4 py-2 border hidden rounded-lg ${activeTab === tab ? "bg-[#1F4B43] text-white" : "bg-gray-200 text-gray-700"}`}
+          >
+            {tab}
+          </button>
+        ))}
+      </div>
+
+      {/* Filter Button */}
+      <button
+        onClick={openModal}
+        className="px-4 py-2 bg-[#1F4B43] text-white rounded-lg"
+      >
+        Filter
+      </button>
+
+      {/* Filter Modal */}
+      {isModalOpen && (
+        <div
+          className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50"
+          onClick={closeModal}
+        >
+          <div
+            className="bg-white rounded-lg p-6 w-11/12 md:w-3/4 lg:w-1/2 overflow-y-auto max-h-[90vh]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button
+              onClick={closeModal}
+              className="text-gray-500 hover:text-gray-800 float-right text-xl font-bold"
+            >
+              &times;
+            </button>
+
+            <h2 className="text-lg font-semibold mb-4 text-gray-700">Filters</h2>
+
+            {/* Dynamic Filters */}
+            <div className="text-sm grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {renderFilters()}
+            </div>
+
+            {/* Apply Filters Button */}
+            <button
+              onClick={closeModal}
+              className="mt-4 px-4 py-2 bg-[#1F4B43] text-white rounded-lg"
+            >
+              Apply Filters
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
 
   return (
     <>

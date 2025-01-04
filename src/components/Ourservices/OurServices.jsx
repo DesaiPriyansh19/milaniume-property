@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import img from '../../assets/AboutUS.webp';
+import img1 from '../../assets/pexels-rdne-8292896.jpg'
+import img2 from '../../assets/pexels-kindelmedia-7579047.jpg'
+import img3 from '../../assets/interiordesign3.jpg'
 
 const services = [
   {
@@ -12,8 +15,8 @@ const services = [
       'Market trend analysis and investment guidance',
       'Property documentation and verification services'
     ],
-    link: '/ourservices/property',
-    image:img
+    link: '/properties',
+    image:img2
   },
   {
     name: 'Loan & Finance',
@@ -25,7 +28,7 @@ const services = [
       'Guidance through paperwork and bank formalities'
     ],
     link: '/ourservices/loan',
-    image:img },
+    image:img1 },
   {
     name: 'Interior Design',
     description: 'Revamp your space with elegant and functional designs, curated by industry-leading experts. Our team specializes in modern, classic, and contemporary interiors, ensuring your home or office reflects your unique style and personality. We provide 3D visualization, material selection, and budget planning for a smooth experience.',
@@ -36,7 +39,7 @@ const services = [
       'End-to-end execution from concept to completion'
     ],
     link: '/ourservices/interior',
-    image:img
+    image:img3
   },
   
 ];
@@ -52,10 +55,10 @@ const OurServices = () => {
         <div className="absolute inset-0  "></div>
         <div className="relative z-10 flex flex-col items-center justify-center text-center text-white h-full px-6 md:px-12"
           style={{ textShadow: "2px 2px 6px rgba(0, 0, 0, 0.7)" }}>
-          <h2 className="text-3xl md:text-5xl font-bold">Our Services</h2>
-          <p className="hidden md:block mt-4 text-lg lg:text-xl px-6 lg:px-40 font-light">Discover our range of real estate services, designed to provide you with an effortless and rewarding property experience.</p>
+          <h2 className="text-3xl md:text-5xl font-normal">Our Services</h2>
+          <p className="hidden md:block mt-4 text- lg:text-xl px-6 lg:px-40 font-light">Discover our range of real estate services, designed to provide you with an effortless and rewarding property experience.</p>
           <Link to={'/'}>
-            <button className="mt-6 px-6 py-3 bg-[#E7C873] text-black rounded-lg font-medium shadow-md transition-transform transform hover:scale-110">Back to Home →</button>
+            <button className="mt-6 p-6 py-2 text-sm bg-[#E7C873] text-black rounded-lg font-normal shadow-md transition-transform transform hover:scale-110">Back to Home →</button>
           </Link>
         </div>
       </div>
@@ -76,7 +79,7 @@ const OurServices = () => {
                   <li key={i} className="text-lg py-1">{detail}</li>
                 ))}
               </ul>
-              <Link to={service.link} className="mt-8 inline-block px-8 py-3 bg-[#E7C873] text-[#1F4B43] font-semibold rounded-lg shadow-md transition-transform transform hover:scale-110">Learn More</Link>
+              <Link to={service.link} className="mt-8 inline-block px-6 py-2 bg-[#E7C873] text-[#1F4B43] font-normal rounded-lg shadow-md transition-transform transform hover:scale-110">Learn More</Link>
             </div>
           </div>
         </section>

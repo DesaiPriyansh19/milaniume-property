@@ -185,8 +185,8 @@ import React, { useState,useEffect } from "react";
             <div className="mb-6">
               <h3 className="text-lg font-light mb-2">Area</h3>
               <input
-                type="number"
-                placeholder="Enter area in sqfts"
+                type="text"
+                placeholder="Enter area "
                 className="block w-full mt-1 p-2 border rounded-md"
               />
             </div>

@@ -4,11 +4,6 @@ import useApiData from "../../../../hooks/useApiData";
 export default function EnquiresPage() {
   const baseUrl = "https://milaniumepropertybackend.vercel.app/api/enquiry";
   const { data } = useApiData(baseUrl);
-  const [expandedIndex, setExpandedIndex] = useState(null);
-
-  const handleToggle = (id) => {
-    setExpandedIndex(expandedIndex === id ? null : id);
-  };
 
   return (
     <div className="text-white mx-auto p-4">
@@ -23,7 +18,6 @@ export default function EnquiresPage() {
           <div
             key={index}
             className={`bg-gray-900 relative p-4 transition-transform duration-300 cursor-pointer rounded-xl shadow-lg hover:shadow-xl transform hover:scale-[0.98]`}
-            onClick={() => handleToggle(person._id)}
           >
             <div
               style={{

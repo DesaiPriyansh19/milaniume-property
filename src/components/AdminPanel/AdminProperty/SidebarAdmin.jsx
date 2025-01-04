@@ -12,6 +12,8 @@ export default function SidebarAdmin() {
     { name: "Contact Information", icon: <HomeSvg />, path: "/contact-info" },
     { name: "Enquiries", icon: <HomeSvg />, path: "/enquiries" },
     { name: "Add Property", icon: <HomeSvg />, path: "/add-property" },
+    { name: "User Post", icon: <HomeSvg />, path: "/user-post" },
+    { name: "Require Post", icon: <HomeSvg />, path: "/require-post" },
     { name: "Bar Chart", icon: <HomeSvg />, path: "/bar-chart" },
     { name: "Pie Chart", icon: <HomeSvg />, path: "/pie-chart" },
     { name: "Line Chart", icon: <HomeSvg />, path: "/line-chart" },

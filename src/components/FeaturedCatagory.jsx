@@ -32,16 +32,17 @@ function FeaturedCatagory() {
 
     <Link to={'/properties'}>
     <div data-aos-duration="1400" data-aos-delay="100" data-aos="flip-up">
-    <div className='bg-gray-100 hover:shadow-uniqshadow cursor-pointer rounded-2xl py-3 text-center flex h-[130px]
+    <div className='bg-gray-100 hover:shadow-2xl cursor-pointer rounded-2xl py-3 text-center flex h-[130px]
          md:w-[120px] lg:w-[150px] xl:h-[170px] xl:w-[160px] flex-col justify-center items-center'>
 
     <span className=''><HomeLogo/></span>
 <p className='text-[.8rem] font-semibold'>Residantial</p>
 <p className='text-[.7rem]'>2 properties</p>
 </div></div></Link>
+
 <Link to={'/properties'}>
 <div data-aos-duration="1400" data-aos-delay="250" data-aos="flip-up" 
-className='bg-gray-100 hover:shadow-uniqshadow cursor-pointer rounded-2xl py-3 text-center flex h-[130px]
+className='bg-gray-100 hover:shadow-2xl cursor-pointer rounded-2xl py-3 text-center flex h-[130px]
          md:w-[120px] lg:w-[150px] xl:h-[170px] xl:w-[160px]  flex-col justify-center items-center'> 
     <span className=''><HomeLogo3/></span>
 <p className='text-[.8rem] font-semibold'>Commercial Property</p>
@@ -49,7 +50,7 @@ className='bg-gray-100 hover:shadow-uniqshadow cursor-pointer rounded-2xl py-3 t
 </div></Link>
 <Link to={'/properties'}>
 <div data-aos-duration="1400" data-aos-delay="350" data-aos="flip-up"
- className='bg-gray-100 hover:shadow-uniqshadow cursor-pointer rounded-2xl py-3 text-center flex h-[130px]
+ className='bg-gray-100 hover:shadow-2xl cursor-pointer rounded-2xl py-3 text-center flex h-[130px]
          md:w-[120px] lg:w-[150px] xl:h-[170px] xl:w-[160px]  flex-col justify-center items-center'> 
     <span className=''><HomeLogo4/></span>
 <p className='text-[.8rem] font-semibold'>Industrial Property</p>
@@ -57,7 +58,7 @@ className='bg-gray-100 hover:shadow-uniqshadow cursor-pointer rounded-2xl py-3 t
 </div></Link>
 <Link to={'/properties'}>
 <div data-aos-duration="1400" data-aos-delay="650" data-aos="flip-up"
- className='bg-gray-100 hover:shadow-uniqshadow cursor-pointer rounded-2xl py-3 text-center flex h-[130px]
+ className='bg-gray-100 hover:shadow-2xl cursor-pointer rounded-2xl py-3 text-center flex h-[130px]
          md:w-[120px] lg:w-[150px] xl:h-[170px] xl:w-[160px]  flex-col justify-center items-center'> 
     <span className='flex justify-center items-center'><img src={Agriculture} className=' w-[40%]'/></span>
 <p className='text-[.8rem] font-semibold'>Agriculture & Project Land</p>
@@ -65,7 +66,7 @@ className='bg-gray-100 hover:shadow-uniqshadow cursor-pointer rounded-2xl py-3 t
 </div></Link>
 <Link to={'/ourservices/loan'}>
 <div data-aos-duration="1400" data-aos-delay="750" data-aos="flip-up"
- className='bg-gray-100 hover:shadow-uniqshadow cursor-pointer rounded-2xl py-3 text-center flex h-[130px]
+ className='bg-gray-100 hover:shadow-2xl cursor-pointer rounded-2xl py-3 text-center flex h-[130px]
          md:w-[120px] lg:w-[150px] xl:h-[170px] xl:w-[160px]  flex-col justify-center items-center'> 
  <span className='flex justify-center items-center'><img src={Loan} className=' w-[40%]'/></span>
 <p className='text-[.8rem] font-semibold'>Loan and Finance</p>
@@ -73,7 +74,7 @@ className='bg-gray-100 hover:shadow-uniqshadow cursor-pointer rounded-2xl py-3 t
 </div></Link>
 <Link to={'/ourservices/interior'}>
 <div data-aos-duration="1400" data-aos-delay="950" data-aos="flip-up"
- className='bg-gray-100 hover:shadow-uniqshadow cursor-pointer rounded-2xl py-3 text-center flex h-[130px]
+ className='bg-gray-100 hover:shadow-2xl cursor-pointer rounded-2xl py-3 text-center flex h-[130px]
          md:w-[120px] lg:w-[150px] xl:h-[170px] xl:w-[160px]  flex-col justify-center items-center'> 
    <span className='flex justify-center items-center'><img src={Intirial} className=' w-[40%]'/></span>
 <p className='text-[.8rem] font-semibold px-0 '>Interior Design</p>

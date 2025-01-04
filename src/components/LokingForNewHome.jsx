@@ -51,7 +51,7 @@ function LokingForNewHome() {
 </div>
 
 
-<div className='w-full grid grid-cols-1 md:flex justify-evenly items-center px-[10%] md:px-[10%]  gap-2'>
+<div className='w-[90%] rounded-xl`  mx-auto grid grid-cols-1  py-10 md:flex justify-evenly items-center px-[10%] md:px-[10%]  gap-2'>
 <Link to={'/yourrequirments'}>  
    <button data-aos-duration="500" data-aos-delay="100" data-aos="fade-in" 
 className=' w-full md:w-full px-5 hover:bg-[#e8f4f4]

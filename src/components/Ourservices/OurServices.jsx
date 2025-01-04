@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import img from '../../assets/AboutUS.webp';
-import img1 from '../../assets/pexels-rdne-8292896.jpg'
+import img1 from '../../assets/Loan&Finance2.jpg'
 import img2 from '../../assets/pexels-kindelmedia-7579047.jpg'
-import img3 from '../../assets/interiordesign3.jpg'
+import img3 from '../../assets/Interior design/inerior-image5.jpg'
 
 const services = [
   {
-    name: 'Property Services',
+    name: 'Real Estate Consultant',
     description: 'Buy, sell, and rent residential, commercial, and industrial properties with expert assistance, market insights, and legal support. Our dedicated agents ensure a seamless experience from property selection to final transaction. We provide property valuation, legal documentation support, and negotiation services to help you get the best deal.',
     details: [
       'Comprehensive property search and listing',
@@ -20,23 +20,29 @@ const services = [
   },
   {
     name: 'Loan & Finance',
-    description: 'Secure the best mortgage rates and customized financial plans tailored to your real estate investment needs. We provide expert financial guidance, loan approvals, and refinancing options to help you make the best decision. Our advisors help navigate bank procedures and ensure seamless loan disbursal.',
+    description: 'Secure the best mortgage rates and customized financial plans tailored to your real estate investment needs.',
     details: [
-      'Assistance with home and commercial property loans',
-      'Customized financial plans based on your needs',
-      'Loan refinancing and interest rate negotiation',
-      'Guidance through paperwork and bank formalities'
+      'Personal loan',
+      'Home loan',
+      'Loan against Property',
+      'Business loan',
+      'vehical loan',
+      'Project loan',
+
     ],
     link: '/ourservices/loan',
     image:img1 },
   {
     name: 'Interior Design',
-    description: 'Revamp your space with elegant and functional designs, curated by industry-leading experts. Our team specializes in modern, classic, and contemporary interiors, ensuring your home or office reflects your unique style and personality. We provide 3D visualization, material selection, and budget planning for a smooth experience.',
+    description: 'Revamp your space with elegant and functional designs, curated by industry-leading experts.',
     details: [
-      'Personalized interior design consultation',
-      '3D rendering and visualization before execution',
-      'Material sourcing and vendor management',
-      'End-to-end execution from concept to completion'
+      'Interior designs (3D Customised)',
+      'Civil Work',
+      'All Electric Work',
+      'Steel Fabrication',
+        'Glass & Aluminium Work',
+        'Paint & Polish Work',
+
     ],
     link: '/ourservices/interior',
     image:img3

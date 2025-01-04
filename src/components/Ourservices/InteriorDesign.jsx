@@ -58,14 +58,17 @@ const InteriorDesign = () => {
       </div>
 
       {/* Content Section */}
-      <section className="py-16 bg-white text-center">
+      <section className="py-16  text-center mx-auto bg-gray-100 rounded-lg w-[80%]">
         <h2 className="text-3xl font-bold text-[#247264]">Our Interior Design Services</h2>
         <p className="mt-4 text-gray-600">We specialize in both residential and commercial interior design:</p>
         <ul className="mt-6 text-center list-disc list-inside text-gray-600">
-          <li>Residential Interiors</li>
-          <li>Commercial Interiors</li>
-          <li>Office Spaces</li>
-          <li>Turnkey Projects</li>
+          <li>Interior designs (3D Customised)</li>
+          <li>Civil Work</li>
+          <li>All Electric Work</li>
+          <li>Steel Fabrication</li>
+          <li>Glass & Aluminium Work</li>
+          <li>Paint & Polish Work</li>
+
         </ul>
       </section>
 

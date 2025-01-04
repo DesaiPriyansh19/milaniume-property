@@ -47,7 +47,7 @@ const Footer = () => {
                 <li className="flex items-center">
                 <span className="mr-2">📞</span>
                 <a href="tel:9898992554" className="hover:text-gray-900">
-               Mayur BhaiDesai:9898992554 
+               MayurBhai Desai:9898992554 
 
                 </a>
               </li>

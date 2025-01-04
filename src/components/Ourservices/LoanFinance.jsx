@@ -39,10 +39,13 @@ const LoanFinance = () => {
             We provide tailored loan solutions for your property goals:
           </p>
           <ul className="mt-6 list-disc list-inside text-gray-600">
-            <li>Home Loans</li>
-            <li>Business Property Loans</li>
-            <li>Land Purchase Loans</li>
-            <li>Construction Finance</li>
+            <li>Personal loan</li>
+            <li>Home loan</li>
+            <li>Loan against Property</li>
+            <li>Business loan</li>
+            <li>vehical loan</li>
+            <li>Project loan</li>
+            
           </ul>
         </div>
       </section>

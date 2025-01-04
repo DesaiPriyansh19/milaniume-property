@@ -108,7 +108,7 @@ const Navbar = ({ handlePopupOpen }) => {
               <Call />
             </a>
           </div>
-          <span className="w-9 h-9 flex items-center justify-start">
+          <span className="w-9 h-9 md:hidden flex items-center justify-start">
                 <MyProfileLogo />
               </span>
           {/* Hamburger menu for small devices */}

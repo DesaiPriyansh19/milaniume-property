@@ -98,7 +98,7 @@ const QuickEnquiry = () => {
           </div>
         </div>
         {/* Right Section - Office Location with Map */}
-        <div className="w-full md:w-1/2 p-4">
+        <div className="w-full mx-auto md:w-1/3 p-4">
           <h2 className="text-2xl font-semibold mb-4">Quick Enquiry</h2>
 
           <form className="space-y-4">

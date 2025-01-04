@@ -1,23 +1,27 @@
 import React from "react";
-
+import logo from "../../src/assets/logo final PNG.png";
 const Footer = () => {
   return (
     <footer className="bg-gray-50 mt-10 text-gray-black border-t border-gray-200">
-      <div className="container mx-auto px-6 lg:px-16 py-12">
+      <div className="container mx-auto px-6 lg:px-16 pt-12">
         {/* Grid Section */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* About Us */}
           <div>
-            <h3 className="text-xl font-bold mb-4">About Us</h3>
-            <p className="text-sm leading-relaxed text-gray-600">
-              At Real Estate Hub, we connect buyers and sellers to create seamless transactions. Our mission is to help you find your dream property, with a focus on trust and transparency.
+             <img
+                     src={logo}
+                     alt="Logo 1"
+                     className=" w-[100px] mx-auto sm:w-[90px] md:w-[100px] xl:w-[90px] mb-3 "
+                   />
+            <p className="text-[.7rem] leading-relaxed text-gray-600">
+              At Millennium Properties, we connect buyers and sellers to create seamless transactions. Our mission is to help you find your dream property, with a focus on trust and transparency.
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
             <h3 className="text-xl font-bold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
+            <ul className="sm:space-y-2 flex items-center justify-between sm:justify-center text-start sm:grid">
               {["Home", "Properties", "Agents", "Blog", "Contact Us"].map((link, index) => (
                 <li key={index}>
                   <a

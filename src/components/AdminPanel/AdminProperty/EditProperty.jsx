@@ -99,7 +99,13 @@ export default function EditProperty({
     }
 
     console.log(filteredData);
-    await updateById(editData.id, filteredData);
+    try {
+      await updateById(editData.id, filteredData);
+      console.log("Data updated successfully.");
+      handleEdit("View");
+    } catch (error) {
+      console.error("Error updating data:", error); // Debugging error
+    }
 
     handleEdit("View");
   };

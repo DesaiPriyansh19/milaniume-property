@@ -7,7 +7,7 @@ import useApiData from "../../hooks/useApiData";
 import InputField from "../../utils/InputFields";
 function YourRequirements() {
   const [activeTab, setActiveTab] = useState("Residential");
-  const baseUrl = "https://milaniumepropertybackend.vercel.app/api/property";
+  const baseUrl = "https://milaniumepropertybackend.vercel.app/api/require";
   const { addNew } = useApiData(baseUrl);
 
   const [formData, setFormData] = useState({
@@ -15,8 +15,16 @@ function YourRequirements() {
     RequiredPersonName: "",
     RequiredPersonPhone: "",
     RequiredPersonEmail: "",
+    RequiredAreaSqft: {
+      max: "",
+      min: "",
+    },
+    RequiredBudget: {
+      max: "",
+      min: "",
+    },
     RequiredPropertyDetails: {
-      RequiredPropertyType: "",
+      RequiredPropertyType: "Residential",
       RequiredAreaSqft: { min: "", max: "" },
       RequiredBudget: { min: "", max: "" },
       RequiredPropertySellOrRent: "",
@@ -44,50 +52,50 @@ function YourRequirements() {
       Other: false,
     },
     CommercialAvailability: {
-      BossCabin: false,
-      ManagerCabin: false,
-      WorkStation: false,
+      "Boss Cabin": false,
+      "Manager Cabin": false,
+      "Work Station": false,
       Pantry: false,
       Reception: false,
-      WaitingArea: false,
-      CarParking: false,
+      "Waiting Area": false,
+      "Car Parking": false,
     },
     AllIndustrial: {
-      WareHouse: false,
-      HeavyManufacturing: false,
-      LightManufacturing: false,
-      DistributionWarehouse: false,
-      GeneralWarehouse: false,
-      FlexSpace: false,
-      ShowroomBuildings: false,
-      ResearchAndDevelopment: false,
-      DataCenter: false,
+      "Ware House": false,
+      "Heavy Manufacturing": false,
+      "Light Manufacturing": false,
+      "Distribution Warehouse": false,
+      "General Warehouse": false,
+      "Flex Space": false,
+      "Showroom Buildings": false,
+      "Research And Development": false,
+      "Data Center": false,
     },
     AllPlotAndLand: {
-      ResidentialPlot: false,
-      CommercialPlot: false,
-      IndustrialPlot: false,
-      AgricultureLand: false,
-      NonAgricultureLand: false,
-      ProjectLand: false,
+      "Residential Plot": false,
+      "Commercial Plot": false,
+      "Industrial Plot": false,
+      "Agriculture Land": false,
+      "Non - Agriculture Land": false,
+      "Project Land": false,
     },
     Condition: {
-      BuildingSite: false,
-      StructuralFrameAndBuildingEnvelope: false,
-      SemiFurnished: false,
+      "Building Site": false,
+      "Structural Frame & Building Envelope": false,
+      "Semi Furnished": false,
       Roofing: false,
       Plumbing: false,
       Heating: false,
-      AirConditioningAndVentilation: false,
+      "Air Conditioning & Ventilation": false,
       Electrical: false,
-      VerticalTransportation: false,
-      LifeSafetyFireProtection: false,
-      InteriorElements: false,
-      FullyFurnished: false,
+      "Vertical Transportation (Elevators & Escalators)": false,
+      "Life Safety / Fire Protection": false,
+      "Interior Elements": false,
+      "Fully Furnished": false,
       Furnished: false,
-      SemiFurnished: false,
-      KitchenFix: false,
-      FixFurnished: false,
+      "Semi Furnished": false,
+      "Kitchen Fix": false,
+      "Fix Furnished": false,
       Unfurnished: false,
     },
     ResidentialAvailability: {
@@ -100,18 +108,18 @@ function YourRequirements() {
       "Above 6Bhk": false,
     },
     ResidentAvailableFor: {
-      forFamily: false,
-      forExicutive: false,
-      forBechlore: false,
+      "FOR FAMILY": false,
+      "FOR EXICUTIVE": false,
+      "FOR BECHLORE": false,
     },
     Facing: {
       East: false,
       North: false,
-      NorthEast: false,
-      NorthWest: false,
+      "North-East": false,
+      "North-West": false,
       South: false,
-      SouthEast: false,
-      SouthWest: false,
+      "South-East": false,
+      "South-West": false,
       West: false,
     },
   });
@@ -174,7 +182,9 @@ function YourRequirements() {
     const filteredData = filterDefaultValues(formData);
 
     await addNew(filteredData);
+    console.log("Submmited Data-", filteredData);
   };
+
   useEffect(() => {
     AOS.init({ once: true }); // Initialize AOS
   }, []);
@@ -208,7 +218,14 @@ function YourRequirements() {
                   "Farm House",
                 ].map((type) => (
                   <label key={type} className="w-1/2 p-2">
-                    <input type="checkbox" className="mr-2" /> {type}
+                    <input
+                      name={`AllResidential.${type}`}
+                      value={formData.AllResidential[type]}
+                      onClick={handleInputChange}
+                      type="checkbox"
+                      className="mr-2"
+                    />{" "}
+                    {type}
                   </label>
                 ))}
               </div>
@@ -227,12 +244,19 @@ function YourRequirements() {
                   "Fully Furnished",
                   "Furnished",
                   "Semi Furnished",
-                  "Kitchen-Fix",
-                  "Fix-Furnished",
+                  "Kitchen Fix",
+                  "Fix Furnished",
                   "Unfurnished",
                 ].map((condition) => (
                   <label key={condition} className="w-1/2 p-2">
-                    <input type="checkbox" className="mr-2" /> {condition}
+                    <input
+                      name={`Condition.${condition}`}
+                      value={formData.Condition[condition]}
+                      onClick={handleInputChange}
+                      type="checkbox"
+                      className="mr-2"
+                    />{" "}
+                    {condition}
                   </label>
                 ))}
               </div>
@@ -250,130 +274,27 @@ function YourRequirements() {
               </h3>
               <div className="flex flex-wrap">
                 {[
-                  "1 BHK",
-                  "2 BHK",
-                  "3 BHK",
-                  "4 BHK",
-                  "5 BHK",
-                  "6 BHK",
-                  "Above 6 BHK",
+                  "1 Bhk",
+                  "2 Bhk",
+                  "3 Bhk",
+                  "4 Bhk",
+                  "5 Bhk",
+                  "6 Bhk",
+                  "Above 6Bhk",
                 ].map((bhk) => (
                   <label key={bhk} className="w-1/2 p-2">
-                    <input type="checkbox" className="mr-2" /> {bhk}
+                    <input
+                      name={`ResidentialAvailability.${bhk}`}
+                      value={formData.ResidentialAvailability[bhk]}
+                      onClick={handleInputChange}
+                      type="checkbox"
+                      className="mr-2"
+                    />{" "}
+                    {bhk}
                   </label>
                 ))}
               </div>
             </div>
-            {/* Facing */}
-            <div
-              data-aos="fade-in"
-              data-aos-duration="1000"
-              data-aos-delay="500"
-              className="mb-6"
-            >
-              <h3 className="text-lg font-light mb-2">Available For</h3>
-              <div className="flex flex-wrap">
-                {["FOR FAMILY", "FOR EXICUTIVE", "FOR BECHLORE"].map(
-                  (direction) => (
-                    <label key={direction} className="w-1/2 p-2">
-                      <input type="checkbox" className="mr-2" /> {direction}
-                    </label>
-                  )
-                )}
-              </div>
-            </div>
-
-            {/* Facing */}
-            <div
-              data-aos="fade-in"
-              data-aos-duration="1000"
-              data-aos-delay="500"
-              className="mb-6"
-            >
-              <h3 className="text-lg font-light mb-2">Facing</h3>
-              <div className="flex flex-wrap">
-                {[
-                  "East",
-                  "North",
-                  "North – East",
-                  "North – West",
-                  "South",
-                  "South-East",
-                  "South-West",
-                  "West",
-                ].map((direction) => (
-                  <label key={direction} className="w-1/2 p-2">
-                    <input type="checkbox" className="mr-2" /> {direction}
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            {/* Area - Min to Max */}
-            <div
-              data-aos="fade-in"
-              data-aos-duration="1000"
-              data-aos-delay="500"
-              className="mb-6"
-            >
-              <h3 className="text-lg font-light mb-2">
-                Area (Sqft) - Min to Max
-              </h3>
-              <div className="flex gap-4">
-                <input
-                  type="number"
-                  placeholder="Min"
-                  className="block w-1/2 p-2 border rounded-md"
-                />
-                <input
-                  type="number"
-                  placeholder="Max"
-                  className="block w-1/2 p-2 border rounded-md"
-                />
-              </div>
-            </div>
-
-            {/* Budget - Min to Max */}
-            <div
-              data-aos="fade-in"
-              data-aos-duration="1000"
-              data-aos-delay="500"
-              className="mb-6"
-            >
-              <h3 className="text-lg font-light mb-2">Budget - Min to Max</h3>
-              <div className="flex gap-4">
-                <input
-                  type="number"
-                  placeholder="Min"
-                  className="block w-1/2 p-2 border rounded-md"
-                />
-                <input
-                  type="number"
-                  placeholder="Max"
-                  className="block w-1/2 p-2 border rounded-md"
-                />
-              </div>
-            </div>
-
-            {/* Description */}
-            <div
-              data-aos="fade-in"
-              data-aos-duration="1000"
-              data-aos-delay="500"
-              className="mb-6"
-            >
-              <h3 className="text-lg font-light mb-2">Description</h3>
-              <textarea
-                placeholder="Enter a brief description"
-                className="block w-full p-2 border rounded-md"
-                rows="4"
-              ></textarea>
-            </div>
-
-            {/* Submit Button */}
-            <button className="w-full  bg-[#1F4B43] text-sm  text-white p-2 rounded-md">
-              Submit
-            </button>
           </div>
         );
 
@@ -386,7 +307,7 @@ function YourRequirements() {
               <div className="flex flex-wrap">
                 {[
                   "Office",
-                  " Shop",
+                  "Shop",
                   "Showroom",
                   "Co Working Space",
                   "Ready to Move Offices",
@@ -395,7 +316,14 @@ function YourRequirements() {
                   "Other",
                 ].map((type) => (
                   <label key={type} className="w-1/2 p-2">
-                    <input type="checkbox" className="mr-2" /> {type}
+                    <input
+                      name={`AllCommercial.${type}`}
+                      value={formData.AllCommercial[type]}
+                      onClick={handleInputChange}
+                      type="checkbox"
+                      className="mr-2"
+                    />{" "}
+                    {type}
                   </label>
                 ))}
               </div>
@@ -409,12 +337,18 @@ function YourRequirements() {
                   "Fully Furnished",
                   "Furnished",
                   "Semi Furnished",
-
-                  "Fix-Furnished",
+                  "Fix Furnished",
                   "Unfurnished",
                 ].map((condition) => (
                   <label key={condition} className="w-1/2 p-2">
-                    <input type="checkbox" className="mr-2" /> {condition}
+                    <input
+                      name={`Condition.${condition}`}
+                      value={formData.Condition[condition]}
+                      onClick={handleInputChange}
+                      type="checkbox"
+                      className="mr-2"
+                    />{" "}
+                    {condition}
                   </label>
                 ))}
               </div>
@@ -427,90 +361,27 @@ function YourRequirements() {
               </h3>
               <div className="flex flex-wrap">
                 {[
-                  " Boss Cabin",
+                  "Boss Cabin",
                   "Manager Cabin",
-                  " Work Station",
+                  "Work Station",
                   "Pantry",
                   "Reception",
                   "Waiting Area",
                   "Car parking",
                 ].map((bhk) => (
                   <label key={bhk} className="w-1/2 p-2">
-                    <input type="checkbox" className="mr-2" /> {bhk}
+                    <input
+                      name={`CommercialAvailability.${bhk}`}
+                      value={formData.CommercialAvailability[bhk]}
+                      onClick={handleInputChange}
+                      type="checkbox"
+                      className="mr-2"
+                    />{" "}
+                    {bhk}
                   </label>
                 ))}
               </div>
             </div>
-
-            {/* Facing */}
-            <div className="mb-6">
-              <h3 className="text-xl font-light mb-2">Facing</h3>
-              <div className="flex flex-wrap">
-                {[
-                  "East",
-                  "North",
-                  "North – East",
-                  "North – West",
-                  "South",
-                  "South-East",
-                  "South-West",
-                  "West",
-                ].map((direction) => (
-                  <label key={direction} className="w-1/2 p-2">
-                    <input type="checkbox" className="mr-2" /> {direction}
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            {/* Area - Min to Max */}
-            <div className="mb-6">
-              <h3 className="text-xl font-light mb-2">Area (Sqft) </h3>
-              <div className="flex gap-4">
-                <input
-                  type="number"
-                  placeholder="Min"
-                  className="block w-1/2 p-2 border rounded-md"
-                />
-                <input
-                  type="number"
-                  placeholder="Max"
-                  className="block w-1/2 p-2 border rounded-md"
-                />
-              </div>
-            </div>
-
-            {/* Budget - Min to Max */}
-            <div className="mb-6">
-              <h3 className="text-xl font-light mb-2">Budget</h3>
-              <div className="flex gap-4">
-                <input
-                  type="number"
-                  placeholder="Min"
-                  className="block w-1/2 p-2 border rounded-md"
-                />
-                <input
-                  type="number"
-                  placeholder="Max"
-                  className="block w-1/2 p-2 border rounded-md"
-                />
-              </div>
-            </div>
-
-            {/* Description */}
-            <div className="mb-6">
-              <h3 className="text-xl font-light mb-2">Description</h3>
-              <textarea
-                placeholder="Enter a brief description"
-                className="block w-full p-2 border rounded-md"
-                rows="4"
-              ></textarea>
-            </div>
-
-            {/* Submit Button */}
-            <button className="w-full  bg-[#1F4B43] text-sm  text-white p-2 rounded-md">
-              Submit
-            </button>
           </div>
         );
       case "Industrial":
@@ -533,7 +404,14 @@ function YourRequirements() {
                     "Data Center",
                   ].map((type) => (
                     <label key={type} className="w-1/2 p-2">
-                      <input type="checkbox" className="mr-2" /> {type}
+                      <input
+                        name={`AllIndustrial.${type}`}
+                        value={formData.AllIndustrial[type]}
+                        onClick={handleInputChange}
+                        type="checkbox"
+                        className="mr-2"
+                      />{" "}
+                      {type}
                     </label>
                   ))}
                 </div>
@@ -547,7 +425,7 @@ function YourRequirements() {
                     "Building Site",
                     "Structural Frame & Building Envelope",
                     "Semi Furnished",
-                    " Roofing",
+                    "Roofing",
                     "Plumbing",
                     "Heating",
                     "Air Conditioning & Ventilation",
@@ -557,7 +435,14 @@ function YourRequirements() {
                     "Interior Elements",
                   ].map((condition) => (
                     <label key={condition} className="w-1/2 p-2">
-                      <input type="checkbox" className="mr-2" /> {condition}
+                      <input
+                        name={`Condition.${condition}`}
+                        value={formData.Condition[condition]}
+                        onClick={handleInputChange}
+                        type="checkbox"
+                        className="mr-2"
+                      />{" "}
+                      {condition}
                     </label>
                   ))}
                 </div>
@@ -570,90 +455,27 @@ function YourRequirements() {
                 </h3>
                 <div className="flex flex-wrap">
                   {[
-                    " Boss Cabin",
+                    "Boss Cabin",
                     "Manager Cabin",
-                    " Work Station",
+                    "Work Station",
                     "Pantry",
                     "Reception",
                     "Waiting Area",
                     "Car parking",
                   ].map((bhk) => (
                     <label key={bhk} className="w-1/2 p-2">
-                      <input type="checkbox" className="mr-2" /> {bhk}
+                      <input
+                        name={`CommercialAvailability.${bhk}`}
+                        value={formData.CommercialAvailability[bhk]}
+                        onClick={handleInputChange}
+                        type="checkbox"
+                        className="mr-2"
+                      />{" "}
+                      {bhk}
                     </label>
                   ))}
                 </div>
               </div>
-
-              {/* Facing */}
-              <div className="mb-6">
-                <h3 className="text-xl font-light mb-2">Facing</h3>
-                <div className="flex flex-wrap">
-                  {[
-                    "East",
-                    "North",
-                    "North – East",
-                    "North – West",
-                    "South",
-                    "South-East",
-                    "South-West",
-                    "West",
-                  ].map((direction) => (
-                    <label key={direction} className="w-1/2 p-2">
-                      <input type="checkbox" className="mr-2" /> {direction}
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              {/* Area - Min to Max */}
-              <div className="mb-6">
-                <h3 className="text-xl font-light mb-2">Area (Sqft) </h3>
-                <div className="flex gap-4">
-                  <input
-                    type="number"
-                    placeholder="Min"
-                    className="block w-1/2 p-2 border rounded-md"
-                  />
-                  <input
-                    type="number"
-                    placeholder="Max"
-                    className="block w-1/2 p-2 border rounded-md"
-                  />
-                </div>
-              </div>
-
-              {/* Budget - Min to Max */}
-              <div className="mb-6">
-                <h3 className="text-xl font-light mb-2">Budget</h3>
-                <div className="flex gap-4">
-                  <input
-                    type="number"
-                    placeholder="Min"
-                    className="block w-1/2 p-2 border rounded-md"
-                  />
-                  <input
-                    type="number"
-                    placeholder="Max"
-                    className="block w-1/2 p-2 border rounded-md"
-                  />
-                </div>
-              </div>
-
-              {/* Description */}
-              <div className="mb-6">
-                <h3 className="text-xl font-light mb-2">Description</h3>
-                <textarea
-                  placeholder="Enter a brief description"
-                  className="block w-full p-2 border rounded-md"
-                  rows="4"
-                ></textarea>
-              </div>
-
-              {/* Submit Button */}
-              <button className="w-full  bg-[#1F4B43] text-sm  text-white p-2 rounded-md">
-                Submit
-              </button>
             </div>
           </>
         );
@@ -670,85 +492,22 @@ function YourRequirements() {
                     "Commercial Plot",
                     "Industrial Plot",
                     "Agriculture Land",
-                    "Non – Agriculture Land",
+                    "Non - Agriculture Land",
                     "Project Land",
                   ].map((type) => (
                     <label key={type} className="w-1/2 p-2">
-                      <input type="checkbox" className="mr-2" /> {type}
+                      <input
+                        name={`AllPlotAndLand.${type}`}
+                        value={formData.AllPlotAndLand[type]}
+                        onClick={handleInputChange}
+                        type="checkbox"
+                        className="mr-2"
+                      />{" "}
+                      {type}
                     </label>
                   ))}
                 </div>
               </div>
-
-              {/* Facing */}
-              <div className="mb-6">
-                <h3 className="text-xl font-light mb-2">Facing</h3>
-                <div className="flex flex-wrap">
-                  {[
-                    "East",
-                    "North",
-                    "North – East",
-                    "North – West",
-                    "South",
-                    "South-East",
-                    "South-West",
-                    "West",
-                  ].map((direction) => (
-                    <label key={direction} className="w-1/2 p-2">
-                      <input type="checkbox" className="mr-2" /> {direction}
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              {/* Area - Min to Max */}
-              <div className="mb-6">
-                <h3 className="text-xl font-light mb-2">Area (Sqft) </h3>
-                <div className="flex gap-4">
-                  <input
-                    type="number"
-                    placeholder="Min"
-                    className="block w-1/2 p-2 border rounded-md"
-                  />
-                  <input
-                    type="number"
-                    placeholder="Max"
-                    className="block w-1/2 p-2 border rounded-md"
-                  />
-                </div>
-              </div>
-
-              {/* Budget - Min to Max */}
-              <div className="mb-6">
-                <h3 className="text-xl font-light mb-2">Budget</h3>
-                <div className="flex gap-4">
-                  <input
-                    type="number"
-                    placeholder="Min"
-                    className="block w-1/2 p-2 border rounded-md"
-                  />
-                  <input
-                    type="number"
-                    placeholder="Max"
-                    className="block w-1/2 p-2 border rounded-md"
-                  />
-                </div>
-              </div>
-
-              {/* Description */}
-              <div className="mb-6">
-                <h3 className="text-xl font-light mb-2">Description</h3>
-                <textarea
-                  placeholder="Enter a brief description"
-                  className="block w-full p-2 border rounded-md"
-                  rows="4"
-                ></textarea>
-              </div>
-
-              {/* Submit Button */}
-              <button className="w-full  bg-[#1F4B43] text-sm  text-white p-2 rounded-md">
-                Submit
-              </button>
             </div>
           </>
         );
@@ -800,7 +559,13 @@ function YourRequirements() {
                ? " text-gray-600 border-[2px] border-[#1F4B43] rounded-3xl"
                : ""
            }`}
-                onClick={() => setActiveTab(tab)}
+                onClick={() => {
+                  setFormData((prev) => ({
+                    ...prev,
+                    RequiredPropertyType: activeTab,
+                  }));
+                  setActiveTab(tab);
+                }}
               >
                 {tab}
               </li>
@@ -827,7 +592,7 @@ function YourRequirements() {
               <label className="block mb-2 text-sm">
                 Role:
                 <select
-                  name="role"
+                  name="RequiredPersonRole"
                   value={formData.RequiredPersonRole}
                   onChange={handleInputChange}
                   className="block w-full mt-1 p-2 border rounded-md"
@@ -892,9 +657,17 @@ function YourRequirements() {
 
               <label className="block mb-2 text-sm">
                 Rent or Buy:
-                <select className="block w-full mt-1 p-2 border rounded-md">
-                  <option value="rent">Rent</option>
-                  <option value="buy">Buy</option>
+                <select
+                  name="RequiredPropertyDetails.RequiredPropertySellOrRent"
+                  value={
+                    formData.RequiredPropertyDetails.RequiredPropertySellOrRent
+                  }
+                  onChange={handleInputChange}
+                  className="block w-full mt-1 p-2 border rounded-md"
+                >
+                  <option value="Sell">Sell</option>
+                  <option value="Rent">Rent</option>
+                  <option value="Buy">Buy</option>
                 </select>
               </label>
             </div>
@@ -910,17 +683,136 @@ function YourRequirements() {
             <h3 className="text-lg font-light mb-2">Construction Status</h3>
 
             <label className="block mb-2 text-sm">
-              <select className="block w-full mt-1 p-2 rounded-md">
-                <option value="new-launch">New Launch</option>
-                <option value="under-construction">Under Construction</option>
-                <option value="ready-to-move">Ready to Move</option>
-                <option value="old-construction">Old Construction</option>
+              <select
+                name="RequiredPropertyDetails.RequiredConstructionStatus"
+                value={
+                  formData.RequiredPropertyDetails.RequiredConstructionStatus
+                }
+                onChange={handleInputChange}
+                className="block w-full mt-1 p-2 rounded-md"
+              >
+                <option value="New Launch">New Launch</option>
+                <option value="Under Construction">Under Construction</option>
+                <option value="Ready to Move">Ready to Move</option>
+                <option value="Old Construction">Old Construction</option>
               </select>
             </label>
           </div>
 
           {/* Dynamic Inputs */}
           {renderAdditionalInputs()}
+
+          {/* Facing */}
+          <div
+            data-aos="fade-in"
+            data-aos-duration="1000"
+            data-aos-delay="500"
+            className="mb-6"
+          >
+            <h3 className="text-lg font-light mb-2">Facing</h3>
+            <div className="flex flex-wrap">
+              {[
+                "East",
+                "North",
+                "North-East",
+                "North-West",
+                "South",
+                "South-East",
+                "South-West",
+                "West",
+              ].map((direction) => (
+                <label key={direction} className="w-1/2 p-2">
+                  <input
+                    name={`Facing.${direction}`}
+                    value={formData.Facing[direction]}
+                    onClick={handleInputChange}
+                    type="checkbox"
+                    className="mr-2"
+                  />{" "}
+                  {direction}
+                </label>
+              ))}
+            </div>
+          </div>
+          {/* Area - Min to Max */}
+          <div
+            data-aos="fade-in"
+            data-aos-duration="1000"
+            data-aos-delay="500"
+            className="mb-6 w-full flex justify-between"
+          >
+            <div>
+              <h3 className="text-lg font-light mb-2">
+                Area (Sqft) - Min to Max
+              </h3>
+              <div className="flex  gap-4">
+                <InputField
+                  type="text"
+                  name="RequiredAreaSqft"
+                  value={formData.RequiredAreaSqft.min}
+                  placeholder={"Min"}
+                  onChange={handleInputChange}
+                  variant={4}
+                />
+                <InputField
+                  type="text"
+                  name="RequiredAreaSqft"
+                  value={formData.RequiredAreaSqft.max}
+                  placeholder={"Max"}
+                  onChange={handleInputChange}
+                  variant={4}
+                />
+              </div>
+            </div>
+            <div>
+              <h3 className="text-lg font-light mb-2">Budget - Min to Max</h3>
+              <div className="flex gap-4">
+                <InputField
+                  type="text"
+                  name="RequiredBudget"
+                  value={formData.RequiredBudget.min}
+                  placeholder={"Min"}
+                  onChange={handleInputChange}
+                  variant={4}
+                />
+                <InputField
+                  type="text"
+                  name="RequiredBudget"
+                  value={formData.RequiredBudget.max}
+                  placeholder={"Max"}
+                  onChange={handleInputChange}
+                  variant={4}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Description */}
+          <div
+            data-aos="fade-in"
+            data-aos-duration="1000"
+            data-aos-delay="500"
+            className="mb-6"
+          >
+            <h3 className="text-lg font-light mb-2">Description</h3>
+
+            <InputField
+              type="textarea"
+              name="RequiredPropertyDetails.RequiredDescription"
+              placeholder="Enter a brief description"
+              value={formData.RequiredPropertyDetails.RequiredDescription}
+              onChange={handleInputChange}
+              required={true}
+              variant={4}
+            />
+          </div>
+          {/* Submit Button */}
+          <button
+            onClick={handleSubmit}
+            className="w-full  bg-[#1F4B43] text-sm  text-white p-2 rounded-md"
+          >
+            Submit
+          </button>
         </form>
       </div>
     </>

@@ -7,6 +7,8 @@ import BarChart from "./BarChart";
 import PieChart from "./PieChart";
 import LineChart from "./LineChart";
 import EnquiresPage from "./EnquiresPage";
+import UserPostedProperty from "../UserPostProperty/UserPostedProperty";
+import UserRequirementPost from "../UserRequirementPost/UserRequirementPost";
 
 export default function SlugPage() {
   const { slug } = useParams();
@@ -16,6 +18,8 @@ export default function SlugPage() {
       {slug === "manage-peoples" && <ManagePeoples />}
       {slug === "enquiries" && <EnquiresPage />}
       {slug === "add-property" && <ViewProperty />}
+      {slug === "user-post" && <UserPostedProperty />}
+      {slug === "require-post" && <UserRequirementPost />}
       {slug === "bar-chart" && <BarChart />}
       {slug === "pie-chart" && <PieChart />}
       {slug === "line-chart" && <LineChart />}

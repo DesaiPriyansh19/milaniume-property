@@ -10,199 +10,341 @@ import SkeletonLoader from "../SkeletonLoader";
 function Properties() {
   const [activeTab, setActiveTab] = useState("Residential");
   const [isModalOpen, setIsModalOpen] = useState(false); // Moved here
+  const [mainData, setMainData] = useState([]);
   const { data, loading } = useFetch(
     "https://milaniumepropertybackend.vercel.app/api/property"
   );
+
+  const [filterData, setFilterData] = useState({
+    ResidentList: "",
+    CommercialList: "",
+    IndustrialList: "",
+    PlotandLandList: "",
+  });
+
+  const handleFilterInput = (type, e) => {
+    const selectedOption = e.target.value; // Get the selected value
+
+    setFilterData(() => {
+      switch (type) {
+        case "resident":
+          return {
+            ResidentList: selectedOption,
+            CommercialList: "",
+            IndustrialList: "",
+            PlotandLandList: "",
+          };
+        case "commercial":
+          return {
+            ResidentList: "",
+            CommercialList: selectedOption,
+            IndustrialList: "",
+            PlotandLandList: "",
+          };
+        case "industrial":
+          return {
+            ResidentList: "",
+            CommercialList: "",
+            IndustrialList: selectedOption,
+            PlotandLandList: "",
+          };
+        case "plotandland":
+          return {
+            ResidentList: "",
+            CommercialList: "",
+            IndustrialList: "",
+            PlotandLandList: selectedOption,
+          };
+        default:
+          return {
+            ResidentList: "",
+            CommercialList: "",
+            IndustrialList: "",
+            PlotandLandList: "",
+          };
+      }
+    });
+  };
 
   useEffect(() => {
     AOS.init({ once: true }); // Initialize AOS
   }, []);
 
   const openModal = () => {
-    console.log("Modal Open Triggered");
     setIsModalOpen(true);
   };
-  
+
   const closeModal = () => {
-    console.log("Modal Close Triggered");
     setIsModalOpen(false);
   };
-  
+
+  useEffect(() => {
+    if (data) {
+      // Start by filtering based on activeTab
+      let filteredData = data.filter((item) => item.PropertyType === activeTab);
+
+      // Check which filter is active and apply it
+      if (filterData.ResidentList) {
+        filteredData = filteredData.filter(
+          (item) =>
+            item.ResidentialAvailabilityType &&
+            item.ResidentialAvailabilityType[filterData.ResidentList]
+        );
+      } else if (filterData.CommercialList) {
+        filteredData = filteredData.filter(
+          (item) =>
+            item.AllCommercial && item.AllCommercial[filterData.CommercialList]
+        );
+      } else if (filterData.IndustrialList) {
+        filteredData = filteredData.filter(
+          (item) =>
+            item.AllIndustrial &&
+            item.AllIndustrial[filterData.IndustrialList]
+        );
+      } else if (filterData.PlotandLandList) {
+        filteredData = filteredData.filter(
+          (item) =>
+            item.AllPlotLand &&
+            item.AllPlotLand[filterData.PlotandLandList]
+        );
+      }
+
+      // Update the main data
+      setMainData(filteredData);
+    }
+  }, [activeTab, data, filterData]);
 
   const renderAdditionalInputs = () => {
-     // Function to render dynamic filters
-  const renderFilters = () => {
-    switch (activeTab) {
-      case "Residential":
-        return (
-          <>
-            {/* Search */}
-            <div className="mb-4 w-full">
-              <label className="block mb-2 text-sm text-gray-500">Search</label>
-              <input
-                type="text"
-                placeholder="ENTER PROPERTY AREA"
-                className="w-full p-2 border rounded-lg border-[#1F4B43] placeholder:text-[#1F4B43]"
-              />
-            </div>
+    // Function to render dynamic filters
+    const renderFilters = () => {
+      switch (activeTab) {
+        case "Residential":
+          return (
+            <>
+              {/* Search */}
+              <div className="mb-4 w-full">
+                <label className="block mb-2 text-sm text-gray-500">
+                  Search
+                </label>
+                <input
+                  type="text"
+                  placeholder="ENTER PROPERTY AREA"
+                  className="w-full p-2 border rounded-lg border-[#1F4B43] placeholder:text-[#1F4B43]"
+                />
+              </div>
 
-            {/* Residential Type */}
-            <div className="mb-4 text-sm w-full">
-              <label className="block mb-2 text-sm text-gray-500">Residential Type</label>
-              <select className="w-full p-2 border rounded-lg border-[#1F4B43] text-sm">
-                <option>LOW RISE APARTMENT</option>
-                <option>HIGH RISE APARTMENT</option>
-                <option>BUNGALOW</option>
-                <option>VILLAS</option>
-                <option>TENEMENT</option>
-                <option>ROWHOUSE</option>
-                <option>FARM HOUSE</option>
-              </select>
-            </div>
+              {/* Residential Type */}
+              <div className="mb-4 text-sm w-full">
+                <label className="block mb-2 text-sm text-gray-500">
+                  Residential Type
+                </label>
+                <select
+                  value={filterData.ResidentList}
+                  onChange={(e) => {
+                    handleFilterInput("resident", e);
+                  }}
+                  className="w-full p-2 border rounded-lg border-[#1F4B43] text-sm"
+                >
+                  <option value="">Select Residential Type</option>
+                  <option value="LowRiseApartment">Low Rise Apartment</option>
+                  <option value="HighRiseApartment">High Rise Apartment</option>
+                  <option value="Bungalow">Bungalow</option>
+                  <option value="WeekendVillas">Villas</option>
+                  <option value="Tenament">Tenement</option>
+                  <option value="RowHouse">Row House</option>
+                  <option value="FarmHouse">Farm House</option>
+                </select>
+              </div>
 
-            {/* Sale/Rent */}
-            <div className="w-full mb-4">
-              <label className="block mb-2 text-sm text-gray-500">Sale/Rent</label>
-              <select className="w-full p-2 border rounded-lg border-[#1F4B43]">
-                <option>Buy</option>
-                <option>Rent</option>
-              </select>
-            </div>
-          </>
-        );
+              {/* Sale/Rent */}
+              <div className="w-full mb-4">
+                <label className="block mb-2 text-sm text-gray-500">
+                  Sale/Rent
+                </label>
+                <select className="w-full p-2 border rounded-lg border-[#1F4B43]">
+                  <option>Buy</option>
+                  <option>Rent</option>
+                </select>
+              </div>
+            </>
+          );
 
-      case "Commercial":
-        return (
-          <>
-            {/* Search */}
-            <div className="mb-4 w-full">
-              <label className="block mb-2 text-sm text-gray-500">Search</label>
-              <input
-                type="text"
-                placeholder="ENTER PROPERTY AREA"
-                className="w-full p-2 border rounded-lg border-[#1F4B43] placeholder:text-[#1F4B43]"
-              />
-            </div>
+        case "Commercial":
+          return (
+            <>
+              {/* Search */}
+              <div className="mb-4 w-full">
+                <label className="block mb-2 text-sm text-gray-500">
+                  Search
+                </label>
+                <input
+                  type="text"
+                  placeholder="ENTER PROPERTY AREA"
+                  className="w-full p-2 border rounded-lg border-[#1F4B43] placeholder:text-[#1F4B43]"
+                />
+              </div>
 
-            {/* Commercial Type */}
-            <div className="mb-4 text-sm">
-              <label className="block mb-2 text-sm text-gray-500">Commercial Availability</label>
-              <select className="w-full p-2 border rounded-lg border-[#1F4B43] text-sm">
-                <option>OFFICE</option>
-                <option>SHOP</option>
-                <option>CO WORKING SPACE</option>
-                <option>READY TO MOVE OFFICE</option>
-                <option>WAREHOUSE</option>
-                <option>COLD STORAGE</option>
-                <option>OTHER</option>
-              </select>
-            </div>
-          </>
-        );
+              {/* Commercial Type */}
+              <div className="mb-4 text-sm">
+                <label className="block mb-2 text-sm text-gray-500">
+                  Commercial Availability
+                </label>
+                <select
+                  value={filterData.CommercialList}
+                  onChange={(e) => {
+                    handleFilterInput("commercial", e);
+                  }}
+                  className="w-full p-2 border rounded-lg border-[#1F4B43] text-sm"
+                >
+                  <option value="">Select</option>
+                  <option value="Office">OFFICE</option>
+                  <option value="Shop">SHOP</option>
+                  <option value="CoWorkingSpave">CO WORKING SPACE</option>
+                  <option value="ReadyToMoveOffices">
+                    READY TO MOVE OFFICE
+                  </option>
+                  <option value="Warehouse">WAREHOUSE</option>
+                  <option value="ColdStorage">COLD STORAGE</option>
+                  <option value="Other">OTHER</option>
+                </select>
+              </div>
+            </>
+          );
 
-      case "Industrial":
-        return (
-          <>
-            {/* Industrial Type */}
-            <div className="mb-4 text-sm">
-              <label className="block mb-2 text-sm text-gray-500">Industrial Type</label>
-              <select className="w-full p-2 border rounded-lg border-[#1F4B43] text-sm">
-                <option>Warehouse</option>
-                <option>Heavy Manufacturing</option>
-                <option>Light Manufacturing</option>
-                <option>Data Center</option>
-                <option>Research and Development</option>
-              </select>
-            </div>
-          </>
-        );
+        case "Industrial":
+          return (
+            <>
+              {/* Industrial Type */}
+              <div className="mb-4 text-sm">
+                <label className="block mb-2 text-sm text-gray-500">
+                  Industrial Type
+                </label>
+                <select
+                  value={filterData.IndustrialList}
+                  onChange={(e) => {
+                    handleFilterInput("industrial", e);
+                  }}
+                  className="w-full p-2 border rounded-lg border-[#1F4B43] text-sm"
+                >
+                  <option value="">Select Industrial Type</option>
+                  <option value="Warehouse">Warehouse</option>
+                  <option value="HeavyManufacturing">
+                    Heavy Manufacturing
+                  </option>
+                  <option value="LightManufacturing">
+                    Light Manufacturing
+                  </option>
+                  <option value="DataCenter">Data Center</option>
+                  <option value="ResearchAndDevelopment">
+                    Research and Development
+                  </option>
+                </select>
+              </div>
+            </>
+          );
 
-      case "Plot&Land":
-        return (
-          <>
-            {/* Land Type */}
-            <div className="mb-4 text-sm">
-              <label className="block mb-2 text-sm text-gray-500">Land Type</label>
-              <select className="w-full p-2 border rounded-lg border-[#1F4B43] text-sm">
-                <option>Residential Land</option>
-                <option>Agricultural Land</option>
-                <option>Commercial Land</option>
-                <option>Industrial Land</option>
-              </select>
-            </div>
-          </>
-        );
+        case "Agricultural Plot":
+          return (
+            <>
+              {/* Land Type */}
+              <div className="mb-4 text-sm">
+                <label className="block mb-2 text-sm text-gray-500">
+                  Land Type
+                </label>
+                <select
+                  value={filterData.AllPlotLand}
+                  onChange={(e) => {
+                    handleFilterInput("plotandland", e);
+                  }}
+                  className="w-full p-2 border rounded-lg border-[#1F4B43] text-sm"
+                >
+                  <option value={"ResidentialPlot"}>Residential Land</option>
+                  <option value={"AgriculturalLand"}>Agricultural Land</option>
+                  <option value={"CommercialPlot"}>Commercial Land</option>
+                  <option value={"IndustrialPlot"}>Industrial Land</option>
+                </select>
+              </div>
+            </>
+          );
 
-      default:
-        return null;
-    }
-  };
+        default:
+          return null;
+      }
+    };
 
-  return (
-    <div>
-      {/* Tabs */}
-      <div className="flex gap-4 mb-4 mx-auto">
-        {["Residential", "Commercial", "Industrial", "Plot&Land"].map((tab) => (
-          <button
-            key={tab}
-            onClick={() => setActiveTab(tab)}
-            className={`px-4 py-2 border hidden rounded-lg ${activeTab === tab ? "bg-[#1F4B43] text-white" : "bg-gray-200 text-gray-700"}`}
-          >
-            {tab}
-          </button>
-        ))}
-      </div>
-
-      {/* Filter Button */}
-      <button
-        onClick={openModal}
-        className="px-4 py-2 bg-[#1F4B43] text-white rounded-lg"
-      >
-        Filter
-      </button>
-
-      {/* Filter Modal */}
-      {isModalOpen && (
-        <div
-          className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50"
-          onClick={closeModal}
-        >
-          <div
-            className="bg-white rounded-lg p-6 w-11/12 md:w-3/4 lg:w-1/2 overflow-y-auto max-h-[90vh]"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Close Button */}
-            <button
-              onClick={closeModal}
-              className="text-gray-500 hover:text-gray-800 float-right text-xl font-bold"
-            >
-              &times;
-            </button>
-
-            <h2 className="text-lg font-semibold mb-4 text-gray-700">Filters</h2>
-
-            {/* Dynamic Filters */}
-            <div className="text-sm grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {renderFilters()}
-            </div>
-
-            {/* Apply Filters Button */}
-            <button
-              onClick={closeModal}
-              className="mt-4 px-4 py-2 bg-[#1F4B43] text-white rounded-lg"
-            >
-              Apply Filters
-            </button>
-          </div>
+    return (
+      <div>
+        {/* Tabs */}
+        <div className="flex gap-4 mb-4 mx-auto">
+          {["Residential", "Commercial", "Industrial", "Agricultural Plot"].map(
+            (tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`px-4 py-2 border hidden rounded-lg ${
+                  activeTab === tab
+                    ? "bg-[#1F4B43] text-white"
+                    : "bg-gray-200 text-gray-700"
+                }`}
+              >
+                {tab}
+              </button>
+            )
+          )}
         </div>
-      )}
-    </div>
-  );
-};
+
+        {/* Filter Button */}
+        <button
+          type="button"
+          onClick={openModal}
+          className="px-4 py-2 bg-[#1F4B43] text-white rounded-lg"
+        >
+          Filter
+        </button>
+
+        {/* Filter Modal */}
+        {isModalOpen && (
+          <div
+            className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50"
+            onClick={closeModal}
+          >
+            <div
+              className="bg-white rounded-lg p-6 w-11/12 md:w-3/4 lg:w-1/2 overflow-y-auto max-h-[90vh]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close Button */}
+              <button
+                onClick={closeModal}
+                className="text-gray-500 hover:text-gray-800 float-right text-xl font-bold"
+              >
+                &times;
+              </button>
+
+              <h2 className="text-lg font-semibold mb-4 text-gray-700">
+                Filters
+              </h2>
+
+              {/* Dynamic Filters */}
+              <div className="text-sm grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {renderFilters()}
+              </div>
+
+              {/* Apply Filters Button */}
+              <button
+                onClick={closeModal}
+                className="mt-4 px-4 py-2 bg-[#1F4B43] text-white rounded-lg"
+              >
+                Apply Filters
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  };
 
   return (
     <>
-   
       <div className="relative w-full mb-0 pb-0">
         {/* Background Image with Blur */}
         <img
@@ -236,7 +378,7 @@ function Properties() {
 
         {/* Tabs */}
         <ul className="flex w-full justify-center mb-6 sticky top-0 bg-white z-10 ">
-          {["Residential", "Commercial", "Industrial", "Plot&Land"].map(
+          {["Residential", "Commercial", "Industrial", "Agricultural Plot"].map(
             (tab) => (
               <li
                 key={tab}
@@ -256,9 +398,6 @@ function Properties() {
 
         {/* Filter Form */}
         <form className="space-y-4 bg-white p-6 rounded ">
-          {/* Common Inputs */}
-          <div className="flex text-sm w-full justify-start items-center gap-1 "></div>
-
           {/* Dynamic Inputs */}
           {renderAdditionalInputs()}
 
@@ -282,15 +421,9 @@ function Properties() {
           Results {data?.length} Properties
         </p>
       </div>
-    
-       {/* Show skeleton loader when loading */}
-    {loading ? (
-       
-          <SkeletonLoader/>
-       
-      ) : (
-        
-      <PropertyCards data={data} />)}
+
+      {/* Show skeleton loader when loading */}
+      {loading ? <SkeletonLoader /> : <PropertyCards data={mainData} />}
     </>
   );
 }

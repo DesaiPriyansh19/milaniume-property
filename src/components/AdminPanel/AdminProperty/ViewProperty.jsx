@@ -4,11 +4,12 @@ import EditProperty from "./EditProperty";
 import AddProperty from "./AddProperty";
 
 export default function ViewProperty() {
-  const baseUrl = "https://milaniumepropertybackend.vercel.app/api/property";
+  const baseUrl =
+    "https://milaniumepropertybackend.vercel.app/api/property/allprops/admin";
   const { data, fetchById, updateById, addNew, deleteById } =
     useApiData(baseUrl);
   const [editData, setEditData] = useState({ type: "View", id: null });
-
+  const [filter, setFilter] = useState("verified");
   const [formData, setFormData] = useState({
     id: "",
     PropertyName: "",
@@ -16,6 +17,7 @@ export default function ViewProperty() {
     ForSale: true,
     ForRent: false,
     Featured: false,
+    Verified: false,
     Prices: {
       SalesPrice: "",
       RentPrice: "",
@@ -151,6 +153,7 @@ export default function ViewProperty() {
       SouthWest: false,
       West: false,
     },
+    PropertyDescription: "",
   });
 
   useEffect(() => {
@@ -161,6 +164,7 @@ export default function ViewProperty() {
         ForSale: data?.ForSale || true,
         ForRent: data?.ForRent || false,
         Featured: data?.Featured || false,
+        Verified: data?.Verified || false,
         Prices: data?.Prices || {
           SalesPrice: "",
           RentPrice: "",
@@ -309,9 +313,14 @@ export default function ViewProperty() {
           SouthWest: data?.Facing?.SouthWest || false,
           West: data?.Facing?.West || false,
         },
+        PropertyDescription: data?.PropertyDescription || "",
       });
     }
   }, [data]);
+
+  const filteredData = data.filter((property) =>
+    filter === "verified" ? property?.Verified : !property?.Verified
+  );
 
   const handleEdit = (type, id) => {
     const selectedProperty = data.find((property) => property._id === id); // Filter data by ID
@@ -331,6 +340,10 @@ export default function ViewProperty() {
         Featured:
           selectedProperty?.Featured !== undefined
             ? selectedProperty?.Featured
+            : false, // Default false if undefined
+        Verified:
+          selectedProperty?.Verified !== undefined
+            ? selectedProperty?.Verified
             : false, // Default false if undefined
         Prices: selectedProperty?.Prices || {
           SalesPrice: "",
@@ -514,6 +527,7 @@ export default function ViewProperty() {
           SouthWest: selectedProperty?.Facing?.SouthWest || false,
           West: selectedProperty?.Facing?.West || false,
         },
+        PropertyDescription: selectedProperty?.PropertyDescription || "",
       });
     }
     setEditData({ type, id });
@@ -531,15 +545,52 @@ export default function ViewProperty() {
                 Welcome to your Real Estate Portfolio
               </p>
             </div>
-            <button
-              onClick={() => handleEdit("Add")}
-              className=" bg-red-500 text-white h-8 px-5  rounded "
-            >
-              Add New Estate
-            </button>
+            <div className="flex justify-between gap-4">
+              <div className="relative">
+                <select
+                  onChange={(e) => {
+                    setFilter(e.target.value);
+                  }}
+                  value={filter}
+                  className="appearance-none text-white bg-transparent outline-none border border-white h-8 pl-2 pr-8"
+                >
+                  <option value="verified">Verified</option>
+                  <option value="unverified">Un-Verified</option>
+                </select>
+
+                <span
+                  style={{
+                    transform: "rotate(180deg) translateY(50%)",
+                    position: "absolute",
+                    top: "38%",
+                    right: "10px", // or whatever position you need
+                  }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className={`h-5 w-5 text-white`}
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M5.293 8.707a1 1 0 010-1.414L10 3.586l4.707 4.707a1 1 0 01-1.414 1.414L10 6.414 6.707 9.707a1 1 0 01-1.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </span>
+              </div>
+
+              <button
+                onClick={() => handleEdit("Add")}
+                className=" bg-red-500 text-white h-8 px-5  rounded "
+              >
+                Add New Estate
+              </button>
+            </div>
           </div>
           <div className="text-white w-full grid grid-cols-4 gap-4">
-            {data.map((property, index) => (
+            {filteredData.map((property, index) => (
               <div
                 key={index}
                 onClick={() => handleEdit("Edit", property._id)}

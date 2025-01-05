@@ -11,6 +11,7 @@ const QuickEnquiry = () => {
     EnquiryPersonEmail: "",
     EnquiryPersonPhone: "",
     EnquiryPersonMessage: "",
+    EnquiryPropertyType: "",
   });
 
   const handleInputChange = (e) => {
@@ -82,7 +83,7 @@ const QuickEnquiry = () => {
         <div className="w-full md:w-1/2 p-4">
           <h2 className="text-2xl font-semibold mb-4">Our Office Location</h2>
           <p>
-          C/491, Ganesh Glory 11,Nr. Moneyplant Highstreet,Jagatpur Road,
+            C/491, Ganesh Glory 11,Nr. Moneyplant Highstreet,Jagatpur Road,
             Gota, Ahmedabad-382481
           </p>
           <div className="map-container w-full h-[80%]">
@@ -134,25 +135,26 @@ const QuickEnquiry = () => {
               required={true}
               variant={3}
             />
-             <div className="mb-4 text-sm w-full">
-                  <label className="block mb-2 text-sm text-gray-500">
-                    Residential Type
-                  </label>
-                  <select
-                    
-                    className="w-full   p-2 border-[1.5px] rounded-lg text-sm placeholder:text-[#1F4B43] border-[#1F4B43]"
-                  >
-                    <option value={"LowRiseApartment"}>
-                    Property
-                    </option>
-                    <option value={"HighRiseApartment"}>
-                     Inerior
-                    </option>
-                    <option value={"Bungalow"}>Loan & Finance</option>
-                    <option value={"WeekendVillas"}>VILLAS</option>
-                  
-                  </select>
-                </div>
+            <div className="mb-4 text-sm w-full">
+              <label className="block mb-2 text-sm text-gray-500">
+                Residential Type
+              </label>
+              <select
+                onChange={(e) => {
+                  setFormData((prev) => ({
+                    ...prev,
+                    EnquiryPropertyType: e.target.value,
+                  }));
+                }}
+                value={formData.EnquiryPropertyType}
+                className="w-full   p-2 border-[1.5px] rounded-lg text-sm placeholder:text-[#1F4B43] border-[#1F4B43]"
+              >
+                <option value={"LowRiseApartment"}>Property</option>
+                <option value={"HighRiseApartment"}>Inerior</option>
+                <option value={"Bungalow"}>Loan & Finance</option>
+                <option value={"WeekendVillas"}>VILLAS</option>
+              </select>
+            </div>
             <InputField
               label="Message"
               type="textarea"

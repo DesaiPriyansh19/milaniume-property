@@ -103,7 +103,7 @@ const AboutUs = () => {
                 className="w-full h-64 object-cover"
               />
               <div className="p-6">
-                <h4 className="text-xl font-semibold text-gray-800">John Doe</h4>
+                <h4 className="text-xl font-semibold text-gray-800">MayurBhai Desai</h4>
                 <p className="text-gray-600">CEO & Founder</p>
               </div>
             </div>
@@ -115,8 +115,8 @@ const AboutUs = () => {
                 className="w-full h-64 object-cover"
               />
               <div className="p-6">
-                <h4 className="text-xl font-semibold text-gray-800">Jane Smith</h4>
-                <p className="text-gray-600">Lead Architect</p>
+                <h4 className="text-xl font-semibold text-gray-800">Rutvik Desai</h4>
+                <p className="text-gray-600">Manager</p>
               </div>
             </div>
 
@@ -127,7 +127,8 @@ const AboutUs = () => {
                 className="w-full h-64 object-cover"
               />
               <div className="p-6">
-                <h4 className="text-xl font-semibold text-gray-800">Michael Lee</h4>
+                <h4 className="text-xl font-semibold text-gray-800">Tulsi Mewada &<br></br>
+                Dhruvi Mewada</h4>
                 <p className="text-gray-600">Real Estate Consultant</p>
               </div>
             </div>

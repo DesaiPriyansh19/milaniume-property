@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import img2 from '../../assets/slider1.jpg.png'
 import img from '../../assets/property_2_-853gCunl--transformed.webp'
-import bgImg from "../../assets/pexels-clubhouseconvos-13620073.jpg";
+import bgImg from "../../assets/pexels-clubhouseconvos-13620073.webp";
 const PropertyDetailPage = () => {
   const images = [
   img,

@@ -82,7 +82,7 @@ const QuickEnquiry = () => {
         <div className="w-full md:w-1/2 p-4">
           <h2 className="text-2xl font-semibold mb-4">Our Office Location</h2>
           <p>
-            C-401, Ganesh Glory 11,Nr. Moneyplant Highstreet,Jagatpur Road,
+          C/491, Ganesh Glory 11,Nr. Moneyplant Highstreet,Jagatpur Road,
             Gota, Ahmedabad-382481
           </p>
           <div className="map-container w-full h-[80%]">

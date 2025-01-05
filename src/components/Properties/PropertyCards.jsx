@@ -1,9 +1,15 @@
 import React from "react";
 import Room from "../../assets/Room.jpeg";
+import LocationLogo from "../../../svg/Icon/Locationlogo/Index";
 
 
 
 function PropertyCards({ data }) {
+  const style = {
+   
+    textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', // Shadow with a blur
+    backdropFilter: 'blur(5px)', 
+  };
   return (<>  
     <div className=" w-[90%] px-5 md:px-4 rounded-3xl 
     mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -17,9 +23,10 @@ function PropertyCards({ data }) {
             style={{
               backgroundImage: `url(${card.PropertyPhotos[0] || Room})`,
             }}
-          >
+          >  {/* Overlay to darken the background */}
+  <div className="absolute inset-0 bg-black opacity-10 rounded-xl"></div>
             <div className="flex gap-2 items-center justify-center absolute top-4 left-4">
-              <p className="bg-[#1F4B43] rounded-xl text-[.7rem] text-white px-3 py-1">
+              <p className="bg-[#1F4B43]  rounded-xl text-[.7rem] text-white px-3 py-1 ">
                 Apartment
               </p>
               <p
@@ -32,15 +39,15 @@ function PropertyCards({ data }) {
                 {card?.Featured ? "Featured" : "Not Featured"}
               </p>
             </div>
-            <div className="absolute bottom-4 left-4 text-white pl-2 rounded-md">
+            <div className="absolute bottom-4 left-4 text-white pl-2 rounded-md" >
               <p className="text-[.9rem] font-normal">{card.PropertyName}</p>
-              <p className="text-[.7rem] gap-1 flex items-center">
-                <span className="material-icons">location_on</span>
+              <p className="text-[.7rem] gap-1    flex items-center" >
+                <span className="material-icons"><LocationLogo/></span>
                 {card.Landmark}
               </p>
               <div className="flex justify-between items-center mt-2">
-                <div className="flex items-center gap-[2px]">
-                  <p className="text-[.6rem] text-gray-70 pr-2">
+                <div className="flex items-center gap-[2px]" style={style}>
+                  <p className="text-[.6rem] text-gray-70 pr-2 " >
                     {card.PropertyDetails.Sqft} Sqft
                   </p>
                   <p className="text-[.6rem] text-gray-70 border-l-[1px] pl-2">

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import bgImg from "../../assets/pexels-clubhouseconvos-13620073.jpg";
+import bgImg from "../../assets/pexels-clubhouseconvos-13620073.webp";
 import PropertyCards from "./PropertyCards";
 import { FiSearch } from "react-icons/fi"; // Import the search icon from React Icons
 import AOS from "aos";

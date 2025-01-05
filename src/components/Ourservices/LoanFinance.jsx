@@ -1,6 +1,17 @@
 import React from 'react';
 import bgImg from '../../assets/Loan&Finance.jpg'
+import { FaRegMoneyBillAlt, FaHome, FaLandmark, FaBuilding, FaCar, FaProjectDiagram } from "react-icons/fa";
+import { Link } from 'react-router-dom';
+
 const LoanFinance = () => {
+  const services = [
+    { icon: <FaRegMoneyBillAlt />, text: "Personal Loan" },
+    { icon: <FaHome />, text: "Home Loan" },
+    { icon: <FaLandmark />, text: "Loan Against Property" },
+    { icon: <FaBuilding />, text: "Business Loan" },
+    { icon: <FaCar />, text: "Vehicle Loan" },
+    { icon: <FaProjectDiagram />, text: "Project Loan" },
+  ];
   return (
     <div className="bg-gray-50 text-gray-800">
       <div className="relative w-full mb-0 pb-0">
@@ -30,25 +41,28 @@ const LoanFinance = () => {
               </div>
             </div>
      
+            <section className="py-20 px-6 mx-auto w-[85%] my-5 bg-white shadow-lg rounded-xl text-center">
+      <div className="max-w-2xl mx-auto">
+        <h2 className="text-4xl font-extrabold text-[#247264] leading-tight">Our Loan Services</h2>
+        <p className="mt-4 text-lg text-gray-700">
+          We provide tailored loan solutions to meet your property and financial goals.
+        </p>
+      </div>
 
-      {/* Content for Loan and Finance Services */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-[#247264]">Our Loan Services</h2>
-          <p className="mt-4 text-gray-600">
-            We provide tailored loan solutions for your property goals:
-          </p>
-          <ul className="mt-6 list-disc list-inside text-gray-600">
-            <li>Personal loan</li>
-            <li>Home loan</li>
-            <li>Loan against Property</li>
-            <li>Business loan</li>
-            <li>vehical loan</li>
-            <li>Project loan</li>
-            
-          </ul>
-        </div>
-      </section>
+      <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {services.map((service, index) => (
+          <div
+            key={index}
+            className="flex flex-col justify-center items-center p-6 bg-gray-100 rounded-lg shadow-md h-44 w-full text-center
+                      hover:bg-[#247264] hover:text-white transition-all duration-300"
+          >
+            <div className="text-4xl mb-3">{service.icon}</div> {/* Bigger Icon */}
+            <p className="text-xl font-semibold">{service.text}</p> {/* Bigger Text */}
+          </div>
+        ))}
+      </div>
+    </section>
+
 
       {/* Call to Action */}
       <div className="bg-[#247264] text-white py-12 text-center">
@@ -56,9 +70,10 @@ const LoanFinance = () => {
         <p className="mt-4 text-lg">
           Speak to one of our experts and secure your loan.
         </p>
-        <button className="mt-6 px-4 py-2 bg-[#E7C873]  rounded text-[#247264] font-normal">
+       <Link to={'/quickenquiry'}> 
+       <button className="mt-6 px-4 py-2 bg-[#E7C873]  rounded text-[#247264] font-normal">
           Contat US
-        </button>
+        </button></Link>
       </div>
     </div>
   );

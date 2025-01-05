@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import img1 from '../../assets/Interior design/inerior-image1.jpg'
 import img2 from '../../assets/Interior design/inerior-image2.jpg'
 import img3 from '../../assets/Interior design/inerior-image3.jpg'
+import { MdDesignServices, MdConstruction, MdElectricalServices, MdPrecisionManufacturing, MdWindow, MdFormatPaint } from "react-icons/md";
 const images = [
 img1,
 img2,
@@ -10,7 +11,14 @@ img3
 
 const InteriorDesign = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-
+  const services = [
+    { icon: <MdDesignServices />, text: "Interior Designs (3D Customised)" }, // Design Icon
+    { icon: <MdConstruction />, text: "Civil Work" }, // Construction Icon
+    { icon: <MdElectricalServices />, text: "All Electric Work" }, // Electrical Icon
+    { icon: <MdPrecisionManufacturing />, text: "Steel Fabrication" }, // Fabrication Icon
+    { icon: <MdWindow />, text: "Glass & Aluminium Work" }, // Window Icon
+    { icon: <MdFormatPaint />, text: "Paint & Polish Work" }, // Paint Icon
+  ];
   const prevSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1));
   };
@@ -20,7 +28,7 @@ const InteriorDesign = () => {
   };
 
   return (
-    <div className="bg-gray-50 text-gray-800">
+    <div className="bg-gray-50 ext-gray-800">
       {/* Hero Section Over Carousel */}
       <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-end  text-center text-white bg-black bg-opacity-25 z-10">
         <h1 className="text-4xl font-bold">Interior Design Services</h1>
@@ -56,21 +64,36 @@ const InteriorDesign = () => {
           &#10095;
         </button>
       </div>
+      <section className="py-20 my-4 px-6 mx-auto w-[85%] bg-white shadow-lg rounded-xl text-center">
+      <div className="max-w-2xl mx-auto">
+        <h2 className="text-4xl font-extrabold text-[#247264] leading-tight">Our Interior Design Services</h2>
+        <p className="mt-4 text-lg text-gray-700">
+          We provide top-notch interior design solutions for both residential and commercial spaces.
+        </p>
+      </div>
 
-      {/* Content Section */}
-      <section className="py-16  text-center mx-auto bg-gray-100 rounded-lg w-[80%]">
-        <h2 className="text-3xl font-bold text-[#247264]">Our Interior Design Services</h2>
-        <p className="mt-4 text-gray-600">We specialize in both residential and commercial interior design:</p>
-        <ul className="mt-6 text-center list-disc list-inside text-gray-600">
-          <li>Interior designs (3D Customised)</li>
-          <li>Civil Work</li>
-          <li>All Electric Work</li>
-          <li>Steel Fabrication</li>
-          <li>Glass & Aluminium Work</li>
-          <li>Paint & Polish Work</li>
+      <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {services.map((service, index) => (
+       <div
+       key={index}
+       className="group flex flex-col justify-center items-center p-6 bg-gray-100 rounded-lg shadow-md h-44 w-full text-center
+                  hover:bg-[#247264] hover:text-white transition-all duration-300"
+     >
+       {/* The icon will now turn white on hover */}
+       <div className="text-5xl text-[#247264] mb-3 transition group-hover:text-white">
+         {service.icon}
+       </div> 
+     
+       {/* Text will also turn white on hover */}
+       <p className="text-xl font-semibold transition group-hover:text-white">
+         {service.text}
+       </p> 
+     </div>
+     
+        ))}
+      </div>
+    </section>
 
-        </ul>
-      </section>
 
       {/* Call to Action */}
       <div className="bg-[#247264] text-white py-12 text-center">

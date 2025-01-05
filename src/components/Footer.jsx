@@ -82,11 +82,10 @@ const Footer = () => {
                C/491, Ganesh Glory 11, Nr. Money Plant Highstreet, 
                 Jagtpur Road, Gota, Ahmedabad -382481</a> 
               </li>
-      
-                <li className="flex items-center">
-                <span className="mr-2 ">📞</span>
-                <a href="tel:9898992554" className="hover:text-gray-900">
-               Founder:9898992554 
+              <li className="flex items-center">
+                <span className="mr-2">📞</span>
+                <a href="tel:9898512554" className="hover:text-gray-900">
+                Back  Office:9898512554 
 
                 </a>
               </li>
@@ -97,13 +96,15 @@ const Footer = () => {
 
                 </a>
               </li>
-              <li className="flex items-center">
-                <span className="mr-2">📞</span>
-                <a href="tel:9898512554" className="hover:text-gray-900">
-                Back  Office:9898512554 
+                <li className="flex items-center">
+                <span className="mr-2 ">📞</span>
+                <a href="tel:9898992554" className="hover:text-gray-900">
+               Founder:9898992554 
 
                 </a>
               </li>
+         
+          
               <li className="flex items-center">
                 <span className="mr-2">✉️</span>
                 <a

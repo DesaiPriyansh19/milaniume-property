@@ -78,6 +78,17 @@ export default function AddProperty({ addNew, handleEdit }) {
       Tenament: false,
       Building: false,
     },
+    BhkScheme: {
+      oneBHK: false,
+      twoBHK: false,
+      threeBHK: false,
+      fourBHK: false,
+      fiveBHK: false,
+      sixBHK: false,
+      aboveSixBHK: false,
+      duplex: false,
+      pg: false,
+    },
     CommercialPropertyFeatures: {
       BossCabin: false,
       ManagerCabin: false,

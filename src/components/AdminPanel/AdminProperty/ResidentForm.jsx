@@ -466,6 +466,99 @@ export default function ResidentForm({ formData, handleInputChange }) {
           />
         </div>
       </div>
+      {/* BhkScheme */}
+      <div>
+        <label
+          htmlFor={"BhkScheme"}
+          className={"block text-sm mb-2 font-semibold"}
+        >
+          BHK Scheme
+        </label>
+        <div className="flex flex-col mb-3">
+          <InputField
+            type="checkbox"
+            id="oneBHK"
+            label="1 BHK"
+            name="BhkScheme.oneBHK"
+            variant={2}
+            checked={formData.BhkScheme.oneBHK}
+            onChange={handleInputChange}
+          />
+          <InputField
+            type="checkbox"
+            id="twoBHK"
+            label="2 BHK"
+            name="BhkScheme.twoBHK"
+            variant={2}
+            checked={formData.BhkScheme.twoBHK}
+            onChange={handleInputChange}
+          />
+          <InputField
+            type="checkbox"
+            id="threeBHK"
+            label="3 BHK"
+            name="BhkScheme.threeBHK"
+            variant={2}
+            checked={formData.BhkScheme.threeBHK}
+            onChange={handleInputChange}
+          />
+          <InputField
+            type="checkbox"
+            id="fourBHK"
+            label="4 BHK"
+            name="BhkScheme.fourBHK"
+            variant={2}
+            checked={formData.BhkScheme.fourBHK}
+            onChange={handleInputChange}
+          />
+          <InputField
+            type="checkbox"
+            id="fiveBHK"
+            label="5 BHK"
+            name="BhkScheme.fiveBHK"
+            variant={2}
+            checked={formData.BhkScheme.fiveBHK}
+            onChange={handleInputChange}
+          />
+          <InputField
+            type="checkbox"
+            id="sixBHK"
+            label="6 BHK"
+            name="BhkScheme.sixBHK"
+            variant={2}
+            checked={formData.BhkScheme.sixBHK}
+            onChange={handleInputChange}
+          />
+          <InputField
+            type="checkbox"
+            id="aboveSixBHK"
+            label="Above 6 BHK"
+            name="BhkScheme.aboveSixBHK"
+            variant={2}
+            checked={formData.BhkScheme.aboveSixBHK}
+            onChange={handleInputChange}
+          />
+          <InputField
+            type="checkbox"
+            id="duplex"
+            label="Duplex"
+            name="BhkScheme.duplex"
+            variant={2}
+            checked={formData.BhkScheme.duplex}
+            onChange={handleInputChange}
+          />
+          <InputField
+            type="checkbox"
+            id="pg"
+            label="PG"
+            name="BhkScheme.pg"
+            variant={2}
+            checked={formData.BhkScheme.pg}
+            onChange={handleInputChange}
+          />
+        </div>
+      </div>
+
       {/* Resident Available */}
       <div>
         {/* Label for the ResidentAvailable section */}

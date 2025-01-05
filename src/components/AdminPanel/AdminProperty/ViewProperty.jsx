@@ -80,6 +80,17 @@ export default function ViewProperty() {
       Tenament: false,
       Building: false,
     },
+    BhkScheme: {
+      oneBHK: false,
+      twoBHK: false,
+      threeBHK: false,
+      fourBHK: false,
+      fiveBHK: false,
+      sixBHK: false,
+      aboveSixBHK: false,
+      duplex: false,
+      pg: false,
+    },
     CommercialPropertyFeatures: {
       BossCabin: false,
       ManagerCabin: false,
@@ -222,6 +233,17 @@ export default function ViewProperty() {
             data?.ResidentialAvailabilityType?.WeekendVillas || false,
           Tenament: data?.ResidentialAvailabilityType?.Tenament || false,
           Building: data?.ResidentialAvailabilityType?.Building || false,
+        },
+        BhkScheme: {
+          oneBHK: data?.BhkScheme?.oneBHK || false,
+          twoBHK: data?.BhkScheme?.twoBHK || false,
+          threeBHK: data?.BhkScheme?.threeBHK || false,
+          fourBHK: data?.BhkScheme?.fourBHK || false,
+          fiveBHK: data?.BhkScheme?.fiveBHK || false,
+          sixBHK: data?.BhkScheme?.sixBHK || false,
+          aboveSixBHK: data?.BhkScheme?.aboveSixBHK || false,
+          duplex: data?.BhkScheme?.duplex || false,
+          pg: data?.BhkScheme?.pg || false,
         },
         CommercialPropertyFeatures: {
           BossCabin: data?.CommercialPropertyFeatures?.BossCabin || false,
@@ -403,6 +425,17 @@ export default function ViewProperty() {
             selectedProperty?.ResidentialAvailabilityType?.Tenament || false,
           Building:
             selectedProperty?.ResidentialAvailabilityType?.Building || false,
+        },
+        BhkScheme: {
+          oneBHK: selectedProperty?.BhkScheme?.oneBHK || false,
+          twoBHK: selectedProperty?.BhkScheme?.twoBHK || false,
+          threeBHK: selectedProperty?.BhkScheme?.threeBHK || false,
+          fourBHK: selectedProperty?.BhkScheme?.fourBHK || false,
+          fiveBHK: selectedProperty?.BhkScheme?.fiveBHK || false,
+          sixBHK: selectedProperty?.BhkScheme?.sixBHK || false,
+          aboveSixBHK: selectedProperty?.BhkScheme?.aboveSixBHK || false,
+          duplex: selectedProperty?.BhkScheme?.duplex || false,
+          pg: selectedProperty?.BhkScheme?.pg || false,
         },
         CommercialPropertyFeatures: {
           BossCabin:

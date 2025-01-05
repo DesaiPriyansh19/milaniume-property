@@ -15,53 +15,113 @@ function Properties() {
     "https://milaniumepropertybackend.vercel.app/api/property"
   );
 
+  console.log(data);
+
   const [filterData, setFilterData] = useState({
+    UserTypedArea: "",
     ResidentList: "",
     CommercialList: "",
     IndustrialList: "",
     PlotandLandList: "",
+    SaleOrRent: "",
+    Condition: "",
+    AvailableFor: "",
+    MinSqft: "",
+    MaxSqft: "",
+    MinBudget: "",
+    MaxBudget: "",
+    Bhk: "",
+    selectedFeatures: [],
   });
 
-  const handleFilterInput = (type, e) => {
-    const selectedOption = e.target.value; // Get the selected value
+  const handleCheckboxChange = (e) => {
+    const { value, checked } = e.target;
 
-    setFilterData(() => {
+    setFilterData((prev) => ({
+      ...prev, // Spread the previous state to retain other keys
+      selectedFeatures: checked
+        ? [...prev.selectedFeatures, value] // Add the new value if checked
+        : prev.selectedFeatures.filter((item) => item !== value), // Remove the value if unchecked
+    }));
+  };
+
+  const handleFilterInput = (type, e) => {
+    const selectedOption = e.target.value;
+
+    setFilterData((prev) => {
       switch (type) {
         case "resident":
           return {
+            ...prev,
             ResidentList: selectedOption,
+            SaleOrRent: prev.SaleOrRent, // Retain the SaleOrRent filter
             CommercialList: "",
             IndustrialList: "",
             PlotandLandList: "",
+            Condition: prev.Condition,
+            AvailableFor: prev.AvailableFor,
+            MinSqft: prev.MinSqft,
+            MaxSqft: prev.MaxSqft,
+            Bhk: prev.Bhk,
+            selectedFeatures: [],
           };
         case "commercial":
           return {
-            ResidentList: "",
+            ...prev,
             CommercialList: selectedOption,
+            SaleOrRent: prev.SaleOrRent,
+            ResidentList: "",
             IndustrialList: "",
             PlotandLandList: "",
+            Condition: prev.Condition,
+            AvailableFor: "",
+            MinSqft: prev.MinSqft,
+            MaxSqft: prev.MaxSqft,
+            Bhk: "",
+            selectedFeatures: prev.selectedFeatures,
           };
         case "industrial":
           return {
+            ...prev,
+            IndustrialList: selectedOption,
+            SaleOrRent: prev.SaleOrRent,
             ResidentList: "",
             CommercialList: "",
-            IndustrialList: selectedOption,
             PlotandLandList: "",
+            Condition: "",
+            AvailableFor: "",
+            MinSqft: prev.MinSqft,
+            MaxSqft: prev.MaxSqft,
+            Bhk: "",
+            selectedFeatures: [],
           };
         case "plotandland":
           return {
+            ...prev,
+            PlotandLandList: selectedOption,
+            SaleOrRent: prev.SaleOrRent,
             ResidentList: "",
             CommercialList: "",
             IndustrialList: "",
-            PlotandLandList: selectedOption,
+            Condition: "",
+            AvailableFor: "",
+            MinSqft: prev.MinSqft,
+            MaxSqft: prev.MaxSqft,
+            Bhk: "",
+            selectedFeatures: [],
+          };
+        case "saleOrRent":
+          return {
+            ...prev,
+            SaleOrRent: selectedOption, // Update SaleOrRent filter for all categories
+          };
+        case "condition":
+          return {
+            ...prev,
+            Condition: selectedOption, // Update SaleOrRent filter for all categories
           };
         default:
-          return {
-            ResidentList: "",
-            CommercialList: "",
-            IndustrialList: "",
-            PlotandLandList: "",
-          };
+          return prev;
       }
     });
   };
@@ -77,6 +137,8 @@ function Properties() {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+  console.log(filterData);
 
   useEffect(() => {
     if (data) {
@@ -98,14 +160,80 @@ function Properties() {
       } else if (filterData.IndustrialList) {
         filteredData = filteredData.filter(
           (item) =>
-            item.AllIndustrial &&
-            item.AllIndustrial[filterData.IndustrialList]
+            item.AllIndustrial && item.AllIndustrial[filterData.IndustrialList]
         );
       } else if (filterData.PlotandLandList) {
         filteredData = filteredData.filter(
           (item) =>
-            item.AllPlotLand &&
-            item.AllPlotLand[filterData.PlotandLandList]
+            item.AllPlotLand && item.AllPlotLand[filterData.PlotandLandList]
+        );
+      } else if (filterData.Condition) {
+        filteredData = filteredData.filter(
+          (item) => item.Condition && item.Condition[filterData.Condition]
+        );
+      } else if (filterData.AvailableFor) {
+        filteredData = filteredData.filter(
+          (item) =>
+            item.ResidentAvailable &&
+            item.ResidentAvailable[filterData.AvailableFor]
+        );
+      } else if (filterData.MinSqft || filterData.MaxSqft) {
+        filteredData = filteredData.filter(
+          (item) =>
+            parseFloat(item.PropertyDetails.Sqft) >= filterData.MinSqft &&
+            parseFloat(item.PropertyDetails.Sqft) <= filterData.MaxSqft
+        );
+      } else if (filterData.MinBudget || filterData.MaxBudget) {
+        filteredData = filteredData.filter((item) =>
+          item.Prices.SalesPrice
+            ? parseFloat(item.Prices.SalesPrice) >= filterData.MinBudget &&
+              parseFloat(item.Prices.SalesPrice) <= filterData.MaxBudget
+            : parseFloat(item.Prices.RentPrice) >= filterData.MinBudget &&
+              parseFloat(item.Prices.RentPrice) <= filterData.MaxBudget
+        );
+      } else if (filterData.Bhk) {
+        filteredData = filteredData.filter(
+          (item) => item.BhkScheme && item.BhkScheme[filterData.Bhk]
+        );
+      } else if (filterData.UserTypedArea) {
+        const searchTerms = filterData.UserTypedArea.toLowerCase().split(" "); // Split by spaces
+        filteredData = filteredData.filter((item) =>
+          searchTerms.every(
+            (term) =>
+              item.Landmark?.toLowerCase().includes(term) ||
+              item.City?.toLowerCase().includes(term) ||
+              item.PinCode?.toLowerCase().includes(term)
+          )
+        );
+      }
+
+      if (filterData.SaleOrRent) {
+        filteredData = filteredData.filter((item) => {
+          if (filterData.SaleOrRent === "Buy") {
+            return item.ForSale === true;
+          } else if (filterData.SaleOrRent === "Rent") {
+            return item.ForRent === true;
+          }
+          return true; // Default case if filterData.SaleOrRent is invalid
+        });
+      }
+      // Filter by selectedFeatures
+      if (filterData.selectedFeatures.length > 0) {
+        const featureMapping = {
+          "BOSS CABIN": "BossCabin",
+          "MANAGER CABIN": "ManagerCabin",
+          "WORK STATION": "WorkStation",
+          "CONFERENCE ROOM": "ConferenceRoom", // Add this key to the schema if necessary
+          PANTRY: "Pantry",
+          RECEPTION: "Reception",
+          "WAITING AREA": "WaitingArea",
+        };
+
+        filteredData = filteredData.filter((item) =>
+          filterData.selectedFeatures.every(
+            (feature) =>
+              item.CommercialPropertyFeatures?.[featureMapping[feature]]
+          )
         );
       }
 
@@ -121,381 +249,682 @@ function Properties() {
         case "Residential":
           return (
             <>
-            <div className=" w-full mb-4 mt-4 text-sm grid grid-cols-2   items-center justify-start ">
-              {/* no1 */}
-              <div className="mb-4 w-full">
-                <label className="block mb-2 text-sm text-gray-500">Search</label>
-                <input
-                  type="text"
-                  placeholder="ENTER PROPERTY AREA"
-                  className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]"
-                />
-              </div>
-              {/* no2 */}
-              <div className="mb-4 text-sm w-full">
-                <label className="block mb-2 text-sm text-gray-500">Residential Type</label>
-                <select className="w-full sm:w-52  p-2 border-[1.5px] rounded-lg text-sm placeholder:text-[#1F4B43] border-[#1F4B43]">
-                  <option>LOW RISE APARTMENT</option>
-                  <option>HIGH RISE APARTMENT</option>
-                  <option>BUNGALOW</option>
-                  <option>VILLAS</option>
-                  <option>TENEMENT</option>
-                  <option>ROWHOUSE</option>
-                  <option>FARM HOUSE</option>
-                </select>
-              </div>
-              {/* no3 */}
-              <div className="w-full mb-4">
-                <label className="block mb-2 text-sm text-gray-500">Sale/Rent</label>
-                <select className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]">
-                  <option>Buy</option>
-                  <option>Rent</option>
-                </select>
-              </div>
-              {/* no4 */}
-              <div className="mb-4 text-sm w-full">
-                <label className="block mb-2 text-sm text-gray-500">Residential Availability</label>
-                <select className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg text-sm placeholder:text-[#1F4B43] border-[#1F4B43]">
-                  <option>1 BHK</option>
-                  <option>2 BHK</option>
-                  <option>3 BHK</option>
-                  <option>4 BHK</option>
-                  <option>5 BHK</option>
-                  <option>6 BHK</option>
-                  <option>Above 6 BHK</option>
-                  <option>Duplex</option>
-                  <option>PG</option>
-                  <option>Residential Plot</option>
-                </select>
-              </div>
-              {/* no5 */}
-              <div className="mb-4 text-sm w-full">
-                <label className="block mb-2 text-sm text-gray-500">Residential Condition</label>
-                <select className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg text-sm placeholder:text-[#1F4B43] border-[#1F4B43]">
-                  <option>FULLY FURNISHED</option>
-                  <option>FURNISHED</option>
-                  <option>SEMI FURNISHED</option>
-                  <option>FIX-FURNISHED</option>
-                  <option>KITCHEN FIX</option>
-                  <option>UNFURNISHED</option>
-                </select>
-              </div>
-              {/* no6 */}
-              <div className="mb-4 text-sm w-full">
-                <label className="block mb-2 text-sm text-gray-500">Available For</label>
-                <select className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg text-sm placeholder:text-[#1F4B43] border-[#1F4B43]">
-                  <option>FOR FAMILY</option>
-                  <option>FOR EXECUTIVE</option>
-                  <option>FOR BACHELOR</option>
-                </select>
-              </div>
-              {/* no8 */}
-              <div className="mb-4 text-sm w-full sm:max-w-52">
-                <label className="block mb-2 text-sm text-gray-500">Sqft/Sqyd</label>
-                <span className="p-[2px] sm:p-0 flex flex-row justify-center items-center rounded-lg border-[1.5px] border-[#1F4B43]">
+              <div className=" w-full mb-4 mt-4 text-sm grid grid-cols-2   items-center justify-start ">
+                {/* no1 */}
+                <div className="mb-4 w-full">
+                  <label className="block mb-2 text-sm text-gray-500">
+                    Search
+                  </label>
                   <input
-                    type="number"
-                    placeholder="min"
-                    className="w-full sm:w-[40%] py-2 text-sm placeholder:text-[#1F4B43] text-center"
+                    type="text"
+                    onChange={(e) => {
+                      setFilterData((prev) => ({
+                        ...prev,
+                        UserTypedArea: e.target.value,
+                      }));
+                    }}
+                    value={filterData.UserTypedArea}
+                    placeholder="ENTER PROPERTY AREA"
+                    className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]"
                   />
-                  <label className="block w-[10%] mx-1 text-sm text-[#1F4B43]">To</label>
-                  <input
-                    type="number"
-                    placeholder="max"
-                    className="w-full sm:w-[40%] py-2 text-sm placeholder:text-[#1F4B43] text-center"
-                  />
-                </span>
+                </div>
+                {/* no2 */}
+                <div className="mb-4 text-sm w-full">
+                  <label className="block mb-2 text-sm text-gray-500">
+                    Residential Type
+                  </label>
+                  <select
+                    onChange={(e) => {
+                      handleFilterInput("resident", e);
+                    }}
+                    className="w-full sm:w-52  p-2 border-[1.5px] rounded-lg text-sm placeholder:text-[#1F4B43] border-[#1F4B43]"
+                  >
+                    <option value={"LowRiseApartment"}>
+                      LOW RISE APARTMENT
+                    </option>
+                    <option value={"HighRiseApartment"}>
+                      HIGH RISE APARTMENT
+                    </option>
+                    <option value={"Bungalow"}>BUNGALOW</option>
+                    <option value={"WeekendVillas"}>VILLAS</option>
+                    <option value={"Tenament"}>TENAMENT</option>
+                    <option value={"RowHouse"}>ROWHOUSE</option>
+                    <option value={"FarmHouse"}>FARM HOUSE</option>
+                  </select>
+                </div>
+                {/* no3 */}
+                <div className="w-full mb-4">
+                  <label className="block mb-2 text-sm text-gray-500">
+                    Sale/Rent
+                  </label>
+                  <select
+                    onChange={(e) => handleFilterInput("saleOrRent", e)}
+                    value={filterData.SaleOrRent}
+                    className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]"
+                  >
+                    <option value={""}>Select Option</option>
+                    <option value={"Buy"}>Buy</option>
+                    <option value={"Rent"}>Rent</option>
+                  </select>
+                </div>
+                {/* no4 */}
+                <div className="mb-4 text-sm w-full">
+                  <label className="block mb-2 text-sm text-gray-500">
+                    Residential Availability
+                  </label>
+                  <select
+                    onChange={(e) => {
+                      setFilterData((prev) => ({
+                        ...prev,
+                        Bhk: e.target.value,
+                      }));
+                    }}
+                    value={filterData.Bhk}
+                    className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg text-sm placeholder:text-[#1F4B43] border-[#1F4B43]"
+                  >
+                    <option value={""}>Select BHK</option>
+                    <option value={"oneBHK"}>1 BHK</option>
+                    <option value={"twoBHK"}>2 BHK</option>
+                    <option value={"threeBHK"}>3 BHK</option>
+                    <option value={"fourBHK"}>4 BHK</option>
+                    <option value={"fiveBHK"}>5 BHK</option>
+                    <option value={"sixBHK"}>6 BHK</option>
+                    <option value={"aboveSixBHK"}>Above 6 BHK</option>
+                    <option value={"duplex"}>Duplex</option>
+                    <option value={"pg"}>PG</option>
+                  </select>
+                </div>
+                {/* no5 */}
+                <div className="mb-4 text-sm w-full">
+                  <label className="block mb-2 text-sm text-gray-500">
+                    Residential Condition
+                  </label>
+                  <select
+                    onChange={(e) => handleFilterInput("condition", e)}
+                    value={filterData.Condition}
+                    className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg text-sm placeholder:text-[#1F4B43] border-[#1F4B43]"
+                  >
+                    <option value={"FullyFurnished"}>FULLY FURNISHED</option>
+                    <option value={"Furnished"}>FURNISHED</option>
+                    <option value={"SemiFurnished"}>SEMI FURNISHED</option>
+                    <option value={"FixFurnished"}>FIX-FURNISHED</option>
+                    <option value={"KitchenFix"}>KITCHEN FIX</option>
+                    <option value={"Unfurnished"}>UNFURNISHED</option>
+                  </select>
+                </div>
+                {/* no6 */}
+                <div className="mb-4 text-sm w-full">
+                  <label className="block mb-2 text-sm text-gray-500">
+                    Available For
+                  </label>
+                  <select
+                    onChange={(e) => {
+                      setFilterData((prev) => ({
+                        ...prev,
+                        Condition: e.target.value,
+                      }));
+                    }}
+                    value={filterData.Condition}
+                    className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg text-sm placeholder:text-[#1F4B43] border-[#1F4B43]"
+                  >
+                    <option value={"ForFamily"}>FOR FAMILY</option>
+                    <option value={"ForExecutive"}>FOR EXECUTIVE</option>
+                    <option value={"ForBachlore"}>FOR BACHELOR</option>
+                  </select>
+                </div>
+                {/* no8 */}
+                <div className="mb-4 text-sm w-full sm:max-w-52">
+                  <label className="block mb-2 text-sm text-gray-500">
+                    Sqft/Sqyd
+                  </label>
+                  <span className="p-[2px] sm:p-0 flex flex-row justify-center items-center rounded-lg border-[1.5px] border-[#1F4B43]">
+                    <input
+                      type="number"
+                      onChange={(e) => {
+                        setFilterData((prev) => ({
+                          ...prev,
+                          MinSqft: e.target.value,
+                        }));
+                      }}
+                      value={filterData.MinSqft}
+                      placeholder="min"
+                      className="w-full sm:w-[40%] py-2 text-sm placeholder:text-[#1F4B43] text-center"
+                    />
+                    <label className="block w-[10%] mx-1 text-sm text-[#1F4B43]">
+                      To
+                    </label>
+                    <input
+                      type="number"
+                      onChange={(e) => {
+                        setFilterData((prev) => ({
+                          ...prev,
+                          MaxSqft: e.target.value,
+                        }));
+                      }}
+                      value={filterData.MaxSqft}
+                      placeholder="max"
+                      className="w-full sm:w-[40%] py-2 text-sm placeholder:text-[#1F4B43] text-center"
+                    />
+                  </span>
+                </div>
+                {/* no7 */}
+                <div className="mb-4 text-sm w-full sm:max-w-52">
+                  <label className="block mb-2 text-sm text-gray-500">
+                    Budget
+                  </label>
+                  <span className=" p-[2px] sm:p-0 flex flex-row justify-center items-center rounded-lg border-[1.5px] border-[#1F4B43]">
+                    <input
+                      type="number"
+                      onChange={(e) => {
+                        setFilterData((prev) => ({
+                          ...prev,
+                          MinBudget: e.target.value,
+                        }));
+                      }}
+                      value={filterData.MinBudget}
+                      placeholder="min"
+                      className="w-full sm:w-[40%]  p-2 text-sm placeholder:text-[#1F4B43] text-center"
+                    />
+                    <label className="block w-[10%] mx-1 text-sm text-[#1F4B43]">
+                      To
+                    </label>
+                    <input
+                      type="number"
+                      onChange={(e) => {
+                        setFilterData((prev) => ({
+                          ...prev,
+                          MaxBudget: e.target.value,
+                        }));
+                      }}
+                      value={filterData.MaxBudget}
+                      placeholder="max"
+                      className="w-full sm:w-[40%] p-2 text-sm placeholder:text-[#1F4B43] text-center"
+                    />
+                  </span>
+                </div>
               </div>
-              {/* no7 */}
-              <div className="mb-4 text-sm w-full sm:max-w-52">
-                <label className="block mb-2 text-sm text-gray-500">Budget</label>
-                <span className=" p-[2px] sm:p-0 flex flex-row justify-center items-center rounded-lg border-[1.5px] border-[#1F4B43]">
-                  <input
-                    type="number"
-                    placeholder="min"
-                    className="w-full sm:w-[40%]  p-2 text-sm placeholder:text-[#1F4B43] text-center"
-                  />
-                  <label className="block w-[10%] mx-1 text-sm text-[#1F4B43]">To</label>
-                  <input
-                    type="number"
-                    placeholder="max"
-                    className="w-full sm:w-[40%] p-2 text-sm placeholder:text-[#1F4B43] text-center"
-                  />
-                </span>
-              </div>
-            </div>
-          </>
+            </>
           );
 
         case "Commercial":
           return (
             <>
-         <div className="mb-4 mx-4 sm:mx-6  mt-4 text-sm grid grid-cols-1 sm:grid-cols-2  gap-5 items-start justify-start ">
-  {/* Search */}
-  <div className="mb-4 w-full">
-    <label className="block mb-2 text-sm text-gray-500">Search</label>
-    <input
-      type="text"
-      placeholder="ENTER PROPERTY AREA"
-      className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]"
-    />
-  </div>
+              <div className="mb-4 mx-4 sm:mx-6  mt-4 text-sm grid grid-cols-1 sm:grid-cols-2  gap-5 items-start justify-start ">
+                {/* Search */}
+                <div className="mb-4 w-full">
+                  <label className="block mb-2 text-sm text-gray-500">
+                    Search
+                  </label>
+                  <input
+                    type="text"
+                    onChange={(e) => {
+                      setFilterData((prev) => ({
+                        ...prev,
+                        UserTypedArea: e.target.value,
+                      }));
+                    }}
+                    value={filterData.UserTypedArea}
+                    placeholder="ENTER PROPERTY AREA"
+                    className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]"
+                  />
+                </div>
 
-  {/* Commercial Availability */}
-  <div className="mb-4 text-sm">
-    <label className="block mb-2 text-sm text-gray-400">Commercial Availability</label>
-    <select className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg tex-sm placeholder:text-[#1F4B43] border-[#1F4B43]">
-      <option>OFFICE</option>
-      <option>SHOP</option>
-      <option>CO WORKING SPACE</option>
-      <option>READY TO MOVE OFFICE</option>
-      <option>WAREHOUSE</option>
-      <option>COLD STORAGE</option>
-      <option>OTHER</option>
-    </select>
-  </div>
+                {/* Commercial Availability */}
+                <div className="mb-4 text-sm">
+                  <label className="block mb-2 text-sm text-gray-400">
+                    Commercial Availability
+                  </label>
+                  <select
+                    onChange={(e) => {
+                      handleFilterInput("commercial", e);
+                    }}
+                    value={filterData.CommercialList}
+                    className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg tex-sm placeholder:text-[#1F4B43] border-[#1F4B43]"
+                  >
+                    <option value="">Select Option</option>
+                    <option value={"Office"}>OFFICE</option>
+                    <option value={"Shop"}>SHOP</option>
+                    <option value={"CoWorkingSpace"}>CO WORKING SPACE</option>
+                    <option value={"ReadyToMoveOffices"}>
+                      READY TO MOVE OFFICE
+                    </option>
+                    <option value={"Warehouse"}>WAREHOUSE</option>
+                    <option value={"ColdStorage"}>COLD STORAGE</option>
+                    <option value={"Other"}>OTHER</option>
+                  </select>
+                </div>
 
-  {/* Sale/Rent */}
-  <div className="mb-4 w-full">
-    <label className="block mb-2 text-sm text-gray-500">Sale/Rent</label>
-    <select className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]">
-      <option>Buy</option>
-      <option>Rent</option>
-    </select>
-  </div>
+                {/* Sale/Rent */}
+                <div className="mb-4 w-full">
+                  <label className="block mb-2 text-sm text-gray-500">
+                    Sale/Rent
+                  </label>
+                  <select
+                    onChange={(e) => handleFilterInput("saleOrRent", e)}
+                    value={filterData.SaleOrRent}
+                    className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]"
+                  >
+                    <option value={""}>Select Option</option>
+                    <option value={"Buy"}>Buy</option>
+                    <option value={"Rent"}>Rent</option>
+                  </select>
+                </div>
 
-  {/* Commercial Condition */}
-  <div className="mb-4 text-sm">
-    <label className="block mb-2 text-sm text-gray-400">Commercial Condition</label>
-    <select className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg tex-sm placeholder:text-[#1F4B43] border-[#1F4B43]">
-      <option>FULLY FURNISHED</option>
-      <option>FURNISHED</option>
-      <option>SEMI FURNISHED</option>
-      <option>FIX-FURNISHED</option>
-      <option>UNFURNISHED</option>
-    </select>
-  </div>
+                {/* Commercial Condition */}
+                <div className="mb-4 text-sm">
+                  <label className="block mb-2 text-sm text-gray-400">
+                    Commercial Condition
+                  </label>
+                  <select
+                    onChange={(e) => handleFilterInput("condition", e)}
+                    value={filterData.Condition}
+                    className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg text-sm placeholder:text-[#1F4B43] border-[#1F4B43]"
+                  >
+                    <option value={"FullyFurnished"}>FULLY FURNISHED</option>
+                    <option value={"Furnished"}>FURNISHED</option>
+                    <option value={"SemiFurnished"}>SEMI FURNISHED</option>
+                    <option value={"FixFurnished"}>FIX-FURNISHED</option>
+                    <option value={"KitchenFix"}>KITCHEN FIX</option>
+                    <option value={"Unfurnished"}>UNFURNISHED</option>
+                  </select>
+                </div>
 
-  {/* Sqft/Sqyd */}
-  <div className="mb-4 text-sm w-full sm:max-w-52">
-    <label className="block mb-2 text-sm text-gray-500">Sqft/Sqyd</label>
-    <span className="p-[2px] sm:p-0 flex flex-row justify-center items-center  rounded-lg border-[1.5px] border-[#1F4B43]">
-      <input
-        type="number"
-        placeholder="min"
-        className="w-full sm:w-[40%]  p-2 placeholder:text-[#1F4B43] text-center"
-      />
-      <label className="w-[10%]  text-sm text-[#1F4B43]">To</label>
-      <input
-        type="number"
-        placeholder="max"
-        className="w-full sm:w-[40%]  p-2 flex flex-row justify-center items-center placeholder:text-[#1F4B43] text-center"
-      />
-    </span>
-  </div>
+                {/* Sqft/Sqyd */}
+                <div className="mb-4 text-sm w-full sm:max-w-52">
+                  <label className="block mb-2 text-sm text-gray-500">
+                    Sqft/Sqyd
+                  </label>
+                  <span className="p-[2px] sm:p-0 flex flex-row justify-center items-center rounded-lg border-[1.5px] border-[#1F4B43]">
+                    <input
+                      type="number"
+                      onChange={(e) => {
+                        setFilterData((prev) => ({
+                          ...prev,
+                          MinSqft: e.target.value,
+                        }));
+                      }}
+                      value={filterData.MinSqft}
+                      placeholder="min"
+                      className="w-full sm:w-[40%] py-2 text-sm placeholder:text-[#1F4B43] text-center"
+                    />
+                    <label className="block w-[10%] mx-1 text-sm text-[#1F4B43]">
+                      To
+                    </label>
+                    <input
+                      type="number"
+                      onChange={(e) => {
+                        setFilterData((prev) => ({
+                          ...prev,
+                          MaxSqft: e.target.value,
+                        }));
+                      }}
+                      value={filterData.MaxSqft}
+                      placeholder="max"
+                      className="w-full sm:w-[40%] py-2 text-sm placeholder:text-[#1F4B43] text-center"
+                    />
+                  </span>
+                </div>
 
-  {/* Budget */}
-  <div className="mb-4 text-sm w-full sm:max-w-52">
-    <label className="block mb-2 text-sm text-gray-500">Budget</label>
-    <span className="p-[2px] sm:p-0 flex flex-row justify-center items-center  rounded-lg border-[1.5px] border-[#1F4B43]">
-      <input
-        type="number"
-        placeholder="min"
-        className="w-full sm:w-[40%]  p-2 tex-sm placeholder:text-[#1F4B43] text-center"
-      />
-      <label className="w-[10%]   text-sm text-[#1F4B43]">To</label>
-      <input
-        type="number"
-        placeholder="max"
-        className="w-full sm:w-[40%]  p-2 tex-sm placeholder:text-[#1F4B43] text-center"
-      />
-    </span>
-  </div>
-
-
-</div>
-  {/* Commercial Availability Type */}
-  <div className="mb-4 text-sm w-ful sm:w-[90%] md:w-[75%] mx-auto max-w-screen-lg">
-    <label className="block mb-2 text-sm text-gray-400">Commercial Availability Type</label>
-    <div className="w-full flex flex-wrap gap-4 p-2 rounded-lg text-sm">
-      {[
-        "BOSS CABIN",
-        "MANAGER CABIN",
-        "WORK STATION",
-        "CONFERENCE ROOM",
-        "PANTRY",
-        "RECEPTION",
-        "WAITING AREA",
-      ].map((item) => (
-        <label key={item} className="flex items-center space-x-2">
-          <input type="checkbox" className="form-checkbox text-[#1F4B43]" value={item} />
-          <span>{item}</span>
-        </label>
-      ))}
-    </div>
-  </div>
-          </>
+                {/* Budget */}
+                <div className="mb-4 text-sm w-full sm:max-w-52">
+                  <label className="block mb-2 text-sm text-gray-500">
+                    Budget
+                  </label>
+                  <span className=" p-[2px] sm:p-0 flex flex-row justify-center items-center rounded-lg border-[1.5px] border-[#1F4B43]">
+                    <input
+                      type="number"
+                      onChange={(e) => {
+                        setFilterData((prev) => ({
+                          ...prev,
+                          MinBudget: e.target.value,
+                        }));
+                      }}
+                      value={filterData.MinBudget}
+                      placeholder="min"
+                      className="w-full sm:w-[40%]  p-2 text-sm placeholder:text-[#1F4B43] text-center"
+                    />
+                    <label className="block w-[10%] mx-1 text-sm text-[#1F4B43]">
+                      To
+                    </label>
+                    <input
+                      type="number"
+                      onChange={(e) => {
+                        setFilterData((prev) => ({
+                          ...prev,
+                          MaxBudget: e.target.value,
+                        }));
+                      }}
+                      value={filterData.MaxBudget}
+                      placeholder="max"
+                      className="w-full sm:w-[40%] p-2 text-sm placeholder:text-[#1F4B43] text-center"
+                    />
+                  </span>
+                </div>
+              </div>
+              {/* Commercial Availability Type */}
+              <div className="mb-4 text-sm w-ful sm:w-[90%] md:w-[75%] mx-auto max-w-screen-lg">
+                <label className="block mb-2 text-sm text-gray-400">
+                  Commercial Availability Type
+                </label>
+                <div className="w-full flex flex-wrap gap-4 p-2 rounded-lg text-sm">
+                  {[
+                    "BOSS CABIN",
+                    "MANAGER CABIN",
+                    "WORK STATION",
+                    "CONFERENCE ROOM",
+                    "PANTRY",
+                    "RECEPTION",
+                    "WAITING AREA",
+                  ].map((item) => (
+                    <label key={item} className="flex items-center space-x-2">
+                      <input
+                        type="checkbox"
+                        onChange={handleCheckboxChange}
+                        checked={filterData.selectedFeatures.includes(item)}
+                        className="form-checkbox text-[#1F4B43]"
+                        value={item}
+                      />
+                      <span>{item}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+            </>
           );
 
         case "Industrial":
           return (
             <>
-             
-             <div className="mb-4 mx-4 mt-4 text-sm grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 items-center justify-start">
-  {/* Search */}
-  <div className="mb-4 w-full">
-    <label className="block mb-2 text-sm text-gray-500">Search</label>
-    <input
-      type="text"
-      placeholder="Search Area"
-      className="w-full p-2 border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]"
-    />
-  </div>
+              <div className="mb-4 mx-4 mt-4 text-sm grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 items-center justify-start">
+                {/* Search */}
+                <div className="mb-4 w-full">
+                  <label className="block mb-2 text-sm text-gray-500">
+                    Search
+                  </label>
+                  <input
+                    type="text"
+                    onChange={(e) => {
+                      setFilterData((prev) => ({
+                        ...prev,
+                        UserTypedArea: e.target.value,
+                      }));
+                    }}
+                    value={filterData.UserTypedArea}
+                    placeholder="Search Area"
+                    className="w-full p-2 border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]"
+                  />
+                </div>
 
-  {/* Industrial Type */}
-  <div className="mb-4 text-sm">
-    <label className="block mb-2 text-sm text-gray-500">Industrial Type</label>
-    <select className="w-full p-2 border-[1.5px] rounded-lg text-sm placeholder:text-[#1F4B43] border-[#1F4B43]">
-      <option>Ware House</option>
-      <option>Heavy Manufacturing</option>
-      <option>Light Manufacturing</option>
-      <option>Distribution Warehouse</option>
-      <option>General Warehouse</option>
-      <option>Flex Space</option>
-      <option>Showroom Buildings</option>
-      <option>Research and Development</option>
-      <option>Data Center</option>
-    </select>
-  </div>
+                {/* Industrial Type */}
+                <div className="mb-4 text-sm">
+                  <label className="block mb-2 text-sm text-gray-500">
+                    Industrial Type
+                  </label>
+                  <select
+                    onChange={(e) => {
+                      handleFilterInput("industrial", e);
+                    }}
+                    value={filterData.IndustrialList}
+                    className="w-full p-2 border-[1.5px] rounded-lg text-sm placeholder:text-[#1F4B43] border-[#1F4B43]"
+                  >
+                    <option value="">Select Industrial Type</option>
+                    <option value={"WareHouse"}>Ware House</option>
+                    <option value={"HeavyManufacturing"}>
+                      Heavy Manufacturing
+                    </option>
+                    <option value={"LightManufacturing"}>
+                      Light Manufacturing
+                    </option>
+                    <option value={"DistributionWarehouse"}>
+                      Distribution Warehouse
+                    </option>
+                    <option value={"GeneralWarehouse"}>
+                      General Warehouse
+                    </option>
+                    <option value={"FlexSpace"}>Flex Space</option>
+                    <option value={"ShowroomBuildings"}>
+                      Showroom Buildings
+                    </option>
+                    <option value={"ResearchAndDevelopment"}>
+                      Research and Development
+                    </option>
+                    <option value={"DataCenter"}>Data Center</option>
+                  </select>
+                </div>
 
-  {/* Rent/Buy */}
-  <div className="mb-4 w-full">
-    <label className="block mb-2 text-sm text-gray-500">Rent/Buy</label>
-    <select className="w-full p-2 border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]">
-      <option>Buy</option>
-      <option>Rent</option>
-    </select>
-  </div>
+                {/* Rent/Buy */}
+                <div className="mb-4 w-full">
+                  <label className="block mb-2 text-sm text-gray-500">
+                    Sale/Rent
+                  </label>
+                  <select
+                    onChange={(e) => handleFilterInput("saleOrRent", e)}
+                    value={filterData.SaleOrRent}
+                    className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]"
+                  >
+                    <option value={""}>Select Option</option>
+                    <option value={"Buy"}>Buy</option>
+                    <option value={"Rent"}>Rent</option>
+                  </select>
+                </div>
 
-  {/* Sqft/Sqyd */}
-  <div className="mb-4 text-sm w-full sm:max-w-52">
-    <label className="block mb-2 text-sm text-gray-500">Sqft/Sqyd</label>
-    <span className="p-[2px] sm:p-0 flex flex-row justify-center items-center rounded-lg border-[1.5px] border-[#1F4B43]">
-      <input
-        type="number"
-        placeholder="min"
-        className="w-full sm:w-[40%]  p-2  text-sm placeholder:text-[#1F4B43] text-center"
-      />
-      <label className="w-[10%] mx-1 text-sm text-[#1F4B43]">To</label>
-      <input
-        type="number"
-        placeholder="max"
-        className="w-full sm:w-[40%]  p-2  text-sm placeholder:text-[#1F4B43] text-center"
-      />
-    </span>
-  </div>
+                {/* Sqft/Sqyd */}
+                <div className="mb-4 text-sm w-full sm:max-w-52">
+                  <label className="block mb-2 text-sm text-gray-500">
+                    Sqft/Sqyd
+                  </label>
+                  <span className="p-[2px] sm:p-0 flex flex-row justify-center items-center rounded-lg border-[1.5px] border-[#1F4B43]">
+                    <input
+                      type="number"
+                      onChange={(e) => {
+                        setFilterData((prev) => ({
+                          ...prev,
+                          MinSqft: e.target.value,
+                        }));
+                      }}
+                      value={filterData.MinSqft}
+                      placeholder="min"
+                      className="w-full sm:w-[40%] py-2 text-sm placeholder:text-[#1F4B43] text-center"
+                    />
+                    <label className="block w-[10%] mx-1 text-sm text-[#1F4B43]">
+                      To
+                    </label>
+                    <input
+                      type="number"
+                      onChange={(e) => {
+                        setFilterData((prev) => ({
+                          ...prev,
+                          MaxSqft: e.target.value,
+                        }));
+                      }}
+                      value={filterData.MaxSqft}
+                      placeholder="max"
+                      className="w-full sm:w-[40%] py-2 text-sm placeholder:text-[#1F4B43] text-center"
+                    />
+                  </span>
+                </div>
 
-  {/* Budget */}
-  <div className="mb-4 text-sm w-full sm:max-w-52">
-    <label className="block mb-2 text-sm text-gray-500">Budget</label>
-    <span className="p-[2px] sm:p-0 flex flex-row justify-center items-center rounded-lg border-[1.5px] border-[#1F4B43]">
-      <input
-        type="number"
-        placeholder="min"
-        className="w-full sm:w-[40%]  p-2  text-sm placeholder:text-[#1F4B43] text-center"
-      />
-      <label className="w-[10%] mx-1 text-sm text-[#1F4B43]">To</label>
-      <input
-        type="number"
-        placeholder="max"
-        className="w-full sm:w-[40%]  p-2  text-sm placeholder:text-[#1F4B43] text-center"
-      />
-    </span>
-  </div>
-</div>
-
+                {/* Budget */}
+                <div className="mb-4 text-sm w-full sm:max-w-52">
+                  <label className="block mb-2 text-sm text-gray-500">
+                    Budget
+                  </label>
+                  <span className=" p-[2px] sm:p-0 flex flex-row justify-center items-center rounded-lg border-[1.5px] border-[#1F4B43]">
+                    <input
+                      type="number"
+                      onChange={(e) => {
+                        setFilterData((prev) => ({
+                          ...prev,
+                          MinBudget: e.target.value,
+                        }));
+                      }}
+                      value={filterData.MinBudget}
+                      placeholder="min"
+                      className="w-full sm:w-[40%]  p-2 text-sm placeholder:text-[#1F4B43] text-center"
+                    />
+                    <label className="block w-[10%] mx-1 text-sm text-[#1F4B43]">
+                      To
+                    </label>
+                    <input
+                      type="number"
+                      onChange={(e) => {
+                        setFilterData((prev) => ({
+                          ...prev,
+                          MaxBudget: e.target.value,
+                        }));
+                      }}
+                      value={filterData.MaxBudget}
+                      placeholder="max"
+                      className="w-full sm:w-[40%] p-2 text-sm placeholder:text-[#1F4B43] text-center"
+                    />
+                  </span>
+                </div>
+              </div>
             </>
           );
 
         case "Agricultural Plot":
           return (
             <>
-  <>
-             <div className="mb-4 mx-4 mt-4 text-sm grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 items-center justify-start">
-  {/* Search */}
-  <div className="mb-4 w-full">
-    <label className="block mb-2 text-sm text-gray-500">Search</label>
-    <input
-      type="text"
-      placeholder="Search Area"
-      className="w-full p-2 border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]"
-    />
-  </div>
+              <>
+                <div className="mb-4 mx-4 mt-4 text-sm grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 items-center justify-start">
+                  {/* Search */}
+                  <div className="mb-4 w-full">
+                    <label className="block mb-2 text-sm text-gray-500">
+                      Search
+                    </label>
+                    <input
+                      type="text"
+                      onChange={(e) => {
+                        setFilterData((prev) => ({
+                          ...prev,
+                          UserTypedArea: e.target.value,
+                        }));
+                      }}
+                      value={filterData.UserTypedArea}
+                      placeholder="Search Area"
+                      className="w-full p-2 border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]"
+                    />
+                  </div>
 
-  {/* Industrial Type */}
-  <div className="mb-4 text-sm">
-    <label className="block mb-2 text-sm text-gray-500">Industrial Type</label>
-    <select className="w-full p-2 border-[1.5px] rounded-lg text-sm placeholder:text-[#1F4B43] border-[#1F4B43]">
-      <option>Ware House</option>
-      <option>Heavy Manufacturing</option>
-      <option>Light Manufacturing</option>
-      <option>Distribution Warehouse</option>
-      <option>General Warehouse</option>
-      <option>Flex Space</option>
-      <option>Showroom Buildings</option>
-      <option>Research and Development</option>
-      <option>Data Center</option>
-    </select>
-  </div>
+                  {/* Plot and land */}
+                  <div className="mb-4 text-sm">
+                    <label className="block mb-2 text-sm text-gray-500">
+                      Type
+                    </label>
+                    <select
+                      onChange={(e) => {
+                        handleFilterInput("plotandland", e);
+                      }}
+                      className="w-full p-2 border-[1.5px] rounded-lg text-sm placeholder:text-[#1F4B43] border-[#1F4B43]"
+                    >
+                      <option value="">Select Plot</option>
+                      <option value={"ResidentialPlot"}>
+                        Residential Plot
+                      </option>
+                      <option value={"CommercialPlot"}>Commercial Plot</option>
+                      <option value={"IndustrialPlot"}>Industrial Plot</option>
+                      <option value={"AgriculturalLand"}>
+                        Agricultural Land
+                      </option>
+                      <option value={"NonAgriculturalLand"}>
+                        Non Agricultural Land
+                      </option>
+                      <option value={"WeekendVillaSite"}>
+                        Weekend Villa Site
+                      </option>
+                    </select>
+                  </div>
 
-  {/* Rent/Buy */}
-  <div className="mb-4 w-full">
-    <label className="block mb-2 text-sm text-gray-500">Rent/Buy</label>
-    <select className="w-full p-2 border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]">
-      <option>Buy</option>
-      <option>Rent</option>
-    </select>
-  </div>
+                  {/* Rent/Buy */}
+                  <div className="mb-4 w-full">
+                    <label className="block mb-2 text-sm text-gray-500">
+                      Sale/Rent
+                    </label>
+                    <select
+                      onChange={(e) => handleFilterInput("saleOrRent", e)}
+                      value={filterData.SaleOrRent}
+                      className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]"
+                    >
+                      <option value={""}>Select Option</option>
+                      <option value={"Buy"}>Buy</option>
+                      <option value={"Rent"}>Rent</option>
+                    </select>
+                  </div>
 
-  {/* Sqft/Sqyd */}
-  <div className="mb-4 text-sm w-full sm:max-w-52">
-    <label className="block mb-2 text-sm text-gray-500">Sqft/Sqyd</label>
-    <span className="p-[2px] sm:p-0 flex flex-row justify-center items-center rounded-lg border-[1.5px] border-[#1F4B43]">
-      <input
-        type="number"
-        placeholder="min"
-        className="w-full sm:w-[40%]  p-2  text-sm placeholder:text-[#1F4B43] text-center"
-      />
-      <label className="w-[10%] mx-1 text-sm text-[#1F4B43]">To</label>
-      <input
-        type="number"
-        placeholder="max"
-        className="w-full sm:w-[40%]  p-2  text-sm placeholder:text-[#1F4B43] text-center"
-      />
-    </span>
-  </div>
+                  {/* Sqft/Sqyd */}
+                  <div className="mb-4 text-sm w-full sm:max-w-52">
+                    <label className="block mb-2 text-sm text-gray-500">
+                      Sqft/Sqyd
+                    </label>
+                    <span className="p-[2px] sm:p-0 flex flex-row justify-center items-center rounded-lg border-[1.5px] border-[#1F4B43]">
+                      <input
+                        type="number"
+                        onChange={(e) => {
+                          setFilterData((prev) => ({
+                            ...prev,
+                            MinSqft: e.target.value,
+                          }));
+                        }}
+                        value={filterData.MinSqft}
+                        placeholder="min"
+                        className="w-full sm:w-[40%] py-2 text-sm placeholder:text-[#1F4B43] text-center"
+                      />
+                      <label className="block w-[10%] mx-1 text-sm text-[#1F4B43]">
+                        To
+                      </label>
+                      <input
+                        type="number"
+                        onChange={(e) => {
+                          setFilterData((prev) => ({
+                            ...prev,
+                            MaxSqft: e.target.value,
+                          }));
+                        }}
+                        value={filterData.MaxSqft}
+                        placeholder="max"
+                        className="w-full sm:w-[40%] py-2 text-sm placeholder:text-[#1F4B43] text-center"
+                      />
+                    </span>
+                  </div>
 
-  {/* Budget */}
-  <div className="mb-4 text-sm w-full sm:max-w-52">
-    <label className="block mb-2 text-sm text-gray-500">Budget</label>
-    <span className="p-[2px] sm:p-0 flex flex-row justify-center items-center rounded-lg border-[1.5px] border-[#1F4B43]">
-      <input
-        type="number"
-        placeholder="min"
-        className="w-full sm:w-[40%]  p-2  placeholder:text-[#1F4B43] text-center"
-      />
-      <label className="w-[10%] mx-1 text-sm text-[#1F4B43]">To</label>
-      <input
-        type="number"
-        placeholder="max"
-        className="w-full sm:w-[40%]  p-2  placeholder:text-[#1F4B43] text-center"
-      />
-    </span>
-  </div>
-</div>
-
-            </>
-
+                  {/* Budget */}
+                  <div className="mb-4 text-sm w-full sm:max-w-52">
+                    <label className="block mb-2 text-sm text-gray-500">
+                      Budget
+                    </label>
+                    <span className=" p-[2px] sm:p-0 flex flex-row justify-center items-center rounded-lg border-[1.5px] border-[#1F4B43]">
+                      <input
+                        type="number"
+                        onChange={(e) => {
+                          setFilterData((prev) => ({
+                            ...prev,
+                            MinBudget: e.target.value,
+                          }));
+                        }}
+                        value={filterData.MinBudget}
+                        placeholder="min"
+                        className="w-full sm:w-[40%]  p-2 text-sm placeholder:text-[#1F4B43] text-center"
+                      />
+                      <label className="block w-[10%] mx-1 text-sm text-[#1F4B43]">
+                        To
+                      </label>
+                      <input
+                        type="number"
+                        onChange={(e) => {
+                          setFilterData((prev) => ({
+                            ...prev,
+                            MaxBudget: e.target.value,
+                          }));
+                        }}
+                        value={filterData.MaxBudget}
+                        placeholder="max"
+                        className="w-full sm:w-[40%] p-2 text-sm placeholder:text-[#1F4B43] text-center"
+                      />
+                    </span>
+                  </div>
+                </div>
+              </>
             </>
           );
 
@@ -557,9 +986,7 @@ function Properties() {
               </h2>
 
               {/* Dynamic Filters */}
-              <div className="text-sm  gap-4">
-                {renderFilters()}
-              </div>
+              <div className="text-sm  gap-4">{renderFilters()}</div>
 
               {/* Apply Filters Button */}
               <button
@@ -650,7 +1077,7 @@ function Properties() {
           className="text-[.7rem] w-auto rounded-lg text-gray-500 
        border-gray-400"
         >
-          Results {data?.length} Properties
+          Results {mainData?.length} Properties
         </p>
       </div>
 

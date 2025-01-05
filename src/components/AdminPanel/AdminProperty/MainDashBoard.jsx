@@ -9,7 +9,7 @@ export default function MainDashBoard() {
     {
       title: "Post Property",
       value: "1,200",
-      goal:"1800",
+      goal: "1800",
       description: "Total Post",
       progressColor: "#ef476f",
       percentage: 30,
@@ -17,7 +17,7 @@ export default function MainDashBoard() {
     {
       title: "Total Enquiry Today",
       value: "800",
-      goal:"1800",
+      goal: "1800",
       description: "Enquiries Today",
       progressColor: "#4ecdae",
       percentage: 25,
@@ -25,7 +25,7 @@ export default function MainDashBoard() {
     {
       title: "Total Requirement Today",
       value: "1,500",
-      goal:"1800",
+      goal: "1800",
       description: "Requirements Today",
       progressColor: "#ff9f1c",
       percentage: 18,
@@ -46,7 +46,9 @@ export default function MainDashBoard() {
                 <div className="mb-2">
                   <HomeSvg />
                 </div>
-                <p className="font-sans mb-1">{card.value} / {card.goal}</p>
+                <p className="font-sans mb-1">
+                  {card.value} / {card.goal}
+                </p>
                 <p className="font-mono text-[#4ecdae]">{card.description} </p>
               </div>
               <div className="flex flex-col justify-between">

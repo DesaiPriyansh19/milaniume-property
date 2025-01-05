@@ -13,6 +13,7 @@ export default function AddProperty({ addNew, handleEdit }) {
     ForSale: true,
     ForRent: false,
     Featured: false,
+    Verified: true,
     Prices: {
       SalesPrice: "",
       RentPrice: "",
@@ -149,6 +150,7 @@ export default function AddProperty({ addNew, handleEdit }) {
       SouthWest: false,
       West: false,
     },
+    PropertyDescription: "",
   });
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -592,7 +594,7 @@ export default function AddProperty({ addNew, handleEdit }) {
           </div>
 
           <section className="mb-4">
-            <h2 className="text-2xl font-bold mb-4">Property Photos (URLs)</h2>
+            <p className="text-base font-bold">Property Photos (URLs)</p>
             {formData?.PropertyPhotos?.map((photo, index) => (
               <div key={index} className="flex items-center">
                 <div className="mb-4 w-full">
@@ -649,6 +651,18 @@ export default function AddProperty({ addNew, handleEdit }) {
               />
             </div>
           </section>
+          <div className="w-full mb-4">
+            <InputField
+              label="Property Description"
+              type="textarea"
+              name="PropertyDescription"
+              placeholder="Enter Property Description"
+              value={formData.PropertyDescription}
+              onChange={handleInputChange}
+              autoComplete="propertydescription"
+              variant={1}
+            />
+          </div>
         </form>
       </div>
     </div>

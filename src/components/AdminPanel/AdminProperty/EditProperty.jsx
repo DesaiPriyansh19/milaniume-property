@@ -185,6 +185,21 @@ export default function EditProperty({
                   ]}
                 />
               </div>
+              <div className="mb-4  h-full  w-full">
+                <InputField
+                  label="Verified"
+                  type="select"
+                  name="Verified"
+                  value={formData.Verified}
+                  onChange={handleInputChange}
+                  multiple={false}
+                  variant={1}
+                  options={[
+                    { value: true, label: "True" },
+                    { value: false, label: "False" },
+                  ]}
+                />
+              </div>
             </div>
             {/* CheckBoxes */}
             <div
@@ -496,9 +511,9 @@ export default function EditProperty({
             </div>
 
             <section className="mb-4">
-              <h2 className="text-2xl font-bold mb-4">
+              <p className="text-base font-bold ">
                 Property Photos (URLs)
-              </h2>
+              </p>
               {formData?.PropertyPhotos.map((photo, index) => (
                 <div key={index} className="flex items-center">
                   <div className="mb-4 w-full">
@@ -555,6 +570,19 @@ export default function EditProperty({
                 />
               </div>
             </section>
+
+            <div className="w-full mb-4">
+              <InputField
+                label="Property Description"
+                type="textarea"
+                name="PropertyDescription"
+                placeholder="Enter Property Description"
+                value={formData.PropertyDescription}
+                onChange={handleInputChange}
+                autoComplete="propertydescription"
+                variant={1}
+              />
+            </div>
           </form>
         </div>
       </div>

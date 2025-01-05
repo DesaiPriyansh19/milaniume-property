@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import bgImg from "../../assets/pexels-clubhouseconvos-13620073.jpg";
 import PropertyCards from "./PropertyCards";
-
+import { FiSearch } from "react-icons/fi"; // Import the search icon from React Icons
 import AOS from "aos";
 import "aos/dist/aos.css"; // Import AOS styles
 import useFetch from "../../../hooks/useFetch";
 import SkeletonLoader from "../SkeletonLoader";
-
+import FilterLogo from '../../../svg/Icon/FilterLogo/Index';
 function Properties() {
   const [activeTab, setActiveTab] = useState("Residential");
   const [isModalOpen, setIsModalOpen] = useState(false); // Moved here
@@ -700,7 +700,7 @@ function Properties() {
                   <select
                     onChange={(e) => handleFilterInput("saleOrRent", e)}
                     value={filterData.SaleOrRent}
-                    className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]"
+                    className="w-full  p-2 border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]"
                   >
                     <option value={""}>Select Option</option>
                     <option value={"Buy"}>Buy</option>
@@ -844,7 +844,7 @@ function Properties() {
                     <select
                       onChange={(e) => handleFilterInput("saleOrRent", e)}
                       value={filterData.SaleOrRent}
-                      className="w-full sm:w-52 p-2 border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]"
+                      className="w-full sm:w-auto  p-2 border-[1.5px] rounded-lg placeholder:text-[#1F4B43] border-[#1F4B43]"
                     >
                       <option value={""}>Select Option</option>
                       <option value={"Buy"}>Buy</option>
@@ -936,7 +936,7 @@ function Properties() {
     return (
       <div>
         {/* Tabs */}
-        <div className="flex gap-4 mb-4 mx-auto">
+        <div className=" hidden gap-4  mx-auto">
           {["Residential", "Commercial", "Industrial", "Agricultural Plot"].map(
             (tab) => (
               <button
@@ -954,15 +954,20 @@ function Properties() {
           )}
         </div>
 
-        {/* Filter Button */}
+    <div className="w-full flex justify-center items-center">    {/* Filter Button */}
         <button
           type="button"
           onClick={openModal}
-          className="px-4 py-2 bg-[#1F4B43] text-white rounded-lg"
+          className="sm:px-9 xl:px-11 w-full sm:w-auto  flex items-center justify-center  py-2 text-sm xl:text-lg bg-[#1F4B43] text-white rounded-lg"
         >
-          Filter
+          <span className="mr-1">
+    <FiSearch className="" /> {/* Search icon */}
+  </span>
+         Search & Filter <span className="mx-1">
+                <FilterLogo />
+              </span>
         </button>
-
+        </div>
         {/* Filter Modal */}
         {isModalOpen && (
           <div
@@ -1060,15 +1065,7 @@ function Properties() {
           {/* Dynamic Inputs */}
           {renderAdditionalInputs()}
 
-          {/* Submit Button */}
-          <div className="w-[100%] flex justify-center items-center">
-            <button
-              className="w-[100%] px-1 py-1  md:w-[20%] text-sm border-[1.2px] text-white
-               bg-[#1F4B43] border-[#1F4B43] rounded-lg"
-            >
-              Search
-            </button>
-          </div>
+       
         </form>
       </div>
 

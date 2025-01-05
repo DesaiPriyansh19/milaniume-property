@@ -1,11 +1,13 @@
 import React from "react";
 import logo from "../../src/assets/logo final PNG.png";
+import { FaFacebook, FaInstagram } from "react-icons/fa";
+import { Link } from "react-router-dom";
 const Footer = () => {
   return (
-    <footer className="bg-gray-50 mt-10 mb-3 text-gray-black border-t border-gray-200">
+    <footer className="bg-gray-50 mt-10 pt-20 mb-3 text-gray-black border-t border-gray-200">
       <div className="container mx-auto px-6 lg:px-16 pt-12">
         {/* Grid Section */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* About Us */}
           <div>
              <img
@@ -19,20 +21,55 @@ const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h3 className="text-xl font-bold mb-4">Quick Links</h3>
-            <ul className="sm:space-y-3   mx-auto flex  justify-between  text-start sm:grid ">
-              {["Home", "AboutUs", "Property", "Service", "Quick Contact"].map((link, index) => (
-                <li key={index}>
-                  <a
-                    href="#"
-                    className="hover:text-gray-900 transition text-sm"
-                  >
-                    {link}
-                  </a>
-                </li>
-              ))}
-            </ul>
+          <div  className="flex flex-col lg:w-[60%] ml-20">
+            <h3 className="text-xl text-center font-bold mb-4">Other Pages</h3>
+            <ul className="sm:space-y-3 mx-auto flex justify-between text-start sm:grid">
+      {[
+        { name: "Home", path: "/" },
+        { name: "AboutUs", path: "/aboutus" },
+        { name: "Property", path: "/properties" },
+        { name: "Service", path: "/ourservices" },
+        { name: "Contact US", path: "/quick-contact" },
+      ].map((link, index) => (
+        <li key={index}>
+          <Link
+            to={link.path}
+            className="hover:text-gray-900 transition text-sm"
+          >
+            {link.name}
+          </Link>
+        </li>
+      ))}
+    </ul>
+          </div>
+            {/* Quick Links */}
+            <div  className="flex flex-col">
+            <h3 className="text-xl text-center font-bold mb-4">Quick Links</h3>
+            <ul className="sm:space-y-3 mx-auto flex justify-between text-start sm:grid">
+  {/* Facebook Logo */}
+  <li>
+    <a
+      href="https://www.facebook.com"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="hover:text-gray-900 transition text-sm flex items-center"
+    >
+      <FaFacebook size={24} className="mr-2" />
+    </a>
+  </li>
+
+  {/* Instagram Logo */}
+  <li>
+    <a
+      href="https://www.instagram.com"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="hover:text-gray-900 transition text-sm flex items-center"
+    >
+      <FaInstagram size={24} className="mr-2" />
+    </a>
+  </li>
+</ul>
           </div>
 
           {/* Contact Info */}
@@ -40,21 +77,23 @@ const Footer = () => {
             <h3 className="text-xl font-bold mb-4">Contact Us</h3>
             <ul className="space-y-3 text-sm text-black">
               <li className="flex items-center">
-              <a href="https://maps.app.goo.gl/bkNkxzhDT4JGRuWL6"> <span className="mr-2">📍</span> C/491, Ganesh Glory 11, Nr. Money Plant Highstreet, 
+              <span className="mr-2 items-start justify-start  ">📍</span>
+              <a href="https://maps.app.goo.gl/bkNkxzhDT4JGRuWL6">
+               C/491, Ganesh Glory 11, Nr. Money Plant Highstreet, 
                 Jagtpur Road, Gota, Ahmedabad -382481</a> 
               </li>
       
                 <li className="flex items-center">
-                <span className="mr-2">📞</span>
+                <span className="mr-2 ">📞</span>
                 <a href="tel:9898992554" className="hover:text-gray-900">
-               MayurBhai Desai:9898992554 
+               Founder:9898992554 
 
                 </a>
               </li>
               <li className="flex items-center">
                 <span className="mr-2">📞</span>
                 <a href="tel:9898152554" className="hover:text-gray-900">
-                Rutvik Desai:9898152554  
+                   Manager:9898152554  
 
                 </a>
               </li>

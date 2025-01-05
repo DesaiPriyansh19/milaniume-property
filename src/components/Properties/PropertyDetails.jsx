@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import img2 from '../../assets/slider1.jpg.png'
 import img from '../../assets/property_2_-853gCunl--transformed.webp'
+import bgImg from "../../assets/pexels-clubhouseconvos-13620073.jpg";
 const PropertyDetailPage = () => {
   const images = [
   img,
@@ -23,6 +24,33 @@ const PropertyDetailPage = () => {
   };
 
   return (
+  <>
+   <div className="relative w-full mb-0 pb-0">
+    {/* Background Image with Blur */}
+    <img
+      src={bgImg}
+      alt="Background"
+      className="w-full h-[500px] sm:h-[500px] md:h-[600px] object-cover object-top filter blur-[0px]"
+    />
+
+    {/* Dark Overlay */}
+    <div className="absolute inset-0 bg-black opacity-[0.3] z-10"></div>
+
+    {/* Text Content */}
+    <div
+      className="absolute mt-[100px] sm:mt-[50px] text-center inset-0 flex flex-col justify-center items-center text-white z-20"
+      style={{
+        textShadow: "4px 4px 8px rgba(1, 1, 0.9, 0.1)",
+      }}
+    >
+      <h1 className="text-white text-3xl sm:text-3xl md:text-5xl px-2 md:px-0 font-normal">
+    View Property Details
+      </h1>
+      <p className="text-white mt-2 md:mt-4 px-2 sm:px-0 text-center text-sm md:text-base lg:text-lg font-normal">
+        Find Your Perfect Property – Where Your Search Ends.
+      </p>
+    </div>
+  </div>
     <section className="bg-white py-16 px-8 sm:px-16 lg:px-32">
       <div className="max-w-screen-xl mx-auto">
         {/* Hero Section with Carousel */}
@@ -38,7 +66,7 @@ const PropertyDetailPage = () => {
             {/* Left Button */}
             <button
               onClick={handlePrev}
-              className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-70 transition-all"
+              className="absolute top-1/2  md:top-[90%] left-4 md:left-20 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-70 transition-all"
             >
               &#8592;
             </button>
@@ -46,7 +74,7 @@ const PropertyDetailPage = () => {
             {/* Right Button */}
             <button
               onClick={handleNext}
-              className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-70 transition-all"
+              className="absolute top-1/2 md:top-[90%] right-4 md:right-20 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-70 transition-all"
             >
               &#8594;
             </button>
@@ -62,8 +90,8 @@ const PropertyDetailPage = () => {
           </div>
           <div className="w-full sm:w-1/2 flex flex-col sm:flex-row justify-between">
             <div className="bg-gray-50 p-6 rounded-lg shadow-lg mb-6 sm:mb-0 sm:w-1/3">
-              <h4 className="text-xl font-semibold text-gray-800">Size</h4>
-              <p className="text-lg text-gray-600">1,500 sq ft</p>
+              <h4 className="text-xl font-semibold text-gray-800">Area</h4>
+              <p className="text-sm text-gray-600">1,500 sq ft</p>
             </div>
             <div className="bg-gray-50 p-6 rounded-lg shadow-lg mb-6 sm:mb-0 sm:w-1/3">
               <h4 className="text-xl font-semibold text-gray-800">Bedrooms</h4>
@@ -115,7 +143,7 @@ const PropertyDetailPage = () => {
           </div>
         </div>
       </div>
-    </section>
+    </section></>
   );
 };
 

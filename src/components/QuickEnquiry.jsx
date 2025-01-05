@@ -85,7 +85,7 @@ const QuickEnquiry = () => {
             C-401, Ganesh Glory 11,Nr. Moneyplant Highstreet,Jagatpur Road,
             Gota, Ahmedabad-382481
           </p>
-          <div className="map-container w-full h-64">
+          <div className="map-container w-full h-[80%]">
             {/* Replace the coordinates with your office's latitude and longitude */}
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m13!1m8!1m3!1d7339.078095836263!2d72.538186!3d23.113964!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjPCsDA2JzUwLjMiTiA3MsKwMzInMjYuNyJF!5e0!3m2!1sen!2sin!4v1735298228605!5m2!1sen!2sin"
@@ -134,7 +134,25 @@ const QuickEnquiry = () => {
               required={true}
               variant={3}
             />
-
+             <div className="mb-4 text-sm w-full">
+                  <label className="block mb-2 text-sm text-gray-500">
+                    Residential Type
+                  </label>
+                  <select
+                    
+                    className="w-full   p-2 border-[1.5px] rounded-lg text-sm placeholder:text-[#1F4B43] border-[#1F4B43]"
+                  >
+                    <option value={"LowRiseApartment"}>
+                    Property
+                    </option>
+                    <option value={"HighRiseApartment"}>
+                     Inerior
+                    </option>
+                    <option value={"Bungalow"}>Loan & Finance</option>
+                    <option value={"WeekendVillas"}>VILLAS</option>
+                  
+                  </select>
+                </div>
             <InputField
               label="Message"
               type="textarea"

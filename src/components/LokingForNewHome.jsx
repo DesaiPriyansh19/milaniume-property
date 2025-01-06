@@ -20,22 +20,23 @@ function LokingForNewHome() {
   <div className="flex-1 bg-[#F9F9F9] 
        p-6 rounded-lg relative xl:h-[350px] xl:w-[700px] 
        xl:max-w-[700px] max-w-full">
-    <h4 className="text-xl md:text-lg font-medium mb-2">
-      Looking for the new Property?
-    </h4>
-    <p className="text-[.7rem] mb-8 pr-11">
-      Many offers every day. Don't miss offers <br />on-site, trusted by a community of thousands of users.
-    </p>
-    <Link to={'/properties'}>
-      <button className="bg-[#1F4B43] text-sm text-white px-6 py-2 rounded-lg transition-transform transform hover:scale-105 hover:shadow-lg">
-        Get Started &#8594;
-      </button>
-    </Link>
-    {/* Small "A" at Bottom Right */}
-    <span className="absolute bottom-4 right-4 w-[60px] md:w-[90px] xl:w-[190px]">
-      <img src={homimg2} alt="Property" />
-    </span>
-  </div>
+  <h4 className="text-xl md:text-lg font-medium mb-2">
+    Share Your Requirements
+  </h4>
+  <p className="text-[.7rem] mb-8 pr-11">
+    Let us know your specific needs, and we'll help you find the best match.<br /> 
+  </p>
+  <Link to={'/yourrequirments'}>
+    <button className="bg-[#1F4B43] text-sm text-white px-6 py-2 rounded-lg transition-transform transform hover:scale-105 hover:shadow-lg">
+      Fill the Form &#8594;
+    </button>
+  </Link>
+  {/* Small "A" at Bottom Right */}
+  <span className="absolute bottom-4 right-4 w-[60px] md:w-[90px] xl:w-[190px]">
+    <img src={homimg2} alt="Requirements" />
+  </span>
+</div>
+
 
   {/* Second Div */}
   <div className="flex-1 bg-[#FFF8F6] 

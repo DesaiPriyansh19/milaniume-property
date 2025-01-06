@@ -1,5 +1,7 @@
 import React from 'react'
 import image from '../assets/Agent.jpg'
+import { FaGlobe } from "react-icons/fa";
+import { FaReact } from "react-icons/fa";
 import { Link } from 'react-router-dom'
 function WeUseRealestate() {
   return (
@@ -29,21 +31,31 @@ function WeUseRealestate() {
     {/* Four Small Divs */}
     <div className="grid grid-cols-2 gap-4 mb-12">
       <div className="p-2 text-center sm:text-start rounded-lg">
-        <h3 className="text-3xl xl:text-4xl font-normal xl:font-normal">10k+</h3>
-        <p className="text-lg xl:text-xl font-thin">Customers</p>
+        <h3 className="text-3xl xl:text-4xl font-normal xl:font-normal">12k+</h3>
+        <p className="text-lg xl:text-xl font-thin">Years Of Experiance</p>
       </div>
       <div className="p-2 rounded-lg text-center sm:text-start">
-        <h3 className="text-3xl xl:text-4xl font-normal xl:font-normal">15k</h3>
-        <p className="text-lg xl:text-xl font-thin">Properties for Sell</p>
+        <h3 className="text-3xl xl:text-4xl font-normal xl:font-normal">26k+</h3>
+        <p className="text-lg xl:text-xl font-thin">Properties For Buy</p>
       </div>
       <div className="p-2 rounded-lg text-center sm:text-start">
         <h3 className="text-3xl xl:text-4xl font-normal xl:font-normal">26K+</h3>
         <p className="text-lg xl:text-xl font-thin">Properties for Buy</p>
       </div>
       <div className="p-2 rounded-lg text-center sm:text-start">
-        <h3 className="text-3xl xl:text-4xl font-normal xl:font-normal">890</h3>
-        <p className="text-lg xl:text-xl font-thin">Daily completed transactions.</p>
+        <h3 className="text-3xl xl:text-4xl font-normal xl:font-normal">15k+</h3>
+        <p className="text-lg xl:text-xl font-thin">Properties for sell</p>
       </div>
+      <div className="p-2 rounded-lg text-center sm:text-start">
+        <h3 className="text-3xl xl:text-4xl font-normal xl:font-normal">125+</h3>
+        <p className="text-lg xl:text-xl font-thin">Work With Project</p>
+      </div>
+      <div className="flex items-center justify-start ml-2 h-full">
+  <div className="text-center">
+    <FaGlobe className="text-3xl  mx-auto" />
+    <p className="text-lg font-thin mt-2">World Wide</p>
+  </div>
+</div>
     </div>
 
     {/* Learn More Button */}

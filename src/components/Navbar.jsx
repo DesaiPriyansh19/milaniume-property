@@ -67,98 +67,105 @@ const Navbar = ({ handlePopupOpen }) => {
           <img
             src={logo}
             alt="Logo 1"
-            className="mx-2 w-[70px] sm:mx-0 sm:w-[90px] md:w-[80px] xl:w-[90px]  "
+            className="mx-2 w-[70px] sm:mx-0 sm:w-[90px] md:w-[80px] xl:w-[90px] transition-transform duration-500 ease-in-out hover:brightness-110 "
           />
-          {/* Nav links for large devices */}
-          <div className="hidden lg:flex text-[.8rem] xl:text-[1rem] px-28 xl:px-80   space-x-6 xl:space-x-8 mx-auto">
-            <Link
-              to="/"
-              className="text-white px-2 hover:text-[#E7C873] hover:border-b-[1px]"
-            >
-              Home
-            </Link>
-            <Link
-              to="/aboutus"
-              className="text-white hover:text-[#E7C873] hover:border-b-[1px]"
-            >
-              AboutUs
-            </Link>
-            <Link
-              to="/properties"
-              className="text-white hover:text-[#E7C873] hover:border-b-[1px]"
-            >
-              Property
-            </Link>
-            <Link
-              to="/ourservices"
-              className="text-white hover:text-[#E7C873] hover:border-b-[1px]"
-            >
-              Service
-            </Link>
+    {/* Nav links for large devices */}
+<div className="hidden lg:flex text-[.8rem] xl:text-[1rem] px-28 xl:px-80 space-x-6 xl:space-x-8 mx-auto">
+  <Link
+    to="/"
+    className="text-white relative transition px-2 group"
+  >
+    Home
+    <span className="absolute left-0 bottom-0 w-0 h-[1.5px] bg-[#E7C873] transition-all duration-300 group-hover:w-full"></span>
+  </Link>
+  <Link
+    to="/aboutus"
+    className="text-white relative transition group"
+  >
+    AboutUs
+    <span className="absolute left-0 bottom-0 w-0 h-[1.5px] bg-[#E7C873] transition-all duration-300 group-hover:w-full"></span>
+  </Link>
+  <Link
+    to="/properties"
+    className="text-white relative transition group"
+  >
+    Property
+    <span className="absolute left-0 bottom-0 w-0 h-[1.5px] bg-[#E7C873] transition-all duration-300 group-hover:w-full"></span>
+  </Link>
+  <Link
+    to="/ourservices"
+    className="text-white relative transition group"
+  >
+    Service
+    <span className="absolute left-0 bottom-0 w-0 h-[1.5px] bg-[#E7C873] transition-all duration-300 group-hover:w-full"></span>
+  </Link>
 
-            <Link
-              to={"/quickenquiry"}
-              className="text-white hover:text-[#E7C873] hover:border-b-[1px]"
-            >
-              Quick Contact
-            </Link>
-          </div>
+  <Link
+    to={"/quickenquiry"}
+    className="text-white relative transition group"
+  >
+    Quick Contact
+    <span className="absolute left-0 bottom-0 w-0 h-[1.5px] bg-[#E7C873] transition-all duration-300 group-hover:w-full"></span>
+  </Link>
+</div>
+
         </div>
 
         {/* Right: Contact and Menu */}
         <div className="flex items-center space-x-3 pr-4 lg:pr-1">
-          {/* Mobile view: Call icon and number */}
+  {/* Mobile view: Call icon and number */}
+  <div className="lg:hidden flex items-center">
+    <a href="tel:+1234567890" className="w-6 h-6 hover:text-blue-500 transition-colors duration-300">
+      <Call />
+    </a>
+  </div>
 
-          <div className="lg:hidden flex items-center">
-            <a href="tel:+1234567890" className="w-6 h-6 ">
-              <Call />
-            </a>
-          </div>
-          <span className="w-9 h-9 md:hidden flex items-center justify-start">
-            <MyProfileLogo />
-          </span>
-          {/* Hamburger menu for small devices */}
-          <button
-            className="lg:hidden text-white"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            <svg
-              className="w-8 h-8"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16m-7 6h7"
-              />
-            </svg>
-          </button>
-          {/* Button and Contact for large devices */}
-          <div className="hidden lg:flex items-center justify-center space-x-4">
-            <a href="tel:+1234567890" className="w-6 h-6  ">
-              <Call />
-            </a>
+  <span className="w-9 h-9 md:hidden flex items-center justify-start hover:rotate-6 transition-transform duration-300">
+    <MyProfileLogo />
+  </span>
 
-            <span onClick={handleOnClick}>
-              <MyProfileLogo />
-            </span>
-            {/* <button className="bg-transparent text-sm text-white px-4 py-1 rounded-full border-2 border-white hover:border-[#E7C873]">
-            Brochure
-            </button> */}
-            <a
-              href={pdf}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-transparent text-sm text-white px-4 py-1 rounded-full border-2 border-white hover:border-[#E7C873]"
-            >
-              Brochure
-            </a>
-          </div>
-        </div>
+  {/* Hamburger menu for small devices */}
+  <button
+    className="lg:hidden text-white hover:text-gray-300 transition-color duration-300"
+    onClick={() => setIsMenuOpen(!isMenuOpen)}
+  >
+    <svg
+      className="w-8 h-8"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M4 6h16M4 12h16m-7 6h7"
+      />
+    </svg>
+  </button>
+
+  {/* Button and Contact for large devices */}
+  <div className="hidden lg:flex items-center justify-center space-x-4">
+    <a href="tel:+9898992554" className="w-6 h-6 hover:scale-125 transition-transform duration-300 ">
+      <Call />
+    </a>
+
+    <span onClick={handleOnClick} className="hover:scale-110 transition-transform duration-300">
+      <MyProfileLogo />
+    </span>
+
+    <a
+      href={pdf}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="bg-transparent text-sm text-white hover:text-[#1F4B43] px-4 py-1 rounded-full border-2 border-white hover:border-[#E7C873] hover:bg-[#E7C873] transition-all duration-300"
+    >
+      Brochure
+    </a>
+  </div>
+</div>
+
       </div>
 
       {/* Side Navigation */}

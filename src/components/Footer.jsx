@@ -10,11 +10,12 @@ const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* About Us */}
           <div>
-             <img
-                     src={logo}
-                     alt="Logo 1"
-                     className=" w-[130px] mx-auto sm:w-[100px] md:w-[110px] xl:w-[120px] mb-3 "
-                   />
+          <img
+  src={logo}
+  alt="Logo 1"
+  className="w-[130px] mx-auto sm:w-[100px] md:w-[110px] xl:w-[120px] mb-3 transition-transform duration-500 ease-in-out hover:brightness-110"
+/>
+
             <p className="text-[.9rem] leading-relaxed text-black">
               At Millennium Properties, we connect buyers and sellers to create seamless transactions. Our mission is to help you find your dream property, with a focus on trust and transparency.
             </p>
@@ -24,98 +25,122 @@ const Footer = () => {
           <div  className="flex flex-col lg:w-[60%] ml-20">
             <h3 className="text-xl text-center font-bold mb-4">Other Pages</h3>
             <ul className="sm:space-y-3 mx-auto flex justify-between text-start sm:grid">
-      {[
-        { name: "Home", path: "/" },
-        { name: "AboutUs", path: "/aboutus" },
-        { name: "Property", path: "/properties" },
-        { name: "Service", path: "/ourservices" },
-        { name: "Contact US", path: "/quick-contact" },
-      ].map((link, index) => (
-        <li key={index}>
-          <Link
-            to={link.path}
-            className="hover:text-gray-900 transition text-sm"
-          >
-            {link.name}
-          </Link>
-        </li>
-      ))}
-    </ul>
+  {[
+    { name: "Home", path: "/" },
+    { name: "AboutUs", path: "/aboutus" },
+    { name: "Property", path: "/properties" },
+    { name: "Service", path: "/ourservices" },
+    { name: "Contact US", path: "/quick-contact" },
+  ].map((link, index) => (
+    <li key={index} className="group relative">
+      <Link
+        to={link.path}
+        className="text-sm hover:text-gray-900 transition relative z-10"
+      >
+        {link.name}
+      </Link>
+      <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-[#E7C873] transition-all duration-300 group-hover:w-full"></span>
+    </li>
+  ))}
+</ul>
+
           </div>
             {/* Quick Links */}
-            <div  className="flex flex-col">
-            <h3 className="text-xl text-center font-bold mb-4">Quick Links</h3>
-            <ul className="sm:space-y-3 mx-auto flex justify-between text-start sm:grid">
-  {/* Facebook Logo */}
-  <li>
-    <a
-      href="https://www.facebook.com"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="hover:text-gray-900 transition text-sm flex items-center"
-    >
-      <FaFacebook size={24} className="mr-2" />
-    </a>
-  </li>
+            <div className="flex flex-col">
+  <h3 className="text-xl text-center font-bold mb-4">Quick Links</h3>
+  <ul className="sm:space-y-3 mx-auto flex justify-between text-start sm:grid">
+    {/* Facebook Logo */}
+    <li>
+      <a
+        href="https://www.facebook.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="hover:text-blue-600 transition text-sm flex items-center group"
+      >
+        <FaFacebook
+          size={24}
+          className="mr-2 transition-transform duration-300 group-hover:scale-110 group-hover:text-blue-600"
+        />
+       
+      </a>
+    </li>
 
-  {/* Instagram Logo */}
-  <li>
-    <a
-      href="https://www.instagram.com"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="hover:text-gray-900 transition text-sm flex items-center"
-    >
-      <FaInstagram size={24} className="mr-2" />
-    </a>
-  </li>
-</ul>
-          </div>
+    {/* Instagram Logo */}
+    <li>
+      <a
+        href="https://www.instagram.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="hover:text-pink-600 transition text-sm flex items-center group"
+      >
+        <FaInstagram
+          size={24}
+          className="mr-2 transition-transform duration-300 group-hover:scale-110 group-hover:text-pink-600"
+        />
+    
+      </a>
+    </li>
+  </ul>
+</div>
 
           {/* Contact Info */}
           <div className="">
-            <h3 className="text-xl font-bold mb-4">Contact Us</h3>
-            <ul className="space-y-3 text-sm text-black">
-              <li className="flex items-center">
-              <span className="mr-2 items-start justify-start  ">📍</span>
-              <a href="https://maps.app.goo.gl/bkNkxzhDT4JGRuWL6">
-               C/491, Ganesh Glory 11, Nr. Money Plant Highstreet, 
-                Jagtpur Road, Gota, Ahmedabad -382481</a> 
-              </li>
-              <li className="flex items-center">
-                <span className="mr-2">📞</span>
-                <a href="tel:9898512554" className="hover:text-gray-900">
-                Back  Office:9898512554 
+  <h3 className="text-xl font-bold mb-4">Contact Us</h3>
+  <ul className="space-y-3 text-sm text-black">
+    <li className="flex items-start group">
+      <span className="mr-2">📍</span>
+      <a
+        href="https://maps.app.goo.gl/bkNkxzhDT4JGRuWL6"
+        className="relative hover:text-gray-900 transition"
+      >
+        C/491, Ganesh Glory 11, Nr. Money Plant Highstreet, 
+        Jagtpur Road, Gota, Ahmedabad -382481
+        <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-[#E7C873] transition-all duration-300 group-hover:w-full"></span>
+      </a>
+    </li>
+    <li className="flex items-center group">
+      <span className="mr-2">📞</span>
+      <a
+        href="tel:9898512554"
+        className="relative hover:text-gray-900 transition"
+      >
+        Back Office: 9898512554
+        <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-[#E7C873] transition-all duration-300 group-hover:w-full"></span>
+      </a>
+    </li>
+    <li className="flex items-center group">
+      <span className="mr-2">📞</span>
+      <a
+        href="tel:9898152554"
+        className="relative hover:text-gray-900 transition"
+      >
+        Manager: 9898152554
+        <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-[#E7C873] transition-all duration-300 group-hover:w-full"></span>
+      </a>
+    </li>
+    <li className="flex items-center group">
+      <span className="mr-2">📞</span>
+      <a
+        href="tel:9898992554"
+        className="relative hover:text-gray-900 transition"
+      >
+        Founder: 9898992554
+        <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-[#E7C873] transition-all duration-300 group-hover:w-full"></span>
+      </a>
+    </li>
+    <li className="flex items-center group">
+      <span className="mr-2">✉️</span>
+      <a
+        href="mailto:support@realestatehub.com"
+        className="relative hover:text-gray-900 transition"
+      >
+        millenniumproperties45@gmail.com
+        <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-[#E7C873] transition-all duration-300 group-hover:w-full"></span>
+      </a>
+    </li>
+  </ul>
+</div>
 
-                </a>
-              </li>
-              <li className="flex items-center">
-                <span className="mr-2">📞</span>
-                <a href="tel:9898152554" className="hover:text-gray-900">
-                   Manager:9898152554  
-
-                </a>
-              </li>
-                <li className="flex items-center">
-                <span className="mr-2 ">📞</span>
-                <a href="tel:9898992554" className="hover:text-gray-900">
-               Founder:9898992554 
-
-                </a>
-              </li>
-         
-          
-              <li className="flex items-center">
-                <span className="mr-2">✉️</span>
-                <a
-                  href="mailto:support@realestatehub.com"
-                  className="hover:text-gray-900"
-                >
-                 millenniumproperties45@gmail.com
-                </a>
-              </li>
-            </ul>
-          </div>
 {/* 
           <div>
             <h3 className="text-xl font-bold mb-4">Newsletter</h3>

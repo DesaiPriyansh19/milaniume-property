@@ -151,7 +151,7 @@ export default function DeleteOrRecoverProperty({
               }}
               className=" bg-red-500 text-white h-10 px-3 rounded"
             >
-              Trash
+              Delete
             </button>
           </div>
         </div>

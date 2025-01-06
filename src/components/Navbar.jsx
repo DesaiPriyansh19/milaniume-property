@@ -4,18 +4,19 @@ import Call from "../../svg/Icon/Call/Index";
 import MyProfileLogo from "../../svg/Icon/MyProfileLogo";
 import { Link, useNavigate } from "react-router-dom";
 import pdf from "/Brochure-MillennumProperties.pdf?url";
-import axios from "axios";
+
 import { jwtDecode } from "jwt-decode";
 
 const Navbar = ({ handlePopupOpen }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showUserInfoDiv, setShowUserInfoDiv] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     const verifyToken = () => {
       const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-  
+
       if (userInfo) {
         try {
           const decodedToken = jwtDecode(userInfo.token);
@@ -35,24 +36,29 @@ const Navbar = ({ handlePopupOpen }) => {
         setIsAdmin(false);
       }
     };
-  
+
     verifyToken();
-  }, []);
-  
+  }, [showUserInfoDiv]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("userInfo"); // Remove user info from localStorage
+    setIsLoggedIn(false); // Update login state
+    setIsAdmin(false); // Update admin state
+    navigate("/"); // Redirect to the homepage or any desired route
+    setShowUserInfoDiv(false);
+  };
+
   const handleOnClick = () => {
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
     if (!isLoggedIn && !userInfo) {
       // User not logged in
       handlePopupOpen();
-    } else if (isAdmin) {
-      // User is admin
-      navigate("/admin");
     } else {
       // User is logged in but not admin
-      alert("Logged in successfully!");
+      setShowUserInfoDiv(true);
     }
   };
-  
+
   return (
     <nav className="bg-gradient-to-b pt-5 text-sm from-black w-full to-transparent bg-opacity-10 absolute inset-x-0 top-0 z-40">
       <div className="container mx-auto px-1 flex items-center justify-between h-16">
@@ -102,15 +108,15 @@ const Navbar = ({ handlePopupOpen }) => {
         {/* Right: Contact and Menu */}
         <div className="flex items-center space-x-3 pr-4 lg:pr-1">
           {/* Mobile view: Call icon and number */}
-          
+
           <div className="lg:hidden flex items-center">
             <a href="tel:+1234567890" className="w-6 h-6 ">
               <Call />
             </a>
           </div>
           <span className="w-9 h-9 md:hidden flex items-center justify-start">
-                <MyProfileLogo />
-              </span>
+            <MyProfileLogo />
+          </span>
           {/* Hamburger menu for small devices */}
           <button
             className="lg:hidden text-white"
@@ -165,7 +171,6 @@ const Navbar = ({ handlePopupOpen }) => {
                 alt="Logo 1"
                 className="w-[70px] sm:mx-0 sm:w-[90px] m-5 "
               />
-             
             </span>
             <button
               className="text-white absolute top-5 right-5"
@@ -210,20 +215,20 @@ const Navbar = ({ handlePopupOpen }) => {
             >
               Property
             </Link>
-          
+
             <Link
-             to="/ourservices"
+              to="/ourservices"
               className="text-white text-lg sm:text-xl"
               onClick={() => setIsMenuOpen(false)}
             >
               Service
             </Link>
             <Link
-             to="/quickenquiry"
+              to="/quickenquiry"
               className="text-white text-lg sm:text-xl"
               onClick={() => setIsMenuOpen(false)}
             >
-          Quick Enquiry
+              Quick Enquiry
             </Link>
             <a
               href={pdf}
@@ -234,6 +239,35 @@ const Navbar = ({ handlePopupOpen }) => {
             >
               Brochure
             </a>
+          </div>
+        </div>
+      )}
+      {showUserInfoDiv && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+          <div className="bg-white p-6 rounded-lg shadow-lg text-center">
+            <p className="text-lg font-medium">Logged in successfully!</p>
+            <div className="flex gap-2 text-sm text-white items-center mt-4">
+              <button
+                className=" px-6 py-2 bg-[#E7C873] rounded-full"
+                onClick={() => setShowUserInfoDiv(false)}
+              >
+                Close
+              </button>
+              {isAdmin && (
+                <Link
+                  to="/admin"
+                  className=" px-6 py-2 rounded-full  bg-[#E7C873] font-semibold"
+                >
+                  Admin
+                </Link>
+              )}
+              <button
+                className=" px-6 py-2 rounded-full bg-[#E7C873]  "
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
+            </div>
           </div>
         </div>
       )}

@@ -10,6 +10,7 @@ export default function AddProperty({ addNew, handleEdit }) {
   const [formData, setFormData] = useState({
     PropertyName: "",
     PropertyType: "Commercial",
+    PropertyStatus: "",
     ForSale: true,
     ForRent: false,
     Featured: false,
@@ -151,6 +152,7 @@ export default function AddProperty({ addNew, handleEdit }) {
       West: false,
     },
     PropertyDescription: "",
+    RecycleBin: false,
   });
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -186,7 +188,6 @@ export default function AddProperty({ addNew, handleEdit }) {
       return { ...prevData, PropertyPhotos: updatedPhotos };
     });
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -281,6 +282,22 @@ export default function AddProperty({ addNew, handleEdit }) {
                   { value: "Industrial", label: "Industrial" },
                   { value: "Agricultural Plot", label: "Agricultural Plot" },
                   { value: "Rental Property", label: "Rental Property" },
+                ]}
+              />
+            </div>
+            <div className="mb-4  h-full  w-full">
+              <InputField
+                label="Property Status"
+                type="select"
+                name="PropertyStatus"
+                value={formData.PropertyStatus}
+                onChange={handleInputChange}
+                variant={1}
+                options={[
+                  { value: "NewLaunch", label: "New Launch" },
+                  { value: "UnderConstruction", label: "Under Construction" },
+                  { value: "ReadyToMove", label: "Ready To Move" },
+                  { value: "OldConstruction", label: "Old Construction " },
                 ]}
               />
             </div>

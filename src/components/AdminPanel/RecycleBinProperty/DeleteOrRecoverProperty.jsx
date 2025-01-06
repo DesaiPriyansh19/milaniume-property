@@ -1,17 +1,18 @@
 import React, { useState } from "react";
-import UploadWidget from "../../UploadWidget/UploadWidget";
-import InputField from "../../../../utils/InputFields";
-import CommercialForm from "./CommercialForm";
-import ResidentForm from "./ResidentForm";
-import IndustrialForm from "./IndustrialForm";
-import AgricultralPlot from "./AgricultralPlot";
 import ConfirmationModal from "../../../../utils/ConfirmationModal";
+import InputField from "../../../../utils/InputFields";
+import ResidentForm from "../AdminProperty/ResidentForm";
+import IndustrialForm from "../AdminProperty/IndustrialForm";
+import AgricultralPlot from "../AdminProperty/AgricultralPlot";
+import UploadWidget from "../../UploadWidget/UploadWidget";
+import CommercialForm from "../AdminProperty/CommercialForm";
 
-export default function EditProperty({
+export default function DeleteOrRecoverProperty({
   formData,
   setFormData,
   handleEdit,
   updateById,
+  deleteById,
   editData,
 }) {
   const [modal, setModal] = useState(null);
@@ -51,45 +52,11 @@ export default function EditProperty({
     });
   };
 
-  const handleDelete = (id, data) => {
-    const filterDefaultValues = (obj) => {
-      return Object.keys(obj).reduce((acc, key) => {
-        if (
-          typeof obj[key] === "object" &&
-          obj[key] !== null &&
-          !Array.isArray(obj[key])
-        ) {
-          const nestedFiltered = filterDefaultValues(obj[key]);
-
-          // If all values inside the nested object are false, include it as an empty object
-          if (Object.values(nestedFiltered).length === 0) {
-            acc[key] = {}; // Include as an empty object
-          } else {
-            acc[key] = nestedFiltered; // Include the filtered nested object
-          }
-        } else if (Array.isArray(obj[key])) {
-          if (obj[key].length > 0) acc[key] = obj[key]; // Include non-empty arrays
-        } else if (obj[key] !== false && obj[key] !== "") {
-          acc[key] = obj[key]; // Include values that are not default
-        }
-        return acc;
-      }, {});
-    };
-
-    const filteredData = filterDefaultValues(data);
-
-    if (!Array.isArray(filteredData.PropertyPhotos)) {
-      filteredData.PropertyPhotos = [];
-    }
-
-    const trashdata = {
-      ...filteredData,
-      RecycleBin: true,
-    };
+  const handleDelete = (id, name) => {
     setModal({
-      message: `Are you sure you want to put this estate ${data.PropertyName} in recycle bin?`,
+      message: `Are you sure you want to delete this estate ${name} from recycle bin?`,
       onConfirm: () => {
-        updateById(id, trashdata); // Perform delete operation
+        deleteById(id); // Perform delete operation
         setModal(null); // Close modal
         handleEdit("View");
       },
@@ -130,8 +97,13 @@ export default function EditProperty({
       filteredData.PropertyPhotos = [];
     }
 
+    const recoverData = {
+      ...filteredData,
+      RecycleBin: false,
+    };
+
     try {
-      await updateById(editData.id, filteredData);
+      await updateById(editData.id, recoverData);
       console.log("Data updated successfully.");
       handleEdit("View");
     } catch (error) {
@@ -163,7 +135,7 @@ export default function EditProperty({
               onClick={handleSubmit}
               className=" bg-green-500 text-white h-10 p-2 rounded "
             >
-              Confirm
+              Recover
             </button>
             <button
               onClick={() => {
@@ -175,7 +147,7 @@ export default function EditProperty({
             </button>
             <button
               onClick={() => {
-                handleDelete(formData.id, formData);
+                handleDelete(formData.id, formData.PropertyName);
               }}
               className=" bg-red-500 text-white h-10 px-3 rounded"
             >
@@ -190,6 +162,7 @@ export default function EditProperty({
                 <InputField
                   label="Property Name"
                   type="text"
+                  disabled={true}
                   name="PropertyName"
                   placeholder="PropertyName"
                   value={formData.PropertyName}
@@ -201,6 +174,7 @@ export default function EditProperty({
               <div className="mb-4  h-full col-span-2 w-full">
                 <InputField
                   label="Property Type"
+                  disabled={true}
                   type="select"
                   name="PropertyType"
                   value={formData.PropertyType}
@@ -219,6 +193,7 @@ export default function EditProperty({
               <div className="mb-4  h-full col-span-2 w-full">
                 <InputField
                   label="Property Status"
+                  disabled={true}
                   type="select"
                   name="PropertyStatus"
                   value={formData.PropertyStatus}
@@ -235,6 +210,7 @@ export default function EditProperty({
               <div className="mb-4  h-full col-span-2  w-full">
                 <InputField
                   label="Verified"
+                  disabled={true}
                   type="select"
                   name="Verified"
                   value={formData.Verified}
@@ -267,6 +243,7 @@ export default function EditProperty({
                 <div className="flex flex-col mb-3 ">
                   <InputField
                     type="checkbox"
+                    disabled={true}
                     id="ForSale"
                     label="For Sale"
                     name="ForSale"
@@ -277,6 +254,7 @@ export default function EditProperty({
 
                   <InputField
                     type="checkbox"
+                    disabled={true}
                     id="ForRent"
                     label="For Rent"
                     name="ForRent"
@@ -287,6 +265,7 @@ export default function EditProperty({
 
                   <InputField
                     type="checkbox"
+                    disabled={true}
                     id="Featured"
                     label="Featured"
                     name="Featured"
@@ -298,6 +277,7 @@ export default function EditProperty({
               </div>
               {formData.PropertyType === "Commercial" && (
                 <CommercialForm
+                  disabled={true}
                   formData={formData}
                   handleInputChange={handleInputChange}
                 />
@@ -305,18 +285,21 @@ export default function EditProperty({
               {(formData.PropertyType === "Residential" ||
                 formData.PropertyType === "Rental Property") && (
                 <ResidentForm
+                  disabled={true}
                   formData={formData}
                   handleInputChange={handleInputChange}
                 />
               )}
               {formData.PropertyType === "Industrial" && (
                 <IndustrialForm
+                  disabled={true}
                   formData={formData}
                   handleInputChange={handleInputChange}
                 />
               )}
               {formData.PropertyType === "Agricultural Plot" && (
                 <AgricultralPlot
+                  disabled={true}
                   formData={formData}
                   handleInputChange={handleInputChange}
                 />
@@ -333,6 +316,7 @@ export default function EditProperty({
                 <div className="flex flex-col mb-3">
                   <InputField
                     type="checkbox"
+                    disabled={true}
                     id="East"
                     label="East"
                     name="Facing.East"
@@ -342,6 +326,7 @@ export default function EditProperty({
                   />
                   <InputField
                     type="checkbox"
+                    disabled={true}
                     id="North"
                     label="North"
                     name="Facing.North"
@@ -351,6 +336,7 @@ export default function EditProperty({
                   />
                   <InputField
                     type="checkbox"
+                    disabled={true}
                     id="NorthEast"
                     label="North East"
                     name="Facing.NorthEast"
@@ -360,6 +346,7 @@ export default function EditProperty({
                   />
                   <InputField
                     type="checkbox"
+                    disabled={true}
                     id="NorthWest"
                     label="North West"
                     name="Facing.NorthWest"
@@ -369,6 +356,7 @@ export default function EditProperty({
                   />
                   <InputField
                     type="checkbox"
+                    disabled={true}
                     id="South"
                     label="South"
                     name="Facing.South"
@@ -378,6 +366,7 @@ export default function EditProperty({
                   />
                   <InputField
                     type="checkbox"
+                    disabled={true}
                     id="SouthEast"
                     label="South East"
                     name="Facing.SouthEast"
@@ -387,6 +376,7 @@ export default function EditProperty({
                   />
                   <InputField
                     type="checkbox"
+                    disabled={true}
                     id="SouthWest"
                     label="South West"
                     name="Facing.SouthWest"
@@ -397,6 +387,7 @@ export default function EditProperty({
                   <InputField
                     type="checkbox"
                     id="West"
+                    disabled={true}
                     label="West"
                     name="Facing.West"
                     variant={2}
@@ -412,6 +403,7 @@ export default function EditProperty({
               <div className="mb-4 w-full">
                 <InputField
                   label="SalesPrice"
+                  disabled={true}
                   type="text"
                   name="Prices.SalesPrice"
                   placeholder="SalesPrice"
@@ -425,6 +417,7 @@ export default function EditProperty({
               <div className="mb-4 w-full">
                 <InputField
                   label="RentPrice"
+                  disabled={true}
                   type="text"
                   name="Prices.RentPrice"
                   placeholder="RentPrice"
@@ -439,6 +432,7 @@ export default function EditProperty({
             <div className="flex w-full gap-4 justify-between">
               <div className="w-full mb-4">
                 <InputField
+                  disabled={true}
                   label="Bedrooms"
                   type="text"
                   name="PropertyDetails.Bedrooms"
@@ -453,6 +447,7 @@ export default function EditProperty({
               <div className="w-full mb-4">
                 <InputField
                   label="Bathrooms"
+                  disabled={true}
                   type="text"
                   name="PropertyDetails.Bathrooms"
                   placeholder="Enter number of bathrooms"
@@ -466,6 +461,7 @@ export default function EditProperty({
               <div className="w-full mb-4">
                 <InputField
                   label="Square Footage"
+                  disabled={true}
                   type="text"
                   name="PropertyDetails.Sqft"
                   placeholder="Enter square footage"
@@ -479,6 +475,7 @@ export default function EditProperty({
               <div className="w-full mb-4">
                 <InputField
                   label="Landmark"
+                  disabled={true}
                   type="text"
                   name="Landmark"
                   placeholder="Enter Landmark"
@@ -493,6 +490,7 @@ export default function EditProperty({
             <div className="w-full mb-4">
               <InputField
                 label="Address"
+                disabled={true}
                 type="text"
                 name="Address"
                 placeholder="Enter Address"
@@ -508,6 +506,7 @@ export default function EditProperty({
                   label="City"
                   type="text"
                   name="City"
+                  disabled={true}
                   placeholder="Enter city"
                   value={formData.City}
                   onChange={handleInputChange}
@@ -519,6 +518,7 @@ export default function EditProperty({
                 <InputField
                   label="Pin Code"
                   type="text"
+                  disabled={true}
                   name="PinCode"
                   placeholder="Enter PinCode"
                   value={formData.PinCode}
@@ -533,6 +533,7 @@ export default function EditProperty({
               <div className="w-full mb-4">
                 <InputField
                   label="Contact Email"
+                  disabled={true}
                   type="email"
                   name="ContactDetails.ContactEmail"
                   placeholder="Enter contact email"
@@ -546,6 +547,7 @@ export default function EditProperty({
               <div className="w-full mb-4">
                 <InputField
                   label="Contact Phone"
+                  disabled={true}
                   type="tel"
                   name="ContactDetails.ContactPhone"
                   placeholder="Enter contact phone"
@@ -564,6 +566,7 @@ export default function EditProperty({
                   <div className="mb-4 w-full">
                     <InputField
                       label={`Main Photo URL ${index + 1}`}
+                      disabled={true}
                       type="text"
                       name={`PropertyPhotos[${index}]`}
                       value={photo}
@@ -611,6 +614,7 @@ export default function EditProperty({
                     maxImageFileSize: 2000000,
                     folder: "Property",
                   }}
+                  disabled={true}
                   setFormData={setFormData}
                 />
               </div>
@@ -619,6 +623,7 @@ export default function EditProperty({
             <div className="w-full mb-4">
               <InputField
                 label="Property Description"
+                disabled={true}
                 type="textarea"
                 name="PropertyDescription"
                 placeholder="Enter Property Description"

@@ -77,12 +77,22 @@ export default function EnquiresPage() {
             </div>
             <div className="w-[98%] mx-auto mt-4 h-[1px] bg-gray-700"></div>
             <div className="px-3 mt-4 pb-2 border border-t-0 rounded-b-xl border-gray-700">
-              <label className="text-xs text-gray-400 uppercase font-semibold tracking-wider">
-                Enquiry Message
-              </label>
-              <p className="text-sm text-gray-300 font-medium">
-                {person.EnquiryPersonMessage}
-              </p>
+              <div className="mb-2">
+                <label className="text-xs text-gray-400 uppercase font-semibold tracking-wider">
+                  Enquiry Property Type
+                </label>
+                <p className="text-sm text-gray-300 font-medium">
+                  {person?.EnquiryPropertyType || "N | A"}
+                </p>
+              </div>
+              <div>
+                <label className="text-xs text-gray-400 uppercase font-semibold tracking-wider">
+                  Enquiry Message
+                </label>
+                <p className="text-sm text-gray-300 font-medium">
+                  {person.EnquiryPersonMessage}
+                </p>
+              </div>
             </div>
           </div>
         ))}

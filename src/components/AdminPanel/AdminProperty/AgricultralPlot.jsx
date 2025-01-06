@@ -1,13 +1,16 @@
 import React from "react";
 import InputField from "../../../../utils/InputFields";
 
-export default function AgricultralPlot({ formData, handleInputChange }) {
+export default function AgricultralPlot({
+  formData,
+  handleInputChange,
+  disabled,
+}) {
   return (
     <>
       {" "}
       {/* All Plot Land */}
       <div>
-        {/* Label for the AllPlotLand section */}
         <label
           htmlFor={"AllPlotLand"}
           className={"block text-sm mb-2 font-semibold"}
@@ -15,60 +18,26 @@ export default function AgricultralPlot({ formData, handleInputChange }) {
           All Plot Land
         </label>
         <div className="flex flex-col mb-3">
-          <InputField
-            type="checkbox"
-            id="ResidentialPlot"
-            label="Residential Plot"
-            name="AllPlotLand.ResidentialPlot"
-            variant={2}
-            checked={formData.AllPlotLand.ResidentialPlot}
-            onChange={handleInputChange}
-          />
-          <InputField
-            type="checkbox"
-            id="CommercialPlot"
-            label="Commercial Plot"
-            name="AllPlotLand.CommercialPlot"
-            variant={2}
-            checked={formData.AllPlotLand.CommercialPlot}
-            onChange={handleInputChange}
-          />
-          <InputField
-            type="checkbox"
-            id="IndustrialPlot"
-            label="Industrial Plot"
-            name="AllPlotLand.IndustrialPlot"
-            variant={2}
-            checked={formData.AllPlotLand.IndustrialPlot}
-            onChange={handleInputChange}
-          />
-          <InputField
-            type="checkbox"
-            id="AgriculturalLand"
-            label="Agricultural Land"
-            name="AllPlotLand.AgriculturalLand"
-            variant={2}
-            checked={formData.AllPlotLand.AgriculturalLand}
-            onChange={handleInputChange}
-          />
-          <InputField
-            type="checkbox"
-            id="NonAgriculturalLand"
-            label="Non-Agricultural Land"
-            name="AllPlotLand.NonAgriculturalLand"
-            variant={2}
-            checked={formData.AllPlotLand.NonAgriculturalLand}
-            onChange={handleInputChange}
-          />
-          <InputField
-            type="checkbox"
-            id="WeekendVillaSite"
-            label="Weekend Villa Site"
-            name="AllPlotLand.WeekendVillaSite"
-            variant={2}
-            checked={formData.AllPlotLand.WeekendVillaSite}
-            onChange={handleInputChange}
-          />
+          {[
+            { id: "ResidentialPlot", label: "Residential Plot" },
+            { id: "CommercialPlot", label: "Commercial Plot" },
+            { id: "IndustrialPlot", label: "Industrial Plot" },
+            { id: "AgriculturalLand", label: "Agricultural Land" },
+            { id: "NonAgriculturalLand", label: "Non-Agricultural Land" },
+            { id: "WeekendVillaSite", label: "Weekend Villa Site" },
+          ].map(({ id, label }) => (
+            <InputField
+              key={id}
+              type="checkbox"
+              disabled={disabled ? true : false}
+              id={id}
+              label={label}
+              name={`AllPlotLand.${id}`}
+              variant={2}
+              checked={formData.AllPlotLand[id]}
+              onChange={handleInputChange}
+            />
+          ))}
         </div>
       </div>
     </>

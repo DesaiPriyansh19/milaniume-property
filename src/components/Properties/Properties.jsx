@@ -6,7 +6,7 @@ import AOS from "aos";
 import "aos/dist/aos.css"; // Import AOS styles
 import useFetch from "../../../hooks/useFetch";
 import SkeletonLoader from "../SkeletonLoader";
-import FilterLogo from '../../../svg/Icon/FilterLogo/Index';
+import FilterLogo from "../../../svg/Icon/FilterLogo/Index";
 function Properties() {
   const [activeTab, setActiveTab] = useState("Residential");
   const [isModalOpen, setIsModalOpen] = useState(false); // Moved here
@@ -14,8 +14,6 @@ function Properties() {
   const { data, loading } = useFetch(
     "https://milaniumepropertybackend.vercel.app/api/property"
   );
-
-  console.log(data);
 
   const [filterData, setFilterData] = useState({
     UserTypedArea: "",
@@ -954,19 +952,22 @@ function Properties() {
           )}
         </div>
 
-    <div className="w-full flex justify-center items-center">    {/* Filter Button */}
-        <button
-          type="button"
-          onClick={openModal}
-          className="sm:px-9 xl:px-11 w-full sm:w-auto  flex items-center justify-center  py-2 text-sm xl:text-lg bg-[#1F4B43] text-white rounded-lg"
-        >
-          <span className="mr-1">
-    <FiSearch className="" /> {/* Search icon */}
-  </span>
-         Search & Filter <span className="mx-1">
-                <FilterLogo />
-              </span>
-        </button>
+        <div className="w-full flex justify-center items-center">
+          {" "}
+          {/* Filter Button */}
+          <button
+            type="button"
+            onClick={openModal}
+            className="sm:px-9 xl:px-11 w-full sm:w-auto  flex items-center justify-center  py-2 text-sm xl:text-lg bg-[#1F4B43] text-white rounded-lg"
+          >
+            <span className="mr-1">
+              <FiSearch className="" /> {/* Search icon */}
+            </span>
+            Search & Filter{" "}
+            <span className="mx-1">
+              <FilterLogo />
+            </span>
+          </button>
         </div>
         {/* Filter Modal */}
         {isModalOpen && (
@@ -1064,8 +1065,6 @@ function Properties() {
         <form className="space-y-4 bg-white p-6 rounded ">
           {/* Dynamic Inputs */}
           {renderAdditionalInputs()}
-
-       
         </form>
       </div>
 

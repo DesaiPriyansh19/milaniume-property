@@ -4,16 +4,13 @@ import AOS from "aos";
 import "aos/dist/aos.css"; // Import AOS styles
 import useApiData from "../../hooks/useApiData";
 import UploadWidget from "./UploadWidget/UploadWidget";
+import InputField from "../../utils/InputFields";
+import axios from "axios";
 function PostProperty() {
   const [activeTab, setActiveTab] = useState("Residential");
-
-  const baseUrl =
-    "https://milaniumepropertybackend.vercel.app/api/property/allprops/admin";
-  const { addNew } = useApiData(baseUrl);
-
-  const [formData, setFormData] = useState({
+  const initialState = {
     PropertyName: "",
-    PropertyType: "Commercial",
+    PropertyType: "Residential",
     ForSale: true,
     ForRent: false,
     Featured: false,
@@ -28,7 +25,6 @@ function PostProperty() {
       Bathrooms: "",
       Sqft: "",
     },
-
     Landmark: "",
     Address: "",
     PinCode: "",
@@ -156,7 +152,17 @@ function PostProperty() {
       West: false,
     },
     PropertyDescription: "",
+  };
+
+  const [userData, setUserData] = useState({
+    Role: "Owner",
+    Fullname: "",
+    Email: "",
+    Phone: "",
+    AltPhone: "",
+    PostedProperties: [],
   });
+  const [formData, setFormData] = useState(initialState);
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
     const nameParts = name.split(".");
@@ -225,8 +231,30 @@ function PostProperty() {
       filteredData.PropertyPhotos = [];
     }
 
-    await addNew(filteredData);
-    handleEdit("View");
+    try {
+      const response = await axios.post(
+        "https://milaniumepropertybackend.vercel.app/api/property/allprops/admin",
+        filteredData
+      );
+
+      if (response.data) {
+        const finalsubmitData = {
+          ...userData,
+          PostedProperties: [response.data.savedProperty._id],
+        };
+        try {
+          await axios.post(
+            "https://milaniumepropertybackend.vercel.app/api/userpostproperty",
+            finalsubmitData
+          );
+          alert("Form has Been Submitted Wait For Devs to Approve");
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
   };
 
   useEffect(() => {
@@ -236,21 +264,34 @@ function PostProperty() {
     switch (activeTab) {
       case "Residential":
         return (
-          <div className="">
+          <div>
             {/* Property Types */}
             <div className="mb-6">
               <h3 className="text-lg font-light mb-2">Property Type</h3>
               <div className="flex flex-wrap">
                 {[
-                  "Flat/ Apartment",
-                  "Independent/ Builder Floor",
-                  "Independent House/ Villa",
-                  "Residential Plot",
-                  "Farm House",
-                  "Other",
-                ].map((type) => (
-                  <label key={type} className="w-1/2 p-2">
-                    <input type="checkbox" className="mr-2" /> {type}
+                  { label: "Flat/ Apartment", value: "FlatApartment" },
+                  {
+                    label: "Independent/ Builder Floor",
+                    value: "IndependentBuilderFloor",
+                  },
+                  {
+                    label: "Independent House/ Villa",
+                    value: "IndependentHouseVilla",
+                  },
+                  { label: "Residential Plot", value: "ResidentialPlot" },
+                  { label: "Farm House", value: "FarmHouse" },
+                  { label: "Other", value: "Other" },
+                ].map(({ label, value }) => (
+                  <label key={value} className="w-1/2 p-2">
+                    <input
+                      type="checkbox"
+                      className="mr-2"
+                      name={`AllResidential.${value}`}
+                      value={formData.AllResidential[value] || false}
+                      onChange={handleInputChange}
+                    />{" "}
+                    {label}
                   </label>
                 ))}
               </div>
@@ -261,17 +302,26 @@ function PostProperty() {
               <h3 className="text-lg font-light mb-2">Availability Type</h3>
               <div className="flex flex-wrap">
                 {[
-                  "Low Rise Apartment",
-                  "Bungalow",
-                  "Penthouse",
-                  "Row House",
-                  "High Rise Apartment",
-                  "Weekend Villas",
-                  "Tenament",
-                  "Building",
-                ].map((type) => (
-                  <label key={type} className="w-1/2 p-2">
-                    <input type="checkbox" className="mr-2" /> {type}
+                  { label: "Low Rise Apartment", value: "LowRiseApartment" },
+                  { label: "Bungalow", value: "Bungalow" },
+                  { label: "Penthouse", value: "Penthouse" },
+                  { label: "Row House", value: "RowHouse" },
+                  { label: "High Rise Apartment", value: "HighRiseApartment" },
+                  { label: "Weekend Villas", value: "WeekendVillas" },
+                  { label: "Tenament", value: "Tenament" },
+                  { label: "Building", value: "Building" },
+                ].map(({ label, value }) => (
+                  <label key={value} className="w-1/2 p-2">
+                    <input
+                      type="checkbox"
+                      className="mr-2"
+                      name={`ResidentialAvailabilityType.${value}`}
+                      checked={
+                        formData.ResidentialAvailabilityType[value] || false
+                      }
+                      onChange={handleInputChange}
+                    />{" "}
+                    {label}
                   </label>
                 ))}
               </div>
@@ -284,96 +334,146 @@ function PostProperty() {
               </h3>
               <div className="flex flex-wrap">
                 {[
-                  "1 BHK",
-                  "2 BHK",
-                  "3 BHK",
-                  "4 BHK",
-                  "6 BHK",
-                  "Above 6 BHK",
-                ].map((bhk) => (
-                  <label key={bhk} className="w-1/2 p-2">
-                    <input type="checkbox" className="mr-2" /> {bhk}
+                  { label: "1 BHK", value: "oneBHK" },
+                  { label: "2 BHK", value: "twoBHK" },
+                  { label: "3 BHK", value: "threeBHK" },
+                  { label: "4 BHK", value: "fourBHK" },
+                  { label: "5 BHK", value: "fiveBHK" },
+                  { label: "6 BHK", value: "sixBHK" },
+                  { label: "Above 6 BHK", value: "aboveSixBHK" },
+                  { label: "Duplex", value: "duplex" },
+                  { label: "PG", value: "pg" },
+                ].map(({ label, value }) => (
+                  <label key={value} className="w-1/2 p-2">
+                    <input
+                      type="checkbox"
+                      className="mr-2"
+                      name={`BhkScheme.${value}`}
+                      checked={formData.BhkScheme[value] || false}
+                      onChange={handleInputChange}
+                    />{" "}
+                    {label}
                   </label>
                 ))}
               </div>
             </div>
+
             {/* Condition Availability */}
             <div className="mb-6">
               <h3 className="text-lg font-light mb-2">Residential Condition</h3>
               <div className="flex flex-wrap">
                 {[
-                  "Fully Furnished",
-                  " Furnished",
-                  "Semi Furnished",
-                  " Kitchen-Fix",
-                  "Fix-Furnished",
-                  "Unfurnished",
-                ].map((bhk) => (
-                  <label key={bhk} className="w-1/2 p-2">
-                    <input type="checkbox" className="mr-2" /> {bhk}
+                  { label: "Fully Furnished", value: "FullyFurnished" },
+                  { label: "Furnished", value: "Furnished" },
+                  { label: "Semi Furnished", value: "SemiFurnished" },
+                  { label: "Kitchen-Fix", value: "KitchenFix" },
+                  { label: "Fix-Furnished", value: "FixFurnished" },
+                  { label: "Unfurnished", value: "Unfurnished" },
+                ].map(({ label, value }) => (
+                  <label key={value} className="w-1/2 p-2">
+                    <input
+                      type="checkbox"
+                      className="mr-2"
+                      name={`Condition.${value}`}
+                      checked={formData.Condition[value] || false}
+                      onChange={handleInputChange}
+                    />{" "}
+                    {label}
                   </label>
                 ))}
               </div>
             </div>
+
             {/*Available Availability */}
             <div className="mb-6">
               <h3 className="text-lg font-light mb-2">Available For</h3>
               <div className="flex flex-wrap">
-                {["FOR FAMILY", "FOR EXICUTIVE", "FOR BECHLORE"].map((bhk) => (
-                  <label key={bhk} className="w-1/2 p-2">
-                    <input type="checkbox" className="mr-2" /> {bhk}
+                {[
+                  { label: "FOR FAMILY", value: "ForFamily" },
+                  { label: "FOR EXECUTIVE", value: "ForExecutive" },
+                  { label: "FOR BACHLORE", value: "ForBachlore" },
+                ].map(({ label, value }) => (
+                  <label key={value} className="w-1/2 p-2">
+                    <input
+                      type="checkbox"
+                      className="mr-2"
+                      name={`ResidentAvailable.${value}`}
+                      checked={formData.ResidentAvailable[value] || false}
+                      onChange={handleInputChange}
+                    />{" "}
+                    {label}
                   </label>
                 ))}
               </div>
             </div>
+
             {/*Available Availability */}
             <div className="mb-6">
               <h3 className="text-lg font-light mb-2">Amenities</h3>
               <div className="flex flex-wrap">
                 {[
-                  "24/7 Water Supply",
-                  "Senior Citizen Sitting",
-                  "Banquet Hall",
-                  "Home Theatre",
-                  "Indoors Game",
-                  "IOutdoors Game",
-                  "Visitor Parking",
-                  " Allotted Parking",
-                  "Lift",
-                  "Power Backup",
-                  "Gas Line",
-                  "Swimming pool",
-                  "Garden",
-                  "Children Play Area",
-                  "Club House",
-                  "CCTV",
-                ].map((bhk) => (
-                  <label key={bhk} className="w-1/2 p-2">
-                    <input type="checkbox" className="mr-2" /> {bhk}
+                  { label: "24/7 Water Supply", value: "WaterSupply247" },
+                  {
+                    label: "Senior Citizen Sitting",
+                    value: "SeniorCitizenSitting",
+                  },
+                  { label: "Banquet Hall", value: "BanquetHall" },
+                  { label: "Home Theatre", value: "HomeTheatre" },
+                  { label: "Indoors Game", value: "IndoorsGame" },
+                  { label: "Outdoors Game", value: "OutdoorsGame" },
+                  { label: "Visitor Parking", value: "VisitorParking" },
+                  { label: "Allotted Parking", value: "AllottedParking" },
+                  { label: "Lift", value: "Lift" },
+                  { label: "Power Backup", value: "PowerBackup" },
+                  { label: "Gas Line", value: "GasLine" },
+                  { label: "Swimming Pool", value: "SwimmingPool" },
+                  { label: "Garden", value: "Garden" },
+                  { label: "Children Play Area", value: "ChildrenPlayArea" },
+                  { label: "Club House", value: "ClubHouse" },
+                  { label: "CCTV", value: "CCTV" },
+                ].map(({ label, value }) => (
+                  <label key={value} className="w-1/2 p-2">
+                    <input
+                      type="checkbox"
+                      className="mr-2"
+                      name={`Amenities.${value}`}
+                      checked={formData.Amenities[value] || false}
+                      onChange={handleInputChange}
+                    />
+                    {label}
                   </label>
                 ))}
               </div>
             </div>
+
             {/*Facing */}
             <div className="mb-6">
               <h3 className="text-lg font-light mb-2">Facing</h3>
               <div className="flex flex-wrap">
                 {[
-                  "East",
-                  "North",
-                  "North – East",
-                  "North – West",
-                  "South",
-                  " South-East",
-                  "South- west",
-                  "west",
-                ].map((bhk) => (
-                  <label key={bhk} className="w-1/2 p-2">
-                    <input type="checkbox" className="mr-2" /> {bhk}
+                  { label: "East", value: "East" },
+                  { label: "North", value: "North" },
+                  { label: "North-East", value: "NorthEast" },
+                  { label: "North-West", value: "NorthWest" },
+                  { label: "South", value: "South" },
+                  { label: "South-East", value: "SouthEast" },
+                  { label: "South-West", value: "SouthWest" },
+                  { label: "West", value: "West" },
+                ].map(({ label, value }) => (
+                  <label key={value} className="w-1/2 p-2">
+                    <input
+                      type="checkbox"
+                      className="mr-2"
+                      name={`Facing.${value}`}
+                      checked={formData.Facing[value] || false}
+                      onChange={handleInputChange}
+                    />
+                    {label}
                   </label>
                 ))}
               </div>
             </div>
+
             {/* Other Sections */}
             {/* Repeat the same pattern for Condition, Availability, Amenities, Facing, etc. */}
           </div>
@@ -386,16 +486,29 @@ function PostProperty() {
               <h3 className="text-lg font-light mb-2">Property Type</h3>
               <div className="flex flex-wrap">
                 {[
-                  "Ready To Move Offices",
-                  "Bare Shall Offices",
-                  "Shops & Retail",
-                  "Commercial / Inst. Land",
-                  " Warehouse",
-                  " Cold Storage",
-                  "Other",
-                ].map((type) => (
-                  <label key={type} className="w-1/2 p-2">
-                    <input type="checkbox" className="mr-2" /> {type}
+                  {
+                    label: "Ready To Move Offices",
+                    value: "ReadyToMoveOffices",
+                  },
+                  { label: "Bare Shall Offices", value: "BareShallOffices" },
+                  { label: "Shops & Retail", value: "ShopsRetail" },
+                  {
+                    label: "Commercial / Inst. Land",
+                    value: "CommercialInstLand",
+                  },
+                  { label: "Warehouse", value: "Warehouse" },
+                  { label: "Cold Storage", value: "ColdStorage" },
+                  { label: "Other", value: "Other" },
+                ].map(({ label, value }) => (
+                  <label key={value} className="w-1/2 p-2">
+                    <input
+                      type="checkbox"
+                      className="mr-2"
+                      name={`AllCommercial.${value}`}
+                      checked={formData.AllCommercial[value] || false}
+                      onChange={handleInputChange}
+                    />
+                    {label}
                   </label>
                 ))}
               </div>
@@ -408,37 +521,53 @@ function PostProperty() {
               </h3>
               <div className="flex flex-wrap">
                 {[
-                  "Boss Cabin",
-                  "Manager Cabin",
-                  " Work Station",
-                  "Pantry",
-                  "Reception",
-                  "Waiting Area",
-                  "Car parking",
-                ].map((type) => (
-                  <label key={type} className="w-1/2 p-2">
-                    <input type="checkbox" className="mr-2" /> {type}
+                  { label: "Boss Cabin", value: "BossCabin" },
+                  { label: "Manager Cabin", value: "ManagerCabin" },
+                  { label: "Work Station", value: "WorkStation" },
+                  { label: "Pantry", value: "Pantry" },
+                  { label: "Reception", value: "Reception" },
+                  { label: "Waiting Area", value: "WaitingArea" },
+                  { label: "Car Parking", value: "CarParking" },
+                ].map(({ label, value }) => (
+                  <label key={value} className="w-1/2 p-2">
+                    <input
+                      type="checkbox"
+                      className="mr-2"
+                      name={`CommercialPropertyFeatures.${value}`}
+                      checked={
+                        formData.CommercialPropertyFeatures[value] || false
+                      }
+                      onChange={handleInputChange}
+                    />
+                    {label}
                   </label>
                 ))}
               </div>
             </div>
 
-            {/*Amenities */}
+            {/* Amenities */}
             <div className="mb-6">
               <h3 className="text-lg font-light mb-2">Amenities</h3>
               <div className="flex flex-wrap">
                 {[
-                  "Allotted Parking",
-                  "Lift",
-                  " Power Backup",
-                  " Garden",
-                  "CCTV",
-                  "24/7 Water Supply",
-                  "Cafeteria",
-                  "Visitor Parking",
-                ].map((bhk) => (
-                  <label key={bhk} className="w-1/2 p-2">
-                    <input type="checkbox" className="mr-2" /> {bhk}
+                  { label: "Allotted Parking", value: "AllottedParking" },
+                  { label: "Lift", value: "Lift" },
+                  { label: "Power Backup", value: "PowerBackup" },
+                  { label: "Garden", value: "Garden" },
+                  { label: "CCTV", value: "CCTV" },
+                  { label: "24/7 Water Supply", value: "WaterSupply247" },
+                  { label: "Cafeteria", value: "Cafeteria" },
+                  { label: "Visitor Parking", value: "VisitorParking" },
+                ].map(({ label, value }) => (
+                  <label key={value} className="w-1/2 p-2">
+                    <input
+                      type="checkbox"
+                      className="mr-2"
+                      name={`Amenities.${value}`}
+                      checked={formData.Amenities[value] || false}
+                      onChange={handleInputChange}
+                    />
+                    {label}
                   </label>
                 ))}
               </div>
@@ -449,17 +578,24 @@ function PostProperty() {
               <h3 className="text-lg font-light mb-2">Facing</h3>
               <div className="flex flex-wrap">
                 {[
-                  "East",
-                  "North",
-                  "North – East",
-                  "North – West",
-                  "South",
-                  " South-East",
-                  "South- west",
-                  "west",
-                ].map((bhk) => (
-                  <label key={bhk} className="w-1/2 p-2">
-                    <input type="checkbox" className="mr-2" /> {bhk}
+                  { label: "East", value: "East" },
+                  { label: "North", value: "North" },
+                  { label: "North-East", value: "NorthEast" },
+                  { label: "North-West", value: "NorthWest" },
+                  { label: "South", value: "South" },
+                  { label: "South-East", value: "SouthEast" },
+                  { label: "South-West", value: "SouthWest" },
+                  { label: "West", value: "West" },
+                ].map(({ label, value }) => (
+                  <label key={value} className="w-1/2 p-2">
+                    <input
+                      type="checkbox"
+                      className="mr-2"
+                      name={`Facing.${value}`}
+                      checked={formData.Facing[value] || false}
+                      onChange={handleInputChange}
+                    />
+                    {label}
                   </label>
                 ))}
               </div>
@@ -475,18 +611,37 @@ function PostProperty() {
                 <h3 className="text-lg font-light mb-2">Property Type</h3>
                 <div className="flex flex-wrap">
                   {[
-                    "Ware House",
-                    "Heavy Manufacturing",
-                    "Light Manufacturing",
-                    "Distribution Warehouse",
-                    "General Warehouse",
-                    "Flex Space",
-                    "Showroom Buildings",
-                    "Research and Development",
-                    "Data Center",
-                  ].map((type) => (
-                    <label key={type} className="w-1/2 p-2">
-                      <input type="checkbox" className="mr-2" /> {type}
+                    { label: "Ware House", value: "WareHouse" },
+                    {
+                      label: "Heavy Manufacturing",
+                      value: "HeavyManufacturing",
+                    },
+                    {
+                      label: "Light Manufacturing",
+                      value: "LightManufacturing",
+                    },
+                    {
+                      label: "Distribution Warehouse",
+                      value: "DistributionWarehouse",
+                    },
+                    { label: "General Warehouse", value: "GeneralWarehouse" },
+                    { label: "Flex Space", value: "FlexSpace" },
+                    { label: "Showroom Buildings", value: "ShowroomBuildings" },
+                    {
+                      label: "Research and Development",
+                      value: "ResearchAndDevelopment",
+                    },
+                    { label: "Data Center", value: "DataCenter" },
+                  ].map(({ label, value }) => (
+                    <label key={value} className="w-1/2 p-2">
+                      <input
+                        type="checkbox"
+                        className="mr-2"
+                        name={`AllIndustrial.${value}`}
+                        checked={formData.AllIndustrial[value] || false}
+                        onChange={handleInputChange}
+                      />
+                      {label}
                     </label>
                   ))}
                 </div>
@@ -497,19 +652,38 @@ function PostProperty() {
                 <h3 className="text-lg font-light mb-2">Condition</h3>
                 <div className="flex flex-wrap">
                   {[
-                    "Building Site",
-                    "Structural Frame & Building Envelope",
-                    "Roofing",
-                    "Plumbing",
-                    "Heating",
-                    "Air Conditioning & Ventilation",
-                    "Electrical",
-                    "Vertical Transportation (Elevators & Escalators)",
-                    "Life Safety / Fire Protection",
-                    "Interior Elements",
-                  ].map((type) => (
-                    <label key={type} className="w-1/2 p-2">
-                      <input type="checkbox" className="mr-2" /> {type}
+                    { label: "Building Site", value: "BuildingSite" },
+                    {
+                      label: "Structural Frame & Building Envelope",
+                      value: "StructuralFrameBuildingEnvelope",
+                    },
+                    { label: "Roofing", value: "Roofing" },
+                    { label: "Plumbing", value: "Plumbing" },
+                    { label: "Heating", value: "Heating" },
+                    {
+                      label: "Air Conditioning & Ventilation",
+                      value: "AirConditioningVentilation",
+                    },
+                    { label: "Electrical", value: "Electrical" },
+                    {
+                      label: "Vertical Transportation (Elevators & Escalators)",
+                      value: "VerticalTransportation",
+                    },
+                    {
+                      label: "Life Safety / Fire Protection",
+                      value: "LifeSafetyFireProtection",
+                    },
+                    { label: "Interior Elements", value: "InteriorElements" },
+                  ].map(({ label, value }) => (
+                    <label key={value} className="w-1/2 p-2">
+                      <input
+                        type="checkbox"
+                        className="mr-2"
+                        name={`Condition.${value}`}
+                        checked={formData.Condition[value] || false}
+                        onChange={handleInputChange}
+                      />
+                      {label}
                     </label>
                   ))}
                 </div>
@@ -520,17 +694,24 @@ function PostProperty() {
                 <h3 className="text-lg font-light mb-2">Facing</h3>
                 <div className="flex flex-wrap">
                   {[
-                    "East",
-                    "North",
-                    "North – East",
-                    "North – West",
-                    "South",
-                    " South-East",
-                    "South- west",
-                    "west",
-                  ].map((bhk) => (
-                    <label key={bhk} className="w-1/2 p-2">
-                      <input type="checkbox" className="mr-2" /> {bhk}
+                    { label: "East", value: "East" },
+                    { label: "North", value: "North" },
+                    { label: "North-East", value: "NorthEast" },
+                    { label: "North-West", value: "NorthWest" },
+                    { label: "South", value: "South" },
+                    { label: "South-East", value: "SouthEast" },
+                    { label: "South-West", value: "SouthWest" },
+                    { label: "West", value: "West" },
+                  ].map(({ label, value }) => (
+                    <label key={value} className="w-1/2 p-2">
+                      <input
+                        type="checkbox"
+                        className="mr-2"
+                        name={`Facing.${value}`}
+                        checked={formData.Facing[value] || false}
+                        onChange={handleInputChange}
+                      />
+                      {label}
                     </label>
                   ))}
                 </div>
@@ -541,15 +722,22 @@ function PostProperty() {
                 <h3 className="text-lg font-light mb-2">Amenities</h3>
                 <div className="flex flex-wrap">
                   {[
-                    "Allotted Parking",
-                    "Lift",
-                    "Power Backup",
-                    " CCTV",
-                    " 24/7 Water Supply",
-                    "Visitor Parking",
-                  ].map((bhk) => (
-                    <label key={bhk} className="w-1/2 p-2">
-                      <input type="checkbox" className="mr-2" /> {bhk}
+                    { label: "Allotted Parking", value: "AllottedParking" },
+                    { label: "Lift", value: "Lift" },
+                    { label: "Power Backup", value: "PowerBackup" },
+                    { label: "CCTV", value: "CCTV" },
+                    { label: "24/7 Water Supply", value: "WaterSupply247" },
+                    { label: "Visitor Parking", value: "VisitorParking" },
+                  ].map(({ label, value }) => (
+                    <label key={value} className="w-1/2 p-2">
+                      <input
+                        type="checkbox"
+                        className="mr-2"
+                        name={`Amenities.${value}`}
+                        checked={formData.Amenities[value] || false}
+                        onChange={handleInputChange}
+                      />
+                      {label}
                     </label>
                   ))}
                 </div>
@@ -563,21 +751,31 @@ function PostProperty() {
       case "Plot&Land":
         return (
           <>
-            <div className="">
+            <div>
               {/* Property Types */}
               <div className="mb-6">
                 <h3 className="text-lg font-light mb-2">Property Type</h3>
                 <div className="flex flex-wrap">
                   {[
-                    "Residential Plot",
-                    "Commercial Plot",
-                    "Industrial Plot",
-                    "Agriculture Land",
-                    "Non – Agriculture Land",
-                    "Weekend Villa Site",
-                  ].map((type) => (
-                    <label key={type} className="w-1/2 p-2">
-                      <input type="checkbox" className="mr-2" /> {type}
+                    { label: "Residential Plot", value: "ResidentialPlot" },
+                    { label: "Commercial Plot", value: "CommercialPlot" },
+                    { label: "Industrial Plot", value: "IndustrialPlot" },
+                    { label: "Agriculture Land", value: "AgriculturalLand" },
+                    {
+                      label: "Non - Agriculture Land",
+                      value: "NonAgriculturalLand",
+                    },
+                    { label: "Weekend Villa Site", value: "WeekendVillaSite" },
+                  ].map(({ label, value }) => (
+                    <label key={value} className="w-1/2 p-2">
+                      <input
+                        type="checkbox"
+                        className="mr-2"
+                        name={`AllPlotLand.${value}`}
+                        checked={formData.AllPlotLand[value] || false}
+                        onChange={handleInputChange}
+                      />
+                      {label}
                     </label>
                   ))}
                 </div>
@@ -588,17 +786,24 @@ function PostProperty() {
                 <h3 className="text-lg font-light mb-2">Facing</h3>
                 <div className="flex flex-wrap">
                   {[
-                    "East",
-                    "North",
-                    "North – East",
-                    "North – West",
-                    "South",
-                    " South-East",
-                    "South- west",
-                    "west",
-                  ].map((bhk) => (
-                    <label key={bhk} className="w-1/2 p-2">
-                      <input type="checkbox" className="mr-2" /> {bhk}
+                    { label: "East", value: "East" },
+                    { label: "North", value: "North" },
+                    { label: "North-East", value: "NorthEast" },
+                    { label: "North-West", value: "NorthWest" },
+                    { label: "South", value: "South" },
+                    { label: "South-East", value: "SouthEast" },
+                    { label: "South-West", value: "SouthWest" },
+                    { label: "West", value: "West" },
+                  ].map(({ label, value }) => (
+                    <label key={value} className="w-1/2 p-2">
+                      <input
+                        type="checkbox"
+                        className="mr-2"
+                        name={`Facing.${value}`}
+                        checked={formData.Facing[value] || false}
+                        onChange={handleInputChange}
+                      />
+                      {label}
                     </label>
                   ))}
                 </div>
@@ -654,7 +859,13 @@ function PostProperty() {
                 ? " text-gray-600 border-[2px] border-[#1F4B43] rounded-3xl"
                 : ""
             }`}
-                onClick={() => setActiveTab(tab)}
+                onClick={() => {
+                  setActiveTab(tab);
+                  setFormData((prev) => ({
+                    ...prev,
+                    PropertyType: activeTab,
+                  }));
+                }}
               >
                 {tab}
               </li>
@@ -671,16 +882,33 @@ function PostProperty() {
               <div className="grid grid-cols-2 gap-2">
                 <label className="block mb-2 text-sm md:text-lg">
                   Role:
-                  <select className="block w-full mt-1 p-2 border rounded-md">
-                    <option value="owner">Owner</option>
-                    <option value="agent">Agent</option>
-                    <option value="builder">Builder</option>
+                  <select
+                    onChange={(e) => {
+                      setUserData((prev) => ({
+                        ...prev,
+                        Role: e.target.value,
+                      }));
+                    }}
+                    value={userData.Role}
+                    className="block w-full mt-1 p-2 border rounded-md"
+                  >
+                    <option value="Owner">Owner</option>
+                    <option value="Agent">Agent</option>
+                    <option value="Builder">Builder</option>
                   </select>
                 </label>
                 <label className="block mb-2 text-sm md:text-lg">
                   Full Name:
                   <input
                     type="text"
+                    name="Fullname"
+                    onChange={(e) => {
+                      setUserData((prev) => ({
+                        ...prev,
+                        Fullname: e.target.value,
+                      }));
+                    }}
+                    value={userData.Fullname}
                     placeholder="Enter your full name"
                     className="block w-full mt-1 p-2 border rounded-md"
                   />
@@ -689,6 +917,14 @@ function PostProperty() {
                   Mobile Number:
                   <input
                     type="tel"
+                    name="Phone"
+                    onChange={(e) => {
+                      setUserData((prev) => ({
+                        ...prev,
+                        Phone: e.target.value,
+                      }));
+                    }}
+                    value={userData.Phone}
                     placeholder="Enter your mobile number"
                     className="block w-full mt-1 p-2 border rounded-md"
                   />
@@ -697,6 +933,14 @@ function PostProperty() {
                   Alt. Mobile Number:
                   <input
                     type="tel"
+                    name="AltPhone"
+                    onChange={(e) => {
+                      setUserData((prev) => ({
+                        ...prev,
+                        AltPhone: e.target.value,
+                      }));
+                    }}
+                    value={userData.AltPhone}
                     placeholder="Enter an alternate mobile number"
                     className="block w-full mt-1 p-2 border rounded-md"
                   />
@@ -705,6 +949,14 @@ function PostProperty() {
                   Your Email:
                   <input
                     type="email"
+                    name="Email"
+                    onChange={(e) => {
+                      setUserData((prev) => ({
+                        ...prev,
+                        Email: e.target.value,
+                      }));
+                    }}
+                    value={userData.Email}
                     placeholder="Enter your email"
                     className="block w-full mt-1 p-2 border rounded-md"
                   />
@@ -715,8 +967,19 @@ function PostProperty() {
             {/* Post Property Details */}
             <div className="mb-6">
               <h3 className="text-lg font-light mb-2">Post Property Details</h3>
-              <div className="grid grid-cols-2 gap-2">
-                <label className="block mb-2 text-sm md:text-lg">
+              <div className="grid grid-cols-6 gap-2">
+                <label className="block mb-2 col-span-2 text-sm md:text-lg">
+                  Property Name:
+                  <input
+                    type="text"
+                    name="PropertyName"
+                    onChange={handleInputChange}
+                    value={formData.PropertyName}
+                    placeholder="Enter Property Name"
+                    className="block w-full mt-1 p-2 border rounded-md"
+                  />
+                </label>
+                <label className="block mb-2 col-span-2 text-sm md:text-lg">
                   Address:
                   <input
                     type="text"
@@ -727,7 +990,7 @@ function PostProperty() {
                     className="block w-full mt-1 p-2 border rounded-md"
                   />
                 </label>
-                <label className="block mb-2 text-sm md:text-lg">
+                <label className="block col-span-2 mb-2 text-sm md:text-lg">
                   City:
                   <input
                     type="text"
@@ -738,7 +1001,7 @@ function PostProperty() {
                     className="block w-full mt-1 p-2 border rounded-md"
                   />
                 </label>
-                <label className="block mb-2 text-sm md:text-lg">
+                <label className="block mb-2 col-span-3 text-sm md:text-lg">
                   Landmark:
                   <input
                     type="text"
@@ -749,7 +1012,7 @@ function PostProperty() {
                     className="block w-full mt-1 p-2 border rounded-md"
                   />
                 </label>
-                <label className="block mb-2 text-sm md:text-lg">
+                <label className="block mb-2 col-span-3 text-sm md:text-lg">
                   Pincode:
                   <input
                     type="number"
@@ -760,7 +1023,7 @@ function PostProperty() {
                     className="block w-full mt-1 p-2 border rounded-md"
                   />
                 </label>
-                <label className="block mb-2 text-sm md:text-lg">
+                <label className="block col-span-3 mb-2 text-sm md:text-lg">
                   Rent or Sale:
                   <select
                     onChange={(e) => {
@@ -769,20 +1032,29 @@ function PostProperty() {
                         ...prev,
                         ForRent: selectedValue === "rent",
                         ForSale: selectedValue === "sale",
+                        Prices: {
+                          ...(prev.Prices || {}),
+                          SalesPrice:
+                            selectedValue === "rent"
+                              ? ""
+                              : prev.Prices.SalesPrice,
+                          RentPrice:
+                            selectedValue === "sale"
+                              ? ""
+                              : prev.Prices.RentPrice,
+                        },
                       }));
                     }}
                     value={
-                      formData.ForRent === true && formData.ForSale === false
-                        ? "Rent"
-                        : "Sale"
+                      formData.ForRent ? "rent" : formData.ForSale ? "sale" : ""
                     }
-                    className="block w-full mt-1 p-2 border rounded-md"
+                    className="block  w-full mt-1 p-2 border rounded-md"
                   >
                     <option value="rent">Rent</option>
                     <option value="sale">Sale</option>
                   </select>
                 </label>
-                <label className="block mb-2 text-sm md:text-lg">
+                <label className="block col-span-3 mb-2 text-sm md:text-lg">
                   Property Status:
                   <select
                     onChange={handleInputChange}
@@ -819,8 +1091,14 @@ function PostProperty() {
                 <h3 className="text-lg font-light mb-2">Price</h3>
                 <input
                   type="number"
-                  name="Prices.ForSales"
-                  value={formData.Prices.SalesPrice}
+                  name={`Prices.${
+                    formData.ForRent === true ? "RentPrice" : "SalesPrice"
+                  }`}
+                  value={
+                    formData.Prices[
+                      formData.ForRent === true ? "RentPrice" : "SalesPrice"
+                    ]
+                  }
                   onChange={handleInputChange}
                   placeholder="Enter price"
                   className="block w-full mt-1 p-2 border rounded-md"
@@ -830,12 +1108,11 @@ function PostProperty() {
             <div className="mb-6">
               <h3 className="text-lg font-light mb-2">Upload Images</h3>
               <section className="mb-4">
-                <p className="text-base font-bold">Property Photos (URLs)</p>
                 {formData?.PropertyPhotos?.map((photo, index) => (
                   <div key={index} className="flex items-center">
                     <div className="mb-4 w-full">
                       <InputField
-                        label={`Main Photo URL ${index + 1}`}
+                        label={``}
                         type="text"
                         name={`PropertyPhotos[${index}]`}
                         value={photo}
@@ -843,7 +1120,7 @@ function PostProperty() {
                           handleMainPhotoChange(index, e.target.value)
                         }
                         placeholder={`Main Photo URL ${index + 1}`}
-                        variant={1}
+                        variant={4}
                       />
                     </div>
                     <button
@@ -880,6 +1157,7 @@ function PostProperty() {
               <h3 className="text-lg font-light mb-2">Description</h3>
               <textarea
                 onChange={handleInputChange}
+                name="PropertyDescription"
                 value={formData.PropertyDescription}
                 placeholder="Enter a brief description"
                 className="block w-full mt-1 p-2 border rounded-md"

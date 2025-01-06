@@ -9,6 +9,7 @@ const InputField = ({
   onChange,
   autoComplete,
   required = false,
+  disabled = false,
   variant = 0, // Default input style
   options = [],
   checked,
@@ -50,6 +51,7 @@ const InputField = ({
           name={name}
           value={value}
           onChange={onChange}
+          disabled={disabled}
           style={
             variant !== 4
               ? {
@@ -110,6 +112,7 @@ const InputField = ({
           <input
             type={type}
             name={name}
+            disabled={disabled}
             className="appearance-none border-2 cursor-pointer  border-gray-300 bg-transparent w-full h-full rounded"
             checked={checked}
             onChange={onChange}
@@ -143,6 +146,7 @@ const InputField = ({
           name={name}
           placeholder={placeholder}
           value={value}
+          disabled={disabled}
           onChange={onChange}
           rows={rows}
           className={`${inputClassName} resize-none`} // Prevent resize for consistent UI
@@ -162,6 +166,7 @@ const InputField = ({
         name={name}
         placeholder={placeholder}
         value={value}
+        disabled={disabled}
         onChange={onChange}
         autoComplete={autoComplete}
         className={inputClassName}

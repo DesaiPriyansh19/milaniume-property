@@ -14,9 +14,10 @@ export default function SidebarAdmin() {
     { name: "Add Property", icon: <HomeSvg />, path: "/add-property" },
     { name: "User Post", icon: <HomeSvg />, path: "/user-post" },
     { name: "Require Post", icon: <HomeSvg />, path: "/require-post" },
-    { name: "Bar Chart", icon: <HomeSvg />, path: "/bar-chart" },
-    { name: "Pie Chart", icon: <HomeSvg />, path: "/pie-chart" },
-    { name: "Line Chart", icon: <HomeSvg />, path: "/line-chart" },
+    { name: "Recycle Bin", icon: <HomeSvg />, path: "/recycle-bin" },
+    // { name: "Bar Chart", icon: <HomeSvg />, path: "/bar-chart" },
+    // { name: "Pie Chart", icon: <HomeSvg />, path: "/pie-chart" },
+    // { name: "Line Chart", icon: <HomeSvg />, path: "/line-chart" },
   ];
 
   const handleMinimise = () => {

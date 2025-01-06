@@ -9,7 +9,7 @@ export default function SidebarAdmin() {
   const SideBarOption = [
     { name: "Dashboard", icon: <HomeSvg />, path: "/dashboard" },
     { name: "Manage Peoples", icon: <HomeSvg />, path: "/manage-peoples" },
-    { name: "Contact Information", icon: <HomeSvg />, path: "/contact-info" },
+    // { name: "Contact Information", icon: <HomeSvg />, path: "/contact-info" },
     { name: "Enquiries", icon: <HomeSvg />, path: "/enquiries" },
     { name: "Add Property", icon: <HomeSvg />, path: "/add-property" },
     { name: "User Post", icon: <HomeSvg />, path: "/user-post" },
@@ -83,7 +83,7 @@ export default function SidebarAdmin() {
           ))}
         </div>
 
-        <div
+        {/* <div
           className={`absolute w-full flex ${
             conMaxWidth === 72 ? "justify-center" : "justify-between"
           }  items-center h-auto bottom-8`}
@@ -101,7 +101,7 @@ export default function SidebarAdmin() {
             <p className="mb-1 font-medium">Testing</p>
             <p className="text-xs">test@gmail.com</p>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

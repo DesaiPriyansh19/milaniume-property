@@ -441,8 +441,6 @@ export default function UserRequirementPost() {
     setEditData(id);
   };
 
-  console.log(formData);
-
   return (
     <div className="text-white  mx-auto p-4">
       {editData && (
@@ -459,7 +457,7 @@ export default function UserRequirementPost() {
       </div>
       <div className="p-6 bg-gray-800 rounded-lg shadow-lg">
         <ul className="space-y-6 gap-4">
-          {requirements?.map((requirement, index) => (
+          {requirements?.slice().reverse().map((requirement, index) => (
             <li
               key={index}
               onClick={() => handleView(requirement._id)}

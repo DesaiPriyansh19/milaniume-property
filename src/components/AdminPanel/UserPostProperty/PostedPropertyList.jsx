@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
 import useApiData from "../../../../hooks/useApiData";
-import EditProperty from "./EditProperty";
-import AddProperty from "./AddProperty";
+import EditPostedProperty from "./EditPostedProperty";
 
-export default function ViewProperty() {
+export default function PostedPropertyList({
+  data,
+  details,
+  initialState,
+  setSelectedUserProperty,
+}) {
   const baseUrl =
     "https://milaniumepropertybackend.vercel.app/api/property/allprops/admin";
-  const { data, updateById, addNew, deleteById } = useApiData(baseUrl);
+  const { updateById, deleteById } = useApiData(baseUrl);
+
   const [editData, setEditData] = useState({ type: "View", id: null });
-  const [filter, setFilter] = useState({ type: "verified", search: "" });
+  const [filter, setFilter] = useState({ search: "" });
   const [formData, setFormData] = useState({
     id: "",
     PropertyName: "",
@@ -320,16 +325,13 @@ export default function ViewProperty() {
   }, [data]);
 
   const filteredData = data.filter((property) => {
-    const matchesType =
-      filter.type === "verified" ? property?.Verified : !property?.Verified;
-
     const matchesSearch = filter.search
       ? property?._id?.toString().includes(filter.search)
       : true;
 
     const notInRecycleBin = property?.RecycleBin === false;
 
-    return matchesType && matchesSearch && notInRecycleBin;
+    return matchesSearch && notInRecycleBin;
   });
 
   const handleEdit = (type, id) => {
@@ -551,76 +553,45 @@ export default function ViewProperty() {
           <div className="flex items-center mb-6 justify-between">
             <div>
               {" "}
-              <p className="text-xl font-semibold uppercase ">View Property</p>
+              <p className="text-xl font-semibold uppercase ">
+                {details.Fullname}
+              </p>
               <p className=" text-sm text-gray-200">
-                Welcome to your Real Estate Portfolio
+                Welcome to {details.Fullname} Listed Portfolio
               </p>
             </div>
-            <div className="relative">
-              <input
-                type="text"
-                onChange={(e) => {
-                  setFilter((prev) => ({ ...prev, search: e.target.value }));
-                }}
-                value={filter.search}
-                placeholder="Enter ID:"
-                className="p-1 pl-10 rounded w-full h-full bg-transparent border "
-              ></input>
-              <div className="absolute top-[15%] left-3 ">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  x="0px"
-                  y="0px"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 30 30"
-                  fill="white"
-                >
-                  <path d="M 13 3 C 7.4889971 3 3 7.4889971 3 13 C 3 18.511003 7.4889971 23 13 23 C 15.396508 23 17.597385 22.148986 19.322266 20.736328 L 25.292969 26.707031 A 1.0001 1.0001 0 1 0 26.707031 25.292969 L 20.736328 19.322266 C 22.148986 17.597385 23 15.396508 23 13 C 23 7.4889971 18.511003 3 13 3 z M 13 5 C 17.430123 5 21 8.5698774 21 13 C 21 17.430123 17.430123 21 13 21 C 8.5698774 21 5 17.430123 5 13 C 5 8.5698774 8.5698774 5 13 5 z"></path>
-                </svg>
-              </div>
-            </div>
-            <div className="flex justify-between gap-4">
+            <div className="flex items-center gap-4">
               <div className="relative">
-                <select
+                <input
+                  type="text"
                   onChange={(e) => {
-                    setFilter((prev) => ({ ...prev, type: e.target.value }));
+                    setFilter((prev) => ({ ...prev, search: e.target.value }));
                   }}
-                  value={filter.type}
-                  className="appearance-none text-white bg-transparent outline-none border border-white h-8 pl-2 pr-8"
-                >
-                  <option value="verified">Verified</option>
-                  <option value="unverified">Un-Verified</option>
-                </select>
-
-                <span
-                  style={{
-                    transform: "rotate(180deg) translateY(50%)",
-                    position: "absolute",
-                    top: "38%",
-                    right: "10px", // or whatever position you need
-                  }}
-                >
+                  value={filter.search}
+                  placeholder="Enter ID:"
+                  className="p-1 pl-10 rounded w-full h-full bg-transparent border "
+                ></input>
+                <div className="absolute top-[15%] left-3 ">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className={`h-5 w-5 text-white`}
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
+                    x="0px"
+                    y="0px"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 30 30"
+                    fill="white"
                   >
-                    <path
-                      fillRule="evenodd"
-                      d="M5.293 8.707a1 1 0 010-1.414L10 3.586l4.707 4.707a1 1 0 01-1.414 1.414L10 6.414 6.707 9.707a1 1 0 01-1.414 0z"
-                      clipRule="evenodd"
-                    />
+                    <path d="M 13 3 C 7.4889971 3 3 7.4889971 3 13 C 3 18.511003 7.4889971 23 13 23 C 15.396508 23 17.597385 22.148986 19.322266 20.736328 L 25.292969 26.707031 A 1.0001 1.0001 0 1 0 26.707031 25.292969 L 20.736328 19.322266 C 22.148986 17.597385 23 15.396508 23 13 C 23 7.4889971 18.511003 3 13 3 z M 13 5 C 17.430123 5 21 8.5698774 21 13 C 21 17.430123 17.430123 21 13 21 C 8.5698774 21 5 17.430123 5 13 C 5 8.5698774 8.5698774 5 13 5 z"></path>
                   </svg>
-                </span>
+                </div>
               </div>
-
               <button
-                onClick={() => handleEdit("Add")}
+                onClick={() => {
+                  setSelectedUserProperty(initialState);
+                }}
                 className=" bg-red-500 text-white h-8 px-5  rounded "
               >
-                Add New Estate
+                Back
               </button>
             </div>
           </div>
@@ -650,12 +621,12 @@ export default function ViewProperty() {
                   </p>
                   <p
                     className={`text-sm group-hover:opacity-0 ease-in-out duration-300 transition-opacity  absolute top-0 right-1 ${
-                      property?.Featured
+                      property?.Verified
                         ? "bg-yellow-500 text-black"
                         : "bg-zinc-900 text-gray-200 opacity-75"
                     } inline-block p-2 my-2 rounded-md`}
                   >
-                    {property?.Featured ? "Featured" : "Not Featured"}
+                    {property?.Verified ? "Verified" : "Not Verified"}
                   </p>
                 </div>
 
@@ -690,17 +661,15 @@ export default function ViewProperty() {
         </div>
       )}
       {editData.type === "Edit" && (
-        <EditProperty
+        <EditPostedProperty
           updateById={updateById}
           handleEdit={handleEdit}
+          details={details}
           setFormData={setFormData}
           formData={formData}
           editData={editData}
           deleteById={deleteById}
         />
-      )}
-      {editData.type === "Add" && (
-        <AddProperty addNew={addNew} handleEdit={handleEdit} />
       )}
     </>
   );

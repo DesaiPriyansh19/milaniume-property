@@ -1,6 +1,7 @@
 import React from "react";
 import Room from "../../assets/Room.jpeg";
 import LocationLogo from "../../../svg/Icon/Locationlogo/Index";
+import { Link } from "react-router-dom";
 
 
 
@@ -16,7 +17,9 @@ function PropertyCards({ data }) {
  
      {data?.map((card) => {
       
-          return (
+          return (<>
+
+<Link to={'/properties/viewdetails'}>
           <div
             key={card._id}
             className="relative bg-cover bg-center h-[300px] sm:h-[300px] md:h-[300px] lg:h-[300px] p-4 rounded-xl shadow-lg transition-transform transform hover:scale-[97%] hover:shadow-xl"
@@ -70,6 +73,8 @@ function PropertyCards({ data }) {
               </div>
             </div>
           </div>
+          </Link>
+          </>
         );
       })}
     </div></> 

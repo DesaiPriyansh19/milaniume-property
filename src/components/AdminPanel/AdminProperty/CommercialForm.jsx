@@ -38,7 +38,7 @@ export default function CommercialForm({
               disabled={disabled ? true : false}
               name={`AllCommercial.${id}`}
               variant={2}
-              checked={formData.AllCommercial.includes(id)}
+              checked={formData.AllCommercial[id] || false}
               onChange={handleInputChange}
             />
           ))}
@@ -82,7 +82,7 @@ export default function CommercialForm({
               disabled={disabled ? true : false}
               name={`Amenities.${id}`}
               variant={2}
-              checked={formData.Amenities.includes(id)}
+              checked={formData.Amenities[id] || false}
               onChange={handleInputChange}
             />
           ))}

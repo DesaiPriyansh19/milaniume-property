@@ -8,7 +8,13 @@ export default function ViewProperty() {
     "https://milaniumepropertybackend.vercel.app/api/property/allprops/admin";
   const { data, updateById, addNew, deleteById } = useApiData(baseUrl);
   const [editData, setEditData] = useState({ type: "View", id: null });
-  const [filter, setFilter] = useState({ type: "verified", search: "" });
+  const [filter, setFilter] = useState({
+    type: "verified",
+    search: "",
+    month: new Date().getMonth() + 1, // Default to current month
+    year: new Date().getFullYear(),
+    currentYear:2025
+  });
   const [formData, setFormData] = useState({
     id: "",
     PropertyName: "",
@@ -329,7 +335,15 @@ export default function ViewProperty() {
 
     const notInRecycleBin = property?.RecycleBin === false;
 
-    return matchesType && matchesSearch && notInRecycleBin;
+    const matchesDate =
+      filter.month !== undefined && filter.year !== undefined
+        ? new Date(property?.PropertyAddedDate) >=
+            new Date(filter.year, filter.month - 1, 1) &&
+          new Date(property?.PropertyAddedDate) <=
+            new Date(filter.year, filter.month, 0)
+        : true;
+
+    return matchesType && matchesSearch && notInRecycleBin && matchesDate;
   });
 
   const handleEdit = (type, id) => {
@@ -563,7 +577,7 @@ export default function ViewProperty() {
                   setFilter((prev) => ({ ...prev, search: e.target.value }));
                 }}
                 value={filter.search}
-                placeholder="Enter ID:"
+                placeholder="Search ID:"
                 className="p-1 pl-10 rounded w-full h-full bg-transparent border "
               ></input>
               <div className="absolute top-[15%] left-3 ">
@@ -579,6 +593,42 @@ export default function ViewProperty() {
                   <path d="M 13 3 C 7.4889971 3 3 7.4889971 3 13 C 3 18.511003 7.4889971 23 13 23 C 15.396508 23 17.597385 22.148986 19.322266 20.736328 L 25.292969 26.707031 A 1.0001 1.0001 0 1 0 26.707031 25.292969 L 20.736328 19.322266 C 22.148986 17.597385 23 15.396508 23 13 C 23 7.4889971 18.511003 3 13 3 z M 13 5 C 17.430123 5 21 8.5698774 21 13 C 21 17.430123 17.430123 21 13 21 C 8.5698774 21 5 17.430123 5 13 C 5 8.5698774 8.5698774 5 13 5 z"></path>
                 </svg>
               </div>
+            </div>
+            <div className="border rounded">
+              <select
+                value={filter.month}
+                className="appearance-none bg-transparent outline-none  p-1 px-4 "
+                onChange={(e) =>
+                  setFilter({ ...filter, month: e.target.value })
+                }
+              >
+                <option value={1}>January</option>
+                <option value={2}>February</option>
+                <option value={3}>March</option>
+                <option value={4}>April</option>
+                <option value={5}>May</option>
+                <option value={6}>June</option>
+                <option value={7}>July</option>
+                <option value={8}>August</option>
+                <option value={9}>September</option>
+                <option value={10}>October</option>
+                <option value={11}>November</option>
+                <option value={12}>December</option>
+
+                {/* Add other months */}
+              </select>
+              <span>/ </span>
+              <select
+                value={filter.year}
+                className="appearance-none bg-transparent outline-none p-1 px-4"
+                onChange={(e) => setFilter({ ...filter, year: e.target.value })}
+              >
+                {Array.from({ length: 10 }, (_, index) => (
+                  <option key={filter.currentYear - index} value={filter.currentYear - index}>
+                    {filter.currentYear - index}
+                  </option>
+                ))}
+              </select>
             </div>
             <div className="flex justify-between gap-4">
               <div className="relative">

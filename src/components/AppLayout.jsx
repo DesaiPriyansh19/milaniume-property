@@ -1,6 +1,7 @@
 import { useLocation } from "react-router-dom";
 
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 export default function AppLayout({ children, handlePopupOpen }) {
   const location = useLocation();
@@ -15,6 +16,7 @@ export default function AppLayout({ children, handlePopupOpen }) {
 
       {/* Main Content */}
       {children}
+      {!isAdminRoute && <Footer />}
     </div>
   );
 }

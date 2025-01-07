@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FaReact, FaGit, FaTwitter, FaGithub } from 'react-icons/fa';
+import { FaReact, FaGit, FaTwitter, FaGithub } from "react-icons/fa";
 import {
   BrowserRouter as Router,
   Routes,
@@ -16,7 +16,7 @@ import AdminPanelDashBoard from "./components/AdminPanel/AdminProperty/AdminPane
 import "./App.css";
 import AppLayout from "./components/AppLayout";
 import QuickEnquiry from "./components/QuickEnquiry";
-import RightSideLogos from './components/RightSideLogos'; // Import RightSideLogos component
+import RightSideLogos from "./components/RightSideLogos"; // Import RightSideLogos component
 import YourRequirements from "./components/YourRequirements";
 import PostProperty from "./components/PostProperty";
 import OurServices from "./components/Ourservices/OurServices";
@@ -27,7 +27,6 @@ import AboutUs from "./components/AboutUs";
 import ViewProperty from "./components/AdminPanel/AdminProperty/ViewProperty";
 import PropertyDetailPage from "./components/Properties/PropertyDetails";
 import Footer from "./components/Footer";
-
 
 function App() {
   const [isVisible, setIsVisible] = useState(true); // Loader visible on initial load
@@ -61,21 +60,23 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/properties" element={<Properties />} />
-          <Route path="/properties/viewdetails" element={<PropertyDetailPage/>} />
-          <Route path="/aboutus" element={<AboutUs/>} />
+          <Route
+            path="/properties/viewdetails/:id"
+            element={<PropertyDetailPage />}
+          />
+          <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/admin" element={<Navigate to="/admin/dashboard" />} />
           <Route path="/quickenquiry" element={<QuickEnquiry />} />
           <Route path="/admin/:slug" element={<AdminPanelDashBoard />} />
-          <Route path="/yourrequirments" element={<YourRequirements/>} />
-          <Route path="/postproperty" element={<PostProperty/>} />
-          <Route path="/ourservices" element={<OurServices/>} />
-          <Route path="/ourservices/property" element={<PropertyServices/>} />
-        <Route path="/ourservices/loan" element={<LoanFinance/>} />
-        <Route path="/ourservices/interior" element={<InteriorDesign/>} />
+          <Route path="/yourrequirments" element={<YourRequirements />} />
+          <Route path="/postproperty" element={<PostProperty />} />
+          <Route path="/ourservices" element={<OurServices />} />
+          <Route path="/ourservices/property" element={<PropertyServices />} />
+          <Route path="/ourservices/loan" element={<LoanFinance />} />
+          <Route path="/ourservices/interior" element={<InteriorDesign />} />
         </Routes>
       </AppLayout>
       <RightSideLogos /> {/* Right-side logos component */}
-      <Footer/>
     </div>
   );
 }

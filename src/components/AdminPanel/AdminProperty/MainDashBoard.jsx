@@ -1,36 +1,74 @@
-import React, { useState } from "react";
-
+import React, { useEffect, useState } from "react";
 import HomeSvg from "../../../../svg/Icon/HomeSvg/index";
+import useFetch from "../../../../hooks/useFetch";
 
 export default function MainDashBoard() {
-  const [progress, setProgress] = useState(60);
+  const { data, loading, error } = useFetch(
+    "https://milaniumepropertybackend.vercel.app/api/property/allprops/admin/todaysIncrement"
+  );
 
-  const cardsData = [
+  const [cardsData, setCardsData] = useState([
     {
       title: "Post Property",
-      value: "1,200",
-      goal: "1800",
+      value: 0,
+      goal: 100,
       description: "Total Post",
       progressColor: "#ef476f",
-      percentage: 30,
+      percentage: 0,
     },
     {
       title: "Total Enquiry Today",
-      value: "800",
-      goal: "1800",
+      value: 0,
+      goal: 100,
       description: "Enquiries Today",
       progressColor: "#4ecdae",
-      percentage: 25,
+      percentage: 0,
     },
     {
       title: "Total Requirement Today",
-      value: "1,500",
-      goal: "1800",
+      value: 0,
+      goal: 100,
       description: "Requirements Today",
       progressColor: "#ff9f1c",
-      percentage: 18,
+      percentage: 0,
     },
-  ];
+  ]);
+
+  useEffect(() => {
+    if (data) {
+      setCardsData((prevCards) =>
+        prevCards.map((card) => {
+          if (card.title === "Post Property") {
+            return {
+              ...card,
+              value: data?.propertyAdded?.length || 0, // Use `data.posts` for Post Property
+              percentage: ((data?.propertyAdded.length || 0) / card.goal) * 100, // Calculate percentage
+            };
+          }
+          if (card.title === "Total Enquiry Today") {
+            return {
+              ...card,
+              value: data?.EnquiryAdded.length || 0, // Use `data.enquiries` for Total Enquiry Today
+              percentage: ((data?.EnquiryAdded.length || 0) / card.goal) * 100, // Calculate percentage
+            };
+          }
+          if (card.title === "Total Requirement Today") {
+            return {
+              ...card,
+              value: data?.RequirementAdded.length || 0, // Use `data.requirements` for Total Requirement Today
+              percentage:
+                ((data?.RequirementAdded.length || 0) / card.goal) * 100, // Calculate percentage
+            };
+          }
+          return card; // Default: return the card as-is
+        })
+      );
+    }
+  }, [data]);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error loading data</p>;
+
   return (
     <div className="text-white  mx-auto p-4">
       <p className="text-xl font-semibold uppercase ">DashBoard</p>

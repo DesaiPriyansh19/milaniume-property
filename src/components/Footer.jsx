@@ -24,7 +24,7 @@ const Footer = () => {
           {/* Quick Links */}
           <div  className="flex flex-col lg:w-[60%] sm:ml-20">
             <h3 className="text-xl text-center font-bold mb-4">Other Pages</h3>
-            <ul className="sm:space-y-3 mx-auto grid grid-cols-3  items-center gap-2 justify-between text-start sm:grid">
+            <ul className="sm:space-y-3 mx-auto grid grid-cols-3  items-center gap-2 justify-between text-start sm:grid-cols-1">
   {[
     { name: "Home", path: "/" },
     { name: "AboutUs", path: "/aboutus" },

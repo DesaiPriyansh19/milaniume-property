@@ -116,12 +116,18 @@ const PropertyDetailPage = () => {
     <FaHome className="text-[#1F4B43] text-lg" />
     For Sale / Rent
   </p>
+   {/* Property Id */}
+   <p className="text-lg  font-normal text-gray-800 mt-4 flex items-center gap-2 bg-gray-100 px-6 py-1 rounded-lg w-fit">
+
+    Property Id :<br></br>125fdfd6566
+  </p>
 
   {/* Price */}
   <p className="text-2xl font-bold text-gray-900 mt-6 flex items-center gap-2">
     <FaTag className="text-green-600 text-xl" />
     Rs.850,000
   </p>
+  <button className="text-lg mt-3 px-6 py-2 hover:scale-95 border-[#7de1cf] border-[1.5px] rounded-full bg-[#1F4B43] text-white ">Buy/Rent</button>
 </div>
 
 

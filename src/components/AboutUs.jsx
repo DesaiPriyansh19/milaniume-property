@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import WhyShould from "./WhyShould";
 import WeUseRealestate from "./WeUseRealestate";
 import img2 from '../assets/nice-suit.jpg'
+import img3 from '../assets/DummyImg.jpeg'
+import person from '../assets/Persone2.jpg'
 const AboutUs = () => {
   return (<>
    <div style={{ backgroundImage: `url(${img})` }}
@@ -98,9 +100,9 @@ const AboutUs = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 transform hover:scale-105">
               <img
-                src="https://via.placeholder.com/300"
+                src={person}
                 alt="Team Member 1"
-                className="w-full h-64 object-cover"
+                className="mx-auto h-64 object-cover w-[50%]"
               />
               <div className="p-6">
                 <h4 className="text-xl font-semibold text-gray-800">Mayur Desai</h4>
@@ -110,9 +112,9 @@ const AboutUs = () => {
 
             <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 transform hover:scale-105">
               <img
-                src="https://via.placeholder.com/300"
+                src={person}
                 alt="Team Member 2"
-                className="w-full h-64 object-cover"
+                className="mx-auto h-64 object-cover w-[50%]"
               />
               <div className="p-6">
                 <h4 className="text-xl font-semibold text-gray-800">Rutvik Desai</h4>
@@ -121,11 +123,18 @@ const AboutUs = () => {
             </div>
 
             <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 transform hover:scale-105">
-              <img
-                src="https://via.placeholder.com/300"
+            <div className="grid grid-cols-2 gap-1">
+                <img
+                src={img3}
                 alt="Team Member 3"
-                className="w-full h-64 object-cover"
+                className="mx-auto h-64 object-cover w-[100%]"
               />
+                  <img
+                src={img3}
+                alt="Team Member 3"
+                className="mx-auto h-64 object-cover w-[100%]"
+              />
+              </div>
               <div className="p-6">
                 <h4 className="text-xl font-semibold text-gray-800">Tulsi Mewada &<br></br>
                 Dhruvi Mewada</h4>

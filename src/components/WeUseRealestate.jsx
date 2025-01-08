@@ -31,13 +31,10 @@ function WeUseRealestate() {
     {/* Four Small Divs */}
     <div className="grid grid-cols-2 gap-4 mb-12">
       <div className="p-2 text-center sm:text-start rounded-lg">
-        <h3 className="text-3xl xl:text-4xl font-normal xl:font-normal">12k+</h3>
+        <h3 className="text-3xl xl:text-4xl font-normal xl:font-normal">12+</h3>
         <p className="text-lg xl:text-xl font-thin">Years Of Experiance</p>
       </div>
-      <div className="p-2 rounded-lg text-center sm:text-start">
-        <h3 className="text-3xl xl:text-4xl font-normal xl:font-normal">26k+</h3>
-        <p className="text-lg xl:text-xl font-thin">Properties For Buy</p>
-      </div>
+      
       <div className="p-2 rounded-lg text-center sm:text-start">
         <h3 className="text-3xl xl:text-4xl font-normal xl:font-normal">26K+</h3>
         <p className="text-lg xl:text-xl font-thin">Properties for Buy</p>
@@ -59,7 +56,7 @@ function WeUseRealestate() {
     </div>
 
     {/* Learn More Button */}
-    <Link to={'/ourservices/property'}>
+    <Link to={'/aboutus'}>
       <button className="bg-[#E7C873] text-black text-lg  px-8 py-4 rounded-xl">
         Learn More &#8594;
       </button>

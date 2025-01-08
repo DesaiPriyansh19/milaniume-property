@@ -30,7 +30,7 @@ const Footer = () => {
     { name: "AboutUs", path: "/aboutus" },
     { name: "Property", path: "/properties" },
     { name: "Service", path: "/ourservices" },
-    { name: "Contact US", path: "/quick-contact" },
+    { name: "Contact US", path: "/quickenquiry" },
   ].map((link, index) => (
     <li key={index} className="group relative">
       <Link
@@ -52,7 +52,7 @@ const Footer = () => {
     {/* Facebook Logo */}
     <li>
       <a
-        href="https://www.facebook.com"
+        href="https://www.instagram.com/millennium_properties45/"
         target="_blank"
         rel="noopener noreferrer"
         className="hover:text-blue-600 transition text-sm flex items-center group"
@@ -68,7 +68,7 @@ const Footer = () => {
     {/* Instagram Logo */}
     <li>
       <a
-        href="https://www.instagram.com"
+        href="https://www.facebook.com/profile.php?id=61565211002294"
         target="_blank"
         rel="noopener noreferrer"
         className="hover:text-pink-600 transition text-sm flex items-center group"
@@ -93,7 +93,7 @@ const Footer = () => {
         href="https://maps.app.goo.gl/bkNkxzhDT4JGRuWL6"
         className="relative hover:text-gray-900 transition"
       >
-        C/491, Ganesh Glory 11, Nr. Money Plant Highstreet, 
+        C/401, Ganesh Glory 11, Nr. Money Plant Highstreet, 
         Jagtpur Road, Gota, Ahmedabad -382481
         <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-[#E7C873] transition-all duration-300 group-hover:w-full"></span>
       </a>
@@ -141,27 +141,7 @@ const Footer = () => {
   </ul>
 </div>
 
-{/* 
-          <div>
-            <h3 className="text-xl font-bold mb-4">Newsletter</h3>
-            <p className="text-sm mb-4 text-gray-600">
-              Subscribe to get the latest updates and offers directly in your inbox.
-            </p>
-            <form className="flex flex-col space-y-3">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-600"
-                aria-label="Enter your email address"
-              />
-              <button
-                type="submit"
-                className="bg-gray-800 text-white py-2 px-4 rounded-md hover:bg-gray-700 transition"
-              >
-                Subscribe
-              </button>
-            </form>
-          </div> */}
+
         </div>
 
         {/* Divider */}

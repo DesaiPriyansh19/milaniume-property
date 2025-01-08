@@ -37,7 +37,7 @@ function FeaturedCatagory() {
 
     <span className=''><HomeLogo/></span>
 <p className='text-[.8rem] font-semibold'>Residantial</p>
-<p className='text-[.7rem]'>2 properties</p>
+
 </div></div></Link>
 
 <Link to={'/properties'}>
@@ -46,7 +46,7 @@ className='bg-gray-100 hover:shadow-2xl cursor-pointer rounded-2xl py-3 text-cen
          md:w-[120px] lg:w-[150px] xl:h-[170px] xl:w-[160px]  flex-col justify-center items-center'> 
     <span className=''><HomeLogo3/></span>
 <p className='text-[.8rem] font-semibold'>Commercial Property</p>
-<p className='text-[.7rem]'>2 properties</p>
+
 </div></Link>
 <Link to={'/properties'}>
 <div data-aos-duration="1400" data-aos-delay="350" data-aos="flip-up"
@@ -54,15 +54,15 @@ className='bg-gray-100 hover:shadow-2xl cursor-pointer rounded-2xl py-3 text-cen
          md:w-[120px] lg:w-[150px] xl:h-[170px] xl:w-[160px]  flex-col justify-center items-center'> 
     <span className=''><HomeLogo4/></span>
 <p className='text-[.8rem] font-semibold'>Industrial Property</p>
-<p className='text-[.7rem]'>2 properties</p>
+
 </div></Link>
 <Link to={'/properties'}>
 <div data-aos-duration="1400" data-aos-delay="650" data-aos="flip-up"
  className='bg-gray-100 hover:shadow-2xl cursor-pointer rounded-2xl py-3 text-center flex h-[130px]
          md:w-[120px] lg:w-[150px] xl:h-[170px] xl:w-[160px]  flex-col justify-center items-center'> 
     <span className='flex justify-center items-center'><img src={Agriculture} className=' w-[30%]'/></span>
-<p className='text-[.8rem] font-semibold'>Agriculture Land & Project Land</p>
-<p className='text-[.7rem]'>2 properties</p>
+<p className='text-[.8rem] font-semibold'>Agriculture Land  & <br></br> Project Land</p>
+
 </div></Link>
 <Link to={'/ourservices/loan'}>
 <div data-aos-duration="1400" data-aos-delay="750" data-aos="flip-up"

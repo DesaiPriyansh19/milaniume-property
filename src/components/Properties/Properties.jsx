@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-import bgImg from "../../assets/pexels-clubhouseconvos-13620073.webp";
+
+import bgImg2 from "../../assets/pexels-clubhouseconvos-13620073.webp";
+
 import PropertyCards from "./PropertyCards";
 import { FiSearch } from "react-icons/fi"; // Import the search icon from React Icons
 import AOS from "aos";
@@ -1013,7 +1015,7 @@ function Properties() {
       <div className="relative w-full mb-0 pb-0">
         {/* Background Image with Blur */}
         <img
-          src={bgImg}
+          src={bgImg2}
           alt="Background"
           className="w-full h-[500px] sm:h-[500px] md:h-[600px] object-cover object-top filter blur-[0px]"
         />

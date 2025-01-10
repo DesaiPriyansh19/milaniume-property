@@ -29,10 +29,54 @@ import useFetch from "../../../hooks/useFetch";
 const PropertyDetailPage = () => {
   const [fadeIn, setFadeIn] = useState(false);
   const { id } = useParams();
+  const businessWhatsAppNumber = "919898152554"; // Replace with the business number
+
 
   const { data } = useFetch(
     `https://milaniumepropertybackend.vercel.app/api/property/${id}`
   );
+
+  const handleWhatsAppClick = () => {
+    const message = `
+    Hello, 
+     I am interested in this property 
+ 
+    **Here are the details**:  
+    ->Property ID: ${data?._id}
+    ->Location: ${data?.Address || "Not Available"}  
+    ->${
+      data?.ForSale === true && data?.ForRent === true
+        ? "For Sale / Rent"
+        : data?.ForSale
+        ? "For Sale"
+        : data?.ForRent
+        ? "For Rent"
+        : "Status Not Available"
+    }
+    ->Name: ${data?.PropertyName || "Not Available"}  
+    ->Price: ${
+      data?.Prices?.SalesPrice
+        ? `₹ ${Intl.NumberFormat().format(data.Prices.SalesPrice)}`
+        : data?.Prices?.RentPrice
+        ? `₹ ${Intl.NumberFormat().format(data.Prices.RentPrice)}/month`
+        : "Price Not Available"
+    }
+    
+   Please let me know the next steps, 
+        Thank you! 
+    `;
+    
+    // Generate WhatsApp URL
+    const whatsappURL = `https://wa.me/${businessWhatsAppNumber}?text=${encodeURIComponent(
+      message
+    )}`;
+
+    // Debugging: Log the URL
+    console.log("Generated WhatsApp URL:", whatsappURL);
+
+    // Open WhatsApp chat
+    window.open(whatsappURL, "_blank");
+  };
 
   const sectionsConfig = {
     Residential: [
@@ -166,7 +210,7 @@ const PropertyDetailPage = () => {
             View Property Details
           </h1>
           <p className="text-white mt-2 md:mt-4 px-2 sm:px-0 text-center text-sm md:text-base lg:text-lg font-normal">
-            Find Your Perfect Property – Where Your Search Ends.
+            Find the  Perfect Property – Where Your Search Ends.
           </p>
         </div>
       </div>
@@ -231,9 +275,9 @@ const PropertyDetailPage = () => {
                   "For  Rent"}
               </p>
               {/* Property Id */}
-              <p className="text-lg  font-normal text-gray-800 mt-4 flex items-center gap-2 bg-gray-100 px-6 py-1 rounded-lg w-fit">
-                Property Id :<br></br>
-                {data?._id}
+              <p className="text-lg  font-normal text-gray-800 mt-4 items-center gap-2 bg-gray-100 px-6 py-1 rounded-lg w-fit">
+                Property Id :
+               <span className="text-sm md:text-lg"> {data?._id}</span>
               </p>
 
               {/* Price */}
@@ -245,9 +289,18 @@ const PropertyDetailPage = () => {
                   ? `${Intl.NumberFormat().format(data.Prices.RentPrice)}/month`
                   : "Price Not Available"}
               </p>
-              <button className="text-lg mt-3 px-6 py-2 hover:scale-95 border-[#7de1cf] border-[1.5px] rounded-full bg-[#1F4B43] text-white ">
-                Buy/Rent
+              <button  onClick={() => handleWhatsAppClick("Buy")} className="text-lg mt-3 px-6 py-[5px] hover:scale-95 shadow-sm shadow-[#1F4B43] border-[#1F4B43] border-[0.5px] rounded-full  text-white bg-[#1F4B43] ">
+              {data?.ForSale === true &&
+                  data?.ForRent === true &&
+                  " Buy / Rent"}
+                {data?.ForSale === true &&
+                  data?.ForRent === false &&
+                  "Buy"}
+                {data?.ForSale === false &&
+                  data?.ForRent === true &&
+                  "For  Rent"}
               </button>
+          
             </div>
 
             {/* Right Side: Property Details */}
@@ -319,7 +372,7 @@ const PropertyDetailPage = () => {
                 return (
                   <div
                     key={index}
-                    className="bg-gray-50 p-4 w-full sm:w-[95%] md:w-[90%] lg:w-[80%] mx-auto rounded-xl shadow-md"
+                    className="bg-gray-50  p-4 w-full sm:w-[95%] md:w-[90%] lg:w-[80%] mx-auto rounded-xl shadow-md"
                   >
                     <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
                       {section.icon} {section.title}

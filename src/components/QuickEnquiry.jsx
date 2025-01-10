@@ -136,8 +136,8 @@ const QuickEnquiry = () => {
               variant={3}
             />
             <div className="mb-4 text-sm w-full">
-              <label className="block mb-2 text-sm text-gray-500">
-                Residential Type
+              <label className="block text-sm font-medium text-gray-500">
+                Looking For
               </label>
               <select
                 onChange={(e) => {
@@ -149,10 +149,10 @@ const QuickEnquiry = () => {
                 value={formData.EnquiryPropertyType}
                 className="w-full   p-2 border-[1.5px] rounded-lg text-sm placeholder:text-[#1F4B43] border-[#1F4B43]"
               >
-                <option value={"LowRiseApartment"}>Property</option>
-                <option value={"HighRiseApartment"}>Inerior</option>
+                <option value={"Property Services"}>Property Services</option>
+                <option value={"HighRiseApartment"}>Inerior Design</option>
                 <option value={"Bungalow"}>Loan & Finance</option>
-                <option value={"WeekendVillas"}>VILLAS</option>
+           
               </select>
             </div>
             <InputField

@@ -63,6 +63,7 @@ export default function HomePage() {
       <div data-aos-duration="2000" data-aos-delay="300" data-aos="fade-in">
       <FeaturedProperty/>
       </div>
+      
       <div data-aos="fade-out">
       <ReusableBanner
         bgImg={bgimg1}

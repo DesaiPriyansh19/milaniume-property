@@ -548,25 +548,25 @@ export default function UserRequirementPost() {
           </button>
         </div>
       </div>
-      <div className="border rounded">
+      <div className="border rounded mb-4 w-[40%]">
         <select
           value={filter.month}
           className="appearance-none bg-transparent outline-none  p-1 px-4 "
           onChange={(e) => setFilter({ ...filter, month: e.target.value,filterBy: "" })}
         >
-          <option value="">Select Month</option>
-          <option value={1}>January</option>
-          <option value={2}>February</option>
-          <option value={3}>March</option>
-          <option value={4}>April</option>
-          <option value={5}>May</option>
-          <option value={6}>June</option>
-          <option value={7}>July</option>
-          <option value={8}>August</option>
-          <option value={9}>September</option>
-          <option value={10}>October</option>
-          <option value={11}>November</option>
-          <option value={12}>December</option>
+          <option className="text-black" value="">Select Month</option>
+          <option className="text-black" value={1}>January</option>
+          <option className="text-black" value={2}>February</option>
+          <option className="text-black" value={3}>March</option>
+          <option className="text-black" value={4}>April</option>
+          <option className="text-black" value={5}>May</option>
+          <option className="text-black" value={6}>June</option>
+          <option className="text-black" value={7}>July</option>
+          <option className="text-black" value={8}>August</option>
+          <option className="text-black" value={9}>September</option>
+          <option className="text-black" value={10}>October</option>
+          <option className="text-black" value={11}>November</option>
+          <option className="text-black" value={12}>December</option>
 
           {/* Add other months */}
         </select>
@@ -580,6 +580,7 @@ export default function UserRequirementPost() {
             <option
               key={filter.currentYear - index}
               value={filter.currentYear - index}
+              className="text-black"
             >
               {filter.currentYear - index}
             </option>

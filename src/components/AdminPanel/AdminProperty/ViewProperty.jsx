@@ -557,7 +557,9 @@ export default function ViewProperty() {
     }
     setEditData({ type, id });
   };
-
+  if ( !data) {
+    return <p className="text-white text-center text-3xl mt-5 mx-auto p-4">Loading....</p>;
+  }
   return (
     <>
       {editData.type === "View" && (
@@ -567,20 +569,71 @@ export default function ViewProperty() {
               {" "}
               <p className="text-xl font-semibold uppercase ">View Property</p>
               <p className=" text-sm text-gray-200">
-                Welcome to your Real Estate Portfolio
+              
               </p>
             </div>
-            <div className="relative">
+
+          
+          
+
+            <div className="flex justify-between gap-4">
+              <div className="relative">
+                <select
+                  onChange={(e) => {
+                    setFilter((prev) => ({ ...prev, type: e.target.value }));
+                  }}
+                  value={filter.type}
+                  className="appearance-none text-white bg-transparent rounded-sm outline-none border border-white h-8 pl-2 pr-8"
+                >
+                  <option className="text-black" value="verified">Verified</option>
+                  <option className="text-black" value="unverified">Un-Verified</option>
+                </select>
+
+                <span
+                  style={{
+                    transform: "rotate(180deg) translateY(50%)",
+                    position: "absolute",
+                    top: "38%",
+                    right: "10px", // or whatever position you need
+                  }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className={`h-5 w-5 text-white`}
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M5.293 8.707a1 1 0 010-1.414L10 3.586l4.707 4.707a1 1 0 01-1.414 1.414L10 6.414 6.707 9.707a1 1 0 01-1.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </span>
+              </div>
+
+              <button
+                onClick={() => handleEdit("Add")}
+                className=" bg-red-800 text-white h-8 px-5  rounded "
+              >
+                Add New Property
+              </button>
+            </div>
+          </div>
+
+<div className="grid grid-cols-2 gap-6 px-2 mb-4">
+
+          <div className="relative">
               <input
                 type="text"
                 onChange={(e) => {
                   setFilter((prev) => ({ ...prev, search: e.target.value }));
                 }}
                 value={filter.search}
-                placeholder="Search ID:"
+                placeholder="Search Property Id"
                 className="p-1 pl-10 rounded w-full h-full bg-transparent border "
               ></input>
-              <div className="absolute top-[15%] left-3 ">
+              <div className="absolute  top-[15%] left-3 ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   x="0px"
@@ -594,7 +647,8 @@ export default function ViewProperty() {
                 </svg>
               </div>
             </div>
-            <div className="border rounded">
+
+            <div className="border bg-white text-black mx-auto rounded">
               <select
                 value={filter.month}
                 className="appearance-none bg-transparent outline-none  p-1 px-4 "
@@ -632,52 +686,10 @@ export default function ViewProperty() {
                   </option>
                 ))}
               </select>
-            </div>
-            <div className="flex justify-between gap-4">
-              <div className="relative">
-                <select
-                  onChange={(e) => {
-                    setFilter((prev) => ({ ...prev, type: e.target.value }));
-                  }}
-                  value={filter.type}
-                  className="appearance-none text-white bg-transparent outline-none border border-white h-8 pl-2 pr-8"
-                >
-                  <option value="verified">Verified</option>
-                  <option value="unverified">Un-Verified</option>
-                </select>
+            </div></div>
 
-                <span
-                  style={{
-                    transform: "rotate(180deg) translateY(50%)",
-                    position: "absolute",
-                    top: "38%",
-                    right: "10px", // or whatever position you need
-                  }}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className={`h-5 w-5 text-white`}
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M5.293 8.707a1 1 0 010-1.414L10 3.586l4.707 4.707a1 1 0 01-1.414 1.414L10 6.414 6.707 9.707a1 1 0 01-1.414 0z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </span>
-              </div>
 
-              <button
-                onClick={() => handleEdit("Add")}
-                className=" bg-red-500 text-white h-8 px-5  rounded "
-              >
-                Add New Estate
-              </button>
-            </div>
-          </div>
-          <div className="text-white w-full grid grid-cols-4 gap-4">
+          <div className="text-white w-full grid grid-cols-3 lg:grid-cols-4 gap-4">
             {filteredData.reverse().map((property, index) => (
               <div
                 key={index}
@@ -754,6 +766,7 @@ export default function ViewProperty() {
               </div>
             ))}
           </div>
+          
         </div>
       )}
       {editData.type === "Edit" && (

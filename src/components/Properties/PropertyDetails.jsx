@@ -26,13 +26,14 @@ import {
 } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import useFetch from "../../../hooks/useFetch";
+import SkeletonLoaderPropetyDetails from "../SkeletonLoaderPropertyDetails";
 const PropertyDetailPage = () => {
   const [fadeIn, setFadeIn] = useState(false);
   const { id } = useParams();
   const businessWhatsAppNumber = "919898152554"; // Replace with the business number
 
 
-  const { data } = useFetch(
+  const { data ,loading} = useFetch(
     `https://milaniumepropertybackend.vercel.app/api/property/${id}`
   );
 
@@ -187,7 +188,9 @@ const PropertyDetailPage = () => {
   const propertyType = data?.PropertyType || "Residential"; // Default to Residential if PropertyType is not provided
   const sections = sectionsConfig[propertyType] || [];
   return (
-    <>
+    <div>
+    
+
       <div className="relative w-full mb-0 pb-0">
         {/* Background Image with Blur */}
         <img
@@ -215,11 +218,14 @@ const PropertyDetailPage = () => {
         </div>
       </div>
 
-      <section className="bg-white py-16 px-8 sm:px-16 lg:px-32">
+      {loading ? (
+        <SkeletonLoaderPropetyDetails/>
+      ) : (   <section className="bg-white py-16 px-8 sm:px-16 lg:px-32">
         <div className="max-w-screen-xl mx-auto">
           {/* Hero Section with Carousel */}
           <div className="relative mb-6">
             <div className="relative w-full h-96 overflow-hidden rounded-lg shadow-xl">
+      
               {/* Current Image */}
               <img
                 src={data?.PropertyPhotos[currentIndex]}
@@ -410,10 +416,11 @@ const PropertyDetailPage = () => {
                 />
               ))}
             </div>
-          </div>
-        </div>
-      </section>
-    </>
+          </div> 
+        </div> 
+      </section> 
+   )}
+      </div>
   );
 };
 

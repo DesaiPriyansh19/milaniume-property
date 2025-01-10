@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom"; // Import Link for routing
 import WhiteHamburgerIcon from "../../../../svg/Icon/WhiteHamburger/index";
+import { FaHome, FaUsers, FaEnvelope, FaPlusCircle, FaUserEdit, FaClipboardList, FaTrashAlt } from "react-icons/fa";
 import HomeSvg from "../../../../svg/Icon/HomeSvg/index";
-
+import logo from "../../../../src/assets/logo final PNG.png";
 export default function SidebarAdmin() {
   const [conMaxWidth, setConMaxWidth] = useState(288);
 
   const SideBarOption = [
-    { name: "Dashboard", icon: <HomeSvg />, path: "/dashboard" },
-    { name: "Manage Peoples", icon: <HomeSvg />, path: "/manage-peoples" },
-    // { name: "Contact Information", icon: <HomeSvg />, path: "/contact-info" },
-    { name: "Enquiries", icon: <HomeSvg />, path: "/enquiries" },
-    { name: "Add Property", icon: <HomeSvg />, path: "/add-property" },
-    { name: "User Post", icon: <HomeSvg />, path: "/user-post" },
-    { name: "Require Post", icon: <HomeSvg />, path: "/require-post" },
-    { name: "Recycle Bin", icon: <HomeSvg />, path: "/recycle-bin" },
+    { name: "Dashboard", icon: <FaHome />, path: "/dashboard" },
+  { name: "Manage Peoples", icon: <FaUsers />, path: "/manage-peoples" },
+  { name: "Enquiries", icon: <FaEnvelope />, path: "/enquiries" },
+  { name: "Add Property", icon: <FaPlusCircle />, path: "/add-property" },
+  { name: "User Post", icon: <FaUserEdit />, path: "/user-post" },
+  { name: "Require Post", icon: <FaClipboardList />, path: "/require-post" },
+  { name: "Recycle Bin", icon: <FaTrashAlt />, path: "/recycle-bin" },
     // { name: "Bar Chart", icon: <HomeSvg />, path: "/bar-chart" },
     // { name: "Pie Chart", icon: <HomeSvg />, path: "/pie-chart" },
     // { name: "Line Chart", icon: <HomeSvg />, path: "/line-chart" },
@@ -39,8 +39,12 @@ export default function SidebarAdmin() {
           } pt-4 mb-10 px-4`}
         >
           {conMaxWidth === 288 && (
-            <Link to="/" className="text-2xl font-bold cursor-pointer text-white">
-              MILLINUM
+            <Link to="/" className="text-2xl flex flex-col gap-3 justify-center items-center font-bold cursor-pointer text-white">
+             <img
+                       src={logo}
+                       alt="Logo 1"
+                       className="mx-2 w-[70px] sm:mx-0 sm:w-[90px] md:w-[80px] xl:w-[90px] transition-transform duration-500 ease-in-out hover:brightness-110 "
+                     />  
             </Link>
           )}
           <div
@@ -60,19 +64,19 @@ export default function SidebarAdmin() {
                 {" "}
                 {/* Link added here */}
                 <div
-                  className={`flex ${
-                    conMaxWidth === 288 ? "ml-4 mb-4" : "justify-center mb-8"
+                  className={`flex  ${
+                    conMaxWidth === 288 ? "ml-4 mb-4" : "justify-center items-center mb-8"
                   } cursor-pointer text-base font-light items-center gap-4`}
                 >
-                  <div className="relative group">
-                    {category.icon}
+                  <div className="relative  flex justify-center items-center text-white   text-xl group">
+                 {category.icon}
 
                     <div
                       className={`absolute  top-[-1px] ${
                         conMaxWidth === 72
                           ? "left-10 opacity-0 z-10 bg-black group-hover:opacity-100 transition-opacity duration-300"
                           : "left-4 mb-1"
-                      } text-white  bg-opacity-60 px-2 ml-2 text-sm whitespace-nowrap rounded-md`}
+                      } text-white text-sm  bg-opacity-60 px-2 ml-2  whitespace-nowrap rounded-md`}
                     >
                       {category.name}
                     </div>

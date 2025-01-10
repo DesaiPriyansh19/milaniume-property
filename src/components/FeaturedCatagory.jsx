@@ -28,7 +28,7 @@ function FeaturedCatagory() {
     </div>
   
 <p className='text-sm text-center md:text-start px-20 text-gray-500 '> wide range of Services</p>
-    <div className='grid grid-cols-3 mt-5 px-5 md:px-10 lg:px-0 lg:flex gap-4 lg:gap-2 xl:gap-24 mx-auto items-center  justify-center py-3'>
+    <div className='grid grid-cols-3 mt-5 px-5 md:px-10 lg:px-0 lg:flex gap-4 lg:gap-2 xl:gap-16 mx-auto items-center  justify-center py-3'>
 
     <Link to={'/properties'}>
     <div data-aos-duration="1400" data-aos-delay="100" data-aos="flip-up">

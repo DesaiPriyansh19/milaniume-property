@@ -61,7 +61,7 @@ const Navbar = ({ handlePopupOpen }) => {
 
   return (
     <nav className="bg-gradient-to-b pt-5 text-sm from-black w-full to-transparent bg-opacity-10 absolute inset-x-0 top-0 z-40">
-      <div className="container mx-auto px-1 flex items-center justify-between h-16">
+      <div className="container mx-auto px-1 flex items-center justify-between lg:justify-evenly xl:gap-44 h-16">
         {/* Left: Logo */}
         <div className="flex items-center text-center justify-center">
           <img
@@ -70,7 +70,7 @@ const Navbar = ({ handlePopupOpen }) => {
             className="mx-2 w-[70px] sm:mx-0 sm:w-[90px] md:w-[80px] xl:w-[90px] transition-transform duration-500 ease-in-out hover:brightness-110 "
           />
     {/* Nav links for large devices */}
-<div className="hidden lg:flex text-[.8rem] xl:text-[1rem] px-28 xl:px-80 space-x-6 xl:space-x-8 mx-auto">
+<div className="hidden lg:flex text-[.8rem] xl:text-[0.9rem]  px-28 lg:px-44 xl:px-70 space-x-6 xl:space-x-7 mx-auto">
   <Link
     to="/"
     className="text-white relative transition px-2 group"

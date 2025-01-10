@@ -240,13 +240,13 @@ export default function AddProperty({ addNew, handleEdit }) {
           {" "}
           <p className="text-xl font-semibold uppercase ">Add Property</p>
           <p className=" text-sm text-gray-200">
-            Add New Real Estate To Your Portfolio
+            Add New properties
           </p>
         </div>
         <div className="flex gap-4">
           <button
             onClick={handleSubmit}
-            className=" bg-blue-500 text-white h-10 p-2 rounded "
+            className=" bg-blue-800 text-white h-10 p-2 rounded "
           >
             Confirm
           </button>
@@ -254,7 +254,7 @@ export default function AddProperty({ addNew, handleEdit }) {
             onClick={() => {
               handleEdit("View");
             }}
-            className=" bg-red-500 text-white h-10 px-3 rounded"
+            className=" bg-red-800 text-white h-10 px-3 rounded"
           >
             Cancel
           </button>
@@ -354,6 +354,7 @@ export default function AddProperty({ addNew, handleEdit }) {
                   variant={2}
                   checked={formData.Featured}
                   onChange={handleInputChange}
+                
                 />
               </div>
             </div>

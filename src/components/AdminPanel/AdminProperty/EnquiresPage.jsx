@@ -127,7 +127,7 @@ export default function EnquiresPage() {
             </button>
           </div>
         </div>
-        <div className="border rounded">
+        <div className="border w-[30%] text-black bg-white rounded">
           <select
             value={filter.month}
             className="appearance-none bg-transparent outline-none  p-1 px-4 "
@@ -215,7 +215,7 @@ export default function EnquiresPage() {
                   </div>
                 </div>
 
-                <div className={`flex items-center mt-4 justify-between`}>
+                <div className={` items-center mt-4 justify-between`}>
                   <div>
                     <label className="text-xs  text-gray-400 uppercase font-semibold tracking-wider">
                       Email
@@ -224,7 +224,7 @@ export default function EnquiresPage() {
                       {person.EnquiryPersonEmail}
                     </p>
                   </div>
-                  <div className="text-end">
+                  <div className="text-start">
                     <label className="text-xs  text-gray-400 uppercase font-semibold tracking-wider">
                       Phone
                     </label>

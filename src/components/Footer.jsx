@@ -52,7 +52,7 @@ const Footer = () => {
     {/* Facebook Logo */}
     <li>
       <a
-        href="https://www.instagram.com/millennium_properties45/"
+        href="https://www.facebook.com/profile.php?id=61565211002294"
         target="_blank"
         rel="noopener noreferrer"
         className="hover:text-blue-600 transition text-sm flex items-center group"
@@ -68,7 +68,7 @@ const Footer = () => {
     {/* Instagram Logo */}
     <li>
       <a
-        href="https://www.facebook.com/profile.php?id=61565211002294"
+        href="https://www.instagram.com/millennium_properties45/"
         target="_blank"
         rel="noopener noreferrer"
         className="hover:text-pink-600 transition text-sm flex items-center group"

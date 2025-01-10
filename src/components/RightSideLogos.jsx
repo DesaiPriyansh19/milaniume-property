@@ -31,17 +31,17 @@ const RightSideLogos = () => {
     className="transition transform hover:scale-125 hover:text-green-500"
   />
 </a>
-
+<a href="https://www.instagram.com/millennium_properties45/">
     <FaInstagram
       size={29}
       color="#1F4B43"
       className="transition transform hover:scale-125 hover:text-green-500"
-    />
-    <FaFacebookF
+    /></a>
+   <a href="https://www.facebook.com/profile.php?id=61565211002294 "><FaFacebookF
       size={29}
       color="#1F4B43"
       className="transition transform hover:scale-125 hover:text-green-500"
-    />
+    /></a> 
   </div>
   
   );

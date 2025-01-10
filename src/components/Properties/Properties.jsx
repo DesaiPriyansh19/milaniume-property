@@ -974,11 +974,11 @@ function Properties() {
         {/* Filter Modal */}
         {isModalOpen && (
           <div
-            className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50"
+            className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50 h-[400vh] md:h-[100vh] lg:h-[550vh] xl:h-[400vh]"
             onClick={closeModal}
           >
             <div
-              className="bg-white rounded-lg p-6 w-11/12 md:w-3/4 lg:w-[50%] overflow-y-auto max-h-[95vh]"
+              className="bg-white rounded-lg p-6 w-11/12 md:w-3/4 lg:w-[50%] absolute top-[18%] overflow-y-auto max-h-[98vh]"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close Button */}

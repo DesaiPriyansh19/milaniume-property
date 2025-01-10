@@ -545,7 +545,7 @@ export default function RecycleBinProperty() {
               {" "}
               <p className="text-xl font-semibold uppercase ">Recycle Bin</p>
               <p className=" text-sm text-gray-200">
-                Your Trash Property Over here
+                Your Recycle Property Over here
               </p>
             </div>
             <div className="relative">
@@ -573,7 +573,7 @@ export default function RecycleBinProperty() {
               </div>
             </div>
           </div>
-          <div className="text-white w-full grid grid-cols-4 gap-4">
+          <div className="text-white w-full grid grid-cols-3 gap-4">
             {filteredData.map((property, index) => (
               <div
                 key={index}

@@ -10,24 +10,24 @@ export default function MainDashBoard() {
       title: "Post Property",
       value: 0,
       total: 0,
-      description: "Total Post",
+      description: "Total Properties",
       progressColor: "#ef476f",
       percentage: 0,
     },
     {
-      title: "Total Enquiry Today",
+      title: "Quick Enquiry ",
       value: 0,
 
       total: 0,
-      description: "Enquiries Today",
+      description: "Quick Enquiries ",
       progressColor: "#4ecdae",
       percentage: 0,
     },
     {
-      title: "Total Requirement Today",
+      title: "Total Requirement ",
       value: 0,
       total: 0,
-      description: "Requirements Today",
+      description: "Requirements ",
       progressColor: "#ff9f1c",
       percentage: 0,
     },
@@ -120,24 +120,27 @@ export default function MainDashBoard() {
     }
   }, [data]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error loading data</p>;
-
+ 
+  if (error) return <p className=" text-center text-xl">Error loading data</p>;
+  if (loading && !data) {
+    return <p className="text-white text-center text-3xl mt-5 mx-auto p-4">Loading....</p>;
+  }
   return (
     <div className="text-white  mx-auto p-4">
       <p className="text-xl font-semibold uppercase ">DashBoard</p>
-      <p className="mb-6 text-sm text-gray-200">Welcome to your Dashboard</p>
+      <p className="mb-6 text-sm text-gray-200">You can See All Yor Real Estate Data Here.</p>
       <div className="flex justify-between mb-4 gap-4 w-full">
         {cardsData.map((card, i) => (
           <div
             key={i}
-            className="bg-gray-800 rounded-lg shadow-md w-full relative"
+            className="bg-gray-800 text-xl rounded-lg shadow-md w-full relative"
           >
             <div className="p-5 flex justify-between ">
               <div>
                 <p className="font-mono text-[#4ecdae]">{card.description} </p>
-                <p className="font-sans mb-1">
-                  {card.value} / {card.total}
+                <p className="font-sans mb-1 flex flex-col gap-2">
+             <span> Today -<span className="font-bold "> {card.value}</span> </span>  
+             <span>   Total-<span className="font-bold "> {card.total}</span></span>
                 </p>
               </div>
             </div>

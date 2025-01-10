@@ -29,11 +29,7 @@ const InteriorDesign = () => {
 
   return (
     <div className="bg-gray-50 ext-gray-800">
-      {/* Hero Section Over Carousel */}
-      <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-end  text-center text-white bg-black bg-opacity-25 z-10">
-        <h1 className="text-4xl font-bold">Interior Design Services</h1>
-        <p className="mt-4 text-lg mb-2">Transform your space with our unique interior design services.</p>
-      </div>
+     
       
       {/* Image Carousel */}
       <div className="relative w-full h-screen overflow-hidden">
@@ -47,7 +43,11 @@ const InteriorDesign = () => {
             }`}
           />
         ))}
-
+ {/* Hero Section Over Carousel */}
+ <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-end  text-center text-white bg-black bg-opacity-25 z-10">
+        <h1 className="text-4xl font-bold">Interior Design Services</h1>
+        <p className="mt-4 text-lg mb-2">Transform your space with our unique interior design services.</p>
+      </div>
         {/* Left Arrow */}
         <button
           onClick={prevSlide}

@@ -665,7 +665,7 @@ function YourRequirements() {
                   onChange={handleInputChange}
                   className="block w-full mt-1 p-2 border rounded-md"
                 >
-                  <option value="Sell">Sell</option>
+                
                   <option value="Rent">Rent</option>
                   <option value="Buy">Buy</option>
                 </select>

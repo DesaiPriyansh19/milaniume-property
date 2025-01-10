@@ -221,7 +221,14 @@ export default function AddProperty({ addNew, handleEdit }) {
       filteredData.PropertyPhotos = [];
     }
 
-    await addNew(filteredData);
+    try {
+      const response = await addNew(filteredData);
+      if (response.data.data) {
+        console.log("true"); // Confirm the response is valid
+      }
+    } catch (error) {
+      console.error("Error occurred:", error); // Log the error
+    }
     handleEdit("View");
   };
 

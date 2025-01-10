@@ -13,7 +13,7 @@ export default function ViewProperty() {
     search: "",
     month: new Date().getMonth() + 1, // Default to current month
     year: new Date().getFullYear(),
-    currentYear:2025
+    currentYear: 2025,
   });
   const [formData, setFormData] = useState({
     id: "",
@@ -624,7 +624,10 @@ export default function ViewProperty() {
                 onChange={(e) => setFilter({ ...filter, year: e.target.value })}
               >
                 {Array.from({ length: 10 }, (_, index) => (
-                  <option key={filter.currentYear - index} value={filter.currentYear - index}>
+                  <option
+                    key={filter.currentYear - index}
+                    value={filter.currentYear - index}
+                  >
                     {filter.currentYear - index}
                   </option>
                 ))}
@@ -682,6 +685,7 @@ export default function ViewProperty() {
                 className="bg-gray-800  p-4 cursor-pointer rounded-lg shadow-lg hover:shadow-xl transform hover:scale-[0.98] transition duration-300"
               >
                 {/* Property Image */}
+
                 <div className="h-48 w-full relative group bg-gray-700 rounded-lg overflow-hidden">
                   <img
                     src={
@@ -717,8 +721,21 @@ export default function ViewProperty() {
                   <p className="text-sm my-1 text-gray-300">
                     ID: {property?._id || "id not available"}
                   </p>
-                  <p className="text-sm mb-2 text-gray-400">
+                  <p className="text-sm mb-1 text-gray-400">
                     {property?.Landmark || "Location not available"}
+                  </p>
+                  <p className="font-bold">
+                    DATE :
+                    <span className="font-semibold ml-2 mb-4">
+                      {new Date(property?.PropertyAddedDate).toLocaleDateString(
+                        "en-GB",
+                        {
+                          day: "2-digit",
+                          month: "2-digit",
+                          year: "numeric",
+                        }
+                      )}
+                    </span>
                   </p>
 
                   <p className="text-base font-bold text-white">

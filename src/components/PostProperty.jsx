@@ -162,6 +162,7 @@ function PostProperty() {
     AltPhone: "",
     PostedProperties: [],
   });
+
   const [formData, setFormData] = useState(initialState);
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -248,6 +249,15 @@ function PostProperty() {
             finalsubmitData
           );
           alert("Form has Been Submitted Wait For Devs to Approve");
+          setFormData(initialState);
+          setUserData({
+            Role: "Owner",
+            Fullname: "",
+            Email: "",
+            Phone: "",
+            AltPhone: "",
+            PostedProperties: [],
+          });
         } catch (error) {
           console.log(error);
         }
@@ -1057,16 +1067,17 @@ function PostProperty() {
                 <label className="block col-span-3 mb-2 text-sm md:text-lg">
                   Property Status:
                   <select
+                    name="PropertyStatus"
                     onChange={handleInputChange}
                     value={formData.PropertyStatus}
                     className="block w-full mt-1 p-2 border rounded-md"
                   >
-                    <option value="new-launch">New Launch</option>
-                    <option value="under-construction">
+                    <option value="NewLaunch">New Launch</option>
+                    <option value="UnderConstruction">
                       Under Construction
                     </option>
-                    <option value="ready-to-move">Ready to Move</option>
-                    <option value="ready-to-move">Old Cunstruction</option>
+                    <option value="ReadyToMove">Ready to Move</option>
+                    <option value="OldConstruction">Old Cunstruction</option>
                   </select>
                 </label>{" "}
               </div>

@@ -6,27 +6,21 @@ import "aos/dist/aos.css"; // Import AOS styles
 import useApiData from "../../hooks/useApiData";
 import InputField from "../../utils/InputFields";
 function YourRequirements() {
-  const [activeTab, setActiveTab] = useState("Residential");
-  const baseUrl = "https://milaniumepropertybackend.vercel.app/api/require";
-  const { addNew } = useApiData(baseUrl);
-
-  const [formData, setFormData] = useState({
-    RequiredPersonRole: "",
+  const initialState = {
+    RequiredPersonRole: "Buyer",
     RequiredPersonName: "",
     RequiredPersonPhone: "",
     RequiredPersonEmail: "",
-    RequiredAreaSqft: {
-      max: "",
-      min: "",
-    },
-    RequiredBudget: {
-      max: "",
-      min: "",
-    },
     RequiredPropertyDetails: {
       RequiredPropertyType: "Residential",
-      RequiredAreaSqft: { min: "", max: "" },
-      RequiredBudget: { min: "", max: "" },
+      RequiredAreaSqft: {
+        max: "",
+        min: "",
+      },
+      RequiredBudget: {
+        max: "",
+        min: "",
+      },
       RequiredPropertySellOrRent: "",
       RequiredConstructionStatus: "",
       RequiredDescription: "",
@@ -122,7 +116,12 @@ function YourRequirements() {
       "South-West": false,
       West: false,
     },
-  });
+  };
+  const [activeTab, setActiveTab] = useState("Residential");
+  const baseUrl = "https://milaniumepropertybackend.vercel.app/api/require";
+  const { addNew } = useApiData(baseUrl);
+
+  const [formData, setFormData] = useState(initialState);
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -182,6 +181,7 @@ function YourRequirements() {
     const filteredData = filterDefaultValues(formData);
 
     await addNew(filteredData);
+    setFormData(initialState);
     console.log("Submmited Data-", filteredData);
   };
 
@@ -748,16 +748,16 @@ function YourRequirements() {
               <div className="flex  gap-4">
                 <InputField
                   type="text"
-                  name="RequiredAreaSqft"
-                  value={formData.RequiredAreaSqft.min}
+                  name="RequiredPropertyDetails.RequiredAreaSqft.min"
+                  value={formData.RequiredPropertyDetails.RequiredAreaSqft.min}
                   placeholder={"Min"}
                   onChange={handleInputChange}
                   variant={4}
                 />
                 <InputField
                   type="text"
-                  name="RequiredAreaSqft"
-                  value={formData.RequiredAreaSqft.max}
+                  name="RequiredPropertyDetails.RequiredAreaSqft.max"
+                  value={formData.RequiredPropertyDetails.RequiredAreaSqft.max}
                   placeholder={"Max"}
                   onChange={handleInputChange}
                   variant={4}
@@ -769,16 +769,16 @@ function YourRequirements() {
               <div className="flex gap-4">
                 <InputField
                   type="text"
-                  name="RequiredBudget"
-                  value={formData.RequiredBudget.min}
+                  name="RequiredPropertyDetails.RequiredBudget.min"
+                  value={formData.RequiredPropertyDetails.RequiredBudget.min}
                   placeholder={"Min"}
                   onChange={handleInputChange}
                   variant={4}
                 />
                 <InputField
                   type="text"
-                  name="RequiredBudget"
-                  value={formData.RequiredBudget.max}
+                  name="RequiredPropertyDetails.RequiredBudget.max"
+                  value={formData.RequiredPropertyDetails.RequiredBudget.max}
                   placeholder={"Max"}
                   onChange={handleInputChange}
                   variant={4}

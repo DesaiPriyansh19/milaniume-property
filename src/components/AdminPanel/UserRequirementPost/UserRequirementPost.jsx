@@ -11,6 +11,7 @@ export default function UserRequirementPost() {
     RequiredPersonName: "",
     RequiredPersonPhone: "",
     RequiredPersonEmail: "",
+    RequiredPersonDate: "",
     RequiredAreaSqft: {
       max: "",
       min: "",
@@ -119,6 +120,13 @@ export default function UserRequirementPost() {
       West: false,
     },
   });
+
+  const [filter, setFilter] = useState({
+    month: "", // Default to current month
+    year: new Date().getFullYear(),
+    currentYear: 2025,
+    filterBy: "",
+  });
   const [editData, setEditData] = useState("");
 
   useEffect(() => {
@@ -127,6 +135,7 @@ export default function UserRequirementPost() {
         ...prevData,
         RequiredPersonRole: requirements?.RequiredPersonRole || "",
         RequiredPersonName: requirements?.RequiredPersonName || "",
+        RequiredPersonDate: requirements?.RequiredPersonDate || "",
         RequiredPersonPhone: requirements?.RequiredPersonPhone || "",
         RequiredPersonEmail: requirements?.RequiredPersonEmail || "",
         RequiredAreaSqft: {
@@ -258,6 +267,44 @@ export default function UserRequirementPost() {
       }));
     }
   }, [requirements]);
+
+  const filteredData = requirements?.filter((property) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Normalize today's date to 00:00:00
+
+    const yesterday = new Date(today);
+    yesterday.setDate(today.getDate() - 1); // Get yesterday's date
+    yesterday.setHours(0, 0, 0, 0); // Normalize yesterday's date to 00:00:00
+
+    const propertyDate = new Date(property?.RequiredPersonDate);
+    propertyDate.setHours(0, 0, 0, 0); // Normalize the property date to 00:00:00
+
+    const isToday =
+      propertyDate.getFullYear() === today.getFullYear() &&
+      propertyDate.getMonth() === today.getMonth() &&
+      propertyDate.getDate() === today.getDate();
+
+    const isYesterday =
+      propertyDate.getFullYear() === yesterday.getFullYear() &&
+      propertyDate.getMonth() === yesterday.getMonth() &&
+      propertyDate.getDate() === yesterday.getDate();
+
+    const matchesDate =
+      filter.filterBy === "Today"
+        ? isToday // Show only today's entries
+        : filter.filterBy === "Yesterday"
+        ? isYesterday // Show only yesterday's entries
+        : filter.filterBy === "All" // Show all entries if 'All' filter is selected
+        ? true
+        : filter.year && !filter.month // Show entries for the selected year, all months
+        ? propertyDate.getFullYear() === Number(filter.year)
+        : filter.month && filter.year // Show entries for selected month/year
+        ? propertyDate >= new Date(filter.year, filter.month - 1, 1) &&
+          propertyDate <= new Date(filter.year, filter.month, 0)
+        : true; // Show all entries if no filter is selected
+
+    return matchesDate;
+  });
 
   const handleView = (id) => {
     const selectedProperty = requirements.find(
@@ -451,45 +498,132 @@ export default function UserRequirementPost() {
           data={formData}
         />
       )}
-      <div className="mb-6">
-        <p className="text-xl font-semibold uppercase ">Requirement Post</p>
-        <p className=" text-sm text-gray-200">View All User Requirement Post</p>
+      <div className="mb-6 flex justify-between">
+        <div>
+          <p className="text-xl font-semibold uppercase ">Requirement Post</p>
+          <p className=" text-sm text-gray-200">
+            View All User Requirement Post
+          </p>
+        </div>
+        <div className="flex gap-4">
+          <button
+            className={`border ${
+              filter.filterBy === "Today" && "bg-gray-800"
+            } px-4 rounded`}
+            onClick={() =>
+              setFilter((prevFilter) => ({
+                ...prevFilter,
+                filterBy: prevFilter.filterBy === "Today" ? "" : "Today", // Toggle between today and no filter
+              }))
+            }
+          >
+            Today's
+          </button>
+          <button
+            className={`border ${
+              filter.filterBy === "Yesterday" && "bg-gray-800"
+            } px-4 rounded`}
+            onClick={() =>
+              setFilter((prevFilter) => ({
+                ...prevFilter,
+                filterBy:
+                  prevFilter.filterBy === "Yesterday" ? "" : "Yesterday", // Toggle between today and no filter
+              }))
+            }
+          >
+            Yesterday's
+          </button>
+          <button
+            className={`border ${
+              filter.filterBy === "All" && "bg-gray-800"
+            } px-4 rounded`}
+            onClick={() =>
+              setFilter((prevFilter) => ({
+                ...prevFilter,
+                filterBy: prevFilter.filterBy === "All" ? "" : "All", // Toggle between today and no filter
+              }))
+            }
+          >
+            All
+          </button>
+        </div>
+      </div>
+      <div className="border rounded">
+        <select
+          value={filter.month}
+          className="appearance-none bg-transparent outline-none  p-1 px-4 "
+          onChange={(e) => setFilter({ ...filter, month: e.target.value,filterBy: "" })}
+        >
+          <option value="">Select Month</option>
+          <option value={1}>January</option>
+          <option value={2}>February</option>
+          <option value={3}>March</option>
+          <option value={4}>April</option>
+          <option value={5}>May</option>
+          <option value={6}>June</option>
+          <option value={7}>July</option>
+          <option value={8}>August</option>
+          <option value={9}>September</option>
+          <option value={10}>October</option>
+          <option value={11}>November</option>
+          <option value={12}>December</option>
+
+          {/* Add other months */}
+        </select>
+        <span>/ </span>
+        <select
+          value={filter.year}
+          className="appearance-none bg-transparent outline-none p-1 px-4"
+          onChange={(e) => setFilter({ ...filter, year: e.target.value,filterBy: "" })}
+        >
+          {Array.from({ length: 10 }, (_, index) => (
+            <option
+              key={filter.currentYear - index}
+              value={filter.currentYear - index}
+            >
+              {filter.currentYear - index}
+            </option>
+          ))}
+        </select>
       </div>
       <div className="p-6 bg-gray-800 rounded-lg shadow-lg">
         <ul className="space-y-6 gap-4">
-          {requirements?.slice().reverse().map((requirement, index) => (
-            <li
-              key={index}
-              onClick={() => handleView(requirement._id)}
-              className="p-6 border cursor-pointer sticky top-0 z-10 bg-gray-800 text-white border-gray-700 rounded-lg shadow-lg hover:bg-gray-900 transition-all duration-300"
-            >
-              <h3 className="text-2xl font-bold mb-2">
-                {requirement?.RequiredPersonRole}:{" "}
-                {requirement?.RequiredPersonName}
-              </h3>
-              <p className="mb-1">
-                <span className="font-semibold">Phone:</span>{" "}
-                {requirement?.RequiredPersonPhone}
-              </p>
-              <p className="mb-1">
-                <span className="font-semibold">Email:</span>{" "}
-                {requirement?.RequiredPersonEmail}
-              </p>
-              <p className="mb-1">
-                <span className="font-semibold">Property Type:</span>{" "}
-                {requirement?.RequiredPropertyDetails?.RequiredPropertyType}
-              </p>
-              <p className="mb-1">
-                <span className="font-semibold">Description:</span>{" "}
-                {requirement?.RequiredPropertyDetails?.RequiredDescription}
-              </p>
-              <p>
-                <span className="font-semibold">Budget:</span>{" "}
-                {requirement?.RequiredPropertyDetails?.RequiredBudget?.min} -{" "}
-                {requirement?.RequiredPropertyDetails?.RequiredBudget?.max}
-              </p>
-            </li>
-          ))}
+          {filteredData
+            ?.slice()
+            .reverse()
+            .map((requirement, index) => (
+              <li
+                key={index}
+                onClick={() => handleView(requirement._id)}
+                className="p-6 border cursor-pointer sticky top-0 z-10 bg-gray-800 text-white border-gray-700 rounded-lg shadow-lg hover:bg-gray-900 transition-all duration-300"
+              >
+                <h3 className="text-2xl font-bold mb-2">
+                  {requirement?.RequiredPersonRole}:{" "}
+                  {requirement?.RequiredPersonName}
+                </h3>
+                <p className="mb-1">
+                  <span className="font-semibold">Phone:</span>{" "}
+                  {requirement?.RequiredPersonPhone}
+                </p>
+                <p className="mb-1">
+                  <span className="font-semibold">Email:</span>{" "}
+                  {requirement?.RequiredPersonEmail}
+                </p>
+                <p className="mb-1">
+                  <span className="font-semibold">Property Type:</span>{" "}
+                  {requirement?.RequiredPropertyDetails?.RequiredPropertyType}
+                </p>
+                <p className="mb-1">
+                  <span className="font-semibold">Description:</span>{" "}
+                  {requirement?.RequiredPropertyDetails?.RequiredDescription}
+                </p>
+                <p>
+                  <span className="font-semibold">Budget:</span>{" "}
+                  {requirement?.RequiredPropertyDetails?.RequiredBudget?.min} -{" "}
+                  {requirement?.RequiredPropertyDetails?.RequiredBudget?.max}
+                </p>
+              </li>
+            ))}
         </ul>
       </div>
     </div>

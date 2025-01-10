@@ -1,6 +1,7 @@
 import React from "react";
 
 export default function ViewDescModal({ data, close }) {
+  console.log(data);
   return (
     <div className="fixed w-full inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div className="bg-gray-800 relative p-6 rounded-lg shadow-lg max-w-xl w-full">

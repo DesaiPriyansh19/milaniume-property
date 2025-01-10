@@ -7,7 +7,7 @@ import SkeletonLoader from "./SkeletonLoader";
 function FeaturedProperty() {
   const [activeTab, setActiveTab] = useState("All Properties");
   const [filteredData, setFilteredData] = useState([]);
-  const data = ["All Properties", "Commercial", "Residential", "Industrial"];
+  const data = ["Commercial", "Residential", "Industrial","Agricultural Plot"];
 
   const { data: PropertyData, loading } = useFetch(
     "https://milaniumepropertybackend.vercel.app/api/property"
@@ -21,9 +21,7 @@ function FeaturedProperty() {
     if (PropertyData) {
       let filtered = PropertyData;
 
-      if (activeTab !== "All Properties") {
-        filtered = filtered.filter((item) => item.PropertyType === activeTab);
-      }
+      filtered = filtered.filter((item) => item.PropertyType === activeTab);
 
       filtered = filtered.filter((item) => item.Featured);
 

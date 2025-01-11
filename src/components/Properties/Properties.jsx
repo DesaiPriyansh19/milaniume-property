@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import bgImg2 from "../../assets/pexels-clubhouseconvos-13620073.webp";
 
@@ -9,8 +9,9 @@ import "aos/dist/aos.css"; // Import AOS styles
 import useFetch from "../../../hooks/useFetch";
 import SkeletonLoader from "../SkeletonLoader";
 import FilterLogo from "../../../svg/Icon/FilterLogo/Index";
+import { useActive } from "../../../context/activeContext";
 function Properties() {
-  const [activeTab, setActiveTab] = useState("Residential");
+  const { activeTab, setActiveTab } = useActive();
   const [isModalOpen, setIsModalOpen] = useState(false); // Moved here
   const [mainData, setMainData] = useState([]);
   const { data, loading } = useFetch(

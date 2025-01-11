@@ -16,7 +16,7 @@ function PropertyCards({ data }) {
       >
         {data?.map((card) => {
           return (
-            <>
+            <React.Fragment key={card._id}>
               <Link to={`/properties/viewdetails/${card._id}`}>
                 <div
                   key={card._id}
@@ -29,29 +29,35 @@ function PropertyCards({ data }) {
                   {/* Overlay to darken the background */}
                   <div className="absolute inset-0 bg-black opacity-10 rounded-xl"></div>
                   <div className="flex gap-2 items-center justify-center absolute top-4 left-4">
-                    <p className="bg-[#1F4B43]  rounded-xl text-[.7rem] text-white px-3 py-1 ">
-                      Apartment
+                    <p className="bg-[#1F4B43] rounded-xl text-[.7rem] text-white  px-3 py-1">
+                      {card?.ForSale === true &&
+                        card?.ForRent === true &&
+                        "For Sale / Rent"}
+                      {card?.ForSale === true &&
+                        card?.ForRent === false &&
+                        "For Sale "}
+                      {card?.ForSale === false &&
+                        card?.ForRent === true &&
+                        "For  Rent"}
                     </p>
                     <p
                       className={`text-[.7rem] ${
-                        card?.Featured
-                          ? "bg-yellow-500 text-black"
-                          : "bg-zinc-900 text-gray-200 opacity-75"
+                        card?.Featured && "bg-yellow-500 text-black"
                       } px-3 py-1 rounded-xl`}
                     >
-                      {card?.Featured ? "Featured" : "Not Featured"}
+                      {card?.Featured && "Featured"}
                     </p>
                   </div>
                   <div className="absolute bottom-4 left-4 text-white pl-2 rounded-md">
                     <p className="text-[.9rem] font-normal">
                       {card.PropertyName}
                     </p>
-                    <p className="text-[.7rem] gap-1    flex items-center">
-                      <span className="material-icons">
+                    <div className="text-[.7rem] gap-1    flex items-center">
+                      <div className="material-icons">
                         <LocationLogo />
-                      </span>
-                      {card.Landmark}
-                    </p>
+                      </div>
+                      <span>{card.Landmark}</span>
+                    </div>
                     <div className="flex justify-between items-center mt-2">
                       <div
                         className="flex items-center gap-[2px]"
@@ -81,7 +87,7 @@ function PropertyCards({ data }) {
                   </div>
                 </div>
               </Link>
-            </>
+            </React.Fragment>
           );
         })}
       </div>

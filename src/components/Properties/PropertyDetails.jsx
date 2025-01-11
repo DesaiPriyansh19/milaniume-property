@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import img2 from "../../assets/slider1.jpg.png";
 import img from "../../assets/property_2_-853gCunl--transformed.webp";
-import bgImg from "../../assets/pexels-clubhouseconvos-13620073.webp";
+
+import bgImg from "../../../public/PropertiesBg.webp";
 import {
   FaMapMarkerAlt,
   FaRulerCombined,
@@ -31,12 +32,12 @@ const PropertyDetailPage = () => {
   const [fadeIn, setFadeIn] = useState(false);
   const { id } = useParams();
   const businessWhatsAppNumber = "919898152554"; // Replace with the business number
-
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const { data ,loading} = useFetch(
     `https://milaniumepropertybackend.vercel.app/api/property/${id}`
   );
-
+  
   const handleWhatsAppClick = () => {
     const message = `
     Hello, 
@@ -191,11 +192,12 @@ const PropertyDetailPage = () => {
     <div>
     
 
-      <div className="relative w-full mb-0 pb-0">
+      <div className="relative w-full mb-0 pb-0 bg-gray-900 ">
         {/* Background Image with Blur */}
         <img
           src={bgImg}
           alt="Background"
+           loading="lazy"
           className="w-full h-[500px] sm:h-[500px] md:h-[600px] object-cover object-top filter blur-[0px]"
         />
 
@@ -236,7 +238,7 @@ const PropertyDetailPage = () => {
               {/* Left Button */}
               <button
                 onClick={handlePrev}
-                className="absolute top-1/2  md:top-[90%] left-4 md:left-20 transform -translate-y-1/2 bg-white bg-opacity-50 text-black p-3 rounded-full hover:bg-opacity-70 transition-all"
+                className="absolute top-1/2 shadow-2xl shadow-white  md:top-[90%] left-4 md:left-20 transform -translate-y-1/2 bg-white bg-opacity-50 text-black p-3 rounded-full hover:bg-opacity-70 transition-all"
               >
                 &#8592;
               </button>

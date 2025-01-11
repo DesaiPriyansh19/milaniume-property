@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import bgImg2 from "../../assets/pexels-clubhouseconvos-13620073.webp";
+import bgImg2 from "../../../public/PropertiesBg.webp";
 
 import PropertyCards from "./PropertyCards";
 import { FiSearch } from "react-icons/fi"; // Import the search icon from React Icons
@@ -936,13 +936,13 @@ function Properties() {
     return (
       <div>
         {/* Tabs */}
-        <div className=" hidden gap-4  mx-auto">
+        <div className=" hidden sm:gap-4  mx-auto">
           {["Residential", "Commercial", "Industrial", "Agricultural Plot"].map(
             (tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-4 py-2 border hidden rounded-lg ${
+                className={`px-0 sm:px-4 sm:py-2 border hidden rounded-lg ${
                   activeTab === tab
                     ? "bg-[#1F4B43] text-white"
                     : "bg-gray-200 text-gray-700"
@@ -1049,8 +1049,8 @@ function Properties() {
             (tab) => (
               <li
                 key={tab}
-                className={`cursor-pointer font-medium text-[.6rem] sm:text-[.8rem]
-           md:text-[.9rem] lg:text-[1rem] px-4 py-1${
+                className={`cursor-pointer font-extrabold sm:font-medium text-[.7rem] sm:text-[.8rem]
+           md:text-[.9rem] lg:text-[1rem] px-2 py-2 sm:px-4 sm:py-1${
              activeTab === tab
                ? " text-gray-600 border-[2px] border-[#1F4B43] rounded-3xl"
                : ""

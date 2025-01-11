@@ -1,5 +1,5 @@
 import React from "react";
-import img from '../assets/about2.jpg'
+import img from '../../public/about2.jpg'
 import { Link } from "react-router-dom";
 import WhyShould from "./WhyShould";
 import WeUseRealestate from "./WeUseRealestate";

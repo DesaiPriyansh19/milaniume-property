@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import img from '../../assets/AboutUS.webp';
+import img from '../../../public/AboutUS.webp';
 import img1 from '../../assets/Loan&Finance2.jpg'
 import img2 from '../../assets/pexels-kindelmedia-7579047.jpg'
 import img3 from '../../assets/Interior design/inerior-image5.jpg'

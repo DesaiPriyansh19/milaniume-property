@@ -212,7 +212,7 @@ const Navbar = ({ handlePopupOpen }) => {
               className="text-white text-lg sm:text-xl"
               onClick={() => setIsMenuOpen(false)}
             >
-              AboutUs
+              About Us
             </a>
 
             <Link
@@ -228,7 +228,7 @@ const Navbar = ({ handlePopupOpen }) => {
               className="text-white text-lg sm:text-xl"
               onClick={() => setIsMenuOpen(false)}
             >
-              Service
+             Our Service
             </Link>
             <Link
               to="/quickenquiry"

@@ -10,7 +10,7 @@ export default function SidebarAdmin() {
   const SideBarOption = [
     { name: "Dashboard", icon: <FaHome />, path: "/dashboard" },
   { name: "Manage Peoples", icon: <FaUsers />, path: "/manage-peoples" },
-  { name: "Enquiries", icon: <FaEnvelope />, path: "/enquiries" },
+  { name: "Quick Enquiries", icon: <FaEnvelope />, path: "/enquiries" },
   { name: "Add Property", icon: <FaPlusCircle />, path: "/add-property" },
   { name: "User Post", icon: <FaUserEdit />, path: "/user-post" },
   { name: "Require Post", icon: <FaClipboardList />, path: "/require-post" },

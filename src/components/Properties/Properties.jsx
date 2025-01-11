@@ -975,11 +975,11 @@ function Properties() {
         {/* Filter Modal */}
         {isModalOpen && (
           <div
-            className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50 h-[400vh] md:h-[100vh] lg:h-[550vh] xl:h-[400vh]"
+            className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50 h-[100vh] md:h-[100vh] lg:h-[550vh] xl:h-[400vh]"
             onClick={closeModal}
           >
             <div
-              className="bg-white rounded-lg p-6 w-11/12 md:w-3/4 lg:w-[50%] absolute top-[18%] overflow-y-auto max-h-[98vh]"
+              className="bg-white rounded-lg p-6 w-[90%] h-auto md:w-3/4 lg:w-[50%] absolute top-[18%] overflow-y-auto max-h-[98vh]"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close Button */}
@@ -1034,7 +1034,7 @@ function Properties() {
           <h1 className="text-white text-3xl sm:text-3xl md:text-5xl px-2 md:px-0 font-normal">
             Your Property, Our Priority.
           </h1>
-          <p className="text-white mt-2 md:mt-4 px-2 sm:px-0 text-center text-sm md:text-base lg:text-lg font-normal">
+          <p className="hidden md:flex text-white mt-2 md:mt-4 px-2 sm:px-0 text-center text-sm md:text-base lg:text-lg font-normal">
             Find Your Perfect Property – Where Your Search Ends.
           </p>
         </div>
@@ -1053,7 +1053,7 @@ function Properties() {
                 className={`cursor-pointer font-extrabold sm:font-medium text-[.7rem] sm:text-[.8rem]
            md:text-[.9rem] lg:text-[1rem] px-2 py-2 sm:px-4 sm:py-1${
              activeTab === tab
-               ? " text-gray-600 border-[2px] border-[#1F4B43] rounded-3xl"
+               ? " text-gray-600 border-[2px] border-[#1F4B43] rounded-md sm:rounded-3xl"
                : ""
            }`}
                 onClick={() => setActiveTab(tab)}
@@ -1080,8 +1080,14 @@ function Properties() {
         </p>
       </div>
 
-      {/* Show skeleton loader when loading */}
-      {loading ? <SkeletonLoader /> : <PropertyCards data={mainData} />}
+    {/* Show skeleton loader when loading */}
+{loading ? (
+  <SkeletonLoader />
+) : mainData?.length === 0 ? (
+  <h1 className="text-center text-3xl font-bold text-gray-600">No property found !</h1>
+) : (
+  <PropertyCards data={mainData} />
+)}
     </>
   );
 }

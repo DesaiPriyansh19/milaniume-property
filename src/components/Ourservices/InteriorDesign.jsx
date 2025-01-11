@@ -3,6 +3,7 @@ import img1 from '../../assets/Interior design/inerior-image1.jpg'
 import img2 from '../../assets/Interior design/inerior-image2.jpg'
 import img3 from '../../assets/Interior design/inerior-image3.jpg'
 import { MdDesignServices, MdConstruction, MdElectricalServices, MdPrecisionManufacturing, MdWindow, MdFormatPaint } from "react-icons/md";
+import { Link } from 'react-router-dom';
 const images = [
 img1,
 img2,
@@ -99,9 +100,9 @@ const InteriorDesign = () => {
       <div className="bg-[#247264] text-white py-12 text-center">
         <h2 className="text-3xl font-semibold">Transform Your Space with Our Designers</h2>
         <p className="mt-4 text-lg">Let us design a space that works for you.</p>
-        <button className="mt-6 px-4 py-2 bg-[#E7C873]   rounded text-[#247264] font-normal">
+       <Link to={'/quickenquiry'}><button className="mt-6 px-4 py-2 bg-[#E7C873]   rounded text-[#247264] font-normal">
         contact us
-        </button>
+        </button></Link>
       </div>
     </div>
   );

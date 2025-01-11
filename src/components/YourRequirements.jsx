@@ -261,7 +261,27 @@ function YourRequirements() {
                 ))}
               </div>
             </div>
-
+  {/*Available Availability */}
+  <div className="mb-6">
+              <h3 className="text-lg font-light mb-2">Available For</h3>
+              <div className="flex flex-wrap">
+                {[
+                  { label: "FOR FAMILY", value: "ForFamily" },
+                  { label: "FOR EXECUTIVE", value: "ForExecutive" },
+                  { label: "FOR BACHLORE", value: "ForBachlore" },
+                ].map(({ label, value }) => (
+                  <label key={value} className="w-1/2 p-2">
+                    <input
+                      type="checkbox"
+                      className="mr-2"
+                      name={`ResidentAvailable.${value}`}
+                     
+                    />{" "}
+                    {label}
+                  </label>
+                ))}
+              </div>
+            </div>
             {/* Residential Availability */}
             <div
               data-aos="fade-in"
@@ -742,11 +762,34 @@ function YourRequirements() {
             data-aos="fade-in"
             data-aos-duration="1000"
             data-aos-delay="500"
-            className="mb-6 w-full flex justify-between"
+            className="mb-6 w-full grid grid-cols-1 sm:grid-cols-2"
           >
+            <div className="mb-2 md:mb-4">
+              <h3 className="text-lg font-light mb-2 ">
+                Area (Sqft) - Min to Max
+              </h3>
+              <div className="flex  gap-4">
+                <InputField
+                  type="text"
+                  name="RequiredPropertyDetails.RequiredAreaSqft.min"
+                  value={formData.RequiredPropertyDetails.RequiredAreaSqft.min}
+                  placeholder={"Min"}
+                  onChange={handleInputChange}
+                  variant={4}
+                />
+                <InputField
+                  type="text"
+                  name="RequiredPropertyDetails.RequiredAreaSqft.max"
+                  value={formData.RequiredPropertyDetails.RequiredAreaSqft.max}
+                  placeholder={"Max"}
+                  onChange={handleInputChange}
+                  variant={4}
+                />
+              </div>
+            </div>
             <div>
               <h3 className="text-lg font-light mb-2">
-                Area (Sqft) - Min to Max
+                Area (Sqyd) - Min to Max
               </h3>
               <div className="flex  gap-4">
                 <InputField

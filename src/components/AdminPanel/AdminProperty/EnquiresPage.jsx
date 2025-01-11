@@ -329,7 +329,7 @@ export default function EnquiresPage() {
               <div className="px-3 mt-4 pb-2 border border-t-0 rounded-b-xl border-gray-700">
                 <div className="mb-2">
                   <label className="text-xs text-gray-400 uppercase font-semibold tracking-wider">
-                    Enquiry Property Type
+                    Enquiry  Type
                   </label>
                   <p className="text-sm text-gray-300 font-medium">
                     {person?.EnquiryPropertyType || "N | A"}
@@ -337,7 +337,7 @@ export default function EnquiresPage() {
                 </div>
                 <div>
                   <label className="text-xs text-gray-400 uppercase font-semibold tracking-wider">
-                    Enquiry Message
+                    Message
                   </label>
                   <p className="text-sm text-gray-300 font-medium">
                     {person.EnquiryPersonMessage}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const PropertyServices = () => {
   return (
@@ -47,9 +48,9 @@ const PropertyServices = () => {
         <p className="mt-4 text-lg">
           Get in touch with us today and let us help you find the perfect property.
         </p>
-        <button className="mt-6 px-6 py-3 bg-blue-600 hover:bg-blue-500 rounded text-white font-bold">
+        <Link to={'/quickenquiry'}>  <button className="mt-6 px-6 py-3 bg-blue-600 hover:bg-blue-500 rounded text-white font-bold">
           Contact Us
-        </button>
+        </button></Link> 
       </div>
     </div>
   );

@@ -742,7 +742,7 @@ export default function ViewProperty() {
             </div>
           </div>
 
-          <div className="text-white w-full grid grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="text-white w-full grid grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredData.reverse().map((property, index) => (
               <div
                 key={index}

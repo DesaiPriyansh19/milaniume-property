@@ -11,7 +11,7 @@ const QuickEnquiry = () => {
     EnquiryPersonEmail: "",
     EnquiryPersonPhone: "",
     EnquiryPersonMessage: "",
-    EnquiryPropertyType: "",
+    EnquiryType: "",
   });
 
   const handleInputChange = (e) => {
@@ -36,6 +36,7 @@ const QuickEnquiry = () => {
         EnquiryPersonName: "",
         EnquiryPersonEmail: "",
         EnquiryPersonPhone: "",
+        EnquiryType: "",
         EnquiryPersonMessage: "",
       });
     } catch (error) {
@@ -63,7 +64,7 @@ const QuickEnquiry = () => {
           <h2 className=" mt-10 text-2xl md:text-2xl lg:text-5xl font-normal">
             Quick Enquiry
           </h2>
-          <p className="hidden md:flex mt-4 font-thin text-sm px-40">
+          <p className="hidden text-white text-lg font-thin md:font-normal px-40">
             Whether you’re looking to buy, sell, or rent, our experienced team
             is here to guide you through <br></br> every step of the process.
             Fill out the form below,and we’ll get <br></br> back to you promptly
@@ -83,7 +84,7 @@ const QuickEnquiry = () => {
         <div className="w-full md:w-1/2 p-4">
           <h2 className="text-2xl font-semibold mb-4">Our Office Location</h2>
           <p>
-            C/491, Ganesh Glory 11,Nr. Moneyplant Highstreet,Jagatpur Road,
+            C/401, Ganesh Glory 11,Nr. Moneyplant Highstreet,Jagatpur Road,
             Gota, Ahmedabad-382481
           </p>
           <div className="map-container w-full h-[80%]">
@@ -143,15 +144,15 @@ const QuickEnquiry = () => {
                 onChange={(e) => {
                   setFormData((prev) => ({
                     ...prev,
-                    EnquiryPropertyType: e.target.value,
+                    EnquiryType: e.target.value,
                   }));
                 }}
-                value={formData.EnquiryPropertyType}
+                value={formData.EnquiryType}
                 className="w-full   p-2 border-[1.5px] rounded-lg text-sm placeholder:text-[#1F4B43] border-[#1F4B43]"
               >
                 <option value={"Property Services"}>Property Services</option>
-                <option value={"HighRiseApartment"}>Loan & Finance</option>
-                <option value={"Bungalow"}> Inerior Design</option>
+                <option value={"Loan & Finance"}>Loan & Finance</option>
+                <option value={"Inerior Design"}> Inerior Design</option>
            
               </select>
             </div>

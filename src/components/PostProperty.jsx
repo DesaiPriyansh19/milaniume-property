@@ -484,8 +484,7 @@ function PostProperty() {
               </div>
             </div>
 
-            {/* Other Sections */}
-            {/* Repeat the same pattern for Condition, Availability, Amenities, Facing, etc. */}
+       
           </div>
         );
       case "Commercial":
@@ -1086,18 +1085,53 @@ function PostProperty() {
             {/* Dynamic Inputs */}
             {renderAdditionalInputs()}
             {/* Area, Price, Image Upload, Description */}
-            <div className="grid grid-cols-2 gap-2">
-              <div className="mb-6">
-                <h3 className="text-lg font-light mb-2">Area(sqft)</h3>
-                <input
-                  type="number"
-                  name="PropertyDetails.Sqft"
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <div>
+              <h3 className="text-lg font-light mb-2">
+                Area (Sqft) 
+              </h3>
+              <div className="flex  gap-4">
+                <InputField
+                  type="text"
+                  name="RequiredPropertyDetails.RequiredAreaSqft.min"
+                
+                  placeholder={"Min"}
                   onChange={handleInputChange}
-                  value={formData.PropertyDetails.Sqft}
-                  placeholder="Enter area "
-                  className="block w-full mt-1 p-2 border rounded-md"
+                  variant={4}
+                />
+                <InputField
+                  type="text"
+                  name="RequiredPropertyDetails.RequiredAreaSqft.max"
+             
+                  placeholder={"Max"}
+                  onChange={handleInputChange}
+                  variant={4}
                 />
               </div>
+            </div>
+              <div>
+              <h3 className="text-lg font-light mb-2">
+                Area (Sqyd) 
+              </h3>
+              <div className="flex  gap-4">
+                <InputField
+                  type="text"
+                  name="RequiredPropertyDetails.RequiredAreaSqft.min"
+                
+                  placeholder={"Min"}
+                  onChange={handleInputChange}
+                  variant={4}
+                />
+                <InputField
+                  type="text"
+                  name="RequiredPropertyDetails.RequiredAreaSqft.max"
+             
+                  placeholder={"Max"}
+                  onChange={handleInputChange}
+                  variant={4}
+                />
+              </div>
+            </div>
               <div className="mb-6">
                 <h3 className="text-lg font-light mb-2">Price</h3>
                 <input

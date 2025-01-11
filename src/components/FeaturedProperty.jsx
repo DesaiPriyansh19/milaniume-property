@@ -5,7 +5,7 @@ import useFetch from "../../hooks/useFetch";
 import { Link } from "react-router-dom";
 import SkeletonLoader from "./SkeletonLoader";
 function FeaturedProperty() {
-  const [activeTab, setActiveTab] = useState("All Properties");
+  const [activeTab, setActiveTab] = useState("Commercial");
   const [filteredData, setFilteredData] = useState([]);
   const data = ["Commercial", "Residential", "Industrial","Agricultural Plot"];
 

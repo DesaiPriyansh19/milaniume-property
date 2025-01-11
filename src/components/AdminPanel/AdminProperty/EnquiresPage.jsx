@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import useApiData from "../../../../hooks/useApiData";
 import ConfirmationModal from "../../../../utils/ConfirmationModal";
+import axios from "axios";
 
 export default function EnquiresPage() {
   const baseUrl = "https://milaniumepropertybackend.vercel.app/api/enquiry";
   const { data, updateById } = useApiData(baseUrl);
   const [modal, setModal] = useState(null);
   const [filter, setFilter] = useState({
-    month: "", // Default to current month
+    month: "", 
     year: new Date().getFullYear(),
     currentYear: 2025,
     filterBy: "",
+    approveStatus: "All",
   });
 
   const filteredData = data?.filter((property) => {
@@ -48,8 +50,52 @@ export default function EnquiresPage() {
           propertyDate <= new Date(filter.year, filter.month, 0)
         : true; // Show all entries if no filter is selected
 
-    return matchesDate;
+    const matchesStatus =
+      filter.approveStatus && filter.approveStatus !== "All"
+        ? property.EnquiryStatus === filter.approveStatus
+        : true;
+
+    return matchesDate && matchesStatus;
   });
+
+  const handleExcel = async () => {
+    const filterData = {
+      filterBy: filter.filterBy,
+      approveStatus: filter.approveStatus,
+      year: filter.year,
+      month: filter.month,
+    };
+    try {
+      const params = new URLSearchParams(filterData).toString();
+      const url = `https://milaniumepropertybackend.vercel.app/api/enquiry/excel/get-excel?${params}`;
+
+      // Make sure the response type is set to 'blob' for binary data (Excel file)
+      const response = await axios.get(url, { responseType: "blob" });
+
+      // Check if the response is successful
+      if (response.status === 200) {
+        // Create a Blob from the response data
+        const blob = response.data;
+
+        // Create an Object URL for the Blob
+        const url = window.URL.createObjectURL(new Blob([blob]));
+
+        // Create a temporary link to download the file
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "Enquiries.xlsx"); // Specify the file name
+        document.body.appendChild(link);
+
+        // Trigger the download
+        link.click();
+
+        // Clean up the link element
+        document.body.removeChild(link);
+      }
+    } catch (err) {
+      console.log("Error downloading file: ", err.message);
+    }
+  };
 
   const handleUpdate = (id, data) => {
     console.log(data);
@@ -85,6 +131,47 @@ export default function EnquiresPage() {
             <p className=" text-sm text-gray-200">Your Customer Enquiries</p>
           </div>
           <div className="flex gap-4">
+            <button onClick={handleExcel} className="border rounded px-4 ">
+              Download
+            </button>
+            <div className="relative">
+              <select
+                onChange={(e) => {
+                  setFilter((prev) => ({
+                    ...prev,
+                    approveStatus: e.target.value,
+                  }));
+                }}
+                value={filter.approveStatus}
+                className="appearance-none text-white bg-transparent outline-none border border-white h-8 pl-2 pr-8"
+              >
+                <option value="All">All</option>
+                <option value="approved">Approverd</option>
+                <option value="pending">Pending</option>
+              </select>
+
+              <span
+                style={{
+                  transform: "rotate(180deg) translateY(50%)",
+                  position: "absolute",
+                  top: "25%",
+                  right: "10px", // or whatever position you need
+                }}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className={`h-5 w-5 text-white`}
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5.293 8.707a1 1 0 010-1.414L10 3.586l4.707 4.707a1 1 0 01-1.414 1.414L10 6.414 6.707 9.707a1 1 0 01-1.414 0z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </span>
+            </div>
             <button
               className={`border ${
                 filter.filterBy === "Today" && "bg-gray-800"

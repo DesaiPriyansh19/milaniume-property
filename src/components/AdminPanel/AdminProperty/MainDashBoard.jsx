@@ -11,25 +11,18 @@ export default function MainDashBoard() {
       value: 0,
       total: 0,
       description: "Total Properties",
-      progressColor: "#ef476f",
-      percentage: 0,
     },
     {
-      title: "Quick Enquiry ",
+      title: "Quick Enquiry",
       value: 0,
-
       total: 0,
-      description: "Quick Enquiries ",
-      progressColor: "#4ecdae",
-      percentage: 0,
+      description: "Quick Enquiries",
     },
     {
-      title: "Total Requirement ",
+      title: "Total Requirement",
       value: 0,
       total: 0,
-      description: "Requirements ",
-      progressColor: "#ff9f1c",
-      percentage: 0,
+      description: "Requirements",
     },
   ]);
 
@@ -61,6 +54,7 @@ export default function MainDashBoard() {
   const { data, loading, error } = useFetch(
     "https://milaniumepropertybackend.vercel.app/api/property/allprops/admin/todaysIncrement"
   );
+  console.log(data);
 
   useEffect(() => {
     const getAnalysis = async () => {
@@ -100,14 +94,14 @@ export default function MainDashBoard() {
               total: data?.propertyAdded?.total || 0,
             };
           }
-          if (card.title === "Total Enquiry Today") {
+          if (card.title === "Quick Enquiry") {
             return {
               ...card,
               value: data?.enquiryAdded?.today?.length || 0, // Use `data.enquiries` for Total Enquiry Today
               total: data?.enquiryAdded?.total || 0,
             };
           }
-          if (card.title === "Total Requirement Today") {
+          if (card.title === "Total Requirement") {
             return {
               ...card,
               value: data?.requirementAdded?.today?.length || 0, // Use `data.requirements` for Total Requirement Today
@@ -120,15 +114,20 @@ export default function MainDashBoard() {
     }
   }, [data]);
 
- 
   if (error) return <p className=" text-center text-xl">Error loading data</p>;
   if (loading && !data) {
-    return <p className="text-white text-center text-3xl mt-5 mx-auto p-4">Loading....</p>;
+    return (
+      <p className="text-white text-center text-3xl mt-5 mx-auto p-4">
+        Loading....
+      </p>
+    );
   }
   return (
     <div className="text-white  mx-auto p-4">
       <p className="text-xl font-semibold uppercase ">DashBoard</p>
-      <p className="mb-6 text-sm text-gray-200">You can See All Yor Real Estate Data Here.</p>
+      <p className="mb-6 text-sm text-gray-200">
+        You can See All Yor Real Estate Data Here.
+      </p>
       <div className="flex justify-between mb-4 gap-4 w-full">
         {cardsData.map((card, i) => (
           <div
@@ -137,10 +136,19 @@ export default function MainDashBoard() {
           >
             <div className="p-5 flex justify-between ">
               <div>
-                <p className="font-mono text-[#4ecdae]">{card.description} </p>
+                <p className="font-mono text-[#4ecdae]">{card?.description} </p>
                 <p className="font-sans mb-1 flex flex-col gap-2">
-             <span> Today -<span className="font-bold "> {card.value}</span> </span>  
-             <span>   Total-<span className="font-bold "> {card.total}</span></span>
+                  <span>
+                    {" "}
+                    Today -<span className="font-bold ">
+                      {" "}
+                      {card?.value}
+                    </span>{" "}
+                  </span>
+                  <span>
+                    {" "}
+                    Total-<span className="font-bold "> {card?.total}</span>
+                  </span>
                 </p>
               </div>
             </div>
@@ -148,7 +156,7 @@ export default function MainDashBoard() {
         ))}
       </div>
       <div className="grid grid-cols-3">
-        <div className="h-[71vh] rounded-lg col-span-2 w-full">
+        <div className="h-[71vh] rounded-lg col-span-3 w-full">
           <div className="h-full relative rounded-lg bg-gray-800  w-full col-span-4">
             <ResponsivePie
               data={pieData}
@@ -187,6 +195,12 @@ export default function MainDashBoard() {
             <div className="absolute top-3 left-3">
               <p className="text-xl font-semibold uppercase ">
                 Real Estate PortFolio
+              </p>
+            </div>
+            <div className="absolute bottom-10 right-14">
+              <p className="text-xl font-semibold uppercase ">
+                Total Properties -{" "}
+                {pieData?.reduce((acc, item) => acc + item.value, 0)}
               </p>
             </div>
           </div>

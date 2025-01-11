@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useFetch from "../../../../hooks/useFetch";
 import ViewDescModal from "../../../../utils/ViewDescModal";
+import axios from "axios";
 
 export default function UserRequirementPost() {
   const baseUrl = "https://milaniumepropertybackend.vercel.app/api/require";
@@ -306,6 +307,44 @@ export default function UserRequirementPost() {
     return matchesDate;
   });
 
+  const handleExcel = async () => {
+    const filterData = {
+      filterBy: filter.filterBy,
+      year: filter.year,
+      month: filter.month,
+    };
+    try {
+      const params = new URLSearchParams(filterData).toString();
+      const url = `https://milaniumepropertybackend.vercel.app/api/require/requirement/get-excel?${params}`;
+
+      // Make sure the response type is set to 'blob' for binary data (Excel file)
+      const response = await axios.get(url, { responseType: "blob" });
+
+      // Check if the response is successful
+      if (response.status === 200) {
+        // Create a Blob from the response data
+        const blob = response.data;
+
+        // Create an Object URL for the Blob
+        const url = window.URL.createObjectURL(new Blob([blob]));
+
+        // Create a temporary link to download the file
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "Requirements.xlsx"); // Specify the file name
+        document.body.appendChild(link);
+
+        // Trigger the download
+        link.click();
+
+        // Clean up the link element
+        document.body.removeChild(link);
+      }
+    } catch (err) {
+      console.log("Error downloading file: ", err.message);
+    }
+  };
+
   const handleView = (id) => {
     const selectedProperty = requirements.find(
       (property) => property._id === id
@@ -506,6 +545,9 @@ export default function UserRequirementPost() {
           </p>
         </div>
         <div className="flex gap-4">
+          <button onClick={handleExcel} className="border rounded px-4 ">
+            Download
+          </button>
           <button
             className={`border ${
               filter.filterBy === "Today" && "bg-gray-800"
@@ -548,25 +590,54 @@ export default function UserRequirementPost() {
           </button>
         </div>
       </div>
+
       <div className="border rounded mb-4 w-[40%]">
         <select
           value={filter.month}
           className="appearance-none bg-transparent outline-none  p-1 px-4 "
-          onChange={(e) => setFilter({ ...filter, month: e.target.value,filterBy: "" })}
+          onChange={(e) =>
+            setFilter({ ...filter, month: e.target.value, filterBy: "" })
+          }
         >
-          <option className="text-black" value="">Select Month</option>
-          <option className="text-black" value={1}>January</option>
-          <option className="text-black" value={2}>February</option>
-          <option className="text-black" value={3}>March</option>
-          <option className="text-black" value={4}>April</option>
-          <option className="text-black" value={5}>May</option>
-          <option className="text-black" value={6}>June</option>
-          <option className="text-black" value={7}>July</option>
-          <option className="text-black" value={8}>August</option>
-          <option className="text-black" value={9}>September</option>
-          <option className="text-black" value={10}>October</option>
-          <option className="text-black" value={11}>November</option>
-          <option className="text-black" value={12}>December</option>
+          <option className="text-black" value="">
+            Select Month
+          </option>
+          <option className="text-black" value={1}>
+            January
+          </option>
+          <option className="text-black" value={2}>
+            February
+          </option>
+          <option className="text-black" value={3}>
+            March
+          </option>
+          <option className="text-black" value={4}>
+            April
+          </option>
+          <option className="text-black" value={5}>
+            May
+          </option>
+          <option className="text-black" value={6}>
+            June
+          </option>
+          <option className="text-black" value={7}>
+            July
+          </option>
+          <option className="text-black" value={8}>
+            August
+          </option>
+          <option className="text-black" value={9}>
+            September
+          </option>
+          <option className="text-black" value={10}>
+            October
+          </option>
+          <option className="text-black" value={11}>
+            November
+          </option>
+          <option className="text-black" value={12}>
+            December
+          </option>
 
           {/* Add other months */}
         </select>
@@ -574,7 +645,9 @@ export default function UserRequirementPost() {
         <select
           value={filter.year}
           className="appearance-none bg-transparent outline-none p-1 px-4"
-          onChange={(e) => setFilter({ ...filter, year: e.target.value,filterBy: "" })}
+          onChange={(e) =>
+            setFilter({ ...filter, year: e.target.value, filterBy: "" })
+          }
         >
           {Array.from({ length: 10 }, (_, index) => (
             <option

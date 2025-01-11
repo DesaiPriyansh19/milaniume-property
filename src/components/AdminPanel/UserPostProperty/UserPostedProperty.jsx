@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import useFetch from "../../../../hooks/useFetch";
 import PostedPropertyList from "./PostedPropertyList";
+import axios from "axios";
 
 export default function UserPostedProperty() {
+  const baseUrl =
+    "https://milaniumepropertybackend.vercel.app/api/userpostproperty";
+  const { data } = useFetch(baseUrl);
   const initialState = {
     view: "PersonView",
     selectedPersonId: "",
@@ -10,12 +14,18 @@ export default function UserPostedProperty() {
     Email: "",
     PostedProperties: [],
   };
+
+  const [filter, setFilter] = useState({
+    month: "", // Default to current month
+    year: new Date().getFullYear(),
+    currentYear: 2025,
+    filterBy: "",
+  });
+
   const [selectedPeople, setSelectedPeople] = useState([]);
   const [selectedUserProperty, setSelectedUserProperty] =
     useState(initialState);
-  const baseUrl =
-    "https://milaniumepropertybackend.vercel.app/api/userpostproperty";
-  const { data } = useFetch(baseUrl);
+
   const handleCheckboxChange = (id) => {
     if (selectedPeople.includes(id)) {
       setSelectedPeople(selectedPeople.filter((personId) => personId !== id));
@@ -40,6 +50,83 @@ export default function UserPostedProperty() {
     });
   };
 
+  const handleExcel = async () => {
+    const filterData = {
+      filterBy: filter.filterBy,
+      year: filter.year,
+      month: filter.month,
+    };
+    try {
+      const params = new URLSearchParams(filterData).toString();
+      const url = `https://milaniumepropertybackend.vercel.app/api/userpostproperty/userpost/get-excel?${params}`;
+
+      // Make sure the response type is set to 'blob' for binary data (Excel file)
+      const response = await axios.get(url, { responseType: "blob" });
+
+      // Check if the response is successful
+      if (response.status === 200) {
+        // Create a Blob from the response data
+        const blob = response.data;
+
+        // Create an Object URL for the Blob
+        const url = window.URL.createObjectURL(new Blob([blob]));
+
+        // Create a temporary link to download the file
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "UserPostDetails.xlsx"); // Specify the file name
+        document.body.appendChild(link);
+
+        // Trigger the download
+        link.click();
+
+        // Clean up the link element
+        document.body.removeChild(link);
+      }
+    } catch (err) {
+      console.log("Error downloading file: ", err.message);
+    }
+  };
+
+  const filteredData = data?.filter((property) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Normalize today's date to 00:00:00
+
+    const yesterday = new Date(today);
+    yesterday.setDate(today.getDate() - 1); // Get yesterday's date
+    yesterday.setHours(0, 0, 0, 0); // Normalize yesterday's date to 00:00:00
+
+    const propertyDate = new Date(property?.UserPostAdded);
+    propertyDate.setHours(0, 0, 0, 0); // Normalize the property date to 00:00:00
+
+    const isToday =
+      propertyDate.getFullYear() === today.getFullYear() &&
+      propertyDate.getMonth() === today.getMonth() &&
+      propertyDate.getDate() === today.getDate();
+
+    const isYesterday =
+      propertyDate.getFullYear() === yesterday.getFullYear() &&
+      propertyDate.getMonth() === yesterday.getMonth() &&
+      propertyDate.getDate() === yesterday.getDate();
+
+    const matchesDate =
+      filter.filterBy === "Today"
+        ? isToday // Show only today's entries
+        : filter.filterBy === "Yesterday"
+        ? isYesterday // Show only yesterday's entries
+        : filter.filterBy === "All" // Show all entries if 'All' filter is selected
+        ? true
+        : filter.year && !filter.month // Show entries for the selected year, all months
+        ? propertyDate.getFullYear() === Number(filter.year)
+        : filter.month && filter.year // Show entries for selected month/year
+        ? propertyDate >= new Date(filter.year, filter.month - 1, 1) &&
+          propertyDate <= new Date(filter.year, filter.month, 0)
+        : true; // Show all entries if no filter is selected
+
+    return matchesDate;
+  });
+
+  console.log(filter);
   return (
     <>
       {selectedUserProperty.view === "PersonView" && (
@@ -47,6 +134,126 @@ export default function UserPostedProperty() {
           <div className="mb-6">
             <p className="text-xl font-semibold uppercase ">User Post</p>
             <p className=" text-sm mb-4 text-gray-200">View All User Post</p>
+            <div>
+              <div className="border rounded mb-4 w-[40%]">
+                <select
+                  value={filter.month}
+                  className="appearance-none bg-transparent outline-none  p-1 px-4 "
+                  onChange={(e) =>
+                    setFilter({
+                      ...filter,
+                      month: e.target.value,
+                      filterBy: "",
+                    })
+                  }
+                >
+                  <option className="text-black" value="">
+                    Select Month
+                  </option>
+                  <option className="text-black" value={1}>
+                    January
+                  </option>
+                  <option className="text-black" value={2}>
+                    February
+                  </option>
+                  <option className="text-black" value={3}>
+                    March
+                  </option>
+                  <option className="text-black" value={4}>
+                    April
+                  </option>
+                  <option className="text-black" value={5}>
+                    May
+                  </option>
+                  <option className="text-black" value={6}>
+                    June
+                  </option>
+                  <option className="text-black" value={7}>
+                    July
+                  </option>
+                  <option className="text-black" value={8}>
+                    August
+                  </option>
+                  <option className="text-black" value={9}>
+                    September
+                  </option>
+                  <option className="text-black" value={10}>
+                    October
+                  </option>
+                  <option className="text-black" value={11}>
+                    November
+                  </option>
+                  <option className="text-black" value={12}>
+                    December
+                  </option>
+
+                  {/* Add other months */}
+                </select>
+                <span>/ </span>
+                <select
+                  value={filter.year}
+                  className="appearance-none bg-transparent outline-none p-1 px-4"
+                  onChange={(e) =>
+                    setFilter({ ...filter, year: e.target.value, filterBy: "" })
+                  }
+                >
+                  {Array.from({ length: 10 }, (_, index) => (
+                    <option
+                      key={filter.currentYear - index}
+                      value={filter.currentYear - index}
+                      className="text-black"
+                    >
+                      {filter.currentYear - index}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="flex mb-4 gap-4">
+                <button onClick={handleExcel} className="border rounded px-4 ">
+                  Download
+                </button>
+                <button
+                  className={`border ${
+                    filter.filterBy === "Today" && "bg-gray-800"
+                  } px-4 rounded`}
+                  onClick={() =>
+                    setFilter((prevFilter) => ({
+                      ...prevFilter,
+                      filterBy: prevFilter.filterBy === "Today" ? "" : "Today", // Toggle between today and no filter
+                    }))
+                  }
+                >
+                  Today's
+                </button>
+                <button
+                  className={`border ${
+                    filter.filterBy === "Yesterday" && "bg-gray-800"
+                  } px-4 rounded`}
+                  onClick={() =>
+                    setFilter((prevFilter) => ({
+                      ...prevFilter,
+                      filterBy:
+                        prevFilter.filterBy === "Yesterday" ? "" : "Yesterday", // Toggle between today and no filter
+                    }))
+                  }
+                >
+                  Yesterday's
+                </button>
+                <button
+                  className={`border ${
+                    filter.filterBy === "All" && "bg-gray-800"
+                  } px-4 rounded`}
+                  onClick={() =>
+                    setFilter((prevFilter) => ({
+                      ...prevFilter,
+                      filterBy: prevFilter.filterBy === "All" ? "" : "All", // Toggle between today and no filter
+                    }))
+                  }
+                >
+                  All
+                </button>
+              </div>
+            </div>
             <div className="overflow-x-auto">
               <table className="min-w-full table-auto bg-gray-800 rounded-lg shadow-md">
                 <thead>
@@ -78,7 +285,7 @@ export default function UserPostedProperty() {
                   </tr>
                 </thead>
                 <tbody>
-                  {data?.map((person, idx) => (
+                  {filteredData?.map((person, idx) => (
                     <tr
                       key={person._id}
                       onClick={() => {

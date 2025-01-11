@@ -59,7 +59,8 @@ const useApiData = (baseUrl) => {
       const response = await axios.post(baseUrl, newData);
       setData((prevData) => [...prevData, response.data.data]);
       fetchData();
-      return response;
+      console.log(response);
+      return response.data.savedProperty;
     } catch (err) {
       setError(err.message);
     }

@@ -22,7 +22,7 @@ export default function AddSuccessfullModal({ showModal }) {
     >
       <div className="bg-white rounded-3xl w-full max-w-md py-14 md:py-8 p-4 sm:p-6 flex flex-col items-center text-center">
         <p className="text-3xl mb-4 font-mono text-center inline-flex gap-1">
-        <RandomReveal isPlaying duration={2} characters="Explore your Journey" />
+        <RandomReveal isPlaying duration={2} characters="Explore your Properties" />
         </p>
         <p className="mb-4 uppercase font-mono">Added SuccessFully</p>
         <div

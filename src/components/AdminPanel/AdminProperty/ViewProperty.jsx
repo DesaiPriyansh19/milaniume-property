@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import useApiData from "../../../../hooks/useApiData";
 import EditProperty from "./EditProperty";
 import AddProperty from "./AddProperty";
+import axios from "axios";
 
 export default function ViewProperty() {
   const baseUrl =
@@ -32,6 +33,7 @@ export default function ViewProperty() {
       Bedrooms: "",
       Bathrooms: "",
       Sqft: "",
+      Sqyd: "",
     },
     Landmark: "",
     Address: "",
@@ -180,6 +182,7 @@ export default function ViewProperty() {
           Bedrooms: data?.PropertyDetails?.Bedrooms || "",
           Bathrooms: data?.PropertyDetails?.Bathrooms || "",
           Sqft: data?.PropertyDetails?.Sqft || "",
+          Sqyd: data?.PropertyDetails?.Sqyd || "",
         },
         Area: data?.Area || "",
         Location: data?.Location || "",
@@ -346,6 +349,44 @@ export default function ViewProperty() {
     return matchesType && matchesSearch && notInRecycleBin && matchesDate;
   });
 
+  const handleExcel = async () => {
+    const filterData = {
+      approveStatus: filter.type,
+      year: filter.year,
+      month: filter.month,
+    };
+    try {
+      const params = new URLSearchParams(filterData).toString();
+      const url = `https://milaniumepropertybackend.vercel.app/api/property/properties/get-excel?${params}`;
+
+      // Make sure the response type is set to 'blob' for binary data (Excel file)
+      const response = await axios.get(url, { responseType: "blob" });
+
+      // Check if the response is successful
+      if (response.status === 200) {
+        // Create a Blob from the response data
+        const blob = response.data;
+
+        // Create an Object URL for the Blob
+        const url = window.URL.createObjectURL(new Blob([blob]));
+
+        // Create a temporary link to download the file
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "UserPostDetails.xlsx"); // Specify the file name
+        document.body.appendChild(link);
+
+        // Trigger the download
+        link.click();
+
+        // Clean up the link element
+        document.body.removeChild(link);
+      }
+    } catch (err) {
+      console.log("Error downloading file: ", err.message);
+    }
+  };
+
   const handleEdit = (type, id) => {
     const selectedProperty = data.find((property) => property._id === id); // Filter data by ID
     if (selectedProperty) {
@@ -378,6 +419,7 @@ export default function ViewProperty() {
           Bedrooms: selectedProperty?.PropertyDetails?.Bedrooms || "",
           Bathrooms: selectedProperty?.PropertyDetails?.Bathrooms || "",
           Sqft: selectedProperty?.PropertyDetails?.Sqft || "",
+          Sqyd: selectedProperty?.PropertyDetails?.Sqyd || "",
         },
         Landmark: selectedProperty?.Landmark || "",
         Address: selectedProperty?.Address || "",
@@ -557,8 +599,12 @@ export default function ViewProperty() {
     }
     setEditData({ type, id });
   };
-  if ( !data) {
-    return <p className="text-white text-center text-3xl mt-5 mx-auto p-4">Loading....</p>;
+  if (!data) {
+    return (
+      <p className="text-white text-center text-3xl mt-5 mx-auto p-4">
+        Loading....
+      </p>
+    );
   }
   return (
     <>
@@ -568,13 +614,8 @@ export default function ViewProperty() {
             <div>
               {" "}
               <p className="text-xl font-semibold uppercase ">View Property</p>
-              <p className=" text-sm text-gray-200">
-              
-              </p>
+              <p className=" text-sm text-gray-200"></p>
             </div>
-
-          
-          
 
             <div className="flex justify-between gap-4">
               <div className="relative">
@@ -585,8 +626,12 @@ export default function ViewProperty() {
                   value={filter.type}
                   className="appearance-none text-white bg-transparent rounded-sm outline-none border border-white h-8 pl-2 pr-8"
                 >
-                  <option className="text-black" value="verified">Verified</option>
-                  <option className="text-black" value="unverified">Un-Verified</option>
+                  <option className="text-black" value="verified">
+                    Verified
+                  </option>
+                  <option className="text-black" value="unverified">
+                    Un-Verified
+                  </option>
                 </select>
 
                 <span
@@ -621,9 +666,8 @@ export default function ViewProperty() {
             </div>
           </div>
 
-<div className="grid grid-cols-2 gap-6 px-2 mb-4">
-
-          <div className="relative">
+          <div className="grid grid-cols-2 gap-6 px-2 mb-4">
+            <div className="relative">
               <input
                 type="text"
                 onChange={(e) => {
@@ -648,46 +692,55 @@ export default function ViewProperty() {
               </div>
             </div>
 
-            <div className="border bg-white text-black mx-auto rounded">
-              <select
-                value={filter.month}
-                className="appearance-none bg-transparent outline-none  p-1 px-4 "
-                onChange={(e) =>
-                  setFilter({ ...filter, month: e.target.value })
-                }
-              >
-                <option value={1}>January</option>
-                <option value={2}>February</option>
-                <option value={3}>March</option>
-                <option value={4}>April</option>
-                <option value={5}>May</option>
-                <option value={6}>June</option>
-                <option value={7}>July</option>
-                <option value={8}>August</option>
-                <option value={9}>September</option>
-                <option value={10}>October</option>
-                <option value={11}>November</option>
-                <option value={12}>December</option>
+            <div className="flex">
+              <div className="border bg-white text-black mx-auto rounded">
+                <select
+                  value={filter.month}
+                  className="appearance-none bg-transparent outline-none  p-1 px-4 "
+                  onChange={(e) =>
+                    setFilter({ ...filter, month: e.target.value })
+                  }
+                >
+                  <option value={1}>January</option>
+                  <option value={2}>February</option>
+                  <option value={3}>March</option>
+                  <option value={4}>April</option>
+                  <option value={5}>May</option>
+                  <option value={6}>June</option>
+                  <option value={7}>July</option>
+                  <option value={8}>August</option>
+                  <option value={9}>September</option>
+                  <option value={10}>October</option>
+                  <option value={11}>November</option>
+                  <option value={12}>December</option>
 
-                {/* Add other months */}
-              </select>
-              <span>/ </span>
-              <select
-                value={filter.year}
-                className="appearance-none bg-transparent outline-none p-1 px-4"
-                onChange={(e) => setFilter({ ...filter, year: e.target.value })}
-              >
-                {Array.from({ length: 10 }, (_, index) => (
-                  <option
-                    key={filter.currentYear - index}
-                    value={filter.currentYear - index}
-                  >
-                    {filter.currentYear - index}
-                  </option>
-                ))}
-              </select>
-            </div></div>
-
+                  {/* Add other months */}
+                </select>
+                <span>/ </span>
+                <select
+                  value={filter.year}
+                  className="appearance-none bg-transparent outline-none p-1 px-4"
+                  onChange={(e) =>
+                    setFilter({ ...filter, year: e.target.value })
+                  }
+                >
+                  {Array.from({ length: 10 }, (_, index) => (
+                    <option
+                      key={filter.currentYear - index}
+                      value={filter.currentYear - index}
+                    >
+                      {filter.currentYear - index}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <button onClick={handleExcel} className="border rounded px-4 ">
+                  Download
+                </button>
+              </div>
+            </div>
+          </div>
 
           <div className="text-white w-full grid grid-cols-3 lg:grid-cols-4 gap-4">
             {filteredData.reverse().map((property, index) => (
@@ -766,7 +819,6 @@ export default function ViewProperty() {
               </div>
             ))}
           </div>
-          
         </div>
       )}
       {editData.type === "Edit" && (

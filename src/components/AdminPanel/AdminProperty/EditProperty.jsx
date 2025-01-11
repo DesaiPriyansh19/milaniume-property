@@ -475,6 +475,18 @@ export default function EditProperty({
                   variant={1}
                 />
               </div>
+              <div className="w-full mb-4">
+                <InputField
+                  label="Square Yards"
+                  type="text"
+                  name="PropertyDetails.Sqyd"
+                  placeholder="Enter square yards"
+                  value={formData?.PropertyDetails?.Sqyd}
+                  onChange={handleInputChange}
+                  autoComplete="sqyd"
+                  variant={1}
+                />
+              </div>
 
               <div className="w-full mb-4">
                 <InputField

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { FaReact, FaGit, FaTwitter, FaGithub } from "react-icons/fa";
 import {
   BrowserRouter as Router,
   Routes,
@@ -9,7 +8,6 @@ import {
 } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import LoaderAnimation from "./components/LoaderAnimation";
-import Navbar from "./components/Navbar";
 import HomePage from "./components/HomePage";
 import LoginPopup from "./components/LoginPopup";
 import Properties from "./components/Properties/Properties";
@@ -25,9 +23,8 @@ import PropertyServices from "./components/Ourservices/PropertyServices";
 import LoanFinance from "./components/Ourservices/LoanFinance";
 import InteriorDesign from "./components/Ourservices/InteriorDesign";
 import AboutUs from "./components/AboutUs";
-import ViewProperty from "./components/AdminPanel/AdminProperty/ViewProperty";
 import PropertyDetailPage from "./components/Properties/PropertyDetails";
-import Footer from "./components/Footer";
+import { ActiveProvider } from "../context/activeContext";
 
 // ScrollToTop component to scroll to the top on route change
 function ScrollToTop() {
@@ -69,7 +66,7 @@ function App() {
       </AnimatePresence>
       <AppLayout handlePopupOpen={handlePopupOpen}>
         {isPopupOpen && <LoginPopup handlePopupClose={handlePopupClose} />}
-        
+
         {/* Scroll to top on route change */}
         <ScrollToTop />
 
@@ -84,17 +81,17 @@ function App() {
                   initial={{
                     opacity: 0,
                     filter: "blur(10px)",
-                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)",  // Dark background
+                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)", // Dark background
                   }}
                   animate={{
                     opacity: 1,
                     filter: "blur(0px)",
-                    backgroundColor: "rgba(0, 0, 0, 0)",   // Transparent background
+                    backgroundColor: "rgba(0, 0, 0, 0)", // Transparent background
                   }}
                   exit={{
                     opacity: 0,
                     filter: "blur(10px)",
-                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)",  // Dark background
+                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)", // Dark background
                   }}
                   transition={{ duration: 0.8 }}
                 >
@@ -110,17 +107,17 @@ function App() {
                   initial={{
                     opacity: 0,
                     filter: "blur(10px)",
-                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)",  // Dark background
+                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)", // Dark background
                   }}
                   animate={{
                     opacity: 1,
                     filter: "blur(0px)",
-                    backgroundColor: "rgba(0, 0, 0, 0)",   // Transparent background
+                    backgroundColor: "rgba(0, 0, 0, 0)", // Transparent background
                   }}
                   exit={{
                     opacity: 0,
                     filter: "blur(10px)",
-                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)",  // Dark background
+                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)", // Dark background
                   }}
                   transition={{ duration: 0.8 }}
                 >
@@ -136,17 +133,17 @@ function App() {
                   initial={{
                     opacity: 0,
                     filter: "blur(10px)",
-                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)",  // Dark background
+                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)", // Dark background
                   }}
                   animate={{
                     opacity: 1,
                     filter: "blur(0px)",
-                    backgroundColor: "rgba(0, 0, 0, 0)",   // Transparent background
+                    backgroundColor: "rgba(0, 0, 0, 0)", // Transparent background
                   }}
                   exit={{
                     opacity: 0,
                     filter: "blur(10px)",
-                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)",  // Dark background
+                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)", // Dark background
                   }}
                   transition={{ duration: 0.8 }}
                 >
@@ -162,17 +159,17 @@ function App() {
                   initial={{
                     opacity: 0,
                     filter: "blur(10px)",
-                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)",  // Dark background
+                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)", // Dark background
                   }}
                   animate={{
                     opacity: 1,
                     filter: "blur(0px)",
-                    backgroundColor: "rgba(0, 0, 0, 0)",   // Transparent background
+                    backgroundColor: "rgba(0, 0, 0, 0)", // Transparent background
                   }}
                   exit={{
                     opacity: 0,
                     filter: "blur(10px)",
-                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)",  // Dark background
+                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)", // Dark background
                   }}
                   transition={{ duration: 0.8 }}
                 >
@@ -180,10 +177,8 @@ function App() {
                 </motion.div>
               }
             />
-            <Route
-              path="/admin"
-              element={<Navigate to="/admin/dashboard" />}
-            />
+
+            <Route path="/admin" element={<Navigate to="/admin/dashboard" />} />
             <Route
               path="/quickenquiry"
               element={
@@ -192,17 +187,17 @@ function App() {
                   initial={{
                     opacity: 0,
                     filter: "blur(10px)",
-                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)",  // Dark background
+                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)", // Dark background
                   }}
                   animate={{
                     opacity: 1,
                     filter: "blur(0px)",
-                    backgroundColor: "rgba(0, 0, 0, 0)",   // Transparent background
+                    backgroundColor: "rgba(0, 0, 0, 0)", // Transparent background
                   }}
                   exit={{
                     opacity: 0,
                     filter: "blur(10px)",
-                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)",  // Dark background
+                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)", // Dark background
                   }}
                   transition={{ duration: 0.8 }}
                 >
@@ -218,17 +213,17 @@ function App() {
                   initial={{
                     opacity: 0,
                     filter: "blur(10px)",
-                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)",  // Dark background
+                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)", // Dark background
                   }}
                   animate={{
                     opacity: 1,
                     filter: "blur(0px)",
-                    backgroundColor: "rgba(0, 0, 0, 0)",   // Transparent background
+                    backgroundColor: "rgba(0, 0, 0, 0)", // Transparent background
                   }}
                   exit={{
                     opacity: 0,
                     filter: "blur(10px)",
-                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)",  // Dark background
+                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)", // Dark background
                   }}
                   transition={{ duration: 0.8 }}
                 >
@@ -244,17 +239,17 @@ function App() {
                   initial={{
                     opacity: 0,
                     filter: "blur(10px)",
-                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)",  // Dark background
+                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)", // Dark background
                   }}
                   animate={{
                     opacity: 1,
                     filter: "blur(0px)",
-                    backgroundColor: "rgba(0, 0, 0, 0)",   // Transparent background
+                    backgroundColor: "rgba(0, 0, 0, 0)", // Transparent background
                   }}
                   exit={{
                     opacity: 0,
                     filter: "blur(10px)",
-                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)",  // Dark background
+                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)", // Dark background
                   }}
                   transition={{ duration: 0.8 }}
                 >
@@ -270,17 +265,17 @@ function App() {
                   initial={{
                     opacity: 0,
                     filter: "blur(10px)",
-                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)",  // Dark background
+                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)", // Dark background
                   }}
                   animate={{
                     opacity: 1,
                     filter: "blur(0px)",
-                    backgroundColor: "rgba(0, 0, 0, 0)",   // Transparent background
+                    backgroundColor: "rgba(0, 0, 0, 0)", // Transparent background
                   }}
                   exit={{
                     opacity: 0,
                     filter: "blur(10px)",
-                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)",  // Dark background
+                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)", // Dark background
                   }}
                   transition={{ duration: 0.8 }}
                 >
@@ -296,17 +291,17 @@ function App() {
                   initial={{
                     opacity: 0,
                     filter: "blur(10px)",
-                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)",  // Dark background
+                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)", // Dark background
                   }}
                   animate={{
                     opacity: 1,
                     filter: "blur(0px)",
-                    backgroundColor: "rgba(0, 0, 0, 0)",   // Transparent background
+                    backgroundColor: "rgba(0, 0, 0, 0)", // Transparent background
                   }}
                   exit={{
                     opacity: 0,
                     filter: "blur(10px)",
-                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)",  // Dark background
+                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)", // Dark background
                   }}
                   transition={{ duration: 0.8 }}
                 >
@@ -322,17 +317,17 @@ function App() {
                   initial={{
                     opacity: 0,
                     filter: "blur(10px)",
-                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)",  // Dark background
+                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)", // Dark background
                   }}
                   animate={{
                     opacity: 1,
                     filter: "blur(0px)",
-                    backgroundColor: "rgba(0, 0, 0, 0)",   // Transparent background
+                    backgroundColor: "rgba(0, 0, 0, 0)", // Transparent background
                   }}
                   exit={{
                     opacity: 0,
                     filter: "blur(10px)",
-                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)",  // Dark background
+                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)", // Dark background
                   }}
                   transition={{ duration: 0.8 }}
                 >
@@ -348,17 +343,17 @@ function App() {
                   initial={{
                     opacity: 0,
                     filter: "blur(10px)",
-                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)",  // Dark background
+                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)", // Dark background
                   }}
                   animate={{
                     opacity: 1,
                     filter: "blur(0px)",
-                    backgroundColor: "rgba(0, 0, 0, 0)",   // Transparent background
+                    backgroundColor: "rgba(0, 0, 0, 0)", // Transparent background
                   }}
                   exit={{
                     opacity: 0,
                     filter: "blur(10px)",
-                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)",  // Dark background
+                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)", // Dark background
                   }}
                   transition={{ duration: 0.8 }}
                 >
@@ -374,17 +369,17 @@ function App() {
                   initial={{
                     opacity: 0,
                     filter: "blur(10px)",
-                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)",  // Dark background
+                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)", // Dark background
                   }}
                   animate={{
                     opacity: 1,
                     filter: "blur(0px)",
-                    backgroundColor: "rgba(0, 0, 0, 0)",   // Transparent background
+                    backgroundColor: "rgba(0, 0, 0, 0)", // Transparent background
                   }}
                   exit={{
                     opacity: 0,
                     filter: "blur(10px)",
-                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)",  // Dark background
+                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)", // Dark background
                   }}
                   transition={{ duration: 0.8 }}
                 >
@@ -402,8 +397,10 @@ function App() {
 
 export default function RootApp() {
   return (
-    <Router>
-      <App />
-    </Router>
+    <ActiveProvider>
+      <Router>
+        <App />
+      </Router>
+    </ActiveProvider>
   );
 }

@@ -23,6 +23,7 @@ export default function AddProperty({ addNew, handleEdit }) {
       Bedrooms: "",
       Bathrooms: "",
       Sqft: "",
+      Sqyd: "",
     },
 
     Landmark: "",
@@ -223,8 +224,7 @@ export default function AddProperty({ addNew, handleEdit }) {
 
     try {
       const response = await addNew(filteredData);
-      if (response.data.data) {
-        console.log("true"); // Confirm the response is valid
+      if (response) {
       }
     } catch (error) {
       console.error("Error occurred:", error); // Log the error
@@ -239,9 +239,7 @@ export default function AddProperty({ addNew, handleEdit }) {
         <div>
           {" "}
           <p className="text-xl font-semibold uppercase ">Add Property</p>
-          <p className=" text-sm text-gray-200">
-            Add New properties
-          </p>
+          <p className=" text-sm text-gray-200">Add New properties</p>
         </div>
         <div className="flex gap-4">
           <button
@@ -354,7 +352,6 @@ export default function AddProperty({ addNew, handleEdit }) {
                   variant={2}
                   checked={formData.Featured}
                   onChange={handleInputChange}
-                
                 />
               </div>
             </div>
@@ -533,6 +530,18 @@ export default function AddProperty({ addNew, handleEdit }) {
                 value={formData.PropertyDetails?.Sqft}
                 onChange={handleInputChange}
                 autoComplete="sqft"
+                variant={1}
+              />
+            </div>
+            <div className="w-full mb-4">
+              <InputField
+                label="Square Yards"
+                type="text"
+                name="PropertyDetails.Sqyd"
+                placeholder="Enter square yrads"
+                value={formData.PropertyDetails?.Sqyd}
+                onChange={handleInputChange}
+                autoComplete="sqyd"
                 variant={1}
               />
             </div>

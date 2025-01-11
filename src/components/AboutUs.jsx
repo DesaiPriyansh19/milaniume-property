@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import WhyShould from "./WhyShould";
 import WeUseRealestate from "./WeUseRealestate";
 import img2 from '../assets/nice-suit.jpg'
-import img3 from '../assets/DummyImg.jpeg'
-import person from '../assets/Persone2.jpg'
+import img3 from '../assets/—Pngtree—women avatar with long black_8494146.png'
+import person from '../assets/—Pngtree—businessman user avatar wearing suit_8385663.png'
 const AboutUs = () => {
   return (<>
    <div style={{ backgroundImage: `url(${img})` }}
@@ -97,12 +97,12 @@ const AboutUs = () => {
         {/* Meet the Team Section */}
         <div className="mt-24">
           <h3 className="text-3xl font-semibold text-center text-gray-800 mb-12">Meet Our Team</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2  gap-8">
             <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 transform hover:scale-105">
               <img
                 src={person}
                 alt="Team Member 1"
-                className="mx-auto h-64 object-cover w-[50%]"
+                className="mx-auto h-auto object-cover w-[55%]"
               />
               <div className="p-6">
                 <h4 className="text-xl font-semibold text-gray-800">Mayur Desai</h4>
@@ -114,7 +114,7 @@ const AboutUs = () => {
               <img
                 src={person}
                 alt="Team Member 2"
-                className="mx-auto h-64 object-cover w-[50%]"
+                className="mx-auto h-auto object-cover w-[55%]"
               />
               <div className="p-6">
                 <h4 className="text-xl font-semibold text-gray-800">Rutvik Desai</h4>
@@ -123,22 +123,51 @@ const AboutUs = () => {
             </div>
 
             <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 transform hover:scale-105">
-            <div className="grid grid-cols-2 gap-1">
+            <div className=" w-full grid grid-cols-2 gap-1">
                 <img
                 src={img3}
                 alt="Team Member 3"
-                className="mx-auto h-64 object-cover w-[100%]"
+                className="mx-auto h-full object-cover w-[100%]"
               />
                   <img
                 src={img3}
                 alt="Team Member 3"
-                className="mx-auto h-64 object-cover w-[100%]"
+                className="mx-auto h-full object-cover w-[100%]"
               />
               </div>
               <div className="p-6">
-                <h4 className="text-xl font-semibold text-gray-800">Tulsi Mewada &<br></br>
+                <h4 className="text-xl font-semibold text-gray-800">Tulsi Mewada &
                 Dhruvi Mewada</h4>
                 <p className="text-gray-600">Real Estate Consultant</p>
+              </div>
+            </div>
+            
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 transform hover:scale-105">
+            <div className=" w-full grid grid-cols-2 gap-1">
+                <img
+                src={person}
+                alt="Team Member 3"
+                className="mx-auto h-auto object-cover w-[70%]"
+              />
+                <img
+                src={person}
+                alt="Team Member 3"
+                className="mx-auto h-auto object-cover w-[70%]"
+              />
+
+<img
+                src={person}
+                alt="Team Member 3"
+                className="mx-auto h-auto object-cover w-[70%]"
+              />                  <img
+                src={person}
+                alt="Team Member 3"
+                className="mx-auto h-auto object-cover w-[70%]"
+              />
+              </div>
+              <div className="p-6">
+                <h4 className="text-xl font-semibold text-gray-800">Sales And Field Team</h4>
+               
               </div>
             </div>
           </div>

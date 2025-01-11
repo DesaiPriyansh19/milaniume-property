@@ -5,9 +5,9 @@ import useFetch from "../../hooks/useFetch";
 import { Link } from "react-router-dom";
 import SkeletonLoader from "./SkeletonLoader";
 function FeaturedProperty() {
-  const [activeTab, setActiveTab] = useState("Commercial");
+  const [activeTab, setActiveTab] = useState("Residential");
   const [filteredData, setFilteredData] = useState([]);
-  const data = ["Commercial", "Residential", "Industrial","Agricultural Plot"];
+  const data = ["Residential","Commercial", "Industrial","Agricultural Plot"];
 
   const { data: PropertyData, loading } = useFetch(
     "https://milaniumepropertybackend.vercel.app/api/property"

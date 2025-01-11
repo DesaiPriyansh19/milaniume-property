@@ -1080,8 +1080,14 @@ function Properties() {
         </p>
       </div>
 
-      {/* Show skeleton loader when loading */}
-      {loading ? <SkeletonLoader /> : <PropertyCards data={mainData} />}
+    {/* Show skeleton loader when loading */}
+{loading ? (
+  <SkeletonLoader />
+) : mainData?.length === 0 ? (
+  <h1 className="text-center text-3xl font-bold text-gray-600">No property found !</h1>
+) : (
+  <PropertyCards data={mainData} />
+)}
     </>
   );
 }

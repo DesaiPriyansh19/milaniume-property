@@ -38,59 +38,61 @@ export default function HomePage() {
     },
   ];
 
+  // Array of background images for dynamic change
+  const bannerImages = [bgimg1, bgimg2, bgimg];
+
   return (
     <div>
       <Carousel images={images} dynamicContent={dynamicContent} />
-      
 
-
-   <div data-aos="fade-out">
-         <FeaturedCatagory/>
-         </div>
-
-            <div data-aos="fade-in" data-aos-duration="1000" data-aos-delay="500"> <LokingForNewHome/></div>
-         
-         <div data-aos="fade-out"><WeUseRealestate/>
-         </div>
-      
       <div data-aos="fade-out">
-         <WhyShould/>
-      
-         </div>
-           
-   
-    
+        <FeaturedCatagory />
+      </div>
+
+      <div data-aos="fade-in" data-aos-duration="1000" data-aos-delay="500">
+        <LokingForNewHome />
+      </div>
+
+      <div data-aos="fade-out">
+        <WeUseRealestate />
+      </div>
+
+      <div data-aos="fade-out">
+        <WhyShould />
+      </div>
+
       <div data-aos-duration="2000" data-aos-delay="300" data-aos="fade-in">
-      <FeaturedProperty/>
+        <FeaturedProperty />
       </div>
-      
+
       <div data-aos="fade-out">
-      <ReusableBanner
-        bgImg={bgimg1}
-        title="Property Services"
-        description="Discover properties that match your style and budget."
-        buttonText="View Properties"
-        buttonLink="/properties"
-      />
-      
+        <ReusableBanner
+          bgImgs={bannerImages} // Pass the array of images for background
+          title="Property Services"
+          description="Discover properties that match your style and budget."
+          buttonText="View Properties"
+          buttonLink="/properties"
+        />
       </div>
+
       <div data-aos="fade-out">
-      <ReusableBanner
-        bgImg={bgimg2}
-        title="Loan & Finance"
-        description="Get the best financial advice and services for your dream home."
-        buttonText="View Properties"
-        buttonLink="/properties"
-      />
+        <ReusableBanner
+          bgImgs={bannerImages} // Pass the array of images for background
+          title="Loan & Finance"
+          description="Get the best financial advice and services for your dream home."
+          buttonText="View Properties"
+          buttonLink="/ourservices/loan"
+        />
       </div>
+
       <div data-aos="fade-out">
-      <ReusableBanner
-        bgImg={bgimg}
-        title="Interior Design"
-        description="Create spaces that truly feel like home with professional designs."
-        buttonText="View Properties"
-        buttonLink="/properties"
-      />
+        <ReusableBanner
+          bgImgs={bannerImages} // Pass the array of images for background
+          title="Interior Design"
+          description="Create spaces that truly feel like home with professional designs."
+          buttonText="View Properties"
+          buttonLink="/ourservices/interior"
+        />
       </div>
     </div>
   );

@@ -15,6 +15,7 @@ export default function ViewProperty() {
     month: new Date().getMonth() + 1, // Default to current month
     year: new Date().getFullYear(),
     currentYear: 2025,
+    propertyType: "",
   });
   const [formData, setFormData] = useState({
     id: "",
@@ -346,7 +347,18 @@ export default function ViewProperty() {
             new Date(filter.year, filter.month, 0)
         : true;
 
-    return matchesType && matchesSearch && notInRecycleBin && matchesDate;
+    const matchesPropertyType = filter.propertyType
+      ? property?.PropertyType ===
+        filter.propertyType
+      : true;
+
+    return (
+      matchesType &&
+      matchesSearch &&
+      notInRecycleBin &&
+      matchesDate &&
+      matchesPropertyType
+    );
   });
 
   const handleExcel = async () => {
@@ -354,6 +366,7 @@ export default function ViewProperty() {
       approveStatus: filter.type,
       year: filter.year,
       month: filter.month,
+      propertyType: filter.propertyType,
     };
     try {
       const params = new URLSearchParams(filterData).toString();
@@ -618,6 +631,55 @@ export default function ViewProperty() {
             </div>
 
             <div className="flex justify-between gap-4">
+              <div className="relative">
+                <select
+                  onChange={(e) => {
+                    setFilter((prev) => ({
+                      ...prev,
+                      propertyType: e.target.value,
+                    }));
+                  }}
+                  value={filter.propertyType}
+                  className="appearance-none text-white bg-transparent rounded-sm outline-none border border-white h-8 pl-2 pr-8"
+                >
+                  <option className="text-black" value="">
+                    Select type
+                  </option>
+                  <option className="text-black" value={"Residential"}>
+                    Residential
+                  </option>
+                  <option className="text-black" value={"Commercial"}>
+                    Commercial
+                  </option>
+                  <option className="text-black" value={"Industrial"}>
+                    Industrial
+                  </option>
+                  <option className="text-black" value={"Plot&Land"}>
+                    Agricultural Plot
+                  </option>
+                </select>
+                <span
+                  style={{
+                    transform: "rotate(180deg) translateY(50%)",
+                    position: "absolute",
+                    top: "38%",
+                    right: "10px", // or whatever position you need
+                  }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className={`h-5 w-5 text-white`}
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M5.293 8.707a1 1 0 010-1.414L10 3.586l4.707 4.707a1 1 0 01-1.414 1.414L10 6.414 6.707 9.707a1 1 0 01-1.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </span>
+              </div>
               <div className="relative">
                 <select
                   onChange={(e) => {

@@ -61,8 +61,8 @@ const OurServices = () => {
         <div className="absolute inset-0  "></div>
         <div className="relative z-10 flex flex-col items-center justify-center text-center text-white h-full px-6 md:px-12"
           style={{ textShadow: "2px 2px 6px rgba(0, 0, 0, 0.7)" }}>
-          <h2 className="text-3xl md:text-5xl font-normal">Our Services</h2>
-          <p className="hidden md:block mt-4 text- lg:text-xl px-6 lg:px-40 font-light">Discover our range of real estate services, designed to provide you with an effortless and rewarding property experience.</p>
+          <h2 className="text-white text-3xl sm:text-3xl md:text-5xl px-2 md:px-0 font-normal">Our Services</h2>
+          <p className="hidden text-white text-lg font-thin md:font-normal">Discover our range of real estate services, <br></br>designed to provide you with an effortless and rewarding property experience.</p>
           <Link to={'/'}>
             <button className="mt-6 p-6 py-2 text-sm bg-[#E7C873] text-black rounded-lg font-normal shadow-md transition-transform transform hover:scale-110">Back to Home →</button>
           </Link>

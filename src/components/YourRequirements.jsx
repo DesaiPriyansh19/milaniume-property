@@ -261,7 +261,27 @@ function YourRequirements() {
                 ))}
               </div>
             </div>
-
+  {/*Available Availability */}
+  <div className="mb-6">
+              <h3 className="text-lg font-light mb-2">Available For</h3>
+              <div className="flex flex-wrap">
+                {[
+                  { label: "FOR FAMILY", value: "ForFamily" },
+                  { label: "FOR EXECUTIVE", value: "ForExecutive" },
+                  { label: "FOR BACHLORE", value: "ForBachlore" },
+                ].map(({ label, value }) => (
+                  <label key={value} className="w-1/2 p-2">
+                    <input
+                      type="checkbox"
+                      className="mr-2"
+                      name={`ResidentAvailable.${value}`}
+                     
+                    />{" "}
+                    {label}
+                  </label>
+                ))}
+              </div>
+            </div>
             {/* Residential Availability */}
             <div
               data-aos="fade-in"

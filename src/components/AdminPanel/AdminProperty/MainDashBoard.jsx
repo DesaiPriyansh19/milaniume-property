@@ -11,6 +11,7 @@ export default function MainDashBoard() {
       value: 0,
       total: 0,
       description: " Properties",
+      
     },
     {
       title: "Quick Enquiry",

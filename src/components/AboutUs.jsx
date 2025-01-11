@@ -16,10 +16,10 @@ const AboutUs = () => {
                text-center text-white h-full px-4" style={{
                 textShadow: "4px 4px 8px rgba(2, 2, 0.5, 0.5)", // Apply text shadow to all children
               }} >
-            <h2 className=" mt-0 text-2xl md:text-2xl lg:text-5xl font-normal">
+            <h2 className="text-white text-3xl sm:text-3xl md:text-5xl px-2 md:px-0 font-normal">
             About Us
             </h2>
-            <p className="hidden md:flex mt-4 font-thin text-sm px-40">
+            <p className="hidden text-white text-lg font-thin md:font-normal">
             We are a dynamic real estate agency committed to <br></br>making your property journey seamless, enjoyable, and profitable.
 
 

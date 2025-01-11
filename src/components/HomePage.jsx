@@ -2,6 +2,11 @@ import React, { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css'; // Import AOS styles
 import Carousel from "./Carousel";
+import interiorimg1 from '../assets/Interior design/inerior-image1.jpg'
+import interiorimg2 from '../assets/Interior design/inerior-image2.jpg'
+import interiorimg3 from '../assets/Interior design/inerior-image3.jpg'
+import loan1 from '../assets/LOAN__01-transformed.jpeg'
+import loan2 from '../assets/LOAN__02-transformed.jpeg'
 
 import WhyShould from "./WhyShould";
 import Img1 from "../assets/office.jpeg";
@@ -39,8 +44,9 @@ export default function HomePage() {
   ];
 
   // Array of background images for dynamic change
-  const bannerImages = [bgimg1, bgimg2, bgimg];
-
+  const bannerImages = [bgimg1, bgimg];
+const inertior = [interiorimg1,interiorimg2,interiorimg3  ]
+const loan =[loan1,loan2]
   return (
     <div>
       <Carousel images={images} dynamicContent={dynamicContent} />
@@ -77,20 +83,20 @@ export default function HomePage() {
 
       <div data-aos="fade-out">
         <ReusableBanner
-          bgImgs={bannerImages} // Pass the array of images for background
+          bgImgs={loan} // Pass the array of images for background
           title="Loan & Finance"
           description="Get the best financial advice and services for your dream home."
-          buttonText="View Properties"
+          buttonText="View All"
           buttonLink="/ourservices/loan"
         />
       </div>
 
       <div data-aos="fade-out">
         <ReusableBanner
-          bgImgs={bannerImages} // Pass the array of images for background
+          bgImgs={inertior} // Pass the array of images for background
           title="Interior Design"
           description="Create spaces that truly feel like home with professional designs."
-          buttonText="View Properties"
+          buttonText="View All"
           buttonLink="/ourservices/interior"
         />
       </div>

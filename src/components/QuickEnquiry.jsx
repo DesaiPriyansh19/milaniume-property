@@ -11,7 +11,7 @@ const QuickEnquiry = () => {
     EnquiryPersonEmail: "",
     EnquiryPersonPhone: "",
     EnquiryPersonMessage: "",
-    EnquiryPropertyType: "",
+    EnquiryType: "",
   });
 
   const handleInputChange = (e) => {
@@ -36,6 +36,7 @@ const QuickEnquiry = () => {
         EnquiryPersonName: "",
         EnquiryPersonEmail: "",
         EnquiryPersonPhone: "",
+        EnquiryType: "",
         EnquiryPersonMessage: "",
       });
     } catch (error) {
@@ -143,15 +144,15 @@ const QuickEnquiry = () => {
                 onChange={(e) => {
                   setFormData((prev) => ({
                     ...prev,
-                    EnquiryPropertyType: e.target.value,
+                    EnquiryType: e.target.value,
                   }));
                 }}
-                value={formData.EnquiryPropertyType}
+                value={formData.EnquiryType}
                 className="w-full   p-2 border-[1.5px] rounded-lg text-sm placeholder:text-[#1F4B43] border-[#1F4B43]"
               >
                 <option value={"Property Services"}>Property Services</option>
-                <option value={"HighRiseApartment"}>Loan & Finance</option>
-                <option value={"Bungalow"}> Inerior Design</option>
+                <option value={"Loan & Finance"}>Loan & Finance</option>
+                <option value={"Inerior Design"}> Inerior Design</option>
            
               </select>
             </div>

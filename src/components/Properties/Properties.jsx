@@ -975,11 +975,11 @@ function Properties() {
         {/* Filter Modal */}
         {isModalOpen && (
           <div
-            className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50 h-[200vh] md:h-[100vh] lg:h-[550vh] xl:h-[400vh]"
+            className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50 h-[100vh] md:h-[100vh] lg:h-[550vh] xl:h-[400vh]"
             onClick={closeModal}
           >
             <div
-              className="bg-white rounded-lg p-6 w-11/12 md:w-3/4 lg:w-[50%] absolute top-[18%] overflow-y-auto max-h-[98vh]"
+              className="bg-white rounded-lg p-6 w-[90%] h-auto md:w-3/4 lg:w-[50%] absolute top-[18%] overflow-y-auto max-h-[98vh]"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close Button */}
@@ -1053,7 +1053,7 @@ function Properties() {
                 className={`cursor-pointer font-extrabold sm:font-medium text-[.7rem] sm:text-[.8rem]
            md:text-[.9rem] lg:text-[1rem] px-2 py-2 sm:px-4 sm:py-1${
              activeTab === tab
-               ? " text-gray-600 border-[2px] border-[#1F4B43] rounded-3xl"
+               ? " text-gray-600 border-[2px] border-[#1F4B43] rounded-md sm:rounded-3xl"
                : ""
            }`}
                 onClick={() => setActiveTab(tab)}

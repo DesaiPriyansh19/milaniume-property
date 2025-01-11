@@ -131,47 +131,7 @@ export default function EnquiresPage() {
             <p className=" text-sm text-gray-200">Your Customer Enquiries</p>
           </div>
           <div className="flex gap-4">
-            <button onClick={handleExcel} className="border rounded px-4 ">
-              Download
-            </button>
-            <div className="relative">
-              <select
-                onChange={(e) => {
-                  setFilter((prev) => ({
-                    ...prev,
-                    approveStatus: e.target.value,
-                  }));
-                }}
-                value={filter.approveStatus}
-                className="appearance-none text-white bg-transparent outline-none border border-white h-8 pl-2 pr-8"
-              >
-                <option value="All">All</option>
-                <option value="approved">Approverd</option>
-                <option value="pending">Pending</option>
-              </select>
-
-              <span
-                style={{
-                  transform: "rotate(180deg) translateY(50%)",
-                  position: "absolute",
-                  top: "25%",
-                  right: "10px", // or whatever position you need
-                }}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className={`h-5 w-5 text-white`}
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M5.293 8.707a1 1 0 010-1.414L10 3.586l4.707 4.707a1 1 0 01-1.414 1.414L10 6.414 6.707 9.707a1 1 0 01-1.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </span>
-            </div>
+          
             <button
               className={`border ${
                 filter.filterBy === "Today" && "bg-gray-800"
@@ -214,6 +174,7 @@ export default function EnquiresPage() {
             </button>
           </div>
         </div>
+        <div className="flex gap-5  gitems-center">
         <div className="border w-[30%] text-black bg-white rounded">
           <select
             value={filter.month}
@@ -255,6 +216,49 @@ export default function EnquiresPage() {
               </option>
             ))}
           </select>
+        </div>
+      
+            <div className="relative">
+              <select
+                onChange={(e) => {
+                  setFilter((prev) => ({
+                    ...prev,
+                    approveStatus: e.target.value,
+                  }));
+                }}
+                value={filter.approveStatus}
+                className="appearance-none  bg-transparent outline-none border border-white h-8 pl-2 pr-8"
+              >
+                <option className="text-black" value="All">All</option>
+                <option className="text-black" value="approved">Read</option>
+                <option className="text-black" value="pending">Unread</option>
+              </select>
+
+              <span
+                style={{
+                  transform: "rotate(180deg) translateY(50%)",
+                  position: "absolute",
+                  top: "25%",
+                  right: "10px", // or whatever position you need
+                }}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className={`h-5 w-5 text-white`}
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5.293 8.707a1 1 0 010-1.414L10 3.586l4.707 4.707a1 1 0 01-1.414 1.414L10 6.414 6.707 9.707a1 1 0 01-1.414 0z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </span>
+            </div>
+            <button onClick={handleExcel} className="border rounded px-4 ">
+              Download
+            </button>
         </div>
         <div className="text-white w-full grid grid-cols-3 gap-4">
           {filteredData.map((person, index) => (

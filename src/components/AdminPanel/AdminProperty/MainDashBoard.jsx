@@ -10,7 +10,7 @@ export default function MainDashBoard() {
       title: "Post Property",
       value: 0,
       total: 0,
-      description: "Total Properties",
+      description: " Properties",
     },
     {
       title: "Quick Enquiry",
@@ -126,35 +126,42 @@ export default function MainDashBoard() {
     <div className="text-white  mx-auto p-4">
       <p className="text-xl font-semibold uppercase ">DashBoard</p>
       <p className="mb-6 text-sm text-gray-200">
-        You can See All Yor Real Estate Data Here.
+        You can See All  Statastics Here.
       </p>
-      <div className="flex justify-between mb-4 gap-4 w-full">
-        {cardsData.map((card, i) => (
-          <div
-            key={i}
-            className="bg-gray-800 text-xl rounded-lg shadow-md w-full relative"
-          >
-            <div className="p-5 flex justify-between ">
-              <div>
-                <p className="font-mono text-[#4ecdae]">{card?.description} </p>
-                <p className="font-sans mb-1 flex flex-col gap-2">
-                  <span>
-                    {" "}
-                    Today -<span className="font-bold ">
-                      {" "}
-                      {card?.value}
-                    </span>{" "}
-                  </span>
-                  <span>
-                    {" "}
-                    Total-<span className="font-bold "> {card?.total}</span>
-                  </span>
-                </p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+      <div className="flex justify-between mb-4 gap-4 w-auto lg:w-[50%] ml-5 rounded-md">
+  <div className="bg-gray-800 text-xl rounded-lg shadow-md w-full relative">
+    <div className="overflow-x-auto">
+      <table className="min-w-full border  shadow-md rounded-lg">
+        {/* Table Header */}
+        <thead>
+          <tr className="bg-gray-200 text-gray-700 uppercase text-sm leading-normal">
+            <th className="py-3 px-6 text-left">CATEGORY</th>
+            <th className="py-3 px-6 text-left">TODAY</th>
+            <th className="py-3 px-6 text-left">ALL</th>
+          </tr>
+        </thead>
+
+        {/* Table Body */}
+        <tbody className="text-gray-600 text-sm font-light">
+          {cardsData.map((card, index) => (
+            <tr key={index} className="border-b border-gray-300 ">
+              <td className="py-3 px-6 text-left font-mono text-white">
+                {card.description}
+              </td>
+              <td className="py-3 text-white px-6 text-left font-bold">
+                {card.value}
+              </td>
+              <td className="py-3 text-yellow-400 px-6 text-left font-bold">
+                {card.total}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
       <div className="grid grid-cols-3">
         <div className="h-[71vh] rounded-lg col-span-3 w-full">
           <div className="h-full relative rounded-lg bg-gray-800  w-full col-span-4">

@@ -37,7 +37,7 @@ function FeaturedCatagory() {
         {" "}
         wide range of Services
       </p>
-      <div className="grid grid-cols-3 mt-5 px-5 md:px-10 lg:px-0 lg:flex gap-4 lg:gap-2 xl:gap-24 mx-auto items-center  justify-center py-3">
+      <div className="grid grid-cols-3 mt-5 px-5 md:px-10 lg:px-0 lg:flex gap-4 md:gap-12 lg:gap-2 xl:gap-14 2xl:gap-24 mx-auto items-center  justify-center py-3">
         <Link
           onClick={() => {
             setActiveTab("Residential");

@@ -975,7 +975,7 @@ function Properties() {
         {/* Filter Modal */}
         {isModalOpen && (
           <div
-            className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50 h-[400vh] md:h-[100vh] lg:h-[550vh] xl:h-[400vh]"
+            className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50 h-[200vh] md:h-[100vh] lg:h-[550vh] xl:h-[400vh]"
             onClick={closeModal}
           >
             <div
@@ -1034,7 +1034,7 @@ function Properties() {
           <h1 className="text-white text-3xl sm:text-3xl md:text-5xl px-2 md:px-0 font-normal">
             Your Property, Our Priority.
           </h1>
-          <p className="text-white mt-2 md:mt-4 px-2 sm:px-0 text-center text-sm md:text-base lg:text-lg font-normal">
+          <p className="hidden md:flex text-white mt-2 md:mt-4 px-2 sm:px-0 text-center text-sm md:text-base lg:text-lg font-normal">
             Find Your Perfect Property – Where Your Search Ends.
           </p>
         </div>

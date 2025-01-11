@@ -650,6 +650,9 @@ function YourRequirements() {
                 Area:
                 <input
                   type="text"
+                  name="RequiredPropertyDetails.RequirementArea"
+                  value={formData.RequiredPropertyDetails.RequirementArea}
+                  onChange={handleInputChange}
                   placeholder="Enter area/location"
                   className="block w-full mt-1 p-2 border rounded-md"
                 />

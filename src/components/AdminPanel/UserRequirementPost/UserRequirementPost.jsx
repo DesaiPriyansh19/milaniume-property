@@ -127,6 +127,7 @@ export default function UserRequirementPost() {
     year: new Date().getFullYear(),
     currentYear: 2025,
     filterBy: "",
+    propertyType: "",
   });
   const [editData, setEditData] = useState("");
 
@@ -304,7 +305,12 @@ export default function UserRequirementPost() {
           propertyDate <= new Date(filter.year, filter.month, 0)
         : true; // Show all entries if no filter is selected
 
-    return matchesDate;
+    const matchesPropertyType = filter.propertyType
+      ? property.RequiredPropertyDetails?.RequiredPropertyType ===
+        filter.propertyType
+      : true;
+
+    return matchesDate && matchesPropertyType;
   });
 
   const handleExcel = async () => {
@@ -312,6 +318,7 @@ export default function UserRequirementPost() {
       filterBy: filter.filterBy,
       year: filter.year,
       month: filter.month,
+      propertyType: filter.propertyType,
     };
     try {
       const params = new URLSearchParams(filterData).toString();
@@ -545,6 +552,31 @@ export default function UserRequirementPost() {
           </p>
         </div>
         <div className="flex gap-4">
+          <select
+            value={filter.propertyType}
+            className="appearance-none bg-transparent border outline-none  p-1 px-4 "
+            onChange={(e) =>
+              setFilter({ ...filter, propertyType: e.target.value })
+            }
+          >
+            <option className="text-black" value="">
+              Select type
+            </option>
+            <option className="text-black" value={"Residential"}>
+              Residential
+            </option>
+            <option className="text-black" value={"Commercial"}>
+              Commercial
+            </option>
+            <option className="text-black" value={"Industrial"}>
+              Industrial
+            </option>
+            <option className="text-black" value={"Plot&Land"}>
+              Agricultural Plot
+            </option>
+
+            {/* Add other months */}
+          </select>
           <button onClick={handleExcel} className="border rounded px-4 ">
             Download
           </button>

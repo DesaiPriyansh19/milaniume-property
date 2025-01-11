@@ -36,6 +36,10 @@ export default function ViewDescModal({ data, close }) {
                 {data.RequiredPropertyDetails.RequiredDescription}
               </p>
               <p className="mb-2">
+                <span className="font-semibold">Area:</span>{" "}
+                {data.RequiredPropertyDetails.RequirementArea}
+              </p>
+              <p className="mb-2">
                 <span className="font-semibold">Budget:</span>{" "}
                 {data.RequiredPropertyDetails.RequiredBudget.min} -{" "}
                 {data.RequiredPropertyDetails.RequiredBudget.max}

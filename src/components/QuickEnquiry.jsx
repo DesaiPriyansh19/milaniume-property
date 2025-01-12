@@ -11,7 +11,7 @@ const QuickEnquiry = () => {
     EnquiryPersonEmail: "",
     EnquiryPersonPhone: "",
     EnquiryPersonMessage: "",
-    EnquiryType: "",
+    EnquiryPropertyType: "",
   });
 
   const handleInputChange = (e) => {
@@ -144,10 +144,10 @@ const QuickEnquiry = () => {
                 onChange={(e) => {
                   setFormData((prev) => ({
                     ...prev,
-                    EnquiryType: e.target.value,
+                    EnquiryPropertyType: e.target.value,
                   }));
                 }}
-                value={formData.EnquiryType}
+                value={formData.EnquiryPropertyType}
                 className="w-full   p-2 border-[1.5px] rounded-lg text-sm placeholder:text-[#1F4B43] border-[#1F4B43]"
               >
                 <option value={"Property Services"}>Property Services</option>

@@ -20,7 +20,8 @@ const ProtectRoutes = ({ children }) => {
       }
 
       const decodedToken = jwtDecode(userInfo.token); // Decode the JWT to get user info
-      if (decodedToken && decodedToken.id) {
+
+      if (decodedToken && decodedToken.id && decodedToken.isAdmin === true) {
         setIsAdmin(true);
         setIsAuthenticated(true); // User is authenticated
       } else {

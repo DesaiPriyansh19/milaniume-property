@@ -14,6 +14,7 @@ const LoginPopup = ({ handlePopupClose }) => {
   const [createUser, setCreateUser] = useState({
     FullName: "",
     email: "",
+    MobileNumber: "",
     password: "",
   });
 
@@ -60,6 +61,7 @@ const LoginPopup = ({ handlePopupClose }) => {
       // Signup logic
       const userData = {
         Email: createUser.email,
+        MobileNumber: createUser.MobileNumber,
         FullName: createUser.FullName,
         Password: createUser.password,
       };
@@ -136,10 +138,7 @@ const LoginPopup = ({ handlePopupClose }) => {
               >
                 Login
               </button>
-              <div
-                
-                className="w-full justify-center flex font-extralight  hover:bg-[#E7C873] border-[2px]  border-[#E7C873] text-black py-2   px-4 rounded-lg "
-              >
+              <div className="w-full justify-center flex font-extralight  hover:bg-[#E7C873] border-[2px]  border-[#E7C873] text-black py-2   px-4 rounded-lg ">
                 <GoogleWrapper
                   text="Google"
                   handlePopupClose={handlePopupClose}
@@ -156,6 +155,15 @@ const LoginPopup = ({ handlePopupClose }) => {
                 name="FullName"
                 placeholder="Full Name"
                 value={createUser.FullName}
+                onChange={handleChange}
+                required
+              />
+              <InputField
+                label="Mobile Number"
+                type="text"
+                name="MobileNumber"
+                placeholder="Mobile Number"
+                value={createUser.MobileNumber}
                 onChange={handleChange}
                 required
               />

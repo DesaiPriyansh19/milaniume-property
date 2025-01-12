@@ -4,6 +4,7 @@ import WhiteHamburgerIcon from "../../../../svg/Icon/WhiteHamburger/index";
 import { FaHome, FaUsers, FaEnvelope, FaPlusCircle, FaUserEdit, FaClipboardList, FaTrashAlt } from "react-icons/fa";
 import HomeSvg from "../../../../svg/Icon/HomeSvg/index";
 import logo from "../../../../src/assets/logo final PNG.png";
+import { IoPower } from "react-icons/io5";
 export default function SidebarAdmin() {
   const [conMaxWidth, setConMaxWidth] = useState(288);
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
@@ -16,6 +17,7 @@ export default function SidebarAdmin() {
   { name: "User Post", icon: <FaUserEdit />, path: "/user-post" },
   { name: "Requirements", icon: <FaClipboardList />, path: "/require-post" },
   { name: "Recycle Bin", icon: <FaTrashAlt />, path: "/recycle-bin" },
+  { name: "Log Out", icon: <IoPower />, path: "/logout" },
     // { name: "Bar Chart", icon: <HomeSvg />, path: "/bar-chart" },
     // { name: "Pie Chart", icon: <HomeSvg />, path: "/pie-chart" },
     // { name: "Line Chart", icon: <HomeSvg />, path: "/line-chart" },

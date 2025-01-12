@@ -369,7 +369,7 @@ const PropertyDetailPage = () => {
                   : "  This spacious and luxurious apartment is located in the heart of downtown, offering easy access to shopping, dining, and entertainment. Featuring modern interiors, high-end finishes, and breathtaking views of the city skyline, this property blends comfort and style seamlessly. The apartment boasts an open floor plan, a contemporary kitchen, and large windows that flood the space with natural light. Ideal for families or professionals looking for a stylish city living experience."}
               </p>
             </div>
-            <div className="grid  sm:grid-cols-2  w-full gap-2  lg:space-y-2 ">
+            <div className="grid    w-full gap-2  lg:space-y-2 ">
               {/* Common Features */}
               {sections.map((section, index) => {
                 const features = data?.[section.key] || {}; // Fetch section data dynamically

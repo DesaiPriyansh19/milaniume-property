@@ -261,7 +261,7 @@ export default function EnquiresPage() {
             </button>
         </div>
         <div className="text-white w-full grid grid-cols-3 gap-4">
-          {filteredData.map((person, index) => (
+          {filteredData.reverse().map((person, index) => (
             <div
               key={index}
               onClick={() => {

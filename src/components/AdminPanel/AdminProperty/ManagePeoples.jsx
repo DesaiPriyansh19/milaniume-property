@@ -50,6 +50,7 @@ export default function ManagePeoples() {
               <th className="px-4 py-2">No</th>
               <th className="px-4 py-2">Name</th>
               <th className="px-4 py-2">Email</th>
+              <th className="px-4 py-2">Phone Number</th>
               <th className="px-4 py-2">Role</th>
             </tr>
           </thead>
@@ -77,6 +78,9 @@ export default function ManagePeoples() {
                 <td className="px-4 py-2">{idx + 1}</td>
                 <td className="px-4 py-2">{person.FullName || "-/-"}</td>
                 <td className="px-4 py-2">{person.Email}</td>
+                <td className="px-4 py-2">
+                  {person.MobileNumber ? person.MobileNumber : "N/A"}
+                </td>
                 <td className="px-4 py-2">
                   {person.isAdmin ? "Admin" : "User"}
                 </td>

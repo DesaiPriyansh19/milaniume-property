@@ -55,7 +55,7 @@ export default function ManagePeoples() {
             </tr>
           </thead>
           <tbody>
-            {data?.map((person, idx) => (
+            {[...data]?.reverse().map((person, idx) => (
               <tr
                 key={person._id}
                 onClick={() => handleCheckboxChange(person._id)}

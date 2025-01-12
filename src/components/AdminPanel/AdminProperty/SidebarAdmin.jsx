@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useRef, useEffect } from "react";
 import { Link } from "react-router-dom"; // Import Link for routing
 import WhiteHamburgerIcon from "../../../../svg/Icon/WhiteHamburger/index";
 import { FaHome, FaUsers, FaEnvelope, FaPlusCircle, FaUserEdit, FaClipboardList, FaTrashAlt } from "react-icons/fa";
@@ -6,14 +6,15 @@ import HomeSvg from "../../../../svg/Icon/HomeSvg/index";
 import logo from "../../../../src/assets/logo final PNG.png";
 export default function SidebarAdmin() {
   const [conMaxWidth, setConMaxWidth] = useState(288);
-
+  const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
+  const targetElementRef = useRef(null); // The specific element
   const SideBarOption = [
     { name: "Dashboard", icon: <FaHome />, path: "/dashboard" },
   { name: "Manage Peoples", icon: <FaUsers />, path: "/manage-peoples" },
   { name: "Quick Enquiries", icon: <FaEnvelope />, path: "/enquiries" },
   { name: "Add Property", icon: <FaPlusCircle />, path: "/add-property" },
   { name: "User Post", icon: <FaUserEdit />, path: "/user-post" },
-  { name: "Require Post", icon: <FaClipboardList />, path: "/require-post" },
+  { name: "Requirements", icon: <FaClipboardList />, path: "/require-post" },
   { name: "Recycle Bin", icon: <FaTrashAlt />, path: "/recycle-bin" },
     // { name: "Bar Chart", icon: <HomeSvg />, path: "/bar-chart" },
     // { name: "Pie Chart", icon: <HomeSvg />, path: "/pie-chart" },

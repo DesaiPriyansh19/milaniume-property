@@ -979,7 +979,7 @@ function Properties() {
             onClick={closeModal}
           >
             <div
-              className="bg-white rounded-lg p-6 w-[90%] h-auto md:w-3/4 lg:w-[50%] absolute top-[18%] overflow-y-auto max-h-[98vh]"
+              className="bg-white rounded-lg p-6 w-[90%] z-40 h-auto md:w-3/4 lg:w-[50%] absolute top-[18%] overflow-y-auto max-h-[98vh]"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close Button */}

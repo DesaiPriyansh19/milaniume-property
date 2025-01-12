@@ -8,11 +8,12 @@ export default function EnquiresPage() {
   const { data, updateById } = useApiData(baseUrl);
   const [modal, setModal] = useState(null);
   const [filter, setFilter] = useState({
-    month: "", 
+    month: "",
     year: new Date().getFullYear(),
     currentYear: 2025,
     filterBy: "",
     approveStatus: "All",
+    propertyType:""
   });
 
   const filteredData = data?.filter((property) => {
@@ -55,7 +56,12 @@ export default function EnquiresPage() {
         ? property.EnquiryStatus === filter.approveStatus
         : true;
 
-    return matchesDate && matchesStatus;
+        const matchesPropertyType =
+        filter.propertyType && filter.propertyType !== "All Enquiry Type"
+          ? property.EnquiryPropertyType === filter.propertyType
+          : true;
+
+    return matchesDate && matchesStatus && matchesPropertyType;
   });
 
   const handleExcel = async () => {
@@ -64,6 +70,7 @@ export default function EnquiresPage() {
       approveStatus: filter.approveStatus,
       year: filter.year,
       month: filter.month,
+      propertyType: filter.propertyType,
     };
     try {
       const params = new URLSearchParams(filterData).toString();
@@ -131,7 +138,6 @@ export default function EnquiresPage() {
             <p className=" text-sm text-gray-200">Your Customer Enquiries</p>
           </div>
           <div className="flex gap-4">
-          
             <button
               className={`border ${
                 filter.filterBy === "Today" && "bg-gray-800"
@@ -175,90 +181,135 @@ export default function EnquiresPage() {
           </div>
         </div>
         <div className="flex gap-5  gitems-center">
-        <div className="border w-[30%] text-black bg-white rounded">
-          <select
-            value={filter.month}
-            className="appearance-none bg-transparent outline-none  p-1 px-4 "
-            onChange={(e) =>
-              setFilter({ ...filter, month: e.target.value, filterBy: "" })
-            }
-          >
-            <option value="">Select Month</option>
-            <option value={1}>January</option>
-            <option value={2}>February</option>
-            <option value={3}>March</option>
-            <option value={4}>April</option>
-            <option value={5}>May</option>
-            <option value={6}>June</option>
-            <option value={7}>July</option>
-            <option value={8}>August</option>
-            <option value={9}>September</option>
-            <option value={10}>October</option>
-            <option value={11}>November</option>
-            <option value={12}>December</option>
+          <div className="border w-[30%] text-black bg-white rounded">
+            <select
+              value={filter.month}
+              className="appearance-none bg-transparent outline-none  p-1 px-4 "
+              onChange={(e) =>
+                setFilter({ ...filter, month: e.target.value, filterBy: "" })
+              }
+            >
+              <option value="">Select Month</option>
+              <option value={1}>January</option>
+              <option value={2}>February</option>
+              <option value={3}>March</option>
+              <option value={4}>April</option>
+              <option value={5}>May</option>
+              <option value={6}>June</option>
+              <option value={7}>July</option>
+              <option value={8}>August</option>
+              <option value={9}>September</option>
+              <option value={10}>October</option>
+              <option value={11}>November</option>
+              <option value={12}>December</option>
 
-            {/* Add other months */}
-          </select>
-          <span>/ </span>
-          <select
-            value={filter.year}
-            className="appearance-none bg-transparent outline-none p-1 px-4"
-            onChange={(e) =>
-              setFilter({ ...filter, year: e.target.value, filterBy: "" })
-            }
-          >
-            {Array.from({ length: 10 }, (_, index) => (
-              <option
-                key={filter.currentYear - index}
-                value={parseInt(filter.currentYear - index)}
-              >
-                {filter.currentYear - index}
-              </option>
-            ))}
-          </select>
-        </div>
-      
-            <div className="relative">
-              <select
-                onChange={(e) => {
-                  setFilter((prev) => ({
-                    ...prev,
-                    approveStatus: e.target.value,
-                  }));
-                }}
-                value={filter.approveStatus}
-                className="appearance-none  bg-transparent outline-none border border-white h-8 pl-2 pr-8"
-              >
-                <option className="text-black" value="All">All</option>
-                <option className="text-black" value="approved">Read</option>
-                <option className="text-black" value="pending">Unread</option>
-              </select>
-
-              <span
-                style={{
-                  transform: "rotate(180deg) translateY(50%)",
-                  position: "absolute",
-                  top: "25%",
-                  right: "10px", // or whatever position you need
-                }}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className={`h-5 w-5 text-white`}
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
+              {/* Add other months */}
+            </select>
+            <span>/ </span>
+            <select
+              value={filter.year}
+              className="appearance-none bg-transparent outline-none p-1 px-4"
+              onChange={(e) =>
+                setFilter({ ...filter, year: e.target.value, filterBy: "" })
+              }
+            >
+              {Array.from({ length: 10 }, (_, index) => (
+                <option
+                  key={filter.currentYear - index}
+                  value={parseInt(filter.currentYear - index)}
                 >
-                  <path
-                    fillRule="evenodd"
-                    d="M5.293 8.707a1 1 0 010-1.414L10 3.586l4.707 4.707a1 1 0 01-1.414 1.414L10 6.414 6.707 9.707a1 1 0 01-1.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </span>
-            </div>
-            <button onClick={handleExcel} className="border rounded px-4 ">
-              Download
-            </button>
+                  {filter.currentYear - index}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="relative">
+            <select
+              onChange={(e) => {
+                setFilter((prev) => ({
+                  ...prev,
+                  propertyType: e.target.value,
+                }));
+              }}
+              value={filter.propertyType}
+              className="appearance-none  bg-transparent outline-none border border-white h-8 pl-2 pr-8"
+            >
+                      <option value={"All Enquiry Type"}>All Enquiry Type</option>
+                <option value={"Property Services"}>Property Services</option>
+                <option value={"Loan & Finance"}>Loan & Finance</option>
+                <option value={"Inerior Design"}> Inerior Design</option>
+            </select>
+
+            <span
+              style={{
+                transform: "rotate(180deg) translateY(50%)",
+                position: "absolute",
+                top: "25%",
+                right: "10px", // or whatever position you need
+              }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className={`h-5 w-5 text-white`}
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M5.293 8.707a1 1 0 010-1.414L10 3.586l4.707 4.707a1 1 0 01-1.414 1.414L10 6.414 6.707 9.707a1 1 0 01-1.414 0z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </span>
+          </div>
+
+          <div className="relative">
+            <select
+              onChange={(e) => {
+                setFilter((prev) => ({
+                  ...prev,
+                  approveStatus: e.target.value,
+                }));
+              }}
+              value={filter.approveStatus}
+              className="appearance-none  bg-transparent outline-none border border-white h-8 pl-2 pr-8"
+            >
+              <option className="text-black" value="All">
+                All
+              </option>
+              <option className="text-black" value="approved">
+                Read
+              </option>
+              <option className="text-black" value="pending">
+                Unread
+              </option>
+            </select>
+
+            <span
+              style={{
+                transform: "rotate(180deg) translateY(50%)",
+                position: "absolute",
+                top: "25%",
+                right: "10px", // or whatever position you need
+              }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className={`h-5 w-5 text-white`}
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M5.293 8.707a1 1 0 010-1.414L10 3.586l4.707 4.707a1 1 0 01-1.414 1.414L10 6.414 6.707 9.707a1 1 0 01-1.414 0z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </span>
+          </div>
+          <button onClick={handleExcel} className="border rounded px-4 ">
+            Download
+          </button>
         </div>
         <div className="text-white w-full grid grid-cols-3 gap-4">
           {filteredData.reverse().map((person, index) => (
@@ -329,7 +380,7 @@ export default function EnquiresPage() {
               <div className="px-3 mt-4 pb-2 border border-t-0 rounded-b-xl border-gray-700">
                 <div className="mb-2">
                   <label className="text-xs text-gray-400 uppercase font-semibold tracking-wider">
-                    Enquiry  Type
+                    Enquiry Type
                   </label>
                   <p className="text-sm text-gray-300 font-medium">
                     {person?.EnquiryPropertyType || "N | A"}

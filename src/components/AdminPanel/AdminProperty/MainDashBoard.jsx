@@ -129,10 +129,10 @@ export default function MainDashBoard() {
       <p className="mb-6 text-sm text-gray-200">
         You can See All  Statastics Here.
       </p>
-      <div className="flex justify-between mb-4 gap-4 w-auto lg:w-[50%] ml-5 rounded-md">
-  <div className="bg-gray-800 text-xl rounded-lg shadow-md w-full relative">
-    <div className="overflow-x-auto">
-      <table className="min-w-full border  shadow-md rounded-lg">
+      <div className="flex justify-between mb-4 gap-4 w-auto   rounded-md">
+  <div className=" flex gap-1 text-xl rounded-lg shadow-md w-full relative">
+    <div className=" ">
+      <table className="w-auto border  shadow-md rounded-lg">
         {/* Table Header */}
         <thead>
           <tr className="bg-gray-200 text-gray-700 uppercase text-sm leading-normal">
@@ -159,6 +159,38 @@ export default function MainDashBoard() {
           ))}
         </tbody>
       </table>
+    
+    </div>
+    <div className="">
+      <table className="w-auto border  shadow-md rounded-lg">
+        {/* Table Header */}
+        <thead>
+          <tr className="bg-gray-200 text-gray-700 uppercase text-sm leading-normal">
+            <th className="py-3 px-6 text-left">Property</th>
+            <th className="py-3 px-6 text-left">Active</th>
+            <th className="py-3 px-6 text-left">Recyclebin</th>
+            <th className="py-3 px-6 text-left">All</th>
+          </tr>
+        </thead>
+
+        {/* Table Body */}
+        <tbody className="text-gray-600 text-sm font-light">
+          {cardsData.map((card, index) => (
+            <tr key={index} className="border-b border-gray-300 ">
+              <td className="py-3 px-6 text-left font-mono text-white">
+                {card.description}
+              </td>
+              <td className="py-3 text-white px-6 text-left font-bold">
+                {card.value}
+              </td>
+              <td className="py-3 text-yellow-400 px-6 text-left font-bold">
+                {card.total}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    
     </div>
   </div>
 </div>

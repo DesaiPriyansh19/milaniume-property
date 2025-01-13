@@ -543,7 +543,7 @@ export default function RecycleBinProperty() {
           <div className="flex items-center mb-6 justify-between">
             <div>
               {" "}
-              <p className="text-xl font-semibold uppercase ">Recycle Bin</p>
+              <p className="text-xl font-semibold uppercase text-[#E7C873] ">Recycle Bin</p>
               <p className=" text-sm text-gray-200">
                 Your Recycle Property Over here
               </p>

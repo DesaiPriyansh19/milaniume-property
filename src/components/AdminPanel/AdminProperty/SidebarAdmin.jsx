@@ -11,12 +11,12 @@ export default function SidebarAdmin() {
   const targetElementRef = useRef(null); // The specific element
   const SideBarOption = [
     { name: "Dashboard", icon: <FaHome />, path: "/dashboard" },
-  { name: "Manage Peoples", icon: <FaUsers />, path: "/manage-peoples" },
-  { name: "Quick Enquiries", icon: <FaEnvelope />, path: "/enquiries" },
-  { name: "Add Property", icon: <FaPlusCircle />, path: "/add-property" },
-  { name: "User Post", icon: <FaUserEdit />, path: "/user-post" },
+    { name: "Add Property", icon: <FaPlusCircle />, path: "/add-property" },
+    { name: "User Post", icon: <FaUserEdit />, path: "/user-post" },
+    { name: "Quick Enquiries", icon: <FaEnvelope />, path: "/enquiries" },
   { name: "Requirements", icon: <FaClipboardList />, path: "/require-post" },
   { name: "Recycle Bin", icon: <FaTrashAlt />, path: "/recycle-bin" },
+  { name: "Manage Peoples", icon: <FaUsers />, path: "/manage-peoples" },
   { name: "Log Out", icon: <IoPower />, path: "/logout" },
     // { name: "Bar Chart", icon: <HomeSvg />, path: "/bar-chart" },
     // { name: "Pie Chart", icon: <HomeSvg />, path: "/pie-chart" },
@@ -61,17 +61,17 @@ export default function SidebarAdmin() {
         {/* Sidebar Options */}
         <div className="pb-10">
           {SideBarOption.map((category, index) => (
-            <div key={index} className="mb-8">
+            <div key={index} className="mb-8 ">
               {/* Category Items */}
               <Link to={`/admin${category.path}`}>
                 {" "}
                 {/* Link added here */}
                 <div
-                  className={`flex  ${
+                  className={`flex    ${
                     conMaxWidth === 288 ? "ml-4 mb-4" : "justify-center items-center mb-8"
                   } cursor-pointer text-base font-light items-center gap-4`}
                 >
-                  <div className="relative  flex justify-center items-center text-white   text-xl group">
+                  <div className="relative hover:text-[#f5d170]  flex justify-center items-center text-white     text-xl group">
                  {category.icon}
 
                     <div
@@ -79,7 +79,7 @@ export default function SidebarAdmin() {
                         conMaxWidth === 72
                           ? "left-10 opacity-0 z-10 bg-black group-hover:opacity-100 transition-opacity duration-300"
                           : "left-4 mb-1"
-                      } text-white text-sm  bg-opacity-60 px-2 ml-2  whitespace-nowrap rounded-md`}
+                      } text-white text-sm hover:text-[#E7C873] hover:scale-105  bg-opacity-60 px-2 ml-2  whitespace-nowrap rounded-md`}
                     >
                       {category.name}
                     </div>

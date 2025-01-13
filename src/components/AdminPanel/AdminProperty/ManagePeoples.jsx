@@ -21,7 +21,7 @@ export default function ManagePeoples() {
 
   return (
     <div className="text-white mx-auto p-4">
-      <p className="text-xl font-semibold uppercase">Manage Peoples</p>
+      <p className="text-xl font-semibold uppercase text-[#E7C873]">Manage Peoples</p>
       <p className="mb-6 text-sm text-gray-200">Manage Your Peoples</p>
 
       {/* Table */}

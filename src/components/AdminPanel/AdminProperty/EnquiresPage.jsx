@@ -134,14 +134,54 @@ export default function EnquiresPage() {
         <div className="flex justify-between mb-4">
           <div className="">
             {" "}
-            <p className="text-xl font-semibold uppercase ">Enquiries</p>
+            <p className="text-xl font-semibold uppercase text-[#E7C873]">Enquiries</p>
             <p className=" text-sm text-gray-200">Your Customer Enquiries</p>
           </div>
-          <div className="flex gap-4">
+
+          <div className="flex gap-4 justify-center items-center">
+          <div className="relative">
+            <select
+              onChange={(e) => {
+                setFilter((prev) => ({
+                  ...prev,
+                  propertyType: e.target.value,
+                }));
+              }}
+              value={filter.propertyType}
+              className="appearance-none   bg-transparent outline-none border border-white h-8 pl-2 pr-8"
+            >
+                      <option className="text-black" value={"All Enquiry Type"}>All Enquiry Type</option>
+                <option className="text-black" value={"Property Services"}>Property Services</option>
+                <option className="text-black" value={"Loan & Finance"}>Loan & Finance</option>
+                <option className="text-black" value={"Inerior Design"}> Inerior Design</option>
+            </select>
+
+            <span
+              style={{
+                transform: "rotate(180deg) translateY(50%)",
+                position: "absolute",
+                top: "25%",
+                right: "10px", // or whatever position you need
+              }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className={`h-5 w-5 text-white`}
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M5.293 8.707a1 1 0 010-1.414L10 3.586l4.707 4.707a1 1 0 01-1.414 1.414L10 6.414 6.707 9.707a1 1 0 01-1.414 0z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </span>
+          </div>
             <button
               className={`border ${
                 filter.filterBy === "Today" && "bg-gray-800"
-              } px-4 rounded`}
+              } px-4 py-1 rounded`}
               onClick={() =>
                 setFilter((prevFilter) => ({
                   ...prevFilter,
@@ -152,7 +192,7 @@ export default function EnquiresPage() {
               Today's
             </button>
             <button
-              className={`border ${
+              className={`border  py-1  ${
                 filter.filterBy === "Yesterday" && "bg-gray-800"
               } px-4 rounded`}
               onClick={() =>
@@ -166,7 +206,7 @@ export default function EnquiresPage() {
               Yesterday's
             </button>
             <button
-              className={`border ${
+              className={`border  py-1  ${
                 filter.filterBy === "All" && "bg-gray-800"
               } px-4 rounded`}
               onClick={() =>
@@ -180,7 +220,7 @@ export default function EnquiresPage() {
             </button>
           </div>
         </div>
-        <div className="flex gap-5  gitems-center">
+        <div className="flex gap-5 items-center justify-end gitems-center">
           <div className="border w-[30%] text-black bg-white rounded">
             <select
               value={filter.month}
@@ -228,46 +268,6 @@ export default function EnquiresPage() {
               onChange={(e) => {
                 setFilter((prev) => ({
                   ...prev,
-                  propertyType: e.target.value,
-                }));
-              }}
-              value={filter.propertyType}
-              className="appearance-none  bg-transparent outline-none border border-white h-8 pl-2 pr-8"
-            >
-                      <option value={"All Enquiry Type"}>All Enquiry Type</option>
-                <option value={"Property Services"}>Property Services</option>
-                <option value={"Loan & Finance"}>Loan & Finance</option>
-                <option value={"Inerior Design"}> Inerior Design</option>
-            </select>
-
-            <span
-              style={{
-                transform: "rotate(180deg) translateY(50%)",
-                position: "absolute",
-                top: "25%",
-                right: "10px", // or whatever position you need
-              }}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className={`h-5 w-5 text-white`}
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M5.293 8.707a1 1 0 010-1.414L10 3.586l4.707 4.707a1 1 0 01-1.414 1.414L10 6.414 6.707 9.707a1 1 0 01-1.414 0z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </span>
-          </div>
-
-          <div className="relative">
-            <select
-              onChange={(e) => {
-                setFilter((prev) => ({
-                  ...prev,
                   approveStatus: e.target.value,
                 }));
               }}
@@ -275,13 +275,13 @@ export default function EnquiresPage() {
               className="appearance-none  bg-transparent outline-none border border-white h-8 pl-2 pr-8"
             >
               <option className="text-black" value="All">
-                All
+              ⚪ All
               </option>
               <option className="text-black" value="approved">
-                Read
+               ✔ Read
               </option>
               <option className="text-black" value="pending">
-                Unread
+              ✖ Unread
               </option>
             </select>
 
@@ -307,8 +307,11 @@ export default function EnquiresPage() {
               </svg>
             </span>
           </div>
-          <button onClick={handleExcel} className="border rounded px-4 ">
-            Download
+      
+
+         
+          <button onClick={handleExcel} className="py-1 border-[1.9px] border-[#E7C873] text-sm hover:scale-95 hover:bg-[#E7C873] hover:text-black  rounded px-4">
+         Download ⬇
           </button>
         </div>
         <div className="text-white w-full grid grid-cols-3 gap-4">

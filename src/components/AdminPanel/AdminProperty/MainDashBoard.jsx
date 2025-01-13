@@ -124,7 +124,7 @@ export default function MainDashBoard() {
   }
   return (
     <div className="text-white  mx-auto p-4">
-      <p className="text-xl font-semibold uppercase ">DashBoard</p>
+      <p className="text-xl font-semibold uppercase text-[#E7C873] ">DashBoard</p>
       <p className="mb-6 text-sm text-gray-200">
         You can See All Statastics Here.
       </p>

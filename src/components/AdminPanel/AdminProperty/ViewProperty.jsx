@@ -626,7 +626,7 @@ export default function ViewProperty() {
           <div className="flex items-center mb-6 justify-between">
             <div>
               {" "}
-              <p className="text-xl font-semibold uppercase ">View Property</p>
+              <p className="text-xl font-semibold uppercase text-[#E7C873] ">View Property</p>
               <p className=" text-sm text-gray-200"></p>
             </div>
 
@@ -686,13 +686,13 @@ export default function ViewProperty() {
                     setFilter((prev) => ({ ...prev, type: e.target.value }));
                   }}
                   value={filter.type}
-                  className="appearance-none text-white bg-transparent rounded-sm outline-none border border-white h-8 pl-2 pr-8"
+                  className="appearance-none  text-sm text-white bg-transparent rounded-sm outline-none border border-white h-8 pl-2 pr-8"
                 >
                   <option className="text-black" value="verified">
-                    Verified
+                  ✔ Verified
                   </option>
                   <option className="text-black" value="unverified">
-                    Un-Verified
+                  ✖Un-Verified
                   </option>
                 </select>
 
@@ -721,9 +721,9 @@ export default function ViewProperty() {
 
               <button
                 onClick={() => handleEdit("Add")}
-                className=" bg-red-800 text-white h-8 px-5  rounded "
+                className=" bg-green-800 text-white h-8 px-5 hover:scale-95 shadow-sm hover:shadow-red-300 rounded "
               >
-                Add New Property
+                +Add New Property
               </button>
             </div>
           </div>
@@ -754,11 +754,11 @@ export default function ViewProperty() {
               </div>
             </div>
 
-            <div className="flex">
+            <div className="flex ">
               <div className="border bg-white text-black mx-auto rounded">
                 <select
                   value={filter.month}
-                  className="appearance-none bg-transparent outline-none  p-1 px-4 "
+                  className="appearance-none bg-transparent outline-none text-sm  p-1 px-4 "
                   onChange={(e) =>
                     setFilter({ ...filter, month: e.target.value })
                   }
@@ -781,7 +781,7 @@ export default function ViewProperty() {
                 <span>/ </span>
                 <select
                   value={filter.year}
-                  className="appearance-none bg-transparent outline-none p-1 px-4"
+                  className="appearance-none bg-transparent text-sm outline-none p-1 px-4"
                   onChange={(e) =>
                     setFilter({ ...filter, year: e.target.value })
                   }
@@ -797,8 +797,8 @@ export default function ViewProperty() {
                 </select>
               </div>
               <div>
-                <button onClick={handleExcel} className="border rounded px-4 ">
-                  Download
+                <button onClick={handleExcel} className=" py-1 border-[1.9px] border-[#E7C873] text-sm hover:scale-95 hover:bg-[#E7C873] hover:text-black  rounded px-4 ">
+                  Download  ⬇
                 </button>
               </div>
             </div>

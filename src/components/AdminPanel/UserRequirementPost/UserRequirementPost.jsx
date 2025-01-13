@@ -544,14 +544,14 @@ export default function UserRequirementPost() {
           data={formData}
         />
       )}
-      <div className="mb-6 flex justify-between">
+      <div className="mb-2 flex justify-between">
         <div>
-          <p className="text-xl font-semibold uppercase ">Requirement Post</p>
+          <p className="text-xl font-semibold uppercase text-[#E7C873]">Requirement Post</p>
           <p className=" text-sm text-gray-200">
             View All User Requirement Post
           </p>
         </div>
-        <div className="flex gap-4">
+        <div className="flex gap-1 py-2">
           <select
             value={filter.propertyType}
             className="appearance-none bg-transparent border outline-none  p-1 px-4 "
@@ -560,7 +560,7 @@ export default function UserRequirementPost() {
             }
           >
             <option className="text-black" value="">
-              Select type
+              Select type ▼
             </option>
             <option className="text-black" value={"Residential"}>
               Residential
@@ -573,15 +573,14 @@ export default function UserRequirementPost() {
             </option>
             <option className="text-black" value={"Plot&Land"}>
               Agricultural Plot
-            </option>
+            </option>	
+           
 
             {/* Add other months */}
           </select>
-          <button onClick={handleExcel} className="border rounded px-4 ">
-            Download
-          </button>
+         
           <button
-            className={`border ${
+            className={`border  ${
               filter.filterBy === "Today" && "bg-gray-800"
             } px-4 rounded`}
             onClick={() =>
@@ -623,7 +622,8 @@ export default function UserRequirementPost() {
         </div>
       </div>
 
-      <div className="border rounded mb-4 w-[40%]">
+    <div className="flex justify-end items-center gap-2 mb-4">
+     <div className="border rounded ">
         <select
           value={filter.month}
           className="appearance-none bg-transparent outline-none  p-1 px-4 "
@@ -692,7 +692,11 @@ export default function UserRequirementPost() {
           ))}
         </select>
       </div>
-      <div className="p-6 bg-gray-800 rounded-lg shadow-lg">
+      <button onClick={handleExcel} className="py-1 border-[1.9px] border-[#E7C873] text-sm hover:scale-95 hover:bg-[#E7C873] hover:text-black  rounded px-4">
+      Download ⬇
+          </button>
+          </div> 
+      <div className="px- bg-gray-800 rounded-lg shadow-lg">
         <ul className="space-y-6 gap-4">
           {filteredData
             ?.slice()

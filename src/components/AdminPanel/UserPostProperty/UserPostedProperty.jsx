@@ -131,14 +131,117 @@ export default function UserPostedProperty() {
     <>
       {selectedUserProperty.view === "PersonView" && (
         <div className="text-white  mx-auto p-4">
-          <div className="mb-6">
-            <p className="text-xl font-semibold uppercase ">User Post</p>
-            <p className=" text-sm mb-4 text-gray-200">View All User Post</p>
+        
+      
+       <div className="mb-6">
+        <div className="flex justify-evenly items-center">
+          <div className="">  <p className="text-xl font-semibold uppercase text-[#E7C873]">User Post</p>
+            <p className=" text-sm mb-4 text-gray-200">View All User Post</p></div> 
             <div>
-              <div className="border rounded mb-4 w-[40%]">
+             
+              <div className="flex  gap-4 mb-3">
+              <div className="relative">
+                <select
+                  onChange={(e) => {
+                    setFilter((prev) => ({
+                      ...prev,
+                      propertyType: e.target.value,
+                    }));
+                  }}
+                  value={filter.propertyType}
+                  className="appearance-none text-white bg-transparent rounded-sm outline-none border border-white h-8 pl-2 pr-8"
+                >
+                  <option className="text-black" value="">
+                    Select type
+                  </option>
+                  <option className="text-black" value={"Residential"}>
+                    Residential
+                  </option>
+                  <option className="text-black" value={"Commercial"}>
+                    Commercial
+                  </option>
+                  <option className="text-black" value={"Industrial"}>
+                    Industrial
+                  </option>
+                  <option className="text-black" value={"Plot&Land"}>
+                    Agricultural Plot
+                  </option>
+                </select>
+                <span
+                  style={{
+                    transform: "rotate(180deg) translateY(50%)",
+                    position: "absolute",
+                    top: "38%",
+                    right: "10px", // or whatever position you need
+                  }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className={`h-5 w-5 text-white`}
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M5.293 8.707a1 1 0 010-1.414L10 3.586l4.707 4.707a1 1 0 01-1.414 1.414L10 6.414 6.707 9.707a1 1 0 01-1.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </span>
+
+              </div>
+            
+                <button
+                  className={`border ${
+                    filter.filterBy === "Today" && "bg-gray-800"
+                  } px-4 rounded`}
+                  onClick={() =>
+                    setFilter((prevFilter) => ({
+                      ...prevFilter,
+                      filterBy: prevFilter.filterBy === "Today" ? "" : "Today", // Toggle between today and no filter
+                    }))
+                  }
+                >
+                  Today's
+                </button>
+                <button
+                  className={`border ${
+                    filter.filterBy === "Yesterday" && "bg-gray-800"
+                  } px-4 rounded`}
+                  onClick={() =>
+                    setFilter((prevFilter) => ({
+                      ...prevFilter,
+                      filterBy:
+                        prevFilter.filterBy === "Yesterday" ? "" : "Yesterday", // Toggle between today and no filter
+                    }))
+                  }
+                >
+                  Yesterday's
+                </button>
+                <button
+                  className={`border ${
+                    filter.filterBy === "All" && "bg-gray-800"
+                  } px-4 rounded`}
+                  onClick={() =>
+                    setFilter((prevFilter) => ({
+                      ...prevFilter,
+                      filterBy: prevFilter.filterBy === "All" ? "" : "All", // Toggle between today and no filter
+                    }))
+                  }
+                >
+                  All
+                </button>
+              
+              </div>
+            </div>
+
+
+            </div>
+            <div className=" w-full flex justify-end  gap-2 items-center mb-4 ">
+            <div className="border rounded mb-1 bg-white text-black text-sm">
                 <select
                   value={filter.month}
-                  className="appearance-none bg-transparent outline-none  p-1 px-4 "
+                  className="appearance-none bg-white text-black outline-none  p-1 px-4 "
                   onChange={(e) =>
                     setFilter({
                       ...filter,
@@ -192,7 +295,7 @@ export default function UserPostedProperty() {
                 <span>/ </span>
                 <select
                   value={filter.year}
-                  className="appearance-none bg-transparent outline-none p-1 px-4"
+                  className="appearance-none bg-white text-black outline-none p-1 px-4"
                   onChange={(e) =>
                     setFilter({ ...filter, year: e.target.value, filterBy: "" })
                   }
@@ -208,52 +311,10 @@ export default function UserPostedProperty() {
                   ))}
                 </select>
               </div>
-              <div className="flex mb-4 gap-4">
-                <button onClick={handleExcel} className="border rounded px-4 ">
-                  Download
-                </button>
-                <button
-                  className={`border ${
-                    filter.filterBy === "Today" && "bg-gray-800"
-                  } px-4 rounded`}
-                  onClick={() =>
-                    setFilter((prevFilter) => ({
-                      ...prevFilter,
-                      filterBy: prevFilter.filterBy === "Today" ? "" : "Today", // Toggle between today and no filter
-                    }))
-                  }
-                >
-                  Today's
-                </button>
-                <button
-                  className={`border ${
-                    filter.filterBy === "Yesterday" && "bg-gray-800"
-                  } px-4 rounded`}
-                  onClick={() =>
-                    setFilter((prevFilter) => ({
-                      ...prevFilter,
-                      filterBy:
-                        prevFilter.filterBy === "Yesterday" ? "" : "Yesterday", // Toggle between today and no filter
-                    }))
-                  }
-                >
-                  Yesterday's
-                </button>
-                <button
-                  className={`border ${
-                    filter.filterBy === "All" && "bg-gray-800"
-                  } px-4 rounded`}
-                  onClick={() =>
-                    setFilter((prevFilter) => ({
-                      ...prevFilter,
-                      filterBy: prevFilter.filterBy === "All" ? "" : "All", // Toggle between today and no filter
-                    }))
-                  }
-                >
-                  All
+              <button onClick={handleExcel} className="py-1 border-[1.5px] border-[#E7C873] text-sm hover:scale-95 hover:bg-[#E7C873] hover:text-black  rounded px-4">
+              Download ⬇
                 </button>
               </div>
-            </div>
             <div className="overflow-x-auto">
               <table className="min-w-full table-auto bg-gray-800 rounded-lg shadow-md">
                 <thead>

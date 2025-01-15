@@ -17,7 +17,28 @@ function Properties() {
   const { data, loading } = useFetch(
     "https://milaniumepropertybackend.vercel.app/api/property"
   );
-
+  const initialFilterState = {
+    ResidentList: "",
+    CommercialList: "",
+    IndustrialList: "",
+    PlotandLandList: "",
+    Condition: "",
+    AvailableFor: "",
+    MinSqft: "",
+    MaxSqft: "",
+    MinBudget: "",
+    MaxBudget: "",
+    Bhk: "",
+    UserTypedArea: "",
+    SaleOrRent: "",
+    selectedFeatures: [],
+  };
+  const resetFilters = (event) => {
+    event.preventDefault(); // Prevents any form submission behavior
+    setFilterData(initialFilterState);
+ 
+  };
+  
   const [filterData, setFilterData] = useState({
     UserTypedArea: "",
     ResidentList: "",
@@ -142,107 +163,134 @@ function Properties() {
   console.log(filterData);
 
   useEffect(() => {
-    if (data) {
-      // Start by filtering based on activeTab
-      let filteredData = data.filter((item) => item.PropertyType === activeTab);
-
-      // Check which filter is active and apply it
-      if (filterData.ResidentList) {
-        filteredData = filteredData.filter(
-          (item) =>
-            item.ResidentialAvailabilityType &&
-            item.ResidentialAvailabilityType[filterData.ResidentList]
-        );
-      } else if (filterData.CommercialList) {
-        filteredData = filteredData.filter(
-          (item) =>
-            item.AllCommercial && item.AllCommercial[filterData.CommercialList]
-        );
-      } else if (filterData.IndustrialList) {
-        filteredData = filteredData.filter(
-          (item) =>
-            item.AllIndustrial && item.AllIndustrial[filterData.IndustrialList]
-        );
-      } else if (filterData.PlotandLandList) {
-        filteredData = filteredData.filter(
-          (item) =>
-            item.AllPlotLand && item.AllPlotLand[filterData.PlotandLandList]
-        );
-      } else if (filterData.Condition) {
-        filteredData = filteredData.filter(
-          (item) => item.Condition && item.Condition[filterData.Condition]
-        );
-      } else if (filterData.AvailableFor) {
-        filteredData = filteredData.filter(
-          (item) =>
-            item.ResidentAvailable &&
-            item.ResidentAvailable[filterData.AvailableFor]
-        );
-      } else if (filterData.MinSqft || filterData.MaxSqft) {
-        filteredData = filteredData.filter(
-          (item) =>
-            parseFloat(item.PropertyDetails.Sqft) >= filterData.MinSqft &&
-            parseFloat(item.PropertyDetails.Sqft) <= filterData.MaxSqft
-        );
-      } else if (filterData.MinBudget || filterData.MaxBudget) {
-        filteredData = filteredData.filter((item) =>
-          item.Prices.SalesPrice
-            ? parseFloat(item.Prices.SalesPrice) >= filterData.MinBudget &&
-              parseFloat(item.Prices.SalesPrice) <= filterData.MaxBudget
-            : parseFloat(item.Prices.RentPrice) >= filterData.MinBudget &&
-              parseFloat(item.Prices.RentPrice) <= filterData.MaxBudget
-        );
-      } else if (filterData.Bhk) {
-        filteredData = filteredData.filter(
-          (item) => item.BhkScheme && item.BhkScheme[filterData.Bhk]
-        );
-      } else if (filterData.UserTypedArea) {
-        const searchTerms = filterData.UserTypedArea.toLowerCase().split(" "); // Split by spaces
-        filteredData = filteredData.filter((item) =>
-          searchTerms.every(
-            (term) =>
-              item.Landmark?.toLowerCase().includes(term) ||
-              item.City?.toLowerCase().includes(term) ||
-              item.PinCode?.toLowerCase().includes(term)
-          )
-        );
-      }
-
-      if (filterData.SaleOrRent) {
-        filteredData = filteredData.filter((item) => {
-          if (filterData.SaleOrRent === "Buy") {
-            return item.ForSale === true;
-          } else if (filterData.SaleOrRent === "Rent") {
-            return item.ForRent === true;
-          }
-          return true; // Default case if filterData.SaleOrRent is invalid
-        });
-      }
-      // Filter by selectedFeatures
-      if (filterData.selectedFeatures.length > 0) {
-        const featureMapping = {
-          "BOSS CABIN": "BossCabin",
-          "MANAGER CABIN": "ManagerCabin",
-          "WORK STATION": "WorkStation",
-          "CONFERENCE ROOM": "ConferenceRoom", // Add this key to the schema if necessary
-          PANTRY: "Pantry",
-          RECEPTION: "Reception",
-          "WAITING AREA": "WaitingArea",
-        };
-
-        filteredData = filteredData.filter((item) =>
-          filterData.selectedFeatures.every(
-            (feature) =>
-              item.CommercialPropertyFeatures?.[featureMapping[feature]]
-          )
-        );
-      }
-
-      // Update the main data
-      setMainData(filteredData);
+    if (!data) return;
+  
+    let filteredData = [...data];
+  
+    // Apply other filters (Property Type, Resident List, etc.)
+    if (activeTab) {
+      filteredData = filteredData.filter((item) => item.PropertyType === activeTab);
     }
+  
+    if (filterData.ResidentList) {
+      filteredData = filteredData.filter(
+        (item) => item.ResidentialAvailabilityType?.[filterData.ResidentList]
+      );
+    }
+  
+    if (filterData.CommercialList) {
+      filteredData = filteredData.filter(
+        (item) => item.AllCommercial?.[filterData.CommercialList]
+      );
+    }
+  
+    if (filterData.IndustrialList) {
+      filteredData = filteredData.filter(
+        (item) => item.AllIndustrial?.[filterData.IndustrialList]
+      );
+    }
+  
+    if (filterData.PlotandLandList) {
+      filteredData = filteredData.filter(
+        (item) => item.AllPlotLand?.[filterData.PlotandLandList]
+      );
+    }
+  
+    if (filterData.Condition) {
+      filteredData = filteredData.filter(
+        (item) => item.Condition?.[filterData.Condition]
+      );
+    }
+  
+    if (filterData.AvailableFor) {
+      filteredData = filteredData.filter(
+        (item) => item.ResidentAvailable?.[filterData.AvailableFor]
+      );
+    }
+  
+    // **Min & Max Sqft Filtering**
+    if (filterData.MinSqft || filterData.MaxSqft) {
+      const minSqft = filterData.MinSqft ? parseFloat(filterData.MinSqft) : 0;
+      const maxSqft = filterData.MaxSqft ? parseFloat(filterData.MaxSqft) : Infinity;
+  
+      filteredData = filteredData.filter((item) => {
+        const propertySqft = parseFloat(item.PropertyDetails?.Sqft || 0);
+        return propertySqft >= minSqft && propertySqft <= maxSqft;
+      });
+    }
+  
+    // **Min & Max Budget Filtering**
+    if (filterData.MinBudget || filterData.MaxBudget) {
+      const minBudget = filterData.MinBudget ? parseFloat(filterData.MinBudget) : 0;
+      const maxBudget = filterData.MaxBudget ? parseFloat(filterData.MaxBudget) : Infinity;
+  
+      filteredData = filteredData.filter((item) => {
+        const salesPrice = item.Prices?.SalesPrice ? parseFloat(item.Prices.SalesPrice) : null;
+        const rentPrice = item.Prices?.RentPrice ? parseFloat(item.Prices.RentPrice) : null;
+  
+        return (
+          (salesPrice !== null && salesPrice >= minBudget && salesPrice <= maxBudget) ||
+          (rentPrice !== null && rentPrice >= minBudget && rentPrice <= maxBudget)
+        );
+      });
+    }
+  
+    // **Area Search (Multiple Areas Search)**
+    if (filterData.UserTypedArea) {
+      // Split the user input into multiple search terms (areas) by comma
+      const searchTerms = filterData.UserTypedArea
+        .toLowerCase()
+        .split(',')  // Split by comma
+        .map(term => term.trim()); // Trim extra spaces around each term
+  
+      filteredData = filteredData.filter((item) => {
+        // Check if any of the areas match Landmark, City, or PinCode
+        const areasToCheck = [item.Landmark, item.City, item.PinCode].map(area => area?.toLowerCase() || "");
+  
+        // Check if at least one area term matches any of the areas in the current property
+        return searchTerms.some((term) =>
+          areasToCheck.some(area => area.includes(term))
+        );
+      });
+    }
+  
+    // Apply additional filters (Bhk, SaleOrRent, etc.)
+    if (filterData.Bhk) {
+      filteredData = filteredData.filter(
+        (item) => item.BhkScheme?.[filterData.Bhk]
+      );
+    }
+  
+    if (filterData.SaleOrRent) {
+      filteredData = filteredData.filter((item) =>
+        filterData.SaleOrRent === "Buy" ? item.ForSale === true : item.ForRent === true
+      );
+    }
+  
+    // Filtering by selectedFeatures
+    if (filterData.selectedFeatures?.length > 0) {
+      const featureMapping = {
+        "BOSS CABIN": "BossCabin",
+        "MANAGER CABIN": "ManagerCabin",
+        "WORK STATION": "WorkStation",
+        "CONFERENCE ROOM": "ConferenceRoom",
+        PANTRY: "Pantry",
+        RECEPTION: "Reception",
+        "WAITING AREA": "WaitingArea",
+      };
+  
+      filteredData = filteredData.filter((item) =>
+        filterData.selectedFeatures.every(
+          (feature) => item.CommercialPropertyFeatures?.[featureMapping[feature]]
+        )
+      );
+    }
+  
+    // Update state with filtered data
+    setMainData(filteredData);
   }, [activeTab, data, filterData]);
-
+  
+  
   const renderAdditionalInputs = () => {
     // Function to render dynamic filters
     const renderFilters = () => {
@@ -974,39 +1022,51 @@ function Properties() {
         </div>
         {/* Filter Modal */}
         {isModalOpen && (
-          <div
-            className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50 h-[100vh] md:h-[100vh] lg:h-[550vh] xl:h-[400vh]"
-            onClick={closeModal}
-          >
-            <div
-              className="bg-white rounded-lg p-6 w-[90%] z-40 h-auto md:w-3/4 lg:w-[50%] absolute top-[18%] overflow-y-auto max-h-[98vh]"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Close Button */}
-              <button
-                onClick={closeModal}
-                className="text-gray-500 hover:text-gray-800 float-right text-xl font-bold"
-              >
-                &times;
-              </button>
+  <div
+    className="fixed inset-0 flex justify-center items-center z-50 h-[100vh] md:h-[100vh] lg:h-[550vh] xl:h-[400vh]"
+    onClick={closeModal}
+  >
+    <div
+      className="bg-slate-50 rounded-lg p-6 w-[90%] z-40 h-auto md:w-3/4 lg:w-[50%] absolute top-[18%] overflow-y-auto max-h-[98vh]"
+      onClick={(e) => e.stopPropagation()}
+    >
+      {/* Close Button */}
+      <button
+        onClick={closeModal}
+        className="text-gray-500 hover:text-gray-800 float-right text-3xl font-thin"
+      >
+        &times;
+      </button>
 
-              <h2 className="text-lg font-semibold mb-4 text-gray-700">
-                Filters
-              </h2>
+      <h2 className="text-lg font-semibold mb-4 text-gray-700">
+        Filters
+      </h2>
 
-              {/* Dynamic Filters */}
-              <div className="text-sm  gap-4">{renderFilters()}</div>
+      {/* Dynamic Filters */}
+      <div className="text-sm gap-4">{renderFilters()}</div>
 
-              {/* Apply Filters Button */}
-              <button
-                onClick={closeModal}
-                className="mt-4 px-4 py-2 bg-[#1F4B43] text-white rounded-lg"
-              >
-                Apply Filters
-              </button>
-            </div>
-          </div>
-        )}
+      {/* Buttons Row: Apply & Reset */}
+      <div className="flex justify-between mt-4">
+        {/* Reset Button */}
+        <button
+  onClick={resetFilters}
+  className="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg"
+>
+  Reset Filters
+</button>
+
+
+        {/* Apply Filters Button */}
+        <button
+          onClick={closeModal}
+          className="px-4 py-2 bg-[#1F4B43] text-white rounded-lg"
+        >
+          Apply Filters
+        </button>
+      </div>
+    </div>
+  </div>
+)}
       </div>
     );
   };

@@ -73,9 +73,7 @@ const PropertyDetailPage = () => {
       message
     )}`;
 
-    // Debugging: Log the URL
-    console.log("Generated WhatsApp URL:", whatsappURL);
-
+ 
     // Open WhatsApp chat
     window.open(whatsappURL, "_blank");
   };
@@ -298,15 +296,7 @@ const PropertyDetailPage = () => {
                   : "Price Not Available"}
               </p>
               <button  onClick={() => handleWhatsAppClick("Buy")} className="text-lg mt-3 px-6 py-[5px] hover:scale-95 shadow-sm shadow-[#1F4B43] border-[#1F4B43] border-[0.5px] rounded-full  text-white bg-[#1F4B43] ">
-              {data?.ForSale === true &&
-                  data?.ForRent === true &&
-                  " Buy / Rent"}
-                {data?.ForSale === true &&
-                  data?.ForRent === false &&
-                  "Buy"}
-                {data?.ForSale === false &&
-                  data?.ForRent === true &&
-                  "For  Rent"}
+            contact for more
               </button>
           
             </div>

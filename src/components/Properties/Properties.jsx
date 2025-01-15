@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext,useRef } from "react";
 
 import bgImg2 from "../../../public/PropertiesBg.webp";
 
@@ -13,6 +13,7 @@ import { useActive } from "../../../context/activeContext";
 function Properties() {
   const { activeTab, setActiveTab } = useActive();
   const [isModalOpen, setIsModalOpen] = useState(false); // Moved here
+  
   const [mainData, setMainData] = useState([]);
   const { data, loading } = useFetch(
     "https://milaniumepropertybackend.vercel.app/api/property"
@@ -159,9 +160,6 @@ function Properties() {
   const closeModal = () => {
     setIsModalOpen(false);
   };
-
-  console.log(filterData);
-
   useEffect(() => {
     if (!data) return;
   
@@ -196,16 +194,31 @@ function Properties() {
       );
     }
   
+    // **Condition Filter (Residential Condition)**
     if (filterData.Condition) {
-      filteredData = filteredData.filter(
-        (item) => item.Condition?.[filterData.Condition]
-      );
+      filteredData = filteredData.filter((item) => {
+        // Check if item.Condition is a string or array and if it matches the filter
+        if (typeof item.Condition === 'string') {
+          return item.Condition.toLowerCase().includes(filterData.Condition.toLowerCase());
+        }
+  
+        if (Array.isArray(item.Condition)) {
+          return item.Condition.some(cond => cond.toLowerCase().includes(filterData.Condition.toLowerCase()));
+        }
+  
+        return false; // Exclude if Condition doesn't match
+      });
     }
   
+    // **Available For Filter (Available For selection)**
     if (filterData.AvailableFor) {
-      filteredData = filteredData.filter(
-        (item) => item.ResidentAvailable?.[filterData.AvailableFor]
-      );
+      filteredData = filteredData.filter((item) => {
+        // Ensure ResidentAvailable exists and matches the AvailableFor filter value
+        if (Array.isArray(item.ResidentAvailable)) {
+          return item.ResidentAvailable.some(available => available.toLowerCase() === filterData.AvailableFor.toLowerCase());
+        }
+        return item.ResidentAvailable?.toLowerCase() === filterData.AvailableFor.toLowerCase();
+      });
     }
   
     // **Min & Max Sqft Filtering**
@@ -237,24 +250,20 @@ function Properties() {
   
     // **Area Search (Multiple Areas Search)**
     if (filterData.UserTypedArea) {
-      // Split the user input into multiple search terms (areas) by comma
       const searchTerms = filterData.UserTypedArea
         .toLowerCase()
-        .split(',')  // Split by comma
-        .map(term => term.trim()); // Trim extra spaces around each term
+        .split(',')
+        .map((term) => term.trim());
   
       filteredData = filteredData.filter((item) => {
-        // Check if any of the areas match Landmark, City, or PinCode
-        const areasToCheck = [item.Landmark, item.City, item.PinCode].map(area => area?.toLowerCase() || "");
-  
-        // Check if at least one area term matches any of the areas in the current property
+        const areasToCheck = [item.Landmark, item.City, item.PinCode].map((area) => area?.toLowerCase() || "");
         return searchTerms.some((term) =>
-          areasToCheck.some(area => area.includes(term))
+          areasToCheck.some((area) => area.includes(term))
         );
       });
     }
   
-    // Apply additional filters (Bhk, SaleOrRent, etc.)
+    // **Additional Filters (Bhk, SaleOrRent, etc.)**
     if (filterData.Bhk) {
       filteredData = filteredData.filter(
         (item) => item.BhkScheme?.[filterData.Bhk]
@@ -267,7 +276,7 @@ function Properties() {
       );
     }
   
-    // Filtering by selectedFeatures
+    // **Filtering by selectedFeatures**
     if (filterData.selectedFeatures?.length > 0) {
       const featureMapping = {
         "BOSS CABIN": "BossCabin",

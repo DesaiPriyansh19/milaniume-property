@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ViewDescModal from "../../../../utils/ViewDescModal";
 
 export default function RecycledRequirements({
-  filteredData: requirements,
+  filteredData,
   deleteById,
   updateById,
 }) {
@@ -131,52 +131,54 @@ export default function RecycledRequirements({
   });
   const [editData, setEditData] = useState("");
 
+  console.log(filteredData)
+
   useEffect(() => {
-    if (requirements) {
+    if (filteredData) {
       setFormData((prevData) => ({
         ...prevData,
-        _id: requirements._id || "",
-        RequiredPersonRole: requirements?.RequiredPersonRole || "",
-        RequiredPersonName: requirements?.RequiredPersonName || "",
-        RequiredPersonDate: requirements?.RequiredPersonDate || "",
-        RequiredPersonPhone: requirements?.RequiredPersonPhone || "",
-        RequiredPersonEmail: requirements?.RequiredPersonEmail || "",
+        _id: filteredData._id || "",
+        RequiredPersonRole: filteredData?.RequiredPersonRole || "",
+        RequiredPersonName: filteredData?.RequiredPersonName || "",
+        RequiredPersonDate: filteredData?.RequiredPersonDate || "",
+        RequiredPersonPhone: filteredData?.RequiredPersonPhone || "",
+        RequiredPersonEmail: filteredData?.RequiredPersonEmail || "",
         RequiredAreaSqft: {
-          min: requirements?.RequiredAreaSqft?.min || "",
-          max: requirements?.RequiredAreaSqft?.max || "",
+          min: filteredData?.RequiredAreaSqft?.min || "",
+          max: filteredData?.RequiredAreaSqft?.max || "",
         },
         RequiredBudget: {
-          min: requirements?.RequiredBudget?.min || "",
-          max: requirements?.RequiredBudget?.max || "",
+          min: filteredData?.RequiredBudget?.min || "",
+          max: filteredData?.RequiredBudget?.max || "",
         },
         RequiredPropertyDetails: {
           RequiredPropertyType:
-            requirements?.RequiredPropertyDetails?.RequiredPropertyType ||
+            filteredData?.RequiredPropertyDetails?.RequiredPropertyType ||
             "Residential",
           RequiredAreaSqft: {
             min:
-              requirements?.RequiredPropertyDetails?.RequiredAreaSqft?.min ||
+              filteredData?.RequiredPropertyDetails?.RequiredAreaSqft?.min ||
               "",
             max:
-              requirements?.RequiredPropertyDetails?.RequiredAreaSqft?.max ||
+              filteredData?.RequiredPropertyDetails?.RequiredAreaSqft?.max ||
               "",
           },
           RequiredBudget: {
             min:
-              requirements?.RequiredPropertyDetails?.RequiredBudget?.min || "",
+              filteredData?.RequiredPropertyDetails?.RequiredBudget?.min || "",
             max:
-              requirements?.RequiredPropertyDetails?.RequiredBudget?.max || "",
+              filteredData?.RequiredPropertyDetails?.RequiredBudget?.max || "",
           },
           RequiredPropertySellOrRent:
-            requirements?.RequiredPropertyDetails?.RequiredPropertySellOrRent ||
+            filteredData?.RequiredPropertyDetails?.RequiredPropertySellOrRent ||
             "",
           RequiredConstructionStatus:
-            requirements?.RequiredPropertyDetails?.RequiredConstructionStatus ||
+            filteredData?.RequiredPropertyDetails?.RequiredConstructionStatus ||
             "",
           RequiredDescription:
-            requirements?.RequiredPropertyDetails?.RequiredDescription || "",
+            filteredData?.RequiredPropertyDetails?.RequiredDescription || "",
         },
-        AllResidential: requirements?.AllResidential || {
+        AllResidential: filteredData?.AllResidential || {
           "Flat/Apartment": false,
           "High Rise Apartment": false,
           Bungalows: false,
@@ -186,7 +188,7 @@ export default function RecycledRequirements({
           "Weekend Villas": false,
           "Farm House": false,
         },
-        AllCommercial: requirements?.AllCommercial || {
+        AllCommercial: filteredData?.AllCommercial || {
           Office: false,
           Shop: false,
           Showroom: false,
@@ -196,7 +198,7 @@ export default function RecycledRequirements({
           "Cold Storage": false,
           Other: false,
         },
-        CommercialAvailability: requirements?.CommercialAvailability || {
+        CommercialAvailability: filteredData?.CommercialAvailability || {
           "Boss Cabin": false,
           "Manager Cabin": false,
           "Work Station": false,
@@ -205,7 +207,7 @@ export default function RecycledRequirements({
           "Waiting Area": false,
           "Car Parking": false,
         },
-        AllIndustrial: requirements?.AllIndustrial || {
+        AllIndustrial: filteredData?.AllIndustrial || {
           "Ware House": false,
           "Heavy Manufacturing": false,
           "Light Manufacturing": false,
@@ -216,7 +218,7 @@ export default function RecycledRequirements({
           "Research And Development": false,
           "Data Center": false,
         },
-        AllPlotAndLand: requirements?.AllPlotAndLand || {
+        AllPlotAndLand: filteredData?.AllPlotAndLand || {
           "Residential Plot": false,
           "Commercial Plot": false,
           "Industrial Plot": false,
@@ -224,7 +226,7 @@ export default function RecycledRequirements({
           "Non - Agriculture Land": false,
           "Project Land": false,
         },
-        Condition: requirements?.Condition || {
+        Condition: filteredData?.Condition || {
           "Building Site": false,
           "Structural Frame & Building Envelope": false,
           "Semi Furnished": false,
@@ -243,7 +245,7 @@ export default function RecycledRequirements({
           "Fix Furnished": false,
           Unfurnished: false,
         },
-        ResidentialAvailability: requirements?.ResidentialAvailability || {
+        ResidentialAvailability: filteredData?.ResidentialAvailability || {
           "1 Bhk": false,
           "2 Bhk": false,
           "3 Bhk": false,
@@ -252,12 +254,12 @@ export default function RecycledRequirements({
           "6 Bhk": false,
           "Above 6Bhk": false,
         },
-        ResidentAvailableFor: requirements?.ResidentAvailableFor || {
+        ResidentAvailableFor: filteredData?.ResidentAvailableFor || {
           "FOR FAMILY": false,
           "FOR EXICUTIVE": false,
           "FOR BECHLORE": false,
         },
-        Facing: requirements?.Facing || {
+        Facing: filteredData?.Facing || {
           East: false,
           North: false,
           "North-East": false,
@@ -269,8 +271,8 @@ export default function RecycledRequirements({
         },
       }));
     }
-  }, [requirements]);
-  const extrafilter = requirements?.filter((property) => {
+  }, [filteredData]);
+  const extrafilter = filteredData?.filter((property) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0); // Normalize today's date to 00:00:00
 
@@ -313,8 +315,10 @@ export default function RecycledRequirements({
     return matchesDate && matchesPropertyType;
   });
 
+
+
   const handleView = (id) => {
-    const selectedProperty = requirements.find(
+    const selectedProperty = filteredData.find(
       (property) => property._id === id
     ); // Filter data by ID
     if (selectedProperty) {

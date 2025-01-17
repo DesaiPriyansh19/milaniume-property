@@ -11,12 +11,12 @@ export default function SidebarAdmin() {
   const targetElementRef = useRef(null); // The specific element
   const SideBarOption = [
     { name: "Dashboard", icon: <FaHome />, path: "/dashboard" },
-    { name: "Add Property", icon: <FaPlusCircle />, path: "/add-property" },
-    { name: "User Post", icon: <FaUserEdit />, path: "/user-post" },
     { name: "Quick Enquiries", icon: <FaEnvelope />, path: "/enquiries" },
-  { name: "Requirements", icon: <FaClipboardList />, path: "/require-post" },
+    { name: "Requirements", icon: <FaClipboardList />, path: "/require-post" },
+    { name: "User Post", icon: <FaUserEdit />, path: "/user-post" },
+    { name: "Add Property", icon: <FaPlusCircle />, path: "/add-property" },
+    { name: "Manage Peoples", icon: <FaUsers />, path: "/manage-peoples" },
   { name: "Recycle Bin", icon: <FaTrashAlt />, path: "/recycle-bin" },
-  { name: "Manage Peoples", icon: <FaUsers />, path: "/manage-peoples" },
   { name: "Log Out", icon: <IoPower />, path: "/logout" },
     // { name: "Bar Chart", icon: <HomeSvg />, path: "/bar-chart" },
     // { name: "Pie Chart", icon: <HomeSvg />, path: "/pie-chart" },

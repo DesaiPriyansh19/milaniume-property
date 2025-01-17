@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
-import useFetch from "../../../../hooks/useFetch";
 import ViewDescModal from "../../../../utils/ViewDescModal";
-import axios from "axios";
-import useApiData from "../../../../hooks/useApiData";
 
-export default function UserRequirementPost() {
-  const baseUrl = "https://milaniumepropertybackend.vercel.app/api/require";
-  const { data: requirements, deleteById, updateById } = useApiData(baseUrl);
-
+export default function RecycledRequirements({
+  filteredData: requirements,
+  deleteById,
+  updateById,
+}) {
   const [formData, setFormData] = useState({
     _id: "",
     RequiredPersonRole: "",
@@ -272,8 +270,7 @@ export default function UserRequirementPost() {
       }));
     }
   }, [requirements]);
-
-  const filteredData = requirements?.filter((property) => {
+  const extrafilter = requirements?.filter((property) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0); // Normalize today's date to 00:00:00
 
@@ -315,45 +312,6 @@ export default function UserRequirementPost() {
 
     return matchesDate && matchesPropertyType;
   });
-
-  const handleExcel = async () => {
-    const filterData = {
-      filterBy: filter.filterBy,
-      year: filter.year,
-      month: filter.month,
-      propertyType: filter.propertyType,
-    };
-    try {
-      const params = new URLSearchParams(filterData).toString();
-      const url = `https://milaniumepropertybackend.vercel.app/api/require/requirement/get-excel?${params}`;
-
-      // Make sure the response type is set to 'blob' for binary data (Excel file)
-      const response = await axios.get(url, { responseType: "blob" });
-
-      // Check if the response is successful
-      if (response.status === 200) {
-        // Create a Blob from the response data
-        const blob = response.data;
-
-        // Create an Object URL for the Blob
-        const url = window.URL.createObjectURL(new Blob([blob]));
-
-        // Create a temporary link to download the file
-        const link = document.createElement("a");
-        link.href = url;
-        link.setAttribute("download", "Requirements.xlsx"); // Specify the file name
-        document.body.appendChild(link);
-
-        // Trigger the download
-        link.click();
-
-        // Clean up the link element
-        document.body.removeChild(link);
-      }
-    } catch (err) {
-      console.log("Error downloading file: ", err.message);
-    }
-  };
 
   const handleView = (id) => {
     const selectedProperty = requirements.find(
@@ -537,7 +495,6 @@ export default function UserRequirementPost() {
     }
     setEditData(id);
   };
-
   return (
     <div className="text-white  mx-auto p-4">
       {editData && (
@@ -546,21 +503,13 @@ export default function UserRequirementPost() {
             setEditData("");
           }}
           data={formData}
-          recycle={true}
+          recycle={false}
           updateById={updateById}
           deleteById={deleteById}
         />
       )}
       <div className="mb-2 flex justify-between">
-        <div>
-          <p className="text-xl font-semibold uppercase text-[#E7C873]">
-            Requirement Post
-          </p>
-          <p className=" text-sm text-gray-200">
-            View All User Requirement Post
-          </p>
-        </div>
-        <div className="flex gap-1 py-2">
+        <div className="flex gap-1 ">
           <select
             value={filter.propertyType}
             className="appearance-none bg-transparent border outline-none  p-1 px-4 "
@@ -628,9 +577,6 @@ export default function UserRequirementPost() {
             All
           </button>
         </div>
-      </div>
-
-      <div className="flex justify-end items-center gap-2 mb-4">
         <div className="border rounded ">
           <select
             value={filter.month}
@@ -700,16 +646,11 @@ export default function UserRequirementPost() {
             ))}
           </select>
         </div>
-        <button
-          onClick={handleExcel}
-          className="py-1 border-[1.9px] border-[#E7C873] text-sm hover:scale-95 hover:bg-[#E7C873] hover:text-black  rounded px-4"
-        >
-          Download ⬇
-        </button>
       </div>
+
       <div className="px- bg-gray-800 rounded-lg shadow-lg">
         <ul className="space-y-6 gap-4">
-          {filteredData
+          {extrafilter
             ?.slice()
             .reverse()
             .map((requirement, index) => (

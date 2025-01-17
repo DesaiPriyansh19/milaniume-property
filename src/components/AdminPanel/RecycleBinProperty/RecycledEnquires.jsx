@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import useApiData from "../../../../hooks/useApiData";
-import ConfirmationModal from "../../../../utils/ConfirmationModal";
-import axios from "axios";
 
-export default function EnquiresPage() {
-  const baseUrl = "https://milaniumepropertybackend.vercel.app/api/enquiry";
-  const { data, updateById } = useApiData(baseUrl);
+import ConfirmationModal from "../../../../utils/ConfirmationModal";
+
+export default function RecycledEnquires({
+  filteredData,
+  updateById,
+  deleteById,
+}) {
   const [modal, setModal] = useState(null);
   const [filter, setFilter] = useState({
     month: "",
@@ -16,7 +17,7 @@ export default function EnquiresPage() {
     propertyType: "",
   });
 
-  const filteredData = data?.filter((property) => {
+  const morefilter = filteredData?.filter((property) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0); // Normalize today's date to 00:00:00
 
@@ -64,53 +65,13 @@ export default function EnquiresPage() {
     return matchesDate && matchesStatus && matchesPropertyType;
   });
 
-  const handleExcel = async () => {
-    const filterData = {
-      filterBy: filter.filterBy,
-      approveStatus: filter.approveStatus,
-      year: filter.year,
-      month: filter.month,
-      propertyType: filter.propertyType,
-    };
-    try {
-      const params = new URLSearchParams(filterData).toString();
-      const url = `https://milaniumepropertybackend.vercel.app/api/enquiry/excel/get-excel?${params}`;
-
-      // Make sure the response type is set to 'blob' for binary data (Excel file)
-      const response = await axios.get(url, { responseType: "blob" });
-
-      // Check if the response is successful
-      if (response.status === 200) {
-        // Create a Blob from the response data
-        const blob = response.data;
-
-        // Create an Object URL for the Blob
-        const url = window.URL.createObjectURL(new Blob([blob]));
-
-        // Create a temporary link to download the file
-        const link = document.createElement("a");
-        link.href = url;
-        link.setAttribute("download", "Enquiries.xlsx"); // Specify the file name
-        document.body.appendChild(link);
-
-        // Trigger the download
-        link.click();
-
-        // Clean up the link element
-        document.body.removeChild(link);
-      }
-    } catch (err) {
-      console.log("Error downloading file: ", err.message);
-    }
-  };
-
   const handleUpdate = (id, data) => {
     const trashdata = {
       ...data,
-      EnquiryStatus: "approved",
+      RecycleBin: false,
     };
     setModal({
-      message: `Are you sure you have looked ${data.EnquiryPersonName} Enquiry?`,
+      message: `Are you sure you want recover ${data.EnquiryPersonName} Enquiry?`,
       onConfirm: () => {
         updateById(id, trashdata); // Perform delete operation
         setModal(null); // Close modal
@@ -120,16 +81,11 @@ export default function EnquiresPage() {
   };
 
   const handleRecycleBin = (data) => {
-    const trashdata = {
-      ...data,
-      RecycleBin: true,
-    };
     setModal({
       message: `Are you sure you want to put this ${data.EnquiryPersonName} Enquiry in recycle bin?`,
       onConfirm: async () => {
-        console.log(trashdata);
-        await updateById(data._id, trashdata); // Perform delete operation
-        setModal(null); // Close modal
+        await deleteById(data._id);
+        setModal(null);
       },
       onCancel: () => setModal(null), // Close modal
     });
@@ -146,39 +102,69 @@ export default function EnquiresPage() {
             color="#4ecdae"
           />
         )}
-        <div className="flex justify-between mb-4">
-          <div className="">
-            {" "}
-            <p className="text-xl font-semibold uppercase text-[#E7C873]">
-              Enquiries
-            </p>
-            <p className=" text-sm text-gray-200">Your Customer Enquiries</p>
-          </div>
+        <div className="flex justify-end mb-4">
+          <div className="flex gap-4 w-full">
+            <div className="border w-[30%] text-black bg-white rounded">
+              <select
+                value={filter.month}
+                className="appearance-none bg-transparent outline-none  p-1 px-4 "
+                onChange={(e) =>
+                  setFilter({ ...filter, month: e.target.value, filterBy: "" })
+                }
+              >
+                <option value="">Select Month</option>
+                <option value={1}>January</option>
+                <option value={2}>February</option>
+                <option value={3}>March</option>
+                <option value={4}>April</option>
+                <option value={5}>May</option>
+                <option value={6}>June</option>
+                <option value={7}>July</option>
+                <option value={8}>August</option>
+                <option value={9}>September</option>
+                <option value={10}>October</option>
+                <option value={11}>November</option>
+                <option value={12}>December</option>
 
-          <div className="flex gap-4 justify-center items-center">
+                {/* Add other months */}
+              </select>
+              <span>/ </span>
+              <select
+                value={filter.year}
+                className="appearance-none bg-transparent outline-none p-1 px-4"
+                onChange={(e) =>
+                  setFilter({ ...filter, year: e.target.value, filterBy: "" })
+                }
+              >
+                {Array.from({ length: 10 }, (_, index) => (
+                  <option
+                    key={filter.currentYear - index}
+                    value={parseInt(filter.currentYear - index)}
+                  >
+                    {filter.currentYear - index}
+                  </option>
+                ))}
+              </select>
+            </div>
             <div className="relative">
               <select
                 onChange={(e) => {
                   setFilter((prev) => ({
                     ...prev,
-                    propertyType: e.target.value,
+                    approveStatus: e.target.value,
                   }));
                 }}
-                value={filter.propertyType}
-                className="appearance-none   bg-transparent outline-none border border-white h-8 pl-2 pr-8"
+                value={filter.approveStatus}
+                className="appearance-none  bg-transparent outline-none border border-white h-8 pl-2 pr-8"
               >
-                <option className="text-black" value={"All Enquiry Type"}>
-                  All Enquiry Type
+                <option className="text-black" value="All">
+                  ⚪ All
                 </option>
-                <option className="text-black" value={"Property Services"}>
-                  Property Services
+                <option className="text-black" value="approved">
+                  ✔ Read
                 </option>
-                <option className="text-black" value={"Loan & Finance"}>
-                  Loan & Finance
-                </option>
-                <option className="text-black" value={"Inerior Design"}>
-                  {" "}
-                  Inerior Design
+                <option className="text-black" value="pending">
+                  ✖ Unread
                 </option>
               </select>
 
@@ -204,6 +190,8 @@ export default function EnquiresPage() {
                 </svg>
               </span>
             </div>
+          </div>
+          <div className="flex gap-4 justify-center items-center">
             <button
               className={`border ${
                 filter.filterBy === "Today" && "bg-gray-800"
@@ -246,108 +234,11 @@ export default function EnquiresPage() {
             </button>
           </div>
         </div>
-        <div className="flex gap-5 items-center justify-end gitems-center">
-          <div className="border w-[30%] text-black bg-white rounded">
-            <select
-              value={filter.month}
-              className="appearance-none bg-transparent outline-none  p-1 px-4 "
-              onChange={(e) =>
-                setFilter({ ...filter, month: e.target.value, filterBy: "" })
-              }
-            >
-              <option value="">Select Month</option>
-              <option value={1}>January</option>
-              <option value={2}>February</option>
-              <option value={3}>March</option>
-              <option value={4}>April</option>
-              <option value={5}>May</option>
-              <option value={6}>June</option>
-              <option value={7}>July</option>
-              <option value={8}>August</option>
-              <option value={9}>September</option>
-              <option value={10}>October</option>
-              <option value={11}>November</option>
-              <option value={12}>December</option>
 
-              {/* Add other months */}
-            </select>
-            <span>/ </span>
-            <select
-              value={filter.year}
-              className="appearance-none bg-transparent outline-none p-1 px-4"
-              onChange={(e) =>
-                setFilter({ ...filter, year: e.target.value, filterBy: "" })
-              }
-            >
-              {Array.from({ length: 10 }, (_, index) => (
-                <option
-                  key={filter.currentYear - index}
-                  value={parseInt(filter.currentYear - index)}
-                >
-                  {filter.currentYear - index}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="relative">
-            <select
-              onChange={(e) => {
-                setFilter((prev) => ({
-                  ...prev,
-                  approveStatus: e.target.value,
-                }));
-              }}
-              value={filter.approveStatus}
-              className="appearance-none  bg-transparent outline-none border border-white h-8 pl-2 pr-8"
-            >
-              <option className="text-black" value="All">
-                ⚪ All
-              </option>
-              <option className="text-black" value="approved">
-                ✔ Read
-              </option>
-              <option className="text-black" value="pending">
-                ✖ Unread
-              </option>
-            </select>
-
-            <span
-              style={{
-                transform: "rotate(180deg) translateY(50%)",
-                position: "absolute",
-                top: "25%",
-                right: "10px", // or whatever position you need
-              }}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className={`h-5 w-5 text-white`}
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M5.293 8.707a1 1 0 010-1.414L10 3.586l4.707 4.707a1 1 0 01-1.414 1.414L10 6.414 6.707 9.707a1 1 0 01-1.414 0z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </span>
-          </div>
-
-          <button
-            onClick={handleExcel}
-            className="py-1 border-[1.9px] border-[#E7C873] text-sm  hover:bg-[#E7C873]   rounded px-4"
-          >
-            Download ⬇
-          </button>
-        </div>
         <div className="text-white w-full grid grid-cols-3 gap-4">
-          {filteredData.reverse().map((person, index) => (
+          {morefilter.reverse().map((person, index) => (
             <div
               key={index}
-              onClick={() => {
-                handleUpdate(person._id, person);
-              }}
               className={`bg-gray-900 relative p-4 transition-transform duration-300 cursor-pointer rounded-xl shadow-lg hover:shadow-xl transform `}
             >
               <div
@@ -405,15 +296,27 @@ export default function EnquiresPage() {
                         {person.EnquiryPersonPhone}
                       </p>
                     </div>
-                    <button
-                      onClick={(event) => {
-                        event.stopPropagation();
-                        handleRecycleBin(person);
-                      }}
-                      className="bg-white px-2 py-1 rounded text-black hover:text-white hover:bg-gray-900 transition-colors ease-in-out duration-300"
-                    >
-                      Delete
-                    </button>
+
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => {
+                          handleUpdate(person._id, person);
+                        }}
+                        className="bg-white px-2 py-1 rounded text-black hover:text-white hover:bg-gray-900 transition-colors ease-in-out duration-300"
+                      >
+                        Recover
+                      </button>
+
+                      <button
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          handleRecycleBin(person);
+                        }}
+                        className="bg-white px-2 py-1 rounded text-black hover:text-white hover:bg-gray-900 transition-colors ease-in-out duration-300"
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>

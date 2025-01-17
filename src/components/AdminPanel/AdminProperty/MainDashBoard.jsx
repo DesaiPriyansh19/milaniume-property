@@ -8,30 +8,36 @@ export default function MainDashBoard() {
   const [cardsData, setCardsData] = useState([
     {
       title: "Post Property",
-      value: 0,
+      today: 0,
+      active: 0,
       total: 0,
+      recycleBinCount: 0,
       description: " Properties",
     },
     {
       title: "Quick Enquiry",
-      value: 0,
+      today: 0,
+      active: 0,
       total: 0,
+      recycleBinCount: 0,
       description: "Quick Enquiries",
     },
     {
       title: "Total Requirement",
-      value: 0,
+      today: 0,
+      active: 0,
       total: 0,
+      recycleBinCount: 0,
       description: "Requirements",
     },
   ]);
 
   const [pieData, setPieData] = useState([
-    { id: "", value: 0, color: "hsl(197, 70%, 50%)" },
-    { id: "", value: 0, color: "hsl(75, 70%, 50%)" },
-    { id: "", value: 0, color: "hsl(132, 70%, 50%)" },
-    { id: "", value: 0, color: "hsl(266, 70%, 50%)" },
-    { id: "", value: 0, color: "hsl(285, 70%, 50%)" },
+    { id: "1", value: 0, color: "hsl(197, 70%, 50%)" },
+    { id: "2", value: 0, color: "hsl(75, 70%, 50%)" },
+    { id: "3", value: 0, color: "hsl(132, 70%, 50%)" },
+    { id: "4", value: 0, color: "hsl(266, 70%, 50%)" },
+    { id: "5", value: 0, color: "hsl(285, 70%, 50%)" },
   ]);
 
   const commonProperties = {
@@ -54,7 +60,6 @@ export default function MainDashBoard() {
   const { data, loading, error } = useFetch(
     "https://milaniumepropertybackend.vercel.app/api/property/allprops/admin/todaysIncrement"
   );
-  console.log(data);
 
   useEffect(() => {
     const getAnalysis = async () => {
@@ -90,22 +95,34 @@ export default function MainDashBoard() {
           if (card.title === "Post Property") {
             return {
               ...card,
-              value: data?.propertyAdded?.today?.length || 0, // Use `data.posts` for Post Property
+              today: data?.propertyAdded?.today?.length || 0, // Use `data.posts` for Post Property
               total: data?.propertyAdded?.total || 0,
+              active:
+                data?.propertyAdded?.total -
+                  data?.propertyAdded?.recycleBinTotal || 0,
+              recycleBinCount: data?.propertyAdded?.recycleBinTotal || 0,
             };
           }
           if (card.title === "Quick Enquiry") {
             return {
               ...card,
-              value: data?.enquiryAdded?.today?.length || 0, // Use `data.enquiries` for Total Enquiry Today
+              today: data?.enquiryAdded?.today?.length || 0, // Use `data.enquiries` for Total Enquiry Today
               total: data?.enquiryAdded?.total || 0,
+              active:
+                data?.enquiryAdded?.total -
+                  data?.enquiryAdded?.recycleBinTotal || 0,
+              recycleBinCount: data?.enquiryAdded?.recycleBinTotal || 0,
             };
           }
           if (card.title === "Total Requirement") {
             return {
               ...card,
-              value: data?.requirementAdded?.today?.length || 0, // Use `data.requirements` for Total Requirement Today
+              today: data?.requirementAdded?.today?.length || 0, // Use `data.requirements` for Total Requirement Today
               total: data?.requirementAdded?.total || 0,
+              active:
+                data?.requirementAdded?.total -
+                  data?.requirementAdded?.recycleBinTotal || 0,
+              recycleBinCount: data?.requirementAdded?.recycleBinTotal || 0,
             };
           }
           return card; // Default: return the card as-is
@@ -124,7 +141,9 @@ export default function MainDashBoard() {
   }
   return (
     <div className="text-white  mx-auto p-4">
-      <p className="text-xl font-semibold uppercase text-[#E7C873] ">DashBoard</p>
+      <p className="text-xl font-semibold uppercase text-[#E7C873] ">
+        DashBoard
+      </p>
       <p className="mb-6 text-sm text-gray-200">
         You can See All Statastics Here.
       </p>
@@ -143,13 +162,13 @@ export default function MainDashBoard() {
 
               {/* Table Body */}
               <tbody className="text-gray-600 text-sm font-light">
-                {cardsData.map((card, index) => (
-                  <tr key={index} className="border-b border-gray-300 ">
+                {cardsData.map((card, cardindex) => (
+                  <tr key={cardindex} className="border-b border-gray-300 ">
                     <td className="py-3 px-6 text-left font-mono text-white">
                       {card.description}
                     </td>
                     <td className="py-3 text-white px-6 text-left font-bold">
-                      {card.value}
+                      {card.today}
                     </td>
                     <td className="py-3 text-yellow-400 px-6 text-left font-bold">
                       {card.total}
@@ -179,10 +198,10 @@ export default function MainDashBoard() {
                       {card.description}
                     </td>
                     <td className="py-3 text-white px-6 text-left font-bold">
-                      {card.value}
+                      {card.active}
                     </td>
                     <td className="py-3 text-white px-6 text-left font-bold">
-                      {card.value}
+                      {card.recycleBinCount}
                     </td>
                     <td className="py-3 text-yellow-400 px-6 text-left font-bold">
                       {card.total}

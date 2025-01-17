@@ -1,4 +1,5 @@
 import React, { useState,useRef, useEffect } from "react";
+import { MdNotificationsActive } from "react-icons/md";
 import { Link } from "react-router-dom"; // Import Link for routing
 import WhiteHamburgerIcon from "../../../../svg/Icon/WhiteHamburger/index";
 import { FaHome, FaUsers, FaEnvelope, FaPlusCircle, FaUserEdit, FaClipboardList, FaTrashAlt } from "react-icons/fa";
@@ -15,6 +16,7 @@ export default function SidebarAdmin() {
     { name: "Requirements", icon: <FaClipboardList />, path: "/require-post" },
     { name: "User Post", icon: <FaUserEdit />, path: "/user-post" },
     { name: "Add Property", icon: <FaPlusCircle />, path: "/add-property" },
+    { name: "Remider", icon: <MdNotificationsActive/>, path: "/add-property" },
     { name: "Manage Peoples", icon: <FaUsers />, path: "/manage-peoples" },
   { name: "Recycle Bin", icon: <FaTrashAlt />, path: "/recycle-bin" },
   { name: "Log Out", icon: <IoPower />, path: "/logout" },

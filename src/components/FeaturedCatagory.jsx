@@ -8,8 +8,8 @@ import HomeLogo6 from "../../svg/HomeLogo6/Index";
 import Loan from "../assets/personal.png";
 import Agriculture from "../assets/earth.png";
 import Intirial from "../assets/living-room.png";
-import Investment from "../assets/InvestmentPlanner.jpg";
-
+import Investment from "../assets/investment.png";
+import { MdTrendingUp } from "react-icons/md";
 import AOS from "aos";
 import "aos/dist/aos.css"; // Import AOS styles
 import { Link } from "react-router-dom";

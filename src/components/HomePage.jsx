@@ -78,6 +78,7 @@ const loan =[loan1,loan2]
           description="Discover properties that match your style and budget."
           buttonText="View Properties"
           buttonLink="/properties"
+          intervalSeconds={5}
         />
       </div>
 
@@ -88,6 +89,7 @@ const loan =[loan1,loan2]
           description="Get the best financial advice and services for your dream home."
           buttonText="View All"
           buttonLink="/ourservices/loan"
+          intervalSeconds={6}
         />
       </div>
 
@@ -98,6 +100,7 @@ const loan =[loan1,loan2]
           description="Create spaces that truly feel like home with professional designs."
           buttonText="View All"
           buttonLink="/ourservices/interior"
+          intervalSeconds={7}
         />
       </div>
     </div>

@@ -52,7 +52,7 @@ function FeaturedCatagory() {
               <span className="">
                 <HomeLogo />
               </span>
-              <p className="text-[.8rem] font-semibold">Residential</p>
+              <p className="text-[.8rem] font-semibold">Residential Property</p>
             </div>
           </div>
         </Link>

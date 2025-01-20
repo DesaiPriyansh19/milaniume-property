@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-const ReusableBanner = ({ bgImgs = [], title, description, buttonText, buttonLink }) => {
+const ReusableBanner = ({ bgImgs = [], title, description, buttonText, buttonLink, intervalSeconds = 4 }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     if (bgImgs.length > 0) {
       const interval = setInterval(() => {
         setCurrentImageIndex((prevIndex) => (prevIndex + 1) % bgImgs.length);
-      }, 4000); // Change background every 4 seconds
+      }, intervalSeconds * 1000); // Convert seconds to milliseconds
       return () => clearInterval(interval); // Cleanup on component unmount
     }
-  }, [bgImgs]);
+  }, [bgImgs, intervalSeconds]);
 
   // Show a fallback UI if no images are provided
   if (!bgImgs || bgImgs.length === 0) {

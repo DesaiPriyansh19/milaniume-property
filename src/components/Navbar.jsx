@@ -82,7 +82,7 @@ const Navbar = ({ handlePopupOpen }) => {
     to="/aboutus"
     className="text-white relative transition group"
   >
-    AboutUs
+    About Us
     <span className="absolute left-0 bottom-0 w-0 h-[1.5px] bg-[#E7C873] transition-all duration-300 group-hover:w-full"></span>
   </Link>
   <Link

@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import img from '../../../public/AboutUS.webp';
 import img1 from '../../assets/Loan&Finance2.jpg'
 import img2 from '../../assets/pexels-kindelmedia-7579047.jpg'
-import img3 from '../../assets/Interior design/inerior-image5.jpg'
-
+import img3 from '../../assets/Interior design/inerior-image1.jpg'
+import img4 from '../../assets/pexels-tiger-lily-7109288.jpg'
 const services = [
   {
     name: 'Real Estate Consultant',
@@ -47,6 +47,21 @@ const services = [
     link: '/ourservices/interior',
     image:img3
   },
+  {
+    name: ' Investment Planning',
+    description: 'Make informed property investments with expert guidance, ensuring long-term growth and financial security.',
+    details: [
+      'Real estate market analysis and insights',
+      'Residential and commercial property investment strategies',
+      'Portfolio diversification with property assets',
+      'Rental income optimization plans',
+      'Tax-efficient property investment solutions',
+      'Guidance on legal and regulatory compliance'
+    ],
+    link: '/ourservices/propertyinvestment',
+    image: img4
+  }
+  
   
 ];
 

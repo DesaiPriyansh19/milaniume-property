@@ -24,7 +24,8 @@ import ReusableBanner from './ReusableBanner';
 import bgimg from '../assets/slider1.jpg.png'
 import bgimg1 from '../assets/pexels-heyho-8134845.jpg'
 import bgimg2 from '../assets/shutterstock_291968042.jpg'
-
+import invest1 from '../assets/pexels-yankrukov-7698799.jpg'
+import invest2 from '../assets/pexels-tiger-lily-7109288.jpg'
 export default function HomePage() {
   useEffect(() => {
     AOS.init({ once: true }); // Initialize AOS
@@ -45,8 +46,9 @@ export default function HomePage() {
 
   // Array of background images for dynamic change
   const bannerImages = [bgimg1, bgimg];
-const inertior = [interiorimg1,interiorimg2,interiorimg3  ]
-const loan =[loan1,loan2]
+const inertior = [interiorimg1,interiorimg2,interiorimg3  ];
+const loan =[loan1,loan2];
+const Investment =[ invest2,invest1,]
   return (
     <div>
       <Carousel images={images} dynamicContent={dynamicContent} />
@@ -102,6 +104,15 @@ const loan =[loan1,loan2]
           buttonLink="/ourservices/interior"
           intervalSeconds={7}
         />
+       <ReusableBanner
+  bgImgs={Investment} // Pass the array of images for background
+  title="Investment Planning"
+  description="Secure your financial future with tailored investment strategies."
+  buttonText="Explore More"
+  buttonLink="/ourservices/investmentplanning"
+  intervalSeconds={8}
+/>
+
       </div>
     </div>
   );

@@ -38,7 +38,8 @@ function FeaturedCatagory() {
         {" "}
         wide range of Services
       </p>
-      <div className="grid grid-cols-3 mt-5 px-5 md:px-10 lg:px-0 lg:flex gap-4 md:gap-12 lg:gap-2 xl:gap-4 2xl:gap-14 mx-auto items-center  justify-center py-3">
+      <div className="grid grid-cols-3 mt-5 px-5 md:px-10 lg:px-0 lg:flex gap-4
+       md:gap-6 lg:gap-2 xl:gap-4 2xl:gap-14 mx-auto items-center  justify-center py-3">
         <Link
           onClick={() => {
             setActiveTab("Residential");
@@ -48,7 +49,7 @@ function FeaturedCatagory() {
           <div data-aos-duration="1400" data-aos-delay="100" data-aos="flip-up">
             <div
               className="bg-gray-100 hover:shadow-2xl cursor-pointer rounded-2xl py-3 text-center flex h-[130px]
-         md:w-[120px] lg:w-[130px] xl:h-[170px] xl:w-[160px] flex-col justify-center items-center"
+         md:w-[220px] lg:w-[130px] xl:h-[170px] xl:w-[160px] flex-col justify-center items-center"
             >
               <span className="">
                 <HomeLogo />
@@ -69,7 +70,7 @@ function FeaturedCatagory() {
             data-aos-delay="250"
             data-aos="flip-up"
             className="bg-gray-100 hover:shadow-2xl cursor-pointer rounded-2xl py-3 text-center flex h-[130px]
-         md:w-[120px] lg:w-[130px] xl:h-[170px] xl:w-[160px]  flex-col justify-center items-center"
+         md:w-[220px] lg:w-[130px] xl:h-[170px] xl:w-[160px]  flex-col justify-center items-center"
           >
             <span className="">
               <HomeLogo3 />
@@ -88,7 +89,7 @@ function FeaturedCatagory() {
             data-aos-delay="350"
             data-aos="flip-up"
             className="bg-gray-100 hover:shadow-2xl cursor-pointer rounded-2xl py-3 text-center flex h-[130px]
-         md:w-[120px] lg:w-[130px] xl:h-[170px] xl:w-[160px]  flex-col justify-center items-center"
+         md:w-[220px] lg:w-[130px] xl:h-[170px] xl:w-[160px]  flex-col justify-center items-center"
           >
             <span className="">
               <HomeLogo4 />
@@ -107,7 +108,7 @@ function FeaturedCatagory() {
             data-aos-delay="650"
             data-aos="flip-up"
             className="bg-gray-100 hover:shadow-2xl cursor-pointer rounded-2xl py-3 text-center flex h-[130px]
-         md:w-[120px] lg:w-[130px] xl:h-[170px] xl:w-[160px]  flex-col justify-center items-center"
+         md:w-[220px] lg:w-[130px] xl:h-[170px] xl:w-[160px]  flex-col justify-center items-center"
           >
             <span className="flex justify-center items-center">
               <img src={Agriculture} className=" w-[30%]" />
@@ -123,7 +124,7 @@ function FeaturedCatagory() {
             data-aos-delay="750"
             data-aos="flip-up"
             className="bg-gray-100 hover:shadow-2xl cursor-pointer rounded-2xl py-3 text-center flex h-[130px]
-         md:w-[120px] lg:w-[130px] xl:h-[170px] xl:w-[160px]  flex-col justify-center items-center"
+         md:w-[220px] lg:w-[130px] xl:h-[170px] xl:w-[160px]  flex-col justify-center items-center"
           >
             <span className="flex justify-center items-center">
               <img src={Loan} className=" w-[35%]" />
@@ -137,7 +138,7 @@ function FeaturedCatagory() {
             data-aos-delay="950"
             data-aos="flip-up"
             className="bg-gray-100 hover:shadow-2xl cursor-pointer rounded-2xl py-3 text-center flex h-[130px]
-         md:w-[120px] lg:w-[130px] xl:h-[170px] xl:w-[160px]  flex-col justify-center items-center"
+         md:w-[220px] lg:w-[130px] xl:h-[170px] xl:w-[160px]  flex-col justify-center items-center"
           >
             <span className="flex justify-center items-center">
               <img src={Intirial} className=" w-[40%]" />
@@ -145,13 +146,13 @@ function FeaturedCatagory() {
             <p className="text-[.8rem] font-semibold px-0 ">Interior Design</p>
           </div>
         </Link>
-        <Link to={"/ourservices/interior"}> 
+        <Link to={"/ourservices/propertyinvestment"}> 
           <div
             data-aos-duration="1400"
             data-aos-delay="950"
             data-aos="flip-up"
             className="bg-gray-100 hover:shadow-2xl cursor-pointer rounded-2xl py-3 text-center flex h-[130px]
-         md:w-[120px] lg:w-[130px] xl:h-[170px] xl:w-[160px]  flex-col justify-center items-center"
+         md:w-[220px] lg:w-[130px] xl:h-[170px] xl:w-[160px]  flex-col justify-center items-center"
           >
            <span className="flex justify-center items-center">
            <img src={Investment} className=" w-[40%]" />

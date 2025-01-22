@@ -26,6 +26,8 @@ import AboutUs from "./components/AboutUs";
 import PropertyDetailPage from "./components/Properties/PropertyDetails";
 import { ActiveProvider } from "../context/activeContext";
 import ProtectRoutes from "../utils/ProtectRoutes";
+import InvestmentPlanning from "./components/Ourservices/InvestmentPlanning";
+
 
 // ScrollToTop component to scroll to the top on route change
 function ScrollToTop() {
@@ -389,6 +391,32 @@ function App() {
                   transition={{ duration: 0.8 }}
                 >
                   <InteriorDesign />
+                </motion.div>
+              }
+            />
+              <Route
+              path="/ourservices/propertyinvestment"
+              element={
+                <motion.div
+                  key="interiordesign"
+                  initial={{
+                    opacity: 0,
+                    filter: "blur(10px)",
+                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)", // Dark background
+                  }}
+                  animate={{
+                    opacity: 1,
+                    filter: "blur(0px)",
+                    backgroundColor: "rgba(0, 0, 0, 0)", // Transparent background
+                  }}
+                  exit={{
+                    opacity: 0,
+                    filter: "blur(10px)",
+                    backgroundColor: "rgba(0.4, 0.4, 0.5, 0.6)", // Dark background
+                  }}
+                  transition={{ duration: 0.8 }}
+                >
+                  <InvestmentPlanning/>
                 </motion.div>
               }
             />

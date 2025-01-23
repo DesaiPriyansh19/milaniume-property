@@ -496,19 +496,6 @@ export default function EditPostedProperty({
 
               <div className="w-full mb-4">
                 <InputField
-                  label="Square Footage"
-                  type="text"
-                  name="PropertyDetails.Sqft"
-                  placeholder="Enter square footage"
-                  value={formData.PropertyDetails?.Sqft}
-                  onChange={handleInputChange}
-                  autoComplete="sqft"
-                  variant={1}
-                />
-              </div>
-
-              <div className="w-full mb-4">
-                <InputField
                   label="Landmark"
                   type="text"
                   name="Landmark"
@@ -521,10 +508,64 @@ export default function EditPostedProperty({
               </div>
             </div>
 
+            <div className="flex w-full gap-4 justify-between">
+              <div className="w-full mb-4">
+                <InputField
+                  label="Min Sqft"
+                  type="text"
+                  name="Area.Sqft.min"
+                  placeholder="Enter Min Sqft"
+                  value={formData?.Area?.Sqft?.min}
+                  onChange={handleInputChange}
+                  autoComplete="min-sqft"
+                  variant={1}
+                />
+              </div>
+
+              <div className="w-full mb-4">
+                <InputField
+                  label="Max Sqft"
+                  type="text"
+                  name="Area.Sqft.max"
+                  placeholder="Enter Max Sqft"
+                  value={formData?.Area?.Sqft?.max}
+                  onChange={handleInputChange}
+                  autoComplete="max-sqft"
+                  variant={1}
+                />
+              </div>
+
+              <div className="w-full mb-4">
+                <InputField
+                  label="Max Sqyd"
+                  type="text"
+                  name="Area.Sqyd.max"
+                  placeholder="Enter Max Sqft"
+                  value={formData?.Area?.Sqyd?.max}
+                  onChange={handleInputChange}
+                  autoComplete="max-sqyd"
+                  variant={1}
+                />
+              </div>
+
+              <div className="w-full mb-4">
+                <InputField
+                  label="Min Sqyd"
+                  type="text"
+                  name="Area.Sqyd.min"
+                  placeholder="Enter Min Sqyd"
+                  value={formData?.Area?.Sqyd?.min}
+                  onChange={handleInputChange}
+                  autoComplete="min-sqyd"
+                  variant={1}
+                />
+              </div>
+            </div>
+
             <div className="w-full mb-4">
               <InputField
                 label="Address"
-                type="text"
+                type="textarea"
                 name="Address"
                 placeholder="Enter Address"
                 value={formData.Address}

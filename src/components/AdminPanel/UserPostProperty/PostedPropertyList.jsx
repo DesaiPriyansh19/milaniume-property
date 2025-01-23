@@ -8,8 +8,7 @@ export default function PostedPropertyList({
   initialState,
   setSelectedUserProperty,
 }) {
-  const baseUrl =
-    "https://milaniumepropertybackend.vercel.app/api/property/allprops/admin";
+  const baseUrl = "http://localhost:4000/api/property/allprops/admin";
   const { updateById, deleteById } = useApiData(baseUrl);
 
   const [editData, setEditData] = useState({ type: "View", id: null });
@@ -31,6 +30,11 @@ export default function PostedPropertyList({
       Bedrooms: "",
       Bathrooms: "",
       Sqft: "",
+      Sqyd: "",
+    },
+    Area: {
+      Sqft: { min: "", max: "" },
+      Sqyd: { min: "", max: "" },
     },
     Landmark: "",
     Address: "",
@@ -175,12 +179,21 @@ export default function PostedPropertyList({
           SalesPrice: "",
           RentPrice: "",
         },
+        Area: {
+          Sqft: {
+            min: data?.Area?.Sqft?.min || "",
+            max: data?.Area?.Sqft?.max || "",
+          },
+          Sqyd: {
+            min: data?.Area?.Sqyd?.min || "",
+            max: data?.Area?.Sqyd?.max || "",
+          },
+        },
         PropertyDetails: {
           Bedrooms: data?.PropertyDetails?.Bedrooms || "",
           Bathrooms: data?.PropertyDetails?.Bathrooms || "",
           Sqft: data?.PropertyDetails?.Sqft || "",
         },
-        Area: data?.Area || "",
         Location: data?.Location || "",
         Landmark: data?.Landmark || "",
         Address: data?.Address || "",
@@ -366,6 +379,16 @@ export default function PostedPropertyList({
           Bedrooms: selectedProperty?.PropertyDetails?.Bedrooms || "",
           Bathrooms: selectedProperty?.PropertyDetails?.Bathrooms || "",
           Sqft: selectedProperty?.PropertyDetails?.Sqft || "",
+        },
+        Area: {
+          Sqft: {
+            min: selectedProperty?.Area?.Sqft?.min || "",
+            max: selectedProperty?.Area?.Sqft?.max || "",
+          },
+          Sqyd: {
+            min: selectedProperty?.Area?.Sqyd?.min || "",
+            max: selectedProperty?.Area?.Sqyd?.max || "",
+          },
         },
         Landmark: selectedProperty?.Landmark || "",
         Address: selectedProperty?.Address || "",

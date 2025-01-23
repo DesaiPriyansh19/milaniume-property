@@ -20,6 +20,10 @@ function PostProperty() {
       SalesPrice: "",
       RentPrice: "",
     },
+    Area: {
+      Sqft: { max: "", min: "" },
+      Sqyd: { max: "", min: "" },
+    },
     PropertyDetails: {
       Bedrooms: "",
       Bathrooms: "",
@@ -483,8 +487,6 @@ function PostProperty() {
                 ))}
               </div>
             </div>
-
-       
           </div>
         );
       case "Commercial":
@@ -1086,52 +1088,48 @@ function PostProperty() {
             {renderAdditionalInputs()}
             {/* Area, Price, Image Upload, Description */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-            <div>
-              <h3 className="text-lg font-light mb-2">
-                Area (Sqft) 
-              </h3>
-              <div className="flex  gap-4">
-                <InputField
-                  type="text"
-                  name="RequiredPropertyDetails.RequiredAreaSqft.min"
-                
-                  placeholder={"Min"}
-                  onChange={handleInputChange}
-                  variant={4}
-                />
-                <InputField
-                  type="text"
-                  name="RequiredPropertyDetails.RequiredAreaSqft.max"
-             
-                  placeholder={"Max"}
-                  onChange={handleInputChange}
-                  variant={4}
-                />
-              </div>
-            </div>
               <div>
-              <h3 className="text-lg font-light mb-2">
-                Area (Sqyd) 
-              </h3>
-              <div className="flex  gap-4">
-                <InputField
-                  type="text"
-                  name="RequiredPropertyDetails.RequiredAreaSqft.min"
-                
-                  placeholder={"Min"}
-                  onChange={handleInputChange}
-                  variant={4}
-                />
-                <InputField
-                  type="text"
-                  name="RequiredPropertyDetails.RequiredAreaSqft.max"
-             
-                  placeholder={"Max"}
-                  onChange={handleInputChange}
-                  variant={4}
-                />
+                <h3 className="text-lg font-light mb-2">Area (Sqft)</h3>
+                <div className="flex  gap-4">
+                  <InputField
+                    type="text"
+                    name="Area.Sqft.min"
+                    value={formData.Area?.Sqft?.min}
+                    placeholder={"Min"}
+                    onChange={handleInputChange}
+                    variant={4}
+                  />
+                  <InputField
+                    type="text"
+                    name="Area.Sqft.max"
+                    value={formData.Area?.Sqft?.max}
+                    placeholder={"Max"}
+                    onChange={handleInputChange}
+                    variant={4}
+                  />
+                </div>
               </div>
-            </div>
+              <div>
+                <h3 className="text-lg font-light mb-2">Area (Sqyd)</h3>
+                <div className="flex  gap-4">
+                  <InputField
+                    type="text"
+                    name="Area.Sqyd.min"
+                    value={formData.Area?.Sqyd?.min}
+                    placeholder={"Min"}
+                    onChange={handleInputChange}
+                    variant={4}
+                  />
+                  <InputField
+                    type="text"
+                    name="Area.Sqyd.max"
+                    value={formData.Area.Sqyd.max}
+                    placeholder={"Max"}
+                    onChange={handleInputChange}
+                    variant={4}
+                  />
+                </div>
+              </div>
               <div className="mb-6">
                 <h3 className="text-lg font-light mb-2">Price</h3>
                 <input

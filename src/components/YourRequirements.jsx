@@ -17,6 +17,10 @@ function YourRequirements() {
         max: "",
         min: "",
       },
+      RequiredAreaSqyd: {
+        max: "",
+        min: "",
+      },
       RequiredBudget: {
         max: "",
         min: "",
@@ -261,8 +265,8 @@ function YourRequirements() {
                 ))}
               </div>
             </div>
-  {/*Available Availability */}
-  <div className="mb-6">
+            {/*Available Availability */}
+            <div className="mb-6">
               <h3 className="text-lg font-light mb-2">Available For</h3>
               <div className="flex flex-wrap">
                 {[
@@ -275,7 +279,6 @@ function YourRequirements() {
                       type="checkbox"
                       className="mr-2"
                       name={`ResidentAvailable.${value}`}
-                     
                     />{" "}
                     {label}
                   </label>
@@ -317,7 +320,6 @@ function YourRequirements() {
             </div>
           </div>
         );
-
       case "Commercial":
         return (
           <div className="">
@@ -688,7 +690,6 @@ function YourRequirements() {
                   onChange={handleInputChange}
                   className="block w-full mt-1 p-2 border rounded-md"
                 >
-                
                   <option value="Rent">Rent</option>
                   <option value="Buy">Buy</option>
                 </select>
@@ -772,7 +773,7 @@ function YourRequirements() {
                 <InputField
                   type="text"
                   name="RequiredPropertyDetails.RequiredAreaSqft.min"
-                  value={formData.RequiredPropertyDetails.RequiredAreaSqft.min}
+                  value={formData.RequiredPropertyDetails?.RequiredAreaSqft?.min || ""}
                   placeholder={"Min"}
                   onChange={handleInputChange}
                   variant={4}
@@ -794,16 +795,16 @@ function YourRequirements() {
               <div className="flex  gap-4">
                 <InputField
                   type="text"
-                  name="RequiredPropertyDetails.RequiredAreaSqft.min"
-                  value={formData.RequiredPropertyDetails.RequiredAreaSqft.min}
+                  name="RequiredPropertyDetails.RequiredAreaSqyd.min"
+                  value={formData.RequiredPropertyDetails.RequiredAreaSqyd.min}
                   placeholder={"Min"}
                   onChange={handleInputChange}
                   variant={4}
                 />
                 <InputField
                   type="text"
-                  name="RequiredPropertyDetails.RequiredAreaSqft.max"
-                  value={formData.RequiredPropertyDetails.RequiredAreaSqft.max}
+                  name="RequiredPropertyDetails.RequiredAreaSqyd.max"
+                  value={formData.RequiredPropertyDetails.RequiredAreaSqyd.max}
                   placeholder={"Max"}
                   onChange={handleInputChange}
                   variant={4}

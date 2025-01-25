@@ -1036,7 +1036,8 @@ function Properties() {
     onClick={closeModal}
   >
     <div
-      className="bg-slate-50 rounded-lg p-6 w-[90%] z-40 h-auto md:w-3/4 lg:w-[50%] absolute top-[18%] overflow-y-auto max-h-[98vh]"
+    id="filtershadow"
+      className="bg-white   rounded-lg p-6 w-[90%] z-40 h-auto md:w-3/4 lg:w-[50%] absolute top-[18%] overflow-y-auto max-h-[98vh]"
       onClick={(e) => e.stopPropagation()}
     >
       {/* Close Button */}
@@ -1059,7 +1060,7 @@ function Properties() {
         {/* Reset Button */}
         <button
   onClick={resetFilters}
-  className="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg"
+  className="px-4 py-2 bg-gray-100 border-[1.5px] border-[#1F4B43] hover:scale-95 hover:shadow-lg text-[#1F4B43] rounded-lg"
 >
   Reset Filters
 </button>
@@ -1068,7 +1069,7 @@ function Properties() {
         {/* Apply Filters Button */}
         <button
           onClick={closeModal}
-          className="px-4 py-2 bg-[#1F4B43] text-white rounded-lg"
+          className="px-4 py-2 bg-[#1F4B43] hover:scale-95 hover:shadow-lg text-white rounded-lg"
         >
           Apply Filters
         </button>

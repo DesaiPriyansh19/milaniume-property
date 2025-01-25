@@ -109,7 +109,7 @@ const Investment =[ invest2,invest1,]
   title="Investment Planning"
   description="Secure your financial future with tailored investment strategies."
   buttonText="Explore More"
-  buttonLink="/ourservices/investmentplanning"
+  buttonLink="/ourservices/propertyinvestment"
   intervalSeconds={8}
 />
 

@@ -5,14 +5,11 @@ const ReminderList = ({
   updateById,
   handleEdit,
   setFormData,
+  data,
   formData,
   editData,
   deleteById,
 }) => {
-  const { data } = useApiData(
-    "https://milaniumepropertybackend.vercel.app/api/reminder"
-  );
-
   const [openReminderId, setOpenReminderId] = useState(null);
 
   const toggleAccordion = (id) => {
@@ -21,14 +18,6 @@ const ReminderList = ({
 
   return (
     <div className="mx-auto p-6 max-w-7xl">
-      {/* Header */}
-      <div className="flex mb-6 justify-between items-center">
-        <div className="text-white">
-          <p className="text-2xl font-semibold uppercase">View Reminder</p>
-          <p className="text-sm text-gray-500">View All Reminders</p>
-        </div>
-      </div>
-
       {/* Reminder List */}
       <ul className="space-y-6">
         {data?.map((reminder) => (
@@ -182,6 +171,17 @@ const ReminderList = ({
                   <strong>Address:</strong> {reminder?.Address}
                 </p>
               )}
+              <div className="mt-4 flex justify-end">
+                <button
+                  className="px-4 py-2 text-sm font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none"
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevent parent click
+                    handleEdit("Edit",reminder._id); // Call the handleEdit function
+                  }}
+                >
+                  Edit
+                </button>
+              </div>
             </div>
           </li>
         ))}

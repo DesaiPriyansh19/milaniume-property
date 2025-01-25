@@ -5,6 +5,7 @@ import ResidentForm from "../AdminProperty/ResidentForm";
 import IndustrialForm from "../AdminProperty/IndustrialForm";
 import AgricultralPlot from "../AdminProperty/AgricultralPlot";
 import useApiData from "../../../../hooks/useApiData";
+import ConfirmationModal from "../../../../utils/ConfirmationModal";
 
 export default function EditReminder({
   updateById,
@@ -14,6 +15,7 @@ export default function EditReminder({
   editData,
   deleteById,
 }) {
+  const [modal, setModal] = useState(null);
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
     const nameParts = name.split(".");
@@ -66,9 +68,29 @@ export default function EditReminder({
     }
   };
 
+  const handleDelete = (id, data) => {
+    setModal({
+      message: `Are you sure you want to delete ${data?.Name}'s reminder?`,
+      onConfirm: () => {
+        deleteById(id); // Perform delete operation
+        setModal(null); // Close modal
+        handleEdit("View");
+      },
+      onCancel: () => setModal(null), // Close modal
+    });
+  };
+
+  console.log(formData)
+
   return (
     <div className="text-white  mx-auto p-4">
-      {" "}
+      {modal && (
+        <ConfirmationModal
+          message={modal.message}
+          onConfirm={modal.onConfirm}
+          onCancel={modal.onCancel}
+        />
+      )}{" "}
       <div className="flex mb-6 justify-between">
         <div>
           {" "}
@@ -78,7 +100,7 @@ export default function EditReminder({
         <div className="flex gap-4">
           <button
             onClick={handleSubmit}
-            className=" bg-blue-800 text-white h-10 p-2 rounded "
+            className=" bg-green-800 text-white h-10 p-2 rounded "
           >
             Confirm
           </button>
@@ -86,9 +108,17 @@ export default function EditReminder({
             onClick={() => {
               handleEdit("View");
             }}
-            className=" bg-red-800 text-white h-10 px-3 rounded"
+            className=" bg-yellow-800 text-white h-10 px-3 rounded"
           >
             Cancel
+          </button>
+          <button
+            onClick={() => {
+              handleDelete(formData.id,formData);
+            }}
+            className=" bg-red-800 text-white h-10 px-3 rounded"
+          >
+            Delete
           </button>
         </div>
       </div>

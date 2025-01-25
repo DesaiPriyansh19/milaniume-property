@@ -370,7 +370,7 @@ export default function ViewProperty() {
     };
     try {
       const params = new URLSearchParams(filterData).toString();
-      const url = `https://milaniumepropertybackend.vercel.app/api/property/properties/get-excel?${params}`;
+      const url = `http://localhost:4000/api/property/properties/get-excel?${params}`;
 
       // Make sure the response type is set to 'blob' for binary data (Excel file)
       const response = await axios.get(url, { responseType: "blob" });

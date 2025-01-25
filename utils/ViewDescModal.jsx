@@ -78,7 +78,7 @@ export default function ViewDescModal({
 
       {showReminderModal && (
         <ReminderModal
-          requirement={data} // Pass the data to ReminderModal
+          requirement={data || {}} // Pass the data to ReminderModal with a fallback
           close={closeReminderModal} // Close reminder modal function
         />
       )}
@@ -91,71 +91,112 @@ export default function ViewDescModal({
             <>
               <p className="mb-2">
                 <span className="font-semibold">Role:</span>{" "}
-                {data.RequiredPersonRole}
+                {data.RequiredPersonRole || "N/A"}
               </p>
               <p className="mb-2">
                 <span className="font-semibold">Name:</span>{" "}
-                {data.RequiredPersonName}
+                {data.RequiredPersonName || "N/A"}
               </p>
               <p className="mb-2">
                 <span className="font-semibold">Phone:</span>{" "}
-                {data.RequiredPersonPhone}
+                {data.RequiredPersonPhone || "N/A"}
               </p>
               <p className="mb-2">
                 <span className="font-semibold">Email:</span>{" "}
-                {data.RequiredPersonEmail}
+                {data.RequiredPersonEmail || "N/A"}
               </p>
               <p className="mb-2">
                 <span className="font-semibold">Property Type:</span>{" "}
-                {data.RequiredPropertyDetails.RequiredPropertyType}
+                {data.RequiredPropertyDetails?.RequiredPropertyType || "N/A"}
               </p>
               <p className="mb-2">
                 <span className="font-semibold">Description:</span>{" "}
-                {data.RequiredPropertyDetails.RequiredDescription}
+                {data.RequiredPropertyDetails?.RequiredDescription || "N/A"}
               </p>
               <p className="mb-2">
-                <span className="font-semibold">Area:</span>{" "}
-                {data.RequiredPropertyDetails.RequirementArea}
+                <span className="font-semibold">Area Sqft:</span>{" "}
+                {data.RequiredPropertyDetails?.RequiredAreaSqft
+                  ? `${
+                      data.RequiredPropertyDetails.RequiredAreaSqft.min || "N/A"
+                    } - ${
+                      data.RequiredPropertyDetails.RequiredAreaSqft.max || "N/A"
+                    } Sqft`
+                  : "N/A"}
+              </p>
+              <p className="mb-2">
+                <span className="font-semibold">Area Sqyd:</span>{" "}
+                {data.RequiredPropertyDetails?.RequiredAreaSqyd
+                  ? `${
+                      data.RequiredPropertyDetails.RequiredAreaSqyd.min || "N/A"
+                    } - ${
+                      data.RequiredPropertyDetails.RequiredAreaSqyd.max || "N/A"
+                    } Sqyd`
+                  : "N/A"}
               </p>
               <p className="mb-2">
                 <span className="font-semibold">Budget:</span>{" "}
-                {data.RequiredPropertyDetails.RequiredBudget.min} -{" "}
-                {data.RequiredPropertyDetails.RequiredBudget.max}
+                {data.RequiredPropertyDetails?.RequiredBudget
+                  ? `${
+                      data.RequiredPropertyDetails.RequiredBudget.min || "N/A"
+                    } - ${
+                      data.RequiredPropertyDetails.RequiredBudget.max || "N/A"
+                    }`
+                  : "N/A"}
               </p>
               <p className="mb-2">
                 <span className="font-semibold">Property Features:</span>
                 <ul className="list-disc pl-5">
-                  {Object.entries(data.AllResidential).map(([key, value]) =>
-                    value ? <li key={key}>{key}</li> : null
+                  {data.AllResidential ? (
+                    Object.entries(data.AllResidential).map(([key, value]) =>
+                      value ? <li key={key}>{key}</li> : null
+                    )
+                  ) : (
+                    <li>N/A</li>
                   )}
-                  {Object.entries(data.AllCommercial).map(([key, value]) =>
-                    value ? <li key={key}>{key}</li> : null
-                  )}
-                  {Object.entries(data.AllIndustrial).map(([key, value]) =>
-                    value ? <li key={key}>{key}</li> : null
-                  )}
-                  {Object.entries(data.AllPlotAndLand).map(([key, value]) =>
-                    value ? <li key={key}>{key}</li> : null
-                  )}
+                  {data.AllCommercial
+                    ? Object.entries(data.AllCommercial).map(([key, value]) =>
+                        value ? <li key={key}>{key}</li> : null
+                      )
+                    : null}
+                  {data.AllIndustrial
+                    ? Object.entries(data.AllIndustrial).map(([key, value]) =>
+                        value ? <li key={key}>{key}</li> : null
+                      )
+                    : null}
+                  {data.AllPlotAndLand
+                    ? Object.entries(data.AllPlotAndLand).map(([key, value]) =>
+                        value ? <li key={key}>{key}</li> : null
+                      )
+                    : null}
                 </ul>
               </p>
               <p className="mb-2">
                 <span className="font-semibold">Construction Status:</span>{" "}
-                {data.RequiredPropertyDetails.RequiredConstructionStatus}
+                {data.RequiredPropertyDetails?.RequiredConstructionStatus ||
+                  "N/A"}
               </p>
               <p className="mb-2">
                 <span className="font-semibold">Availability:</span>
                 <ul className="list-disc pl-5">
-                  {Object.entries(data.ResidentialAvailability).map(
-                    ([key, value]) => (value ? <li key={key}>{key}</li> : null)
+                  {data.ResidentialAvailability ? (
+                    Object.entries(data.ResidentialAvailability).map(
+                      ([key, value]) =>
+                        value ? <li key={key}>{key}</li> : null
+                    )
+                  ) : (
+                    <li>N/A</li>
                   )}
                 </ul>
               </p>
               <p className="mb-2">
                 <span className="font-semibold">Facing:</span>
                 <ul className="list-disc pl-5">
-                  {Object.entries(data.Facing).map(([key, value]) =>
-                    value ? <li key={key}>{key}</li> : null
+                  {data.Facing ? (
+                    Object.entries(data.Facing).map(([key, value]) =>
+                      value ? <li key={key}>{key}</li> : null
+                    )
+                  ) : (
+                    <li>N/A</li>
                   )}
                 </ul>
               </p>

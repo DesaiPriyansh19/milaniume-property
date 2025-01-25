@@ -16,7 +16,7 @@ export default function SidebarAdmin() {
     { name: "Requirements", icon: <FaClipboardList />, path: "/require-post" },
     { name: "User Post", icon: <FaUserEdit />, path: "/user-post" },
     { name: "Add Property", icon: <FaPlusCircle />, path: "/add-property" },
-    { name: "Reminder", icon: <MdNotificationsActive/>, path: "/add-property" },
+    { name: "Reminder", icon: <MdNotificationsActive/>, path: "/add-reminder" },
     { name: "Manage Peoples", icon: <FaUsers />, path: "/manage-peoples" },
   { name: "Recycle Bin", icon: <FaTrashAlt />, path: "/recycle-bin" },
   { name: "Log Out", icon: <IoPower />, path: "/logout" },

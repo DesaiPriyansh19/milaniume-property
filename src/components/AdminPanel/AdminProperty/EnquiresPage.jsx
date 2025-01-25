@@ -2,11 +2,16 @@ import React, { useState } from "react";
 import useApiData from "../../../../hooks/useApiData";
 import ConfirmationModal from "../../../../utils/ConfirmationModal";
 import axios from "axios";
+import ReminderModal from "../../../../utils/ReminderModal";
 
 export default function EnquiresPage() {
   const baseUrl = "https://milaniumepropertybackend.vercel.app/api/enquiry";
   const { data, updateById } = useApiData(baseUrl);
   const [modal, setModal] = useState(null);
+  const [showReminderModal, setShowReminderModal] = useState({
+    show: false,
+    data: {},
+  });
   const [filter, setFilter] = useState({
     month: "",
     year: new Date().getFullYear(),
@@ -135,6 +140,19 @@ export default function EnquiresPage() {
     });
   };
 
+  const handleReminder = (selectedValue) => {
+    setShowReminderModal((...prev) => ({
+      ...prev,
+      show: true,
+      data: { ...selectedValue },
+    })); // Open reminder modal
+  };
+
+  const closeReminderModal = () => {
+    setShowReminderModal((...prev) => ({ ...prev, show: false, data: {} })); // Close reminder modal
+  };
+
+  console.log(showReminderModal)
   return (
     <>
       <div className="text-white mx-auto p-4">
@@ -144,6 +162,12 @@ export default function EnquiresPage() {
             onConfirm={modal.onConfirm}
             onCancel={modal.onCancel}
             color="#4ecdae"
+          />
+        )}
+        {showReminderModal.show === true && (
+          <ReminderModal
+            enquiry={showReminderModal.data} // Pass the data to ReminderModal
+            close={closeReminderModal} // Close reminder modal function
           />
         )}
         <div className="flex justify-between mb-4">
@@ -405,15 +429,28 @@ export default function EnquiresPage() {
                         {person.EnquiryPersonPhone}
                       </p>
                     </div>
-                    <button
-                      onClick={(event) => {
-                        event.stopPropagation();
-                        handleRecycleBin(person);
-                      }}
-                      className="bg-white px-2 py-1 rounded text-black hover:text-white hover:bg-gray-900 transition-colors ease-in-out duration-300"
-                    >
-                      Delete
-                    </button>
+
+                    <div className="flex justify-between gap-2">
+                      <button
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          handleReminder(person);
+                        }}
+                        className="bg-white px-2 py-1 rounded text-black hover:text-white hover:bg-gray-900 transition-colors ease-in-out duration-300"
+                      >
+                        Remind
+                      </button>
+
+                      <button
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          handleRecycleBin(person);
+                        }}
+                        className="bg-white px-2 py-1 rounded text-black hover:text-white hover:bg-gray-900 transition-colors ease-in-out duration-300"
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>

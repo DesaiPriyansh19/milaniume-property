@@ -10,6 +10,7 @@ import useFetch from "../../../hooks/useFetch";
 import SkeletonLoader from "../SkeletonLoader";
 import FilterLogo from "../../../svg/Icon/FilterLogo/Index";
 import { useActive } from "../../../context/activeContext";
+
 function Properties() {
   const { activeTab, setActiveTab } = useActive();
   const [isModalOpen, setIsModalOpen] = useState(false); // Moved here
@@ -18,6 +19,16 @@ function Properties() {
   const { data, loading } = useFetch(
     "https://milaniumepropertybackend.vercel.app/api/property"
   );
+  // AOS-animation
+  useEffect(() => {
+    AOS.init({
+      duration: 200, // Animation duration (in ms)
+      easing: "ease-in-out", // Easing function
+      once: true, // Whether animation should happen only once
+      delay:100,
+    });
+  }, []);
+
   const initialFilterState = {
     ResidentList: "",
     CommercialList: "",
@@ -1037,6 +1048,7 @@ function Properties() {
   >
     <div
     id="filtershadow"
+    data-aos="zoom-in" // AOS animation effect
       className="bg-white   rounded-lg p-6 w-[90%] z-40 h-auto md:w-3/4 lg:w-[50%] absolute top-[18%] overflow-y-auto max-h-[98vh]"
       onClick={(e) => e.stopPropagation()}
     >

@@ -1043,7 +1043,7 @@ function Properties() {
         {/* Filter Modal */}
         {isModalOpen && (
   <div
-    className="fixed inset-0 flex justify-center items-center z-50 h-[300vh] sm:h-[300vh] md:h-[450vh]  lg:h-[500vh] xl:h-[400vh]"
+    className="fixed inset-0 flex justify-center items-center z-50 h-[90vh] sm:h-[200vh] md:h-[350vh]  lg:h-[500vh] xl:h-[400vh]"
     onClick={closeModal}
   >
     <div

@@ -10,6 +10,9 @@ import EnquiresPage from "./EnquiresPage";
 import UserPostedProperty from "../UserPostProperty/UserPostedProperty";
 import UserRequirementPost from "../UserRequirementPost/UserRequirementPost";
 import RecycleBin from "../RecycleBinProperty/RecycleBin";
+import AddReminder from "../Reminders/AddReminder";
+import ReminderList from "../Reminders/ReminderList";
+import ReminderCRUD from "../Reminders/ReminderCRUD";
 
 export default function SlugPage() {
   const { slug } = useParams();
@@ -25,6 +28,7 @@ export default function SlugPage() {
       {slug === "manage-peoples" && <ManagePeoples />}
       {slug === "enquiries" && <EnquiresPage />}
       {slug === "add-property" && <ViewProperty />}
+      {slug === "add-reminder" && <ReminderCRUD />}
       {slug === "user-post" && <UserPostedProperty />}
       {slug === "require-post" && <UserRequirementPost />}
       {slug === "recycle-bin" && <RecycleBin />}

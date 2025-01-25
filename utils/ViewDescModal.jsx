@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ConfirmationModal from "./ConfirmationModal";
+import ReminderModal from "./ReminderModal";
 
 export default function ViewDescModal({
   data,
@@ -9,6 +10,7 @@ export default function ViewDescModal({
   recycle,
 }) {
   const [modal, setModal] = useState(null);
+  const [showReminderModal, setShowReminderModal] = useState(false);
 
   const handleRecycleBin = () => {
     const trashdata = {
@@ -55,6 +57,14 @@ export default function ViewDescModal({
     });
   };
 
+  const handleReminder = () => {
+    setShowReminderModal(true); // Open reminder modal
+  };
+
+  const closeReminderModal = () => {
+    setShowReminderModal(false); // Close reminder modal
+  };
+
   return (
     <div className="fixed w-full inset-0 flex items-start pt-10 justify-center bg-black bg-opacity-50 z-50">
       {modal && (
@@ -63,6 +73,13 @@ export default function ViewDescModal({
           onConfirm={modal.onConfirm}
           onCancel={modal.onCancel}
           color="#4ecdae"
+        />
+      )}
+
+      {showReminderModal && (
+        <ReminderModal
+          requirement={data} // Pass the data to ReminderModal
+          close={closeReminderModal} // Close reminder modal function
         />
       )}
       <div className="bg-gray-800 relative p-6 rounded-lg shadow-lg max-w-xl w-full">
@@ -160,6 +177,14 @@ export default function ViewDescModal({
               className="bg-gray-200 text-green-500 px-4 py-2 rounded hover:bg-gray-300"
             >
               Recover
+            </button>
+          )}
+          {recycle !== false && (
+            <button
+              onClick={handleReminder}
+              className="bg-gray-200 text-blue-500 px-4 py-2 rounded hover:bg-gray-300"
+            >
+              Reminder
             </button>
           )}
           <button

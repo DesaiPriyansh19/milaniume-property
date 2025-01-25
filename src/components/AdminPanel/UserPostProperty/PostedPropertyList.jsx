@@ -8,7 +8,8 @@ export default function PostedPropertyList({
   initialState,
   setSelectedUserProperty,
 }) {
-  const baseUrl = "http://localhost:4000/api/property/allprops/admin";
+  const baseUrl =
+    "https://milaniumepropertybackend.vercel.app/api/property/allprops/admin";
   const { updateById, deleteById } = useApiData(baseUrl);
 
   const [editData, setEditData] = useState({ type: "View", id: null });

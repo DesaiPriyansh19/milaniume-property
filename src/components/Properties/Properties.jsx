@@ -10,6 +10,7 @@ import useFetch from "../../../hooks/useFetch";
 import SkeletonLoader from "../SkeletonLoader";
 import FilterLogo from "../../../svg/Icon/FilterLogo/Index";
 import { useActive } from "../../../context/activeContext";
+
 function Properties() {
   const { activeTab, setActiveTab } = useActive();
   const [isModalOpen, setIsModalOpen] = useState(false); // Moved here
@@ -18,6 +19,16 @@ function Properties() {
   const { data, loading } = useFetch(
     "https://milaniumepropertybackend.vercel.app/api/property"
   );
+  // AOS-animation
+  useEffect(() => {
+    AOS.init({
+      duration: 200, // Animation duration (in ms)
+      easing: "ease-in-out", // Easing function
+      once: true, // Whether animation should happen only once
+      delay:100,
+    });
+  }, []);
+
   const initialFilterState = {
     ResidentList: "",
     CommercialList: "",
@@ -1032,11 +1043,13 @@ function Properties() {
         {/* Filter Modal */}
         {isModalOpen && (
   <div
-    className="fixed inset-0 flex justify-center items-center z-50 h-[300vh] sm:h-[300vh] md:h-[450vh]  lg:h-[500vh] xl:h-[400vh]"
+    className="fixed inset-0 flex justify-center items-center z-50 h-[90vh] sm:h-[200vh] md:h-[350vh]  lg:h-[500vh] xl:h-[400vh]"
     onClick={closeModal}
   >
     <div
-      className="bg-slate-50 rounded-lg p-6 w-[90%] z-40 h-auto md:w-3/4 lg:w-[50%] absolute top-[18%] overflow-y-auto max-h-[98vh]"
+    id="filtershadow"
+    data-aos="zoom-in" // AOS animation effect
+      className="bg-white   rounded-lg p-6 w-[90%] z-40 h-auto md:w-3/4 lg:w-[50%] absolute top-[18%] overflow-y-auto max-h-[98vh]"
       onClick={(e) => e.stopPropagation()}
     >
       {/* Close Button */}
@@ -1059,7 +1072,7 @@ function Properties() {
         {/* Reset Button */}
         <button
   onClick={resetFilters}
-  className="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg"
+  className="px-4 py-2 bg-gray-100 border-[1.5px] border-[#1F4B43] hover:scale-95 hover:shadow-lg text-[#1F4B43] rounded-lg"
 >
   Reset Filters
 </button>
@@ -1068,7 +1081,7 @@ function Properties() {
         {/* Apply Filters Button */}
         <button
           onClick={closeModal}
-          className="px-4 py-2 bg-[#1F4B43] text-white rounded-lg"
+          className="px-4 py-2 bg-[#1F4B43] hover:scale-95 hover:shadow-lg text-white rounded-lg"
         >
           Apply Filters
         </button>

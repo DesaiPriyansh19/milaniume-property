@@ -157,7 +157,7 @@ function FeaturedCatagory() {
            <span className="flex justify-center items-center">
            <img src={Investment} className=" w-[40%]" />
 </span>
-            <p className="text-[.8rem] font-semibold px-0 ">Investment Planer</p>
+            <p className="text-[.8rem] font-semibold px-0 ">Investment Planner</p>
           </div>
         </Link>
       </div>

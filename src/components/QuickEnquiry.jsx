@@ -81,7 +81,7 @@ const QuickEnquiry = () => {
       <div className="flex flex-wrap bg-white p-8">
         {/* Left Section - Form Inputs */}
 
-        <div className="w-full md:w-1/2 p-4">
+        <div className="w-full mb-11 sm:mb-5 md:w-1/2 p-4">
           <h2 className="text-2xl font-semibold mb-4">Our Office Location</h2>
           <p>
             C/401, Ganesh Glory 11,Nr. Moneyplant Highstreet,Jagatpur Road,

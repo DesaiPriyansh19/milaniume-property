@@ -92,7 +92,7 @@ const LoginPopup = ({ handlePopupClose }) => {
 
   return (
     <div className="fixed inset-0  px-5 sm:px-0  bg-transparent backdrop-blur-sm flex justify-center items-center z-50">
-      <div className="bg-white  rounded-lg shadow-lg w-full max-w-md p-6">
+      <div id="loginpopup" className="bg-white  rounded-lg shadow-lg w-full max-w-md p-6">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-extralight text-gray-800">
             {view === "login" && "Login"}

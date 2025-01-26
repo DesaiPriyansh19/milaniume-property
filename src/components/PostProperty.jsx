@@ -1091,14 +1091,14 @@ function PostProperty() {
               <div>
                 <h3 className="text-lg font-light mb-2">Area (Sqft)</h3>
                 <div className="flex  gap-4">
-                  <InputField
+                  {/* <InputField
                     type="text"
                     name="Area.Sqft.min"
                     value={formData.Area?.Sqft?.min}
                     placeholder={"Min"}
                     onChange={handleInputChange}
                     variant={4}
-                  />
+                  /> */}
                   <InputField
                     type="text"
                     name="Area.Sqft.max"
@@ -1112,14 +1112,14 @@ function PostProperty() {
               <div>
                 <h3 className="text-lg font-light mb-2">Area (Sqyd)</h3>
                 <div className="flex  gap-4">
-                  <InputField
+                  {/* <InputField
                     type="text"
                     name="Area.Sqyd.min"
                     value={formData.Area?.Sqyd?.min}
                     placeholder={"Min"}
                     onChange={handleInputChange}
                     variant={4}
-                  />
+                  /> */}
                   <InputField
                     type="text"
                     name="Area.Sqyd.max"

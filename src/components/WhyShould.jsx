@@ -8,7 +8,7 @@ function WhyShould() {
     <>
     <section className='mt-5 xl:mt-20 mb-14'>
     <h3 className=' text-center text-2xl xl:text-4xl font-medium mb-1'>Why You Should Work With Us</h3>
-    <p className='text-center text-[.8rem] xl:text-lg mb-6 md:mb-9'>Experience Trust, Excellence, and Expertise</p>
+    <p className='text-center text-[.8rem] xl:text-lg mb-6 md:mb-9'>Experience Trust, Excellence and Expertise</p>
     <div className='flex items-center xl:gap-36 justify-center w-[80%] mx-auto mb-2'>
     <div className='flex flex-col gap-1 justify-center items-center mb-3 sm:mb-0 
                     transition-transform transform hover:scale-105 hover:shadow-lg p-4 rounded-lg'>

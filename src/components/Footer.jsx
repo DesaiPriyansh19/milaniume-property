@@ -17,7 +17,9 @@ const Footer = () => {
 />
 
             <p className="text-[.9rem] leading-relaxed text-black">
-              At Millennium Properties, we connect buyers and sellers to create seamless transactions. Our mission is to help you find your dream property, with a focus on trust and transparency.
+              At Millennium Properties, we connect buyers and sellers to
+               create seamless transactions. Our mission is to help you to find
+                your dream property, with a focus on trust and transparency.
             </p>
           </div>
 
@@ -27,10 +29,10 @@ const Footer = () => {
             <ul className="sm:space-y-3 mx-auto grid grid-cols-3  items-center gap-2 justify-between text-start sm:grid-cols-1">
   {[
     { name: "Home", path: "/" },
-    { name: "AboutUs", path: "/aboutus" },
+    { name: "About Us", path: "/aboutus" },
     { name: "Property", path: "/properties" },
     { name: "Service", path: "/ourservices" },
-    { name: "Contact US", path: "/quickenquiry" },
+    { name: "Contact Us", path: "/quickenquiry" },
   ].map((link, index) => (
     <li key={index} className="group relative">
       <Link
@@ -94,7 +96,7 @@ const Footer = () => {
         className="relative hover:text-gray-900 transition"
       >
         C/401, Ganesh Glory 11, Nr. Money Plant Highstreet, 
-        Jagtpur Road, Gota, Ahmedabad -382481
+        Jagtapur Road, Gota, Ahmedabad -382481
         <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-[#E7C873] transition-all duration-300 group-hover:w-full"></span>
       </a>
     </li>

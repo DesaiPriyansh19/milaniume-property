@@ -39,10 +39,10 @@ const AboutUs = () => {
           <div className="lg:w-1/2 space-y-6">
             <h3 className="text-3xl font-medium text-gray-800 mb-4">Your Trusted Real Estate Partner</h3>
             <p className="text-lg text-gray-700">
-              At Millenuime, we specialize in delivering high-quality real estate services tailored to your unique needs. Our experience and commitment to excellence ensures that every property transaction is handled with care and professionalism.
+              At Millennuime, we specialize in delivering high-quality real estate services tailored to your unique needs. Our experience and commitment to excellence ensures that every property transaction is handled with care and professionalism.
             </p>
             <p className="text-lg text-gray-700">
-              Whether you're looking to buy, sell, or invest in real estate, we are here to offer guidance, advice, and a seamless experience.
+              Whether you're looking to buy, sell or invest in real estate, we are here to offer guidance, advice and a seamless experience.
             </p>
           </div>
 
@@ -87,7 +87,7 @@ const AboutUs = () => {
               </div>
               <h4 className="text-xl font-semibold text-gray-800 mb-2">Customer-Centric</h4>
               <p className="text-gray-600">
-                We always put our clients' needs first, providing tailored services that deliver results.
+                We always put our clients' needs first, providing tailored services that deliver best and optimume results.
               </p>
             </div>
           </div>

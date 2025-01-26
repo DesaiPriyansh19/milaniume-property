@@ -26,7 +26,7 @@ function LokingForNewHome() {
     Share Your Requirements
   </h4>
   <p className="text-[.7rem] xl:text-lg xl:mt-9 mb-8 pr-24 pb-4">
-    Let us know your specific needs, and we'll help you find the best match.<br /> 
+    Let us know your specific needs and we'll help you find the best match.<br /> 
   </p>
   <Link to={'/yourrequirments'}>
     <button className="bg-[#1F4B43] text-sm absolute bottom-7 text-white px-5 sm:px-2 lg:px-6 py-2 rounded-lg transition-transform transform hover:scale-105 hover:shadow-lg">

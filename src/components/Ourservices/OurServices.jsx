@@ -8,7 +8,7 @@ import img4 from '../../assets/pexels-tiger-lily-7109288.jpg'
 const services = [
   {
     name: 'Real Estate Consultant',
-    description: 'Buy, sell, and rent residential, commercial, and industrial properties with expert assistance, market insights, and legal support. Our dedicated agents ensure a seamless experience from property selection to final transaction. We provide property valuation, legal documentation support, and negotiation services to help you get the best deal.',
+    description: 'Buy, sell and rent residential, commercial and industrial properties with expert assistance, market insights and legal support. Our dedicated agents ensure a seamless experience from property selection to final transaction. We provide property valuation, legal documentation support and negotiation services to help you get the best deal.',
     details: [
       'Comprehensive property search and listing',
       'Legal and financial advisory for smooth transactions',
@@ -26,7 +26,7 @@ const services = [
       'Home loan',
       'Loan against Property',
       'Business loan',
-      'vehical loan',
+      'Vehical loan',
       'Project loan',
 
     ],
@@ -34,7 +34,7 @@ const services = [
     image:img1 },
   {
     name: 'Interior Design',
-    description: 'Revamp your space with elegant and functional designs, curated by industry-leading experts.',
+    description: 'Revamp your space with elegant and functional designs curated by industry-leading experts.',
     details: [
       'Interior designs (3D Customised)',
       'Civil Work',
@@ -49,7 +49,7 @@ const services = [
   },
   {
     name: ' Investment Planning',
-    description: 'Make informed property investments with expert guidance, ensuring long-term growth and financial security.',
+    description: 'Make informed property investments with expert guidance ensuring long-term growth and financial security.',
     details: [
       'Real estate market analysis and insights',
       'Residential and commercial property investment strategies',

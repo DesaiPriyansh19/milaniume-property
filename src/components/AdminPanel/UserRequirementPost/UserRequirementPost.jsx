@@ -15,10 +15,6 @@ export default function UserRequirementPost() {
     RequiredPersonPhone: "",
     RequiredPersonEmail: "",
     RequiredPersonDate: "",
-    RequiredAreaSqft: {
-      max: "",
-      min: "",
-    },
     RequiredBudget: {
       max: "",
       min: "",
@@ -26,6 +22,10 @@ export default function UserRequirementPost() {
     RequiredPropertyDetails: {
       RequiredPropertyType: "Residential",
       RequiredAreaSqft: { min: "", max: "" },
+      RequiredAreaSqyd: {
+        max: "",
+        min: "",
+      },
       RequiredBudget: { min: "", max: "" },
       RequiredPropertySellOrRent: "",
       RequiredConstructionStatus: "",
@@ -325,7 +325,7 @@ export default function UserRequirementPost() {
     };
     try {
       const params = new URLSearchParams(filterData).toString();
-      const url = `https://milaniumepropertybackend.vercel.app/api/require/requirement/get-excel?${params}`;
+      const url = `http://localhost:4000/api/require/requirement/get-excel?${params}`;
 
       // Make sure the response type is set to 'blob' for binary data (Excel file)
       const response = await axios.get(url, { responseType: "blob" });

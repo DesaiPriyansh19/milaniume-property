@@ -1103,7 +1103,7 @@ function PostProperty() {
                     type="text"
                     name="Area.Sqft.max"
                     value={formData.Area?.Sqft?.max}
-                    placeholder={"Max"}
+                    placeholder={"sqft"}
                     onChange={handleInputChange}
                     variant={4}
                   />
@@ -1124,7 +1124,7 @@ function PostProperty() {
                     type="text"
                     name="Area.Sqyd.max"
                     value={formData.Area.Sqyd.max}
-                    placeholder={"Max"}
+                    placeholder={"sqyd"}
                     onChange={handleInputChange}
                     variant={4}
                   />

@@ -66,7 +66,10 @@ export default function ViewDescModal({
   };
 
   return (
-    <div className="fixed w-full inset-0 flex items-start pt-10 justify-center bg-black bg-opacity-50 z-50">
+    <div
+      style={{ alignItems: "flex-start" }}
+      className="fixed w-full inset-0 flex items-start pt-10 justify-center bg-black bg-opacity-50 z-50"
+    >
       {modal && (
         <ConfirmationModal
           message={modal.message}

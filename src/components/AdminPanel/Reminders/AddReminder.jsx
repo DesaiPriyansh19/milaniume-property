@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InputField from "../../../../utils/InputFields";
 import CommercialForm from "../AdminProperty/CommercialForm";
 import ResidentForm from "../AdminProperty/ResidentForm";
 import IndustrialForm from "../AdminProperty/IndustrialForm";
 import AgricultralPlot from "../AdminProperty/AgricultralPlot";
 import useApiData from "../../../../hooks/useApiData";
+import DatePicker from "react-datepicker";
 
 export default function AddReminder({ addNew, handleEdit, initialFormData }) {
   const [formData, setFormData] = useState(initialFormData);
@@ -50,6 +51,7 @@ export default function AddReminder({ addNew, handleEdit, initialFormData }) {
       console.error("Error occurred:", error); // Log the error
     }
   };
+  
 
   return (
     <div className="text-white  mx-auto p-4">
@@ -121,19 +123,34 @@ export default function AddReminder({ addNew, handleEdit, initialFormData }) {
             </div>
 
             <div className="mb-4 w-full">
-              <InputField
-                label="Date & Time"
-                type="date"
-                name="Date&Time"
-                placeholder="Select date and time"
-                value={
-                  formData["Date&Time"]
-                    ? new Date(formData["Date&Time"]).toISOString().slice(0, 16)
-                    : ""
+              <label
+                htmlFor="date-time-picker"
+                className="block text-sm mb-2 font-semibold"
+              >
+                Date & Time
+              </label>
+              <DatePicker
+                id="date-time-picker"
+                wrapperClassName="w-full"
+                selected={
+                  formData?.["Date&Time"]
+                    ? new Date(formData["Date&Time"])
+                    : null
                 }
-                onChange={handleInputChange}
-                autoComplete="datetime"
-                variant={1}
+                onChange={(date) => {
+                  // Pass the selected date to setFormData
+                  setFormData((prevData) => ({
+                    ...prevData,
+                    "Date&Time": date ? date.toISOString() : "", // Store as ISO string or empty if cleared
+                  }));
+                }}
+                showTimeSelect
+                name="Date&Time"
+                timeFormat="HH:mm"
+                timeIntervals={15}
+                dateFormat="MMMM d, yyyy h:mm aa"
+                placeholderText="Select date and time"
+                className="w-full p-4 border-b text-base bg-gray-800"
               />
             </div>
           </div>

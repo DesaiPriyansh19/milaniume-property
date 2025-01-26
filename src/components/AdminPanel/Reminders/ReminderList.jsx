@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useApiData from "../../../../hooks/useApiData";
+
 
 const ReminderList = ({
   updateById,
@@ -11,10 +12,26 @@ const ReminderList = ({
   deleteById,
 }) => {
   const [openReminderId, setOpenReminderId] = useState(null);
+  const [message, setMessage] = useState("");
 
   const toggleAccordion = (id) => {
     setOpenReminderId(openReminderId === id ? null : id); // Toggle open/close state
   };
+
+  // useEffect(() => {
+  //   // Create socket connection
+
+  //   // Handle incoming messages from the server
+  //   socket.on("message", (data) => {
+  //     console.log("Received message:", data);
+  //     setMessage(data);
+  //   });
+
+  //   // Cleanup the connection on component unmount
+  //   return () => {
+  //     socket.disconnect();
+  //   };
+  // }, []);
 
   return (
     <div className="mx-auto p-6 max-w-7xl">
@@ -176,7 +193,7 @@ const ReminderList = ({
                   className="px-4 py-2 text-sm font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none"
                   onClick={(e) => {
                     e.stopPropagation(); // Prevent parent click
-                    handleEdit("Edit",reminder._id); // Call the handleEdit function
+                    handleEdit("Edit", reminder._id); // Call the handleEdit function
                   }}
                 >
                   Edit

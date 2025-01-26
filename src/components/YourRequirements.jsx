@@ -582,11 +582,14 @@ function YourRequirements() {
                : ""
            }`}
                 onClick={() => {
+                  setActiveTab(tab);
                   setFormData((prev) => ({
                     ...prev,
-                    RequiredPropertyType: activeTab,
+                    RequiredPropertyDetails: {
+                      ...prev.RequiredPropertyDetails, // Spread existing nested properties
+                      RequiredPropertyType: tab, // Update only the specific nested property
+                    },
                   }));
-                  setActiveTab(tab);
                 }}
               >
                 {tab}
@@ -773,7 +776,10 @@ function YourRequirements() {
                 <InputField
                   type="text"
                   name="RequiredPropertyDetails.RequiredAreaSqft.min"
-                  value={formData.RequiredPropertyDetails?.RequiredAreaSqft?.min || ""}
+                  value={
+                    formData.RequiredPropertyDetails?.RequiredAreaSqft?.min ||
+                    ""
+                  }
                   placeholder={"Min"}
                   onChange={handleInputChange}
                   variant={4}

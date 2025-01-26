@@ -6,6 +6,8 @@ import IndustrialForm from "../AdminProperty/IndustrialForm";
 import AgricultralPlot from "../AdminProperty/AgricultralPlot";
 import useApiData from "../../../../hooks/useApiData";
 import ConfirmationModal from "../../../../utils/ConfirmationModal";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function EditReminder({
   updateById,
@@ -58,11 +60,8 @@ export default function EditReminder({
 
     console.log(formData);
     try {
-      const response = await updateById(editData.id, formData);
-      if (response) {
-        console.log("Printed");
-        handleEdit("View");
-      }
+      await updateById(editData.id, formData);
+      handleEdit("View");
     } catch (error) {
       console.error("Error occurred:", error); // Log the error
     }
@@ -80,7 +79,7 @@ export default function EditReminder({
     });
   };
 
-  console.log(formData)
+  console.log(formData);
 
   return (
     <div className="text-white  mx-auto p-4">
@@ -114,7 +113,7 @@ export default function EditReminder({
           </button>
           <button
             onClick={() => {
-              handleDelete(formData.id,formData);
+              handleDelete(formData.id, formData);
             }}
             className=" bg-red-800 text-white h-10 px-3 rounded"
           >
@@ -164,21 +163,35 @@ export default function EditReminder({
                 variant={1}
               />
             </div>
-
             <div className="mb-4 w-full">
-              <InputField
-                label="Date & Time"
-                type="date"
-                name="Date&Time"
-                placeholder="Select date and time"
-                value={
+              <label
+                htmlFor="date-time-picker"
+                className="block text-sm mb-2 font-semibold"
+              >
+                Date & Time
+              </label>
+              <DatePicker
+                id="date-time-picker"
+                wrapperClassName="w-full"
+                selected={
                   formData?.["Date&Time"]
-                    ? new Date(formData["Date&Time"]).toISOString().slice(0, 10)
-                    : "" // Ensure it's always a string (controlled input)
+                    ? new Date(formData["Date&Time"])
+                    : null
                 }
-                onChange={handleInputChange}
-                autoComplete="datetime"
-                variant={1}
+                onChange={(date) => {
+                  // Pass the selected date to setFormData
+                  setFormData((prevData) => ({
+                    ...prevData,
+                    "Date&Time": date ? date.toISOString() : "", // Store as ISO string or empty if cleared
+                  }));
+                }}
+                showTimeSelect
+                name="Date&Time"
+                timeFormat="HH:mm"
+                timeIntervals={1}
+                dateFormat="MMMM d, yyyy h:mm aa"
+                placeholderText="Select date and time"
+                className="w-full p-4 border-b text-base bg-gray-800"
               />
             </div>
           </div>

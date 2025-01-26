@@ -31,6 +31,7 @@ export default function MainDashBoard() {
       description: "Requirements",
     },
   ]);
+  const [propertyDetail, setPropertyDetail] = useState([]);
 
   const [pieData, setPieData] = useState([
     { id: "1", value: 0, color: "hsl(197, 70%, 50%)" },
@@ -61,6 +62,7 @@ export default function MainDashBoard() {
     "https://milaniumepropertybackend.vercel.app/api/property/allprops/admin/todaysIncrement"
   );
 
+  console.log(data);
   useEffect(() => {
     const getAnalysis = async () => {
       try {
@@ -72,7 +74,7 @@ export default function MainDashBoard() {
             const formattedData = response.data.data.propertyCounts.map(
               (item) => ({
                 id: item.propertyType,
-                value: item.total,
+                value: item.active,
                 color: `hsl(${Math.floor(Math.random() * 360)}, 70%, 50%)`, // Generate random color
               })
             );
@@ -128,6 +130,17 @@ export default function MainDashBoard() {
           return card; // Default: return the card as-is
         })
       );
+
+      // Convert details object to an array
+      const propertyArray = Object.keys(data.propertyType).map((key) => ({
+        description: key,
+        active: data.propertyType[key].active,
+        recycleBinCount: data.propertyType[key].recycled,
+        total: data.propertyType[key].active + data.propertyType[key].recycled,
+      }));
+
+      // Update propertyDetail with the array
+      setPropertyDetail(propertyArray);
     }
   }, [data]);
 
@@ -149,7 +162,7 @@ export default function MainDashBoard() {
       </p>
       <div className="flex justify-between mb-4 gap-4 w-auto   rounded-md">
         <div className=" flex gap-1 text-xl rounded-lg shadow-md w-full relative">
-          <div className=" ">
+          <div>
             <table className="w-auto border  shadow-md rounded-lg">
               {/* Table Header */}
               <thead>
@@ -178,7 +191,7 @@ export default function MainDashBoard() {
               </tbody>
             </table>
           </div>
-          <div className="">
+          <div>
             <table className="w-auto border  shadow-md rounded-lg">
               {/* Table Header */}
               <thead>
@@ -194,6 +207,41 @@ export default function MainDashBoard() {
               <tbody className="text-gray-600 text-sm font-light">
                 {cardsData.map((card, index) => (
                   <tr key={index} className="border-b border-gray-300 ">
+                    <td className="py-3 px-6 text-left font-mono text-white">
+                      {card.description}
+                    </td>
+                    <td className="py-3 text-white px-6 text-left font-bold">
+                      {card.active}
+                    </td>
+                    <td className="py-3 text-white px-6 text-left font-bold">
+                      {card.recycleBinCount}
+                    </td>
+                    <td className="py-3 text-yellow-400 px-6 text-left font-bold">
+                      {card.total}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <table className="w-auto border  shadow-md rounded-lg">
+              {/* Table Header */}
+              <thead>
+                <tr className="bg-gray-200 text-gray-700 uppercase text-sm leading-normal">
+                  <th className="py-3 px-6 whitespace-nowrap text-left">
+                    Property Type
+                  </th>
+                  <th className="py-3 px-6 text-left">Active</th>
+                  <th className="py-3 px-6 text-left">Recyclebin</th>
+                  <th className="py-3 px-6 text-left">All</th>
+                </tr>
+              </thead>
+
+              {/* Table Body */}
+              <tbody className="text-gray-600 text-sm font-light">
+                {propertyDetail?.map((card, index) => (
+                  <tr key={index} className="border-b border-gray-300">
                     <td className="py-3 px-6 text-left font-mono text-white">
                       {card.description}
                     </td>

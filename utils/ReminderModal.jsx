@@ -89,7 +89,10 @@ export default function ReminderModal({ enquiry, requirement, close }) {
   };
 
   return (
-    <div className="fixed w-full inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[51]">
+    <div
+      style={{ alignItems: "flex-start" }}
+      className="fixed w-full inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[51]"
+    >
       <div className="bg-gray-950 p-6 rounded-lg shadow-lg max-w-xl w-full">
         <h3 className="text-white text-xl font-bold mb-4">Set Reminder</h3>
         <div className="text-white">
@@ -113,14 +116,14 @@ export default function ReminderModal({ enquiry, requirement, close }) {
                 <div className="mb-4 w-full">
                   <InputField
                     label="Date & Time"
-                    type="date"
+                    type="datetime-local"
                     name="Date&Time"
                     placeholder="Select date and time"
                     value={
                       formData?.["Date&Time"]
                         ? new Date(formData["Date&Time"])
                             .toISOString()
-                            .slice(0, 10)
+                            .slice(0, 16)
                         : "" // Ensure it's always a string (controlled input)
                     }
                     onChange={handleInputChange}

@@ -192,37 +192,7 @@ export default function MainDashBoard() {
             </table>
           </div>
           <div>
-            <table className="w-auto border  shadow-md rounded-lg">
-              {/* Table Header */}
-              <thead>
-                <tr className="bg-gray-200 text-gray-700 uppercase text-sm leading-normal">
-                  <th className="py-3 px-6 text-left">Property</th>
-                  <th className="py-3 px-6 text-left">Active</th>
-                  <th className="py-3 px-6 text-left">Recyclebin</th>
-                  <th className="py-3 px-6 text-left">All</th>
-                </tr>
-              </thead>
-
-              {/* Table Body */}
-              <tbody className="text-gray-600 text-sm font-light">
-                {cardsData.map((card, index) => (
-                  <tr key={index} className="border-b border-gray-300 ">
-                    <td className="py-3 px-6 text-left font-mono text-white">
-                      {card.description}
-                    </td>
-                    <td className="py-3 text-white px-6 text-left font-bold">
-                      {card.active}
-                    </td>
-                    <td className="py-3 text-white px-6 text-left font-bold">
-                      {card.recycleBinCount}
-                    </td>
-                    <td className="py-3 text-yellow-400 px-6 text-left font-bold">
-                      {card.total}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+         
           </div>
           <div>
             <table className="w-auto border  shadow-md rounded-lg">

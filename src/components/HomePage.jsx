@@ -5,9 +5,9 @@ import Carousel from "./Carousel";
 import interiorimg1 from '../assets/Interior design/inerior-image1.jpg'
 import interiorimg2 from '../assets/Interior design/inerior-image2.jpg'
 import interiorimg3 from '../assets/Interior design/inerior-image3.jpg'
-import loan1 from '../assets/LOAN__01-transformed.jpeg'
-import loan2 from '../assets/LOAN__02-transformed.jpeg'
-
+import loan1 from '../assets/LoanFinance/Loan1.jpg'
+import loan2 from '../assets/LoanFinance/Loan2.jpg'
+import loan3 from '../assets/LoanFinance/Loan3.jpg'
 import WhyShould from "./WhyShould";
 import Img1 from "../assets/office.jpeg";
 import room from "../assets/Room3.jpg";
@@ -26,6 +26,7 @@ import bgimg1 from '../assets/pexels-heyho-8134845.jpg'
 import bgimg2 from '../assets/shutterstock_291968042.jpg'
 import invest1 from '../assets/pexels-yankrukov-7698799.jpg'
 import invest2 from '../assets/pexels-tiger-lily-7109288.jpg'
+
 export default function HomePage() {
   useEffect(() => {
     AOS.init({ once: true }); // Initialize AOS
@@ -47,7 +48,7 @@ export default function HomePage() {
   // Array of background images for dynamic change
   const bannerImages = [bgimg1, bgimg];
 const inertior = [interiorimg1,interiorimg2,interiorimg3  ];
-const loan =[loan1,loan2];
+const loan =[loan1,loan2,loan3];
 const Investment =[ invest2,invest1,]
   return (
     <div>

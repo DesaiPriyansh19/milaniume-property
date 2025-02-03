@@ -1,5 +1,6 @@
 import React from 'react';
-import bgImg from '../../assets/Loan&Finance.jpg'
+import bgImg from '../../assets/LoanFinance/Loan2.jpg'
+
 import { FaRegMoneyBillAlt, FaHome, FaLandmark, FaBuilding, FaCar, FaProjectDiagram } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 

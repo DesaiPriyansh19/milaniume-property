@@ -1043,13 +1043,13 @@ function Properties() {
         {/* Filter Modal */}
         {isModalOpen && (
   <div
-    className="fixed inset-0 flex justify-center items-center z-50 h-[90vh] sm:h-[200vh] md:h-[350vh]  lg:h-[500vh] xl:h-[400vh]"
+    className="absolute inset-0 flex justify-center items-center z-50 h-[100vh] sm:h-[200vh] md:h-[350vh]  lg:h-[500vh] xl:h-[400vh]"
     onClick={closeModal}
   >
     <div
     id="filtershadow"
     data-aos="zoom-in" // AOS animation effect
-      className="bg-white   rounded-lg p-6 w-[90%] z-40 h-auto md:w-3/4 lg:w-[50%] absolute top-[18%] overflow-y-auto max-h-[98vh]"
+      className="bg-white   rounded-lg p-6 w-[92%] z-50 h-auto md:w-3/4 lg:w-[50%] absolute top-[18%] overflow-y-auto max-h-[98vh]"
       onClick={(e) => e.stopPropagation()}
     >
       {/* Close Button */}
